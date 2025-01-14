@@ -1,0 +1,11 @@
+[package]
+name = "x264"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "x264"
+path = "src/x264.rs"
+
+[dependencies]
+libc = "0.2.169"

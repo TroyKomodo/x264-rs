@@ -34,7 +34,7 @@
 #define M128_ZERO ((__m128){0,0,0,0})
 #define x264_union128_t x264_union128_sse_t
 typedef union { __m128 i; uint64_t q[2]; uint32_t d[4]; uint16_t w[8]; uint8_t b[16]; } MAY_ALIAS x264_union128_sse_t;
-#if HAVE_VECTOREXT
+#if HAVE_VECTOREXT && FALSE
 typedef uint32_t v4si __attribute__((vector_size (16)));
 #endif
 #endif // __SSE__

@@ -80,7 +80,7 @@ static ALWAYS_INLINE void x264_macroblock_cache_rect( void *dst, int w, int h, i
     {
         /* height 1, width 16 doesn't occur */
         assert( h != 1 );
-#if HAVE_VECTOREXT && defined(__SSE__)
+#if HAVE_VECTOREXT && defined(__SSE__) && FALSE
         v4si v16 = {v,v,v,v};
 
         M128( d+s*0+0 ) = (__m128)v16;

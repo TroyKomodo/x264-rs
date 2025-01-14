@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types, label_break_value)]
 extern "C" {
     pub type _cl_mem;
@@ -26,12 +34,10 @@ extern "C" {
         i_width: libc::c_int,
         mvp: *mut int16_t,
     );
-    static mut x264_8_cache_mv_func_table: [Option::<
-        unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> (),
-    >; 10];
-    static mut x264_8_cache_mvd_func_table: [Option::<
-        unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> (),
-    >; 10];
+    static mut x264_8_cache_mv_func_table:
+        [Option<unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()>; 10];
+    static mut x264_8_cache_mvd_func_table:
+        [Option<unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()>; 10];
     fn x264_8_rd_cost_part(
         h: *mut x264_t,
         i_lambda2: libc::c_int,
@@ -314,18 +320,15 @@ pub struct x264_opencl_function_t {
     pub clReleaseProgram: clReleaseProgram_func,
     pub clSetKernelArg: clSetKernelArg_func,
 }
-pub type clSetKernelArg_func = Option::<
-    unsafe extern "C" fn(cl_kernel, cl_uint, size_t, *const libc::c_void) -> cl_int,
->;
+pub type clSetKernelArg_func =
+    Option<unsafe extern "C" fn(cl_kernel, cl_uint, size_t, *const libc::c_void) -> cl_int>;
 pub type cl_uint = uint32_t;
-pub type clReleaseProgram_func = Option::<unsafe extern "C" fn(cl_program) -> cl_int>;
-pub type clReleaseMemObject_func = Option::<unsafe extern "C" fn(cl_mem) -> cl_int>;
-pub type clReleaseKernel_func = Option::<unsafe extern "C" fn(cl_kernel) -> cl_int>;
-pub type clReleaseContext_func = Option::<unsafe extern "C" fn(cl_context) -> cl_int>;
-pub type clReleaseCommandQueue_func = Option::<
-    unsafe extern "C" fn(cl_command_queue) -> cl_int,
->;
-pub type clGetSupportedImageFormats_func = Option::<
+pub type clReleaseProgram_func = Option<unsafe extern "C" fn(cl_program) -> cl_int>;
+pub type clReleaseMemObject_func = Option<unsafe extern "C" fn(cl_mem) -> cl_int>;
+pub type clReleaseKernel_func = Option<unsafe extern "C" fn(cl_kernel) -> cl_int>;
+pub type clReleaseContext_func = Option<unsafe extern "C" fn(cl_context) -> cl_int>;
+pub type clReleaseCommandQueue_func = Option<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
+pub type clGetSupportedImageFormats_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -348,7 +351,7 @@ pub type cl_mem_object_type = cl_uint;
 pub type cl_mem_flags = cl_bitfield;
 pub type cl_bitfield = cl_ulong;
 pub type cl_ulong = uint64_t;
-pub type clGetProgramInfo_func = Option::<
+pub type clGetProgramInfo_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_program_info,
@@ -358,7 +361,7 @@ pub type clGetProgramInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_program_info = cl_uint;
-pub type clGetProgramBuildInfo_func = Option::<
+pub type clGetProgramBuildInfo_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_device_id,
@@ -369,11 +372,10 @@ pub type clGetProgramBuildInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_program_build_info = cl_uint;
-pub type clGetPlatformIDs_func = Option::<
-    unsafe extern "C" fn(cl_uint, *mut cl_platform_id, *mut cl_uint) -> cl_int,
->;
+pub type clGetPlatformIDs_func =
+    Option<unsafe extern "C" fn(cl_uint, *mut cl_platform_id, *mut cl_uint) -> cl_int>;
 pub type cl_platform_id = *mut _cl_platform_id;
-pub type clGetKernelWorkGroupInfo_func = Option::<
+pub type clGetKernelWorkGroupInfo_func = Option<
     unsafe extern "C" fn(
         cl_kernel,
         cl_device_id,
@@ -384,7 +386,7 @@ pub type clGetKernelWorkGroupInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_kernel_work_group_info = cl_uint;
-pub type clGetDeviceInfo_func = Option::<
+pub type clGetDeviceInfo_func = Option<
     unsafe extern "C" fn(
         cl_device_id,
         cl_device_info,
@@ -394,7 +396,7 @@ pub type clGetDeviceInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_device_info = cl_uint;
-pub type clGetDeviceIDs_func = Option::<
+pub type clGetDeviceIDs_func = Option<
     unsafe extern "C" fn(
         cl_platform_id,
         cl_device_type,
@@ -404,7 +406,7 @@ pub type clGetDeviceIDs_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_device_type = cl_bitfield;
-pub type clGetCommandQueueInfo_func = Option::<
+pub type clGetCommandQueueInfo_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_command_queue_info,
@@ -414,8 +416,8 @@ pub type clGetCommandQueueInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_command_queue_info = cl_uint;
-pub type clFinish_func = Option::<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
-pub type clEnqueueWriteBuffer_func = Option::<
+pub type clFinish_func = Option<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
+pub type clEnqueueWriteBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -430,7 +432,7 @@ pub type clEnqueueWriteBuffer_func = Option::<
 >;
 pub type cl_event = *mut _cl_event;
 pub type cl_bool = cl_uint;
-pub type clEnqueueReadBuffer_func = Option::<
+pub type clEnqueueReadBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -443,7 +445,7 @@ pub type clEnqueueReadBuffer_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clEnqueueNDRangeKernel_func = Option::<
+pub type clEnqueueNDRangeKernel_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_kernel,
@@ -456,7 +458,7 @@ pub type clEnqueueNDRangeKernel_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clEnqueueMapBuffer_func = Option::<
+pub type clEnqueueMapBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -471,7 +473,7 @@ pub type clEnqueueMapBuffer_func = Option::<
     ) -> *mut libc::c_void,
 >;
 pub type cl_map_flags = cl_bitfield;
-pub type clEnqueueCopyBuffer_func = Option::<
+pub type clEnqueueCopyBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -484,7 +486,7 @@ pub type clEnqueueCopyBuffer_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clCreateProgramWithSource_func = Option::<
+pub type clCreateProgramWithSource_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_uint,
@@ -493,7 +495,7 @@ pub type clCreateProgramWithSource_func = Option::<
         *mut cl_int,
     ) -> cl_program,
 >;
-pub type clCreateProgramWithBinary_func = Option::<
+pub type clCreateProgramWithBinary_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_uint,
@@ -504,10 +506,9 @@ pub type clCreateProgramWithBinary_func = Option::<
         *mut cl_int,
     ) -> cl_program,
 >;
-pub type clCreateKernel_func = Option::<
-    unsafe extern "C" fn(cl_program, *const libc::c_char, *mut cl_int) -> cl_kernel,
->;
-pub type clCreateImage2D_func = Option::<
+pub type clCreateKernel_func =
+    Option<unsafe extern "C" fn(cl_program, *const libc::c_char, *mut cl_int) -> cl_kernel>;
+pub type clCreateImage2D_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -519,12 +520,12 @@ pub type clCreateImage2D_func = Option::<
         *mut cl_int,
     ) -> cl_mem,
 >;
-pub type clCreateContext_func = Option::<
+pub type clCreateContext_func = Option<
     unsafe extern "C" fn(
         *const cl_context_properties,
         cl_uint,
         *const cl_device_id,
-        Option::<
+        Option<
             unsafe extern "C" fn(
                 *const libc::c_char,
                 *const libc::c_void,
@@ -537,7 +538,7 @@ pub type clCreateContext_func = Option::<
     ) -> cl_context,
 >;
 pub type cl_context_properties = intptr_t;
-pub type clCreateCommandQueue_func = Option::<
+pub type clCreateCommandQueue_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_device_id,
@@ -546,7 +547,7 @@ pub type clCreateCommandQueue_func = Option::<
     ) -> cl_command_queue,
 >;
 pub type cl_command_queue_properties = cl_bitfield;
-pub type clCreateBuffer_func = Option::<
+pub type clCreateBuffer_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -555,13 +556,13 @@ pub type clCreateBuffer_func = Option::<
         *mut cl_int,
     ) -> cl_mem,
 >;
-pub type clBuildProgram_func = Option::<
+pub type clBuildProgram_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_uint,
         *const cl_device_id,
         *const libc::c_char,
-        Option::<unsafe extern "C" fn(cl_program, *mut libc::c_void) -> ()>,
+        Option<unsafe extern "C" fn(cl_program, *mut libc::c_void) -> ()>,
         *mut libc::c_void,
     ) -> cl_int,
 >;
@@ -695,7 +696,7 @@ pub struct x264_frame {
     pub extra_sei: x264_sei_t,
     pub opaque: *mut libc::c_void,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub opencl: x264_frame_opencl_t,
 }
 #[derive(Copy, Clone)]
@@ -716,7 +717,7 @@ pub struct x264_frame_opencl_t {
 pub struct x264_sei_t {
     pub num_payloads: libc::c_int,
     pub payloads: *mut x264_sei_payload_t,
-    pub sei_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub sei_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -744,7 +745,7 @@ pub struct x264_weight_t {
     pub i_offset: int32_t,
     pub weightfn: *mut weight_fn_t,
 }
-pub type weight_fn_t = Option::<
+pub type weight_fn_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         intptr_t,
@@ -803,7 +804,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -845,10 +846,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -982,33 +982,14 @@ pub struct C2RustUnnamed_6 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_bitstream_function_t {
-    pub nal_escape: Option::<
-        unsafe extern "C" fn(*mut uint8_t, *mut uint8_t, *mut uint8_t) -> *mut uint8_t,
-    >,
-    pub cabac_block_residual_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
-    pub cabac_block_residual_rd_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
-    pub cabac_block_residual_8x8_rd_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
+    pub nal_escape:
+        Option<unsafe extern "C" fn(*mut uint8_t, *mut uint8_t, *mut uint8_t) -> *mut uint8_t>,
+    pub cabac_block_residual_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
+    pub cabac_block_residual_rd_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
+    pub cabac_block_residual_8x8_rd_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1044,7 +1025,7 @@ pub struct x264_deblock_function_t {
     pub deblock_chroma_intra_mbaff: x264_deblock_intra_t,
     pub deblock_chroma_420_intra_mbaff: x264_deblock_intra_t,
     pub deblock_chroma_422_intra_mbaff: x264_deblock_intra_t,
-    pub deblock_strength: Option::<
+    pub deblock_strength: Option<
         unsafe extern "C" fn(
             *mut uint8_t,
             *mut [int8_t; 40],
@@ -1055,50 +1036,31 @@ pub struct x264_deblock_function_t {
         ) -> (),
     >,
 }
-pub type x264_deblock_intra_t = Option::<
-    unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int) -> (),
->;
-pub type x264_deblock_inter_t = Option::<
-    unsafe extern "C" fn(
-        *mut pixel,
-        intptr_t,
-        libc::c_int,
-        libc::c_int,
-        *mut int8_t,
-    ) -> (),
->;
+pub type x264_deblock_intra_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int) -> ()>;
+pub type x264_deblock_inter_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int, *mut int8_t) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_quant_function_t {
-    pub quant_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int,
+    pub quant_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int>,
+    pub quant_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int>,
+    pub quant_4x4x4: Option<
+        unsafe extern "C" fn(*mut [dctcoef; 16], *mut udctcoef, *mut udctcoef) -> libc::c_int,
     >,
-    pub quant_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int,
-    >,
-    pub quant_4x4x4: Option::<
-        unsafe extern "C" fn(
-            *mut [dctcoef; 16],
-            *mut udctcoef,
-            *mut udctcoef,
-        ) -> libc::c_int,
-    >,
-    pub quant_4x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int,
-    >,
-    pub quant_2x2_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int,
-    >,
-    pub dequant_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 64], libc::c_int) -> (),
-    >,
-    pub dequant_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub dequant_4x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub idct_dequant_2x4_dc: Option::<
+    pub quant_4x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int>,
+    pub quant_2x2_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int>,
+    pub dequant_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 64], libc::c_int) -> ()>,
+    pub dequant_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub dequant_4x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub idct_dequant_2x4_dc: Option<
         unsafe extern "C" fn(
             *mut dctcoef,
             *mut [dctcoef; 16],
@@ -1106,39 +1068,27 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> (),
     >,
-    pub idct_dequant_2x4_dconly: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub optimize_chroma_2x2_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int,
-    >,
-    pub optimize_chroma_2x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int,
-    >,
-    pub denoise_dct: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            *mut uint32_t,
-            *mut udctcoef,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub decimate_score15: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub decimate_score16: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub decimate_score64: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_last: [Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>; 14],
-    pub coeff_last4: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_last8: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_level_run: [Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >; 13],
-    pub coeff_level_run4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >,
-    pub coeff_level_run8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >,
-    pub trellis_cabac_4x4: Option::<
+    pub idct_dequant_2x4_dconly:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub optimize_chroma_2x2_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int>,
+    pub optimize_chroma_2x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int>,
+    pub denoise_dct:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut uint32_t, *mut udctcoef, libc::c_int) -> ()>,
+    pub decimate_score15: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub decimate_score16: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub decimate_score64: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_last: [Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>; 14],
+    pub coeff_last4: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_last8: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_level_run:
+        [Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>; 13],
+    pub coeff_level_run4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>,
+    pub coeff_level_run8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>,
+    pub trellis_cabac_4x4: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1154,7 +1104,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_8x8: Option::<
+    pub trellis_cabac_8x8: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1170,25 +1120,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_4x4_psy: Option::<
-        unsafe extern "C" fn(
-            *const libc::c_int,
-            *const uint8_t,
-            libc::c_int,
-            libc::c_int,
-            *mut dctcoef,
-            *mut dctcoef,
-            *mut dctcoef,
-            *mut uint8_t,
-            *mut uint8_t,
-            uint64_t,
-            uint16_t,
-            libc::c_int,
-            *mut dctcoef,
-            libc::c_int,
-        ) -> libc::c_int,
-    >,
-    pub trellis_cabac_8x8_psy: Option::<
+    pub trellis_cabac_4x4_psy: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1206,7 +1138,25 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_dc: Option::<
+    pub trellis_cabac_8x8_psy: Option<
+        unsafe extern "C" fn(
+            *const libc::c_int,
+            *const uint8_t,
+            libc::c_int,
+            libc::c_int,
+            *mut dctcoef,
+            *mut dctcoef,
+            *mut dctcoef,
+            *mut uint8_t,
+            *mut uint8_t,
+            uint64_t,
+            uint16_t,
+            libc::c_int,
+            *mut dctcoef,
+            libc::c_int,
+        ) -> libc::c_int,
+    >,
+    pub trellis_cabac_dc: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1222,7 +1172,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_chroma_422_dc: Option::<
+    pub trellis_cabac_chroma_422_dc: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1249,71 +1199,45 @@ pub type udctcoef = uint16_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_zigzag_function_t {
-    pub scan_8x8: Option::<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
-    pub scan_4x4: Option::<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
-    pub sub_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int,
+    pub scan_8x8: Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
+    pub scan_4x4: Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
+    pub sub_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int>,
+    pub sub_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int>,
+    pub sub_4x4ac: Option<
+        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel, *mut dctcoef) -> libc::c_int,
     >,
-    pub sub_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int,
-    >,
-    pub sub_4x4ac: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            *const pixel,
-            *mut pixel,
-            *mut dctcoef,
-        ) -> libc::c_int,
-    >,
-    pub interleave_8x8_cavlc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut dctcoef, *mut uint8_t) -> (),
-    >,
+    pub interleave_8x8_cavlc:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef, *mut uint8_t) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_dct_function_t {
-    pub sub4x4_dct: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add4x4_idct: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x8_dct: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> (),
-    >,
-    pub sub8x8_dct_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add8x8_idct: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> (),
-    >,
-    pub add8x8_idct_dc: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x16_dct_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub sub16x16_dct: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> (),
-    >,
-    pub add16x16_idct: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> (),
-    >,
-    pub add16x16_idct_dc: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x8_dct8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add8x8_idct8: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub16x16_dct8: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 64], *mut pixel, *mut pixel) -> (),
-    >,
-    pub add16x16_idct8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 64]) -> (),
-    >,
-    pub dct4x4dc: Option::<unsafe extern "C" fn(*mut dctcoef) -> ()>,
-    pub idct4x4dc: Option::<unsafe extern "C" fn(*mut dctcoef) -> ()>,
-    pub dct2x4dc: Option::<unsafe extern "C" fn(*mut dctcoef, *mut [dctcoef; 16]) -> ()>,
+    pub sub4x4_dct: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add4x4_idct: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x8_dct: Option<unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> ()>,
+    pub sub8x8_dct_dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add8x8_idct: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> ()>,
+    pub add8x8_idct_dc: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x16_dct_dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub sub16x16_dct:
+        Option<unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> ()>,
+    pub add16x16_idct: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> ()>,
+    pub add16x16_idct_dc: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x8_dct8: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add8x8_idct8: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub16x16_dct8:
+        Option<unsafe extern "C" fn(*mut [dctcoef; 64], *mut pixel, *mut pixel) -> ()>,
+    pub add16x16_idct8: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 64]) -> ()>,
+    pub dct4x4dc: Option<unsafe extern "C" fn(*mut dctcoef) -> ()>,
+    pub idct4x4dc: Option<unsafe extern "C" fn(*mut dctcoef) -> ()>,
+    pub dct2x4dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut [dctcoef; 16]) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_mc_functions_t {
-    pub mc_luma: Option::<
+    pub mc_luma: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1326,7 +1250,7 @@ pub struct x264_mc_functions_t {
             *const x264_weight_t,
         ) -> (),
     >,
-    pub get_ref: Option::<
+    pub get_ref: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut intptr_t,
@@ -1339,7 +1263,7 @@ pub struct x264_mc_functions_t {
             *const x264_weight_t,
         ) -> *mut pixel,
     >,
-    pub mc_chroma: Option::<
+    pub mc_chroma: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1352,7 +1276,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub avg: [Option::<
+    pub avg: [Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1363,40 +1287,19 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >; 12],
-    pub copy: [Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub copy: [Option<
+        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> (),
     >; 7],
-    pub copy_16x16_unaligned: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub copy_16x16_unaligned:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub store_interleave_chroma: Option<
+        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, *mut pixel, libc::c_int) -> (),
     >,
-    pub store_interleave_chroma: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            *mut pixel,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub load_deinterleave_chroma_fenc: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub load_deinterleave_chroma_fdec: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub plane_copy: Option::<
+    pub load_deinterleave_chroma_fenc:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub load_deinterleave_chroma_fdec:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub plane_copy: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1406,7 +1309,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_swap: Option::<
+    pub plane_copy_swap: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1416,7 +1319,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_interleave: Option::<
+    pub plane_copy_interleave: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1428,7 +1331,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave: Option::<
+    pub plane_copy_deinterleave: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1440,7 +1343,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_yuyv: Option::<
+    pub plane_copy_deinterleave_yuyv: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1452,7 +1355,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_rgb: Option::<
+    pub plane_copy_deinterleave_rgb: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1467,7 +1370,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_v210: Option::<
+    pub plane_copy_deinterleave_v210: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1479,7 +1382,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub hpel_filter: Option::<
+    pub hpel_filter: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1491,64 +1394,24 @@ pub struct x264_mc_functions_t {
             *mut int16_t,
         ) -> (),
     >,
-    pub prefetch_fenc: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub prefetch_fenc:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_400:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_420:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_422:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_ref: Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub memcpy_aligned: Option<
+        unsafe extern "C" fn(*mut libc::c_void, *const libc::c_void, size_t) -> *mut libc::c_void,
     >,
-    pub prefetch_fenc_400: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_fenc_420: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_fenc_422: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_ref: Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub memcpy_aligned: Option::<
-        unsafe extern "C" fn(
-            *mut libc::c_void,
-            *const libc::c_void,
-            size_t,
-        ) -> *mut libc::c_void,
-    >,
-    pub memzero_aligned: Option::<unsafe extern "C" fn(*mut libc::c_void, size_t) -> ()>,
-    pub integral_init4h: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> (),
-    >,
-    pub integral_init8h: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> (),
-    >,
-    pub integral_init4v: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut uint16_t, intptr_t) -> (),
-    >,
-    pub integral_init8v: Option::<unsafe extern "C" fn(*mut uint16_t, intptr_t) -> ()>,
-    pub frame_init_lowres_core: Option::<
+    pub memzero_aligned: Option<unsafe extern "C" fn(*mut libc::c_void, size_t) -> ()>,
+    pub integral_init4h: Option<unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> ()>,
+    pub integral_init8h: Option<unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> ()>,
+    pub integral_init4v: Option<unsafe extern "C" fn(*mut uint16_t, *mut uint16_t, intptr_t) -> ()>,
+    pub integral_init8v: Option<unsafe extern "C" fn(*mut uint16_t, intptr_t) -> ()>,
+    pub frame_init_lowres_core: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1564,10 +1427,8 @@ pub struct x264_mc_functions_t {
     pub weight: *mut weight_fn_t,
     pub offsetadd: *mut weight_fn_t,
     pub offsetsub: *mut weight_fn_t,
-    pub weight_cache: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_weight_t) -> (),
-    >,
-    pub mbtree_propagate_cost: Option::<
+    pub weight_cache: Option<unsafe extern "C" fn(*mut x264_t, *mut x264_weight_t) -> ()>,
+    pub mbtree_propagate_cost: Option<
         unsafe extern "C" fn(
             *mut int16_t,
             *mut uint16_t,
@@ -1578,7 +1439,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub mbtree_propagate_list: Option::<
+    pub mbtree_propagate_list: Option<
         unsafe extern "C" fn(
             *mut x264_t,
             *mut uint16_t,
@@ -1591,12 +1452,10 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub mbtree_fix8_pack: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut libc::c_float, libc::c_int) -> (),
-    >,
-    pub mbtree_fix8_unpack: Option::<
-        unsafe extern "C" fn(*mut libc::c_float, *mut uint16_t, libc::c_int) -> (),
-    >,
+    pub mbtree_fix8_pack:
+        Option<unsafe extern "C" fn(*mut uint16_t, *mut libc::c_float, libc::c_int) -> ()>,
+    pub mbtree_fix8_unpack:
+        Option<unsafe extern "C" fn(*mut libc::c_float, *mut uint16_t, libc::c_int) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1612,10 +1471,8 @@ pub struct x264_pixel_function_t {
     pub fpelcmp_x3: [x264_pixel_cmp_x3_t; 7],
     pub fpelcmp_x4: [x264_pixel_cmp_x4_t; 7],
     pub sad_aligned: [x264_pixel_cmp_t; 8],
-    pub vsad: Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> libc::c_int,
-    >,
-    pub asd8: Option::<
+    pub vsad: Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> libc::c_int>,
+    pub asd8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1624,17 +1481,13 @@ pub struct x264_pixel_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub sa8d_satd: [Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> uint64_t,
-    >; 1],
-    pub var: [Option::<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
-    pub var2: [Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> libc::c_int,
-    >; 4],
-    pub hadamard_ac: [Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t,
-    >; 4],
-    pub ssd_nv12_core: Option::<
+    pub sa8d_satd:
+        [Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> uint64_t>; 1],
+    pub var: [Option<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
+    pub var2:
+        [Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> libc::c_int>; 4],
+    pub hadamard_ac: [Option<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
+    pub ssd_nv12_core: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1646,7 +1499,7 @@ pub struct x264_pixel_function_t {
             *mut uint64_t,
         ) -> (),
     >,
-    pub ssim_4x4x2_core: Option::<
+    pub ssim_4x4x2_core: Option<
         unsafe extern "C" fn(
             *const pixel,
             intptr_t,
@@ -1655,7 +1508,7 @@ pub struct x264_pixel_function_t {
             *mut [libc::c_int; 4],
         ) -> (),
     >,
-    pub ssim_end4: Option::<
+    pub ssim_end4: Option<
         unsafe extern "C" fn(
             *mut [libc::c_int; 4],
             *mut [libc::c_int; 4],
@@ -1666,7 +1519,7 @@ pub struct x264_pixel_function_t {
     pub sad_x4: [x264_pixel_cmp_x4_t; 7],
     pub satd_x3: [x264_pixel_cmp_x3_t; 7],
     pub satd_x4: [x264_pixel_cmp_x4_t; 7],
-    pub ads: [Option::<
+    pub ads: [Option<
         unsafe extern "C" fn(
             *mut libc::c_int,
             *mut uint16_t,
@@ -1677,70 +1530,49 @@ pub struct x264_pixel_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >; 7],
-    pub intra_mbcmp_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sa8d_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_satd_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_sad_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_mbcmp_x9_8x8: Option::<
+    pub intra_mbcmp_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sa8d_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_satd_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_sad_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_mbcmp_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1749,7 +1581,7 @@ pub struct x264_pixel_function_t {
             *mut uint16_t,
         ) -> libc::c_int,
     >,
-    pub intra_sa8d_x9_8x8: Option::<
+    pub intra_sa8d_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1758,7 +1590,7 @@ pub struct x264_pixel_function_t {
             *mut uint16_t,
         ) -> libc::c_int,
     >,
-    pub intra_sad_x9_8x8: Option::<
+    pub intra_sad_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1768,7 +1600,7 @@ pub struct x264_pixel_function_t {
         ) -> libc::c_int,
     >,
 }
-pub type x264_pixel_cmp_x4_t = Option::<
+pub type x264_pixel_cmp_x4_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         *mut pixel,
@@ -1779,7 +1611,7 @@ pub type x264_pixel_cmp_x4_t = Option::<
         *mut libc::c_int,
     ) -> (),
 >;
-pub type x264_pixel_cmp_x3_t = Option::<
+pub type x264_pixel_cmp_x3_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         *mut pixel,
@@ -1789,16 +1621,12 @@ pub type x264_pixel_cmp_x3_t = Option::<
         *mut libc::c_int,
     ) -> (),
 >;
-pub type x264_pixel_cmp_t = Option::<
-    unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> libc::c_int,
->;
-pub type x264_predict_8x8_filter_t = Option::<
-    unsafe extern "C" fn(*mut pixel, *mut pixel, libc::c_int, libc::c_int) -> (),
->;
-pub type x264_predict_t = Option::<unsafe extern "C" fn(*mut pixel) -> ()>;
-pub type x264_predict8x8_t = Option::<
-    unsafe extern "C" fn(*mut pixel, *mut pixel) -> (),
->;
+pub type x264_pixel_cmp_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> libc::c_int>;
+pub type x264_predict_8x8_filter_t =
+    Option<unsafe extern "C" fn(*mut pixel, *mut pixel, libc::c_int, libc::c_int) -> ()>;
+pub type x264_predict_t = Option<unsafe extern "C" fn(*mut pixel) -> ()>;
+pub type x264_predict8x8_t = Option<unsafe extern "C" fn(*mut pixel, *mut pixel) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_7 {
@@ -2315,27 +2143,23 @@ unsafe extern "C" fn x264_predictor_roundclip(
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < i_mvc {
         let mut mx: libc::c_int = ((*mvc.offset(i as isize))[0 as libc::c_int as usize]
-            as libc::c_int + 2 as libc::c_int) >> 2 as libc::c_int;
+            as libc::c_int
+            + 2 as libc::c_int)
+            >> 2 as libc::c_int;
         let mut my: libc::c_int = ((*mvc.offset(i as isize))[1 as libc::c_int as usize]
-            as libc::c_int + 2 as libc::c_int) >> 2 as libc::c_int;
+            as libc::c_int
+            + 2 as libc::c_int)
+            >> 2 as libc::c_int;
         let mut mv: uint32_t = pack16to32_mask(mx, my);
         if !(mv == 0 || mv == pmv) {
-            (*dst
-                .offset(
-                    cnt as isize,
-                ))[0 as libc::c_int
-                as usize] = x264_clip3(
+            (*dst.offset(cnt as isize))[0 as libc::c_int as usize] = x264_clip3(
                 mx,
                 (*mv_limit.offset(0 as libc::c_int as isize))[0 as libc::c_int as usize]
                     as libc::c_int,
                 (*mv_limit.offset(1 as libc::c_int as isize))[0 as libc::c_int as usize]
                     as libc::c_int,
             ) as int16_t;
-            (*dst
-                .offset(
-                    cnt as isize,
-                ))[1 as libc::c_int
-                as usize] = x264_clip3(
+            (*dst.offset(cnt as isize))[1 as libc::c_int as usize] = x264_clip3(
                 my,
                 (*mv_limit.offset(0 as libc::c_int as isize))[1 as libc::c_int as usize]
                     as libc::c_int,
@@ -2360,39 +2184,29 @@ unsafe extern "C" fn x264_predictor_clip(
 ) -> libc::c_int {
     let mut cnt: libc::c_int = 0 as libc::c_int;
     let mut qpel_limit: [libc::c_int; 4] = [
-        ((*mv_limit.offset(0 as libc::c_int as isize))[0 as libc::c_int as usize]
-            as libc::c_int) << 2 as libc::c_int,
-        ((*mv_limit.offset(0 as libc::c_int as isize))[1 as libc::c_int as usize]
-            as libc::c_int) << 2 as libc::c_int,
-        ((*mv_limit.offset(1 as libc::c_int as isize))[0 as libc::c_int as usize]
-            as libc::c_int) << 2 as libc::c_int,
-        ((*mv_limit.offset(1 as libc::c_int as isize))[1 as libc::c_int as usize]
-            as libc::c_int) << 2 as libc::c_int,
+        ((*mv_limit.offset(0 as libc::c_int as isize))[0 as libc::c_int as usize] as libc::c_int)
+            << 2 as libc::c_int,
+        ((*mv_limit.offset(0 as libc::c_int as isize))[1 as libc::c_int as usize] as libc::c_int)
+            << 2 as libc::c_int,
+        ((*mv_limit.offset(1 as libc::c_int as isize))[0 as libc::c_int as usize] as libc::c_int)
+            << 2 as libc::c_int,
+        ((*mv_limit.offset(1 as libc::c_int as isize))[1 as libc::c_int as usize] as libc::c_int)
+            << 2 as libc::c_int,
     ];
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < i_mvc {
-        let mut mv: uint32_t = (*((*mvc.offset(i as isize)).as_mut_ptr()
-            as *mut x264_union32_t))
-            .i;
-        let mut mx: libc::c_int = (*mvc.offset(i as isize))[0 as libc::c_int as usize]
-            as libc::c_int;
-        let mut my: libc::c_int = (*mvc.offset(i as isize))[1 as libc::c_int as usize]
-            as libc::c_int;
+        let mut mv: uint32_t = (*((*mvc.offset(i as isize)).as_mut_ptr() as *mut x264_union32_t)).i;
+        let mut mx: libc::c_int =
+            (*mvc.offset(i as isize))[0 as libc::c_int as usize] as libc::c_int;
+        let mut my: libc::c_int =
+            (*mvc.offset(i as isize))[1 as libc::c_int as usize] as libc::c_int;
         if !(mv == 0 || mv == pmv) {
-            (*dst
-                .offset(
-                    cnt as isize,
-                ))[0 as libc::c_int
-                as usize] = x264_clip3(
+            (*dst.offset(cnt as isize))[0 as libc::c_int as usize] = x264_clip3(
                 mx,
                 qpel_limit[0 as libc::c_int as usize],
                 qpel_limit[2 as libc::c_int as usize],
             ) as int16_t;
-            (*dst
-                .offset(
-                    cnt as isize,
-                ))[1 as libc::c_int
-                as usize] = x264_clip3(
+            (*dst.offset(cnt as isize))[1 as libc::c_int as usize] = x264_clip3(
                 my,
                 qpel_limit[1 as libc::c_int as usize],
                 qpel_limit[3 as libc::c_int as usize],
@@ -2407,84 +2221,72 @@ unsafe extern "C" fn x264_predictor_clip(
 }
 static mut x264_pixel_size: [C2RustUnnamed_21; 12] = [
     {
-        
         C2RustUnnamed_21 {
             w: 16 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 16 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 2 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
         }
     },
     {
-        
         C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 2 as libc::c_int as uint8_t,
@@ -2550,7 +2352,13 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    if v < i_min { i_min } else if v > i_max { i_max } else { v }
+    if v < i_min {
+        i_min
+    } else if v > i_max {
+        i_max
+    } else {
+        v
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_predictor_difference(
@@ -2560,21 +2368,15 @@ unsafe extern "C" fn x264_predictor_difference(
     let mut sum: libc::c_int = 0 as libc::c_int;
     let mut i: libc::c_int = 0 as libc::c_int;
     while (i as intptr_t) < i_mvc - 1 as libc::c_int as intptr_t {
-        sum
-            += abs(
-                (*mvc.offset(i as isize))[0 as libc::c_int as usize] as libc::c_int
-                    - (*mvc
-                        .offset(
-                            (i + 1 as libc::c_int) as isize,
-                        ))[0 as libc::c_int as usize] as libc::c_int,
-            )
-                + abs(
-                    (*mvc.offset(i as isize))[1 as libc::c_int as usize] as libc::c_int
-                        - (*mvc
-                            .offset(
-                                (i + 1 as libc::c_int) as isize,
-                            ))[1 as libc::c_int as usize] as libc::c_int,
-                );
+        sum += abs(
+            (*mvc.offset(i as isize))[0 as libc::c_int as usize] as libc::c_int
+                - (*mvc.offset((i + 1 as libc::c_int) as isize))[0 as libc::c_int as usize]
+                    as libc::c_int,
+        ) + abs(
+            (*mvc.offset(i as isize))[1 as libc::c_int as usize] as libc::c_int
+                - (*mvc.offset((i + 1 as libc::c_int) as isize))[1 as libc::c_int as usize]
+                    as libc::c_int,
+        );
         i += 1;
         i;
     }
@@ -2617,50 +2419,46 @@ static mut block_idx_y: [uint8_t; 16] = [
     3 as libc::c_int as uint8_t,
 ];
 static mut block_idx_xy_fdec: [uint16_t; 16] = [
-    (0 as libc::c_int * 4 as libc::c_int
-        + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (1 as libc::c_int * 4 as libc::c_int
-        + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (0 as libc::c_int * 4 as libc::c_int
-        + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (1 as libc::c_int * 4 as libc::c_int
-        + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (2 as libc::c_int * 4 as libc::c_int
-        + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (3 as libc::c_int * 4 as libc::c_int
-        + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (2 as libc::c_int * 4 as libc::c_int
-        + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (3 as libc::c_int * 4 as libc::c_int
-        + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (0 as libc::c_int * 4 as libc::c_int
-        + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (1 as libc::c_int * 4 as libc::c_int
-        + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (0 as libc::c_int * 4 as libc::c_int
-        + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (1 as libc::c_int * 4 as libc::c_int
-        + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (2 as libc::c_int * 4 as libc::c_int
-        + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (3 as libc::c_int * 4 as libc::c_int
-        + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (2 as libc::c_int * 4 as libc::c_int
-        + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
-    (3 as libc::c_int * 4 as libc::c_int
-        + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int) as uint16_t,
+    (0 as libc::c_int * 4 as libc::c_int + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (1 as libc::c_int * 4 as libc::c_int + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (0 as libc::c_int * 4 as libc::c_int + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (1 as libc::c_int * 4 as libc::c_int + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (2 as libc::c_int * 4 as libc::c_int + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (3 as libc::c_int * 4 as libc::c_int + 0 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (2 as libc::c_int * 4 as libc::c_int + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (3 as libc::c_int * 4 as libc::c_int + 1 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (0 as libc::c_int * 4 as libc::c_int + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (1 as libc::c_int * 4 as libc::c_int + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (0 as libc::c_int * 4 as libc::c_int + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (1 as libc::c_int * 4 as libc::c_int + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (2 as libc::c_int * 4 as libc::c_int + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (3 as libc::c_int * 4 as libc::c_int + 2 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (2 as libc::c_int * 4 as libc::c_int + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
+    (3 as libc::c_int * 4 as libc::c_int + 3 as libc::c_int * 4 as libc::c_int * 32 as libc::c_int)
+        as uint16_t,
 ];
 #[inline(always)]
 unsafe extern "C" fn pack8to16(mut a: uint32_t, mut b: uint32_t) -> uint32_t {
     a.wrapping_add(b << 8 as libc::c_int)
 }
 #[inline(always)]
-unsafe extern "C" fn pack16to32_mask(
-    mut a: libc::c_int,
-    mut b: libc::c_int,
-) -> uint32_t {
-    ((a & 0xffff as libc::c_int) as uint32_t)
-        .wrapping_add((b as uint32_t) << 16 as libc::c_int)
+unsafe extern "C" fn pack16to32_mask(mut a: libc::c_int, mut b: libc::c_int) -> uint32_t {
+    ((a & 0xffff as libc::c_int) as uint32_t).wrapping_add((b as uint32_t) << 16 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn x264_macroblock_cache_rect(
@@ -2683,8 +2481,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
     } else {
         v * 0x1010101 as libc::c_int as uint32_t
     };
-    let mut v8: uint64_t = (v4 as uint64_t)
-        .wrapping_add((v4 as uint64_t) << 32 as libc::c_int);
+    let mut v8: uint64_t = (v4 as uint64_t).wrapping_add((v4 as uint64_t) << 32 as libc::c_int);
     s *= 8 as libc::c_int;
     if w == 2 as libc::c_int {
         (*(d.offset((s * 0 as libc::c_int) as isize) as *mut x264_union16_t)).i = v2;
@@ -2723,71 +2520,61 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
             (*(d.offset((s * 2 as libc::c_int) as isize) as *mut x264_union64_t)).i = v8;
             (*(d.offset((s * 3 as libc::c_int) as isize) as *mut x264_union64_t)).i = v8;
         } else {
-            (*(d
-                .offset((s * 0 as libc::c_int) as isize)
+            (*(d.offset((s * 0 as libc::c_int) as isize)
                 .offset(0 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
-            (*(d
-                .offset((s * 0 as libc::c_int) as isize)
+            (*(d.offset((s * 0 as libc::c_int) as isize)
                 .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
             if h == 1 as libc::c_int {
                 return;
             }
-            (*(d
-                .offset((s * 1 as libc::c_int) as isize)
+            (*(d.offset((s * 1 as libc::c_int) as isize)
                 .offset(0 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
-            (*(d
-                .offset((s * 1 as libc::c_int) as isize)
+            (*(d.offset((s * 1 as libc::c_int) as isize)
                 .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
             if h == 2 as libc::c_int {
                 return;
             }
-            (*(d
-                .offset((s * 2 as libc::c_int) as isize)
+            (*(d.offset((s * 2 as libc::c_int) as isize)
                 .offset(0 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
-            (*(d
-                .offset((s * 2 as libc::c_int) as isize)
+            (*(d.offset((s * 2 as libc::c_int) as isize)
                 .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
-            (*(d
-                .offset((s * 3 as libc::c_int) as isize)
+            (*(d.offset((s * 3 as libc::c_int) as isize)
                 .offset(0 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
-            (*(d
-                .offset((s * 3 as libc::c_int) as isize)
+            (*(d.offset((s * 3 as libc::c_int) as isize)
                 .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
                 .i = v4;
         }
     } else if w == 16 as libc::c_int {
-        if h != 1 as libc::c_int {} else {
+        if h != 1 as libc::c_int {
+        } else {
             __assert_fail(
                 b"h != 1\0" as *const u8 as *const libc::c_char,
                 b"./common/rectangle.h\0" as *const u8 as *const libc::c_char,
                 82 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 65],
-                    &[libc::c_char; 65],
-                >(b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
+                    b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
+                ))
+                .as_ptr(),
             );
         }
         'c_27091: {
-            if h != 1 as libc::c_int {} else {
+            if h != 1 as libc::c_int {
+            } else {
                 __assert_fail(
                     b"h != 1\0" as *const u8 as *const libc::c_char,
                     b"./common/rectangle.h\0" as *const u8 as *const libc::c_char,
                     82 as libc::c_int as libc::c_uint,
-                    (*::core::mem::transmute::<
-                        &[u8; 65],
-                        &[libc::c_char; 65],
-                    >(
+                    (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
                         b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
                     ))
-                        .as_ptr(),
+                    .as_ptr(),
                 );
             }
         };
@@ -2795,21 +2582,21 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
             == 8 as libc::c_int as libc::c_ulong
         {
             loop {
-                (*(d
-                    .offset((s * 0 as libc::c_int) as isize)
-                    .offset(0 as libc::c_int as isize) as *mut x264_union64_t))
+                (*(d.offset((s * 0 as libc::c_int) as isize)
+                    .offset(0 as libc::c_int as isize)
+                    as *mut x264_union64_t))
                     .i = v8;
-                (*(d
-                    .offset((s * 0 as libc::c_int) as isize)
-                    .offset(8 as libc::c_int as isize) as *mut x264_union64_t))
+                (*(d.offset((s * 0 as libc::c_int) as isize)
+                    .offset(8 as libc::c_int as isize)
+                    as *mut x264_union64_t))
                     .i = v8;
-                (*(d
-                    .offset((s * 1 as libc::c_int) as isize)
-                    .offset(0 as libc::c_int as isize) as *mut x264_union64_t))
+                (*(d.offset((s * 1 as libc::c_int) as isize)
+                    .offset(0 as libc::c_int as isize)
+                    as *mut x264_union64_t))
                     .i = v8;
-                (*(d
-                    .offset((s * 1 as libc::c_int) as isize)
-                    .offset(8 as libc::c_int as isize) as *mut x264_union64_t))
+                (*(d.offset((s * 1 as libc::c_int) as isize)
+                    .offset(8 as libc::c_int as isize)
+                    as *mut x264_union64_t))
                     .i = v8;
                 h -= 2 as libc::c_int;
                 d = d.offset((s * 2 as libc::c_int) as isize);
@@ -2835,22 +2622,20 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
             b"0\0" as *const u8 as *const libc::c_char,
             b"./common/rectangle.h\0" as *const u8 as *const libc::c_char,
             118 as libc::c_int as libc::c_uint,
-            (*::core::mem::transmute::<
-                &[u8; 65],
-                &[libc::c_char; 65],
-            >(b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0"))
-                .as_ptr(),
+            (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
+                b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
+            ))
+            .as_ptr(),
         );
         'c_26858: {
             __assert_fail(
                 b"0\0" as *const u8 as *const libc::c_char,
                 b"./common/rectangle.h\0" as *const u8 as *const libc::c_char,
                 118 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 65],
-                    &[libc::c_char; 65],
-                >(b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
+                    b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
+                ))
+                .as_ptr(),
             );
         };
     };
@@ -2865,17 +2650,16 @@ unsafe extern "C" fn x264_macroblock_cache_mv(
     mut i_list: libc::c_int,
     mut mv: uint32_t,
 ) {
-    let mut mv_cache: *mut libc::c_void = &mut *(*((*h).mb.cache.mv)
-        .as_mut_ptr()
-        .offset(i_list as isize))
-        .as_mut_ptr()
-        .offset(
-            (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int + x
-                + 8 as libc::c_int * y) as isize,
-        ) as *mut [int16_t; 2] as *mut libc::c_void;
+    let mut mv_cache: *mut libc::c_void =
+        &mut *(*((*h).mb.cache.mv).as_mut_ptr().offset(i_list as isize))
+            .as_mut_ptr()
+            .offset(
+                (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int + x + 8 as libc::c_int * y)
+                    as isize,
+            ) as *mut [int16_t; 2] as *mut libc::c_void;
     if 0 == 0 || 0 == 0 {
-        (x264_8_cache_mv_func_table[(width + (height << 1 as libc::c_int)
-            - 3 as libc::c_int) as usize])
+        (x264_8_cache_mv_func_table
+            [(width + (height << 1 as libc::c_int) - 3 as libc::c_int) as usize])
             .expect("non-null function pointer")(mv_cache, mv);
     } else {
         x264_macroblock_cache_rect(
@@ -2897,17 +2681,16 @@ unsafe extern "C" fn x264_macroblock_cache_mvd(
     mut i_list: libc::c_int,
     mut mvd: uint16_t,
 ) {
-    let mut mvd_cache: *mut libc::c_void = &mut *(*((*h).mb.cache.mvd)
-        .as_mut_ptr()
-        .offset(i_list as isize))
-        .as_mut_ptr()
-        .offset(
-            (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int + x
-                + 8 as libc::c_int * y) as isize,
-        ) as *mut [uint8_t; 2] as *mut libc::c_void;
+    let mut mvd_cache: *mut libc::c_void =
+        &mut *(*((*h).mb.cache.mvd).as_mut_ptr().offset(i_list as isize))
+            .as_mut_ptr()
+            .offset(
+                (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int + x + 8 as libc::c_int * y)
+                    as isize,
+            ) as *mut [uint8_t; 2] as *mut libc::c_void;
     if 0 == 0 || 0 == 0 {
-        (x264_8_cache_mvd_func_table[(width + (height << 1 as libc::c_int)
-            - 3 as libc::c_int) as usize])
+        (x264_8_cache_mvd_func_table
+            [(width + (height << 1 as libc::c_int) - 3 as libc::c_int) as usize])
             .expect("non-null function pointer")(mvd_cache, mvd as uint32_t);
     } else {
         x264_macroblock_cache_rect(
@@ -3051,31 +2834,25 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
     let mut pix: [pixel; 256] = [0; 256];
     let mut mvc_temp: [[int16_t; 2]; 16] = [[0; 2]; 16];
     let mut costs: [libc::c_int; 16] = [0; 16];
-    let mut mv_x_min: libc::c_int = (*h)
-        .mb
-        .mv_limit_fpel[0 as libc::c_int as usize][0 as libc::c_int as usize]
-        as libc::c_int;
-    let mut mv_y_min: libc::c_int = (*h)
-        .mb
-        .mv_limit_fpel[0 as libc::c_int as usize][1 as libc::c_int as usize]
-        as libc::c_int;
-    let mut mv_x_max: libc::c_int = (*h)
-        .mb
-        .mv_limit_fpel[1 as libc::c_int as usize][0 as libc::c_int as usize]
-        as libc::c_int;
-    let mut mv_y_max: libc::c_int = (*h)
-        .mb
-        .mv_limit_fpel[1 as libc::c_int as usize][1 as libc::c_int as usize]
-        as libc::c_int;
-    let mut mv_min: uint32_t = ((-mv_x_min as uint32_t) << 16 as libc::c_int) | -mv_y_min as uint32_t & 0x7fff as libc::c_int as uint32_t;
-    let mut mv_max: uint32_t = ((mv_x_max as uint32_t) << 16 as libc::c_int) | mv_y_max as uint32_t & 0x7fff as libc::c_int as uint32_t
+    let mut mv_x_min: libc::c_int =
+        (*h).mb.mv_limit_fpel[0 as libc::c_int as usize][0 as libc::c_int as usize] as libc::c_int;
+    let mut mv_y_min: libc::c_int =
+        (*h).mb.mv_limit_fpel[0 as libc::c_int as usize][1 as libc::c_int as usize] as libc::c_int;
+    let mut mv_x_max: libc::c_int =
+        (*h).mb.mv_limit_fpel[1 as libc::c_int as usize][0 as libc::c_int as usize] as libc::c_int;
+    let mut mv_y_max: libc::c_int =
+        (*h).mb.mv_limit_fpel[1 as libc::c_int as usize][1 as libc::c_int as usize] as libc::c_int;
+    let mut mv_min: uint32_t = ((-mv_x_min as uint32_t) << 16 as libc::c_int)
+        | -mv_y_min as uint32_t & 0x7fff as libc::c_int as uint32_t;
+    let mut mv_max: uint32_t = ((mv_x_max as uint32_t) << 16 as libc::c_int)
+        | mv_y_max as uint32_t & 0x7fff as libc::c_int as uint32_t
         | 0x8000 as libc::c_int as uint32_t;
     let mut pmv: uint32_t = 0;
     let mut bpred_mv: uint32_t = 0 as libc::c_int as uint32_t;
-    let mut p_cost_mvx: *const uint16_t = ((*m).p_cost_mv)
-        .offset(-((*m).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
-    let mut p_cost_mvy: *const uint16_t = ((*m).p_cost_mv)
-        .offset(-((*m).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_mvx: *const uint16_t =
+        ((*m).p_cost_mv).offset(-((*m).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_mvy: *const uint16_t =
+        ((*m).p_cost_mv).offset(-((*m).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
     if (*h).mb.i_subpel_refine >= 3 as libc::c_int {
         let mut bpred_mx: libc::c_int = x264_clip3(
             (*m).mvp[0 as libc::c_int as usize] as libc::c_int,
@@ -3091,10 +2868,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         pmx = (bpred_mx + 2 as libc::c_int) >> 2 as libc::c_int;
         pmy = (bpred_my + 2 as libc::c_int) >> 2 as libc::c_int;
         let mut stride2: intptr_t = 16 as libc::c_int as intptr_t;
-        let mut src: *mut pixel = ((*h).mc.get_ref)
-            .expect(
-                "non-null function pointer",
-            )(
+        let mut src: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
             pix.as_mut_ptr(),
             &mut stride2,
             ((*m).p_fref).as_mut_ptr(),
@@ -3105,11 +2879,12 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        bpred_cost = ((*h).pixf.fpelcmp[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(p_fenc, 16 as libc::c_int as intptr_t, src, stride2)
-            + *p_cost_mvx.offset(bpred_mx as isize) as libc::c_int
+        bpred_cost = ((*h).pixf.fpelcmp[i_pixel as usize]).expect("non-null function pointer")(
+            p_fenc,
+            16 as libc::c_int as intptr_t,
+            src,
+            stride2,
+        ) + *p_cost_mvx.offset(bpred_mx as isize) as libc::c_int
             + *p_cost_mvy.offset(bpred_my as isize) as libc::c_int;
         let mut pmv_cost: libc::c_int = bpred_cost;
         if i_mvc > 0 as libc::c_int {
@@ -3123,20 +2898,19 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             if valid_mvcs > 0 as libc::c_int {
                 let mut i: libc::c_int = 1 as libc::c_int;
                 let mut cost: libc::c_int = 0;
-                (*((mvc_temp[1 as libc::c_int as usize]).as_mut_ptr()
-                    as *mut x264_union32_t))
-                    .i = pmv;
+                (*((mvc_temp[1 as libc::c_int as usize]).as_mut_ptr() as *mut x264_union32_t)).i =
+                    pmv;
                 bpred_cost <<= 4 as libc::c_int;
                 loop {
-                    let mut mx: libc::c_int = mvc_temp[(i + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int;
-                    let mut my: libc::c_int = mvc_temp[(i + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int;
+                    let mut mx: libc::c_int = mvc_temp[(i + 1 as libc::c_int) as usize]
+                        [0 as libc::c_int as usize]
+                        as libc::c_int;
+                    let mut my: libc::c_int = mvc_temp[(i + 1 as libc::c_int) as usize]
+                        [1 as libc::c_int as usize]
+                        as libc::c_int;
                     let mut stride2_0: intptr_t = 16 as libc::c_int as intptr_t;
                     let mut src_0: *mut pixel = ((*h).mc.get_ref)
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                        .expect("non-null function pointer")(
                         pix.as_mut_ptr(),
                         &mut stride2_0,
                         ((*m).p_fref).as_mut_ptr(),
@@ -3148,10 +2922,12 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         &*((*m).weight).offset(0 as libc::c_int as isize),
                     );
                     cost = ((*h).pixf.fpelcmp[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(p_fenc, 16 as libc::c_int as intptr_t, src_0, stride2_0)
-                        + *p_cost_mvx.offset(mx as isize) as libc::c_int
+                        .expect("non-null function pointer")(
+                        p_fenc,
+                        16 as libc::c_int as intptr_t,
+                        src_0,
+                        stride2_0,
+                    ) + *p_cost_mvx.offset(mx as isize) as libc::c_int
                         + *p_cost_mvy.offset(my as isize) as libc::c_int;
                     if (cost << 4 as libc::c_int) + i < bpred_cost {
                         bpred_cost = (cost << 4 as libc::c_int) + i;
@@ -3161,10 +2937,10 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         break;
                     }
                 }
-                bpred_mx = mvc_temp[((bpred_cost & 15 as libc::c_int) + 1 as libc::c_int)
-                    as usize][0 as libc::c_int as usize] as libc::c_int;
-                bpred_my = mvc_temp[((bpred_cost & 15 as libc::c_int) + 1 as libc::c_int)
-                    as usize][1 as libc::c_int as usize] as libc::c_int;
+                bpred_mx = mvc_temp[((bpred_cost & 15 as libc::c_int) + 1 as libc::c_int) as usize]
+                    [0 as libc::c_int as usize] as libc::c_int;
+                bpred_my = mvc_temp[((bpred_cost & 15 as libc::c_int) + 1 as libc::c_int) as usize]
+                    [1 as libc::c_int as usize] as libc::c_int;
                 bpred_cost >>= 4 as libc::c_int;
             }
         }
@@ -3172,18 +2948,14 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         bmy = (bpred_my + 2 as libc::c_int) >> 2 as libc::c_int;
         bpred_mv = pack16to32_mask(bpred_mx, bpred_my);
         if bpred_mv & 0x30003 as libc::c_int as uint32_t != 0 {
-            let mut cost_0: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
-                p_fenc,
-                16 as libc::c_int as intptr_t,
-                &mut *p_fref_w.offset((bmy * stride + bmx) as isize),
-                stride as intptr_t,
-            )
-                + (*p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize) as libc::c_int
-                    + *p_cost_mvy.offset((bmy * 4 as libc::c_int) as isize)
-                        as libc::c_int);
+            let mut cost_0: libc::c_int =
+                ((*h).pixf.fpelcmp[i_pixel as usize]).expect("non-null function pointer")(
+                    p_fenc,
+                    16 as libc::c_int as intptr_t,
+                    &mut *p_fref_w.offset((bmy * stride + bmx) as isize),
+                    stride as intptr_t,
+                ) + (*p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize) as libc::c_int
+                    + *p_cost_mvy.offset((bmy * 4 as libc::c_int) as isize) as libc::c_int);
             if cost_0 < bcost {
                 bcost = cost_0;
                 bmx = bmx;
@@ -3195,20 +2967,16 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         if pmv != 0 {
             if bmx | bmy != 0 {
                 let mut cost_1: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                    .expect("non-null function pointer")(
                     p_fenc,
                     16 as libc::c_int as intptr_t,
-                    &mut *p_fref_w
-                        .offset((0 as libc::c_int * stride + 0 as libc::c_int) as isize),
+                    &mut *p_fref_w.offset((0 as libc::c_int * stride + 0 as libc::c_int) as isize),
                     stride as intptr_t,
-                )
-                    + (*p_cost_mvx.offset((0 as libc::c_int * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset((0 as libc::c_int * 4 as libc::c_int) as isize)
-                            as libc::c_int);
+                ) + (*p_cost_mvx
+                    .offset((0 as libc::c_int * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset((0 as libc::c_int * 4 as libc::c_int) as isize)
+                        as libc::c_int);
                 if cost_1 < bcost {
                     bcost = cost_1;
                     bmx = 0 as libc::c_int;
@@ -3222,22 +2990,21 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         }
     } else {
         pmx = x264_clip3(
-            ((*m).mvp[0 as libc::c_int as usize] as libc::c_int + 2 as libc::c_int) >> 2 as libc::c_int,
+            ((*m).mvp[0 as libc::c_int as usize] as libc::c_int + 2 as libc::c_int)
+                >> 2 as libc::c_int,
             mv_x_min,
             mv_x_max,
         );
         bmx = pmx;
         pmy = x264_clip3(
-            ((*m).mvp[1 as libc::c_int as usize] as libc::c_int + 2 as libc::c_int) >> 2 as libc::c_int,
+            ((*m).mvp[1 as libc::c_int as usize] as libc::c_int + 2 as libc::c_int)
+                >> 2 as libc::c_int,
             mv_y_min,
             mv_y_max,
         );
         bmy = pmy;
         pmv = pack16to32_mask(bmx, bmy);
-        bcost = ((*h).pixf.fpelcmp[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        bcost = ((*h).pixf.fpelcmp[i_pixel as usize]).expect("non-null function pointer")(
             p_fenc,
             16 as libc::c_int as intptr_t,
             &mut *p_fref_w.offset((bmy * stride + bmx) as isize),
@@ -3254,28 +3021,25 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             if valid_mvcs_0 > 0 as libc::c_int {
                 let mut i_0: libc::c_int = 1 as libc::c_int;
                 let mut cost_2: libc::c_int = 0;
-                (*((mvc_temp[1 as libc::c_int as usize]).as_mut_ptr()
-                    as *mut x264_union32_t))
-                    .i = pmv;
+                (*((mvc_temp[1 as libc::c_int as usize]).as_mut_ptr() as *mut x264_union32_t)).i =
+                    pmv;
                 bcost <<= 4 as libc::c_int;
                 loop {
-                    let mut mx_0: libc::c_int = mvc_temp[(i_0 + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int;
-                    let mut my_0: libc::c_int = mvc_temp[(i_0 + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int;
+                    let mut mx_0: libc::c_int = mvc_temp[(i_0 + 1 as libc::c_int) as usize]
+                        [0 as libc::c_int as usize]
+                        as libc::c_int;
+                    let mut my_0: libc::c_int = mvc_temp[(i_0 + 1 as libc::c_int) as usize]
+                        [1 as libc::c_int as usize]
+                        as libc::c_int;
                     cost_2 = ((*h).pixf.fpelcmp[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                        .expect("non-null function pointer")(
                         p_fenc,
                         16 as libc::c_int as intptr_t,
                         &mut *p_fref_w.offset((my_0 * stride + mx_0) as isize),
                         stride as intptr_t,
-                    )
-                        + (*p_cost_mvx.offset((mx_0 * 4 as libc::c_int) as isize)
-                            as libc::c_int
-                            + *p_cost_mvy.offset((my_0 * 4 as libc::c_int) as isize)
-                                as libc::c_int);
+                    ) + (*p_cost_mvx.offset((mx_0 * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset((my_0 * 4 as libc::c_int) as isize) as libc::c_int);
                     if (cost_2 << 4 as libc::c_int) + i_0 < bcost {
                         bcost = (cost_2 << 4 as libc::c_int) + i_0;
                     }
@@ -3284,25 +3048,21 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         break;
                     }
                 }
-                bmx = mvc_temp[((bcost & 15 as libc::c_int) + 1 as libc::c_int)
-                    as usize][0 as libc::c_int as usize] as libc::c_int;
-                bmy = mvc_temp[((bcost & 15 as libc::c_int) + 1 as libc::c_int)
-                    as usize][1 as libc::c_int as usize] as libc::c_int;
+                bmx = mvc_temp[((bcost & 15 as libc::c_int) + 1 as libc::c_int) as usize]
+                    [0 as libc::c_int as usize] as libc::c_int;
+                bmy = mvc_temp[((bcost & 15 as libc::c_int) + 1 as libc::c_int) as usize]
+                    [1 as libc::c_int as usize] as libc::c_int;
                 bcost >>= 4 as libc::c_int;
             }
         }
         if pmv != 0 {
-            let mut cost_3: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
-                p_fenc,
-                16 as libc::c_int as intptr_t,
-                &mut *p_fref_w
-                    .offset((0 as libc::c_int * stride + 0 as libc::c_int) as isize),
-                stride as intptr_t,
-            )
-                + (*p_cost_mvx.offset((0 as libc::c_int * 4 as libc::c_int) as isize)
+            let mut cost_3: libc::c_int =
+                ((*h).pixf.fpelcmp[i_pixel as usize]).expect("non-null function pointer")(
+                    p_fenc,
+                    16 as libc::c_int as intptr_t,
+                    &mut *p_fref_w.offset((0 as libc::c_int * stride + 0 as libc::c_int) as isize),
+                    stride as intptr_t,
+                ) + (*p_cost_mvx.offset((0 as libc::c_int * 4 as libc::c_int) as isize)
                     as libc::c_int
                     + *p_cost_mvy.offset((0 as libc::c_int * 4 as libc::c_int) as isize)
                         as libc::c_int);
@@ -3321,10 +3081,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 let mut pix_base: *mut pixel = p_fref_w
                     .offset(bmx as isize)
                     .offset((bmy * stride) as isize);
-                ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                     p_fenc,
                     pix_base
                         .offset(0 as libc::c_int as isize)
@@ -3341,81 +3098,67 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     stride as intptr_t,
                     costs.as_mut_ptr(),
                 );
-                costs[0 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[1 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[2 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(
-                            ((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                        ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[3 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-                    + 1 as libc::c_int) < bcost
+                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[2 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[3 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-                        + 1 as libc::c_int;
+                    bcost =
+                        (costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int;
                 }
-                if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-                    + 3 as libc::c_int) < bcost
+                if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-                        + 3 as libc::c_int;
+                    bcost =
+                        (costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int;
                 }
-                if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-                    + 4 as libc::c_int) < bcost
+                if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-                        + 4 as libc::c_int;
+                    bcost =
+                        (costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int;
                 }
-                if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-                    + 12 as libc::c_int) < bcost
+                if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 12 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-                        + 12 as libc::c_int;
+                    bcost =
+                        (costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 12 as libc::c_int;
                 }
                 if bcost & 15 as libc::c_int == 0 {
                     break;
                 }
-                bmx
-                    -= ((bcost as uint32_t) << 28 as libc::c_int) as int32_t
-                        >> 30 as libc::c_int;
-                bmy
-                    -= ((bcost as uint32_t) << 30 as libc::c_int) as int32_t
-                        >> 30 as libc::c_int;
+                bmx -= ((bcost as uint32_t) << 28 as libc::c_int) as int32_t >> 30 as libc::c_int;
+                bmy -= ((bcost as uint32_t) << 30 as libc::c_int) as int32_t >> 30 as libc::c_int;
                 bcost &= !(15 as libc::c_int);
                 i_1 -= 1;
                 if !(i_1 != 0
-                    && ((((bmx as uint32_t) << 16 as libc::c_int) | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t)
+                    && ((((bmx as uint32_t) << 16 as libc::c_int)
+                        | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t)
                         .wrapping_add(mv_min)
-                        | mv_max
-                            .wrapping_sub(
-                                ((bmx as uint32_t) << 16 as libc::c_int) | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t,
-                            )) & 0x80004000 as libc::c_uint == 0)
+                        | mv_max.wrapping_sub(
+                            ((bmx as uint32_t) << 16 as libc::c_int)
+                                | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t,
+                        ))
+                        & 0x80004000 as libc::c_uint
+                        == 0)
                 {
                     break;
                 }
@@ -3445,10 +3188,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             let mut pix_base_5: *mut pixel = p_fref_w
                 .offset(omx as isize)
                 .offset((omy * stride) as isize);
-            ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                 p_fenc,
                 pix_base_5
                     .offset(0 as libc::c_int as isize)
@@ -3465,35 +3205,26 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 stride as intptr_t,
                 costs.as_mut_ptr(),
             );
-            costs[0 as libc::c_int as usize]
-                += *p_cost_mvx
-                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int
-                    + *p_cost_mvy
-                        .offset(
-                            ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                        ) as libc::c_int;
-            costs[1 as libc::c_int as usize]
-                += *p_cost_mvx
-                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int
-                    + *p_cost_mvy
-                        .offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int;
-            costs[2 as libc::c_int as usize]
-                += *p_cost_mvx
-                    .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                    as libc::c_int
-                    + *p_cost_mvy
-                        .offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int;
-            costs[3 as libc::c_int as usize]
-                += *p_cost_mvx
-                    .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int
-                    + *p_cost_mvy
-                        .offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int;
+            costs[0 as libc::c_int as usize] += *p_cost_mvx
+                .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int
+                + *p_cost_mvy.offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                    as libc::c_int;
+            costs[1 as libc::c_int as usize] += *p_cost_mvx
+                .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int
+                + *p_cost_mvy.offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int;
+            costs[2 as libc::c_int as usize] += *p_cost_mvx
+                .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int
+                + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int;
+            costs[3 as libc::c_int as usize] += *p_cost_mvx
+                .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int
+                + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int;
             if costs[0 as libc::c_int as usize] < bcost {
                 bcost = costs[0 as libc::c_int as usize];
                 bmx = omx + 0 as libc::c_int;
@@ -3520,10 +3251,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 let mut pix_base_6: *mut pixel = p_fref_w
                     .offset(omx as isize)
                     .offset((omy * stride) as isize);
-                ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                     p_fenc,
                     pix_base_6
                         .offset(0 as libc::c_int as isize)
@@ -3540,39 +3268,26 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     stride as intptr_t,
                     costs.as_mut_ptr(),
                 );
-                costs[0 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[1 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[2 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(
-                            ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                        ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[3 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
+                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[2 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
+                costs[3 as libc::c_int as usize] += *p_cost_mvx
+                    .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                    as libc::c_int
+                    + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int;
                 if costs[0 as libc::c_int as usize] < bcost {
                     bcost = costs[0 as libc::c_int as usize];
                     bmx = omx + 0 as libc::c_int;
@@ -3604,10 +3319,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     let mut pix_base_7: *mut pixel = p_fref_w
                         .offset(omx as isize)
                         .offset((omy * stride) as isize);
-                    ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                         p_fenc,
                         pix_base_7
                             .offset(0 as libc::c_int as isize)
@@ -3624,42 +3336,27 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         stride as intptr_t,
                         costs.as_mut_ptr(),
                     );
-                    costs[0 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[1 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[2 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[3 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
+                    costs[0 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy
+                            .offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[1 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[2 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[3 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
                     if costs[0 as libc::c_int as usize] < bcost {
                         bcost = costs[0 as libc::c_int as usize];
                         bmx = omx + 0 as libc::c_int;
@@ -3688,16 +3385,12 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 omy = bmy;
                 if bcost == ucost2
                     && bcost
-                        < 2000 as libc::c_int
-                            >> pixel_size_shift[i_pixel as usize] as libc::c_int
+                        < 2000 as libc::c_int >> pixel_size_shift[i_pixel as usize] as libc::c_int
                 {
                     let mut pix_base_8: *mut pixel = p_fref_w
                         .offset(omx as isize)
                         .offset((omy * stride) as isize);
-                    ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                         p_fenc,
                         pix_base_8
                             .offset(0 as libc::c_int as isize)
@@ -3714,42 +3407,29 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         stride as intptr_t,
                         costs.as_mut_ptr(),
                     );
-                    costs[0 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[1 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[2 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[3 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
+                    costs[0 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy
+                            .offset(((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[1 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy
+                            .offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[2 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy
+                            .offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[3 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
                     if costs[0 as libc::c_int as usize] < bcost {
                         bcost = costs[0 as libc::c_int as usize];
                         bmx = omx + 0 as libc::c_int;
@@ -3773,10 +3453,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     let mut pix_base_9: *mut pixel = p_fref_w
                         .offset(omx as isize)
                         .offset((omy * stride) as isize);
-                    ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                         p_fenc,
                         pix_base_9
                             .offset(2 as libc::c_int as isize)
@@ -3793,42 +3470,26 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         stride as intptr_t,
                         costs.as_mut_ptr(),
                     );
-                    costs[0 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[1 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[2 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
-                    costs[3 as libc::c_int as usize]
-                        += *p_cost_mvx
-                            .offset(
-                                ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int;
+                    costs[0 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[1 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[2 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
+                    costs[3 as libc::c_int as usize] += *p_cost_mvx
+                        .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                        as libc::c_int
+                        + *p_cost_mvy.offset(((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int;
                     if costs[0 as libc::c_int as usize] < bcost {
                         bcost = costs[0 as libc::c_int as usize];
                         bmx = omx + 2 as libc::c_int;
@@ -3856,7 +3517,8 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     {
                         current_block = 14127502640287082657;
                     } else if bcost == ucost2 {
-                        let mut range: libc::c_int = (i_me_range >> 1 as libc::c_int) | 1 as libc::c_int;
+                        let mut range: libc::c_int =
+                            (i_me_range >> 1 as libc::c_int) | 1 as libc::c_int;
                         let mut i_3: libc::c_int = 3 as libc::c_int;
                         if range
                             <= (if mv_x_max - omx < omx - mv_x_min {
@@ -3870,9 +3532,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     .offset(omx as isize)
                                     .offset((omy * stride) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_10
                                         .offset(i_3 as isize)
@@ -3889,42 +3549,32 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     stride as intptr_t,
                                     costs.as_mut_ptr(),
                                 );
-                                costs[0 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(((omx + i_3) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[1 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(((omx + -i_3) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[2 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + (i_3 + 2 as libc::c_int)) * 4 as libc::c_int)
-                                                as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[3 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + (-i_3 - 2 as libc::c_int)) * 4 as libc::c_int)
-                                                as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
+                                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + i_3) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + -i_3) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[2 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                    ((omx + (i_3 + 2 as libc::c_int)) * 4 as libc::c_int) as isize,
+                                )
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[3 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                    ((omx + (-i_3 - 2 as libc::c_int)) * 4 as libc::c_int) as isize,
+                                )
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
                                 if costs[0 as libc::c_int as usize] < bcost {
                                     bcost = costs[0 as libc::c_int as usize];
                                     bmx = omx + i_3;
@@ -3950,23 +3600,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         }
                         while i_3 < range {
                             if omx + i_3 <= mv_x_max {
-                                let mut cost_4: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_4: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset((omy * stride + (omx + i_3)) as isize),
+                                    &mut *p_fref_w.offset((omy * stride + (omx + i_3)) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx
-                                        .offset(((omx + i_3) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset(((omx + i_3) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_4 < bcost {
                                     bcost = cost_4;
                                     bmx = omx + i_3;
@@ -3974,23 +3618,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 }
                             }
                             if omx - i_3 >= mv_x_min {
-                                let mut cost_5: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_5: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset((omy * stride + (omx - i_3)) as isize),
+                                    &mut *p_fref_w.offset((omy * stride + (omx - i_3)) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx
-                                        .offset(((omx - i_3) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset(((omx - i_3) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_5 < bcost {
                                     bcost = cost_5;
                                     bmx = omx - i_3;
@@ -4012,9 +3650,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     .offset(omx as isize)
                                     .offset((omy * stride) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_11
                                         .offset(0 as libc::c_int as isize)
@@ -4031,42 +3667,30 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     stride as intptr_t,
                                     costs.as_mut_ptr(),
                                 );
-                                costs[0 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + i_3) * 4 as libc::c_int) as isize)
-                                            as libc::c_int;
-                                costs[1 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + -i_3) * 4 as libc::c_int) as isize)
-                                            as libc::c_int;
-                                costs[2 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + (i_3 + 2 as libc::c_int)) * 4 as libc::c_int)
-                                                    as isize,
-                                            ) as libc::c_int;
-                                costs[3 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + (-i_3 - 2 as libc::c_int)) * 4 as libc::c_int)
-                                                    as isize,
-                                            ) as libc::c_int;
+                                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + i_3) * 4 as libc::c_int) as isize)
+                                        as libc::c_int;
+                                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + -i_3) * 4 as libc::c_int) as isize)
+                                        as libc::c_int;
+                                costs[2 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + (i_3 + 2 as libc::c_int)) * 4 as libc::c_int)
+                                            as isize,
+                                    ) as libc::c_int;
+                                costs[3 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + (-i_3 - 2 as libc::c_int)) * 4 as libc::c_int)
+                                            as isize,
+                                    ) as libc::c_int;
                                 if costs[0 as libc::c_int as usize] < bcost {
                                     bcost = costs[0 as libc::c_int as usize];
                                     bmx = omx + 0 as libc::c_int;
@@ -4092,23 +3716,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         }
                         while i_3 < range {
                             if omy + i_3 <= mv_y_max {
-                                let mut cost_6: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_6: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset(((omy + i_3) * stride + omx) as isize),
+                                    &mut *p_fref_w.offset(((omy + i_3) * stride + omx) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx.offset((omx * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + i_3) * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset((omx * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + i_3) * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_6 < bcost {
                                     bcost = cost_6;
                                     bmx = omx;
@@ -4116,23 +3734,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 }
                             }
                             if omy - i_3 >= mv_y_min {
-                                let mut cost_7: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_7: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset(((omy - i_3) * stride + omx) as isize),
+                                    &mut *p_fref_w.offset(((omy - i_3) * stride + omx) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx.offset((omx * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy - i_3) * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset((omx * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy - i_3) * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_7 < bcost {
                                     bcost = cost_7;
                                     bmx = omx;
@@ -4145,9 +3757,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             .offset(omx as isize)
                             .offset((omy * stride) as isize);
                         ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                            .expect("non-null function pointer")(
                             p_fenc,
                             pix_base_12
                                 .offset(-(1 as libc::c_int) as isize)
@@ -4164,42 +3774,30 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             stride as intptr_t,
                             costs.as_mut_ptr(),
                         );
-                        costs[0 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[1 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[2 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[3 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
+                        costs[0 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[1 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[2 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[3 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
                         if costs[0 as libc::c_int as usize] < bcost {
                             bcost = costs[0 as libc::c_int as usize];
                             bmx = omx + -(1 as libc::c_int);
@@ -4224,9 +3822,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             .offset(omx as isize)
                             .offset((omy * stride) as isize);
                         ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                            .expect("non-null function pointer")(
                             p_fenc,
                             pix_base_13
                                 .offset(-(2 as libc::c_int) as isize)
@@ -4243,42 +3839,30 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             stride as intptr_t,
                             costs.as_mut_ptr(),
                         );
-                        costs[0 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[1 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[2 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[3 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
+                        costs[0 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[1 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[2 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[3 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
                         if costs[0 as libc::c_int as usize] < bcost {
                             bcost = costs[0 as libc::c_int as usize];
                             bmx = omx + -(2 as libc::c_int);
@@ -4349,39 +3933,27 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 if i_pixel == PIXEL_16x16 as libc::c_int {
                                     mvd = 25 as libc::c_int;
                                 } else {
-                                    mvd = abs(
-                                        (*m).mvp[0 as libc::c_int as usize] as libc::c_int
-                                            - (*mvc
-                                                .offset(
-                                                    0 as libc::c_int as isize,
-                                                ))[0 as libc::c_int as usize] as libc::c_int,
-                                    )
-                                        + abs(
-                                            (*m).mvp[1 as libc::c_int as usize] as libc::c_int
-                                                - (*mvc
-                                                    .offset(
-                                                        0 as libc::c_int as isize,
-                                                    ))[1 as libc::c_int as usize] as libc::c_int,
-                                        );
+                                    mvd = abs((*m).mvp[0 as libc::c_int as usize] as libc::c_int
+                                        - (*mvc.offset(0 as libc::c_int as isize))
+                                            [0 as libc::c_int as usize]
+                                            as libc::c_int)
+                                        + abs((*m).mvp[1 as libc::c_int as usize] as libc::c_int
+                                            - (*mvc.offset(0 as libc::c_int as isize))
+                                                [1 as libc::c_int as usize]
+                                                as libc::c_int);
                                 }
                             } else {
                                 denom = i_mvc - 1 as libc::c_int;
                                 mvd = 0 as libc::c_int;
                                 if i_pixel != PIXEL_16x16 as libc::c_int {
-                                    mvd = abs(
-                                        (*m).mvp[0 as libc::c_int as usize] as libc::c_int
-                                            - (*mvc
-                                                .offset(
-                                                    0 as libc::c_int as isize,
-                                                ))[0 as libc::c_int as usize] as libc::c_int,
-                                    )
-                                        + abs(
-                                            (*m).mvp[1 as libc::c_int as usize] as libc::c_int
-                                                - (*mvc
-                                                    .offset(
-                                                        0 as libc::c_int as isize,
-                                                    ))[1 as libc::c_int as usize] as libc::c_int,
-                                        );
+                                    mvd = abs((*m).mvp[0 as libc::c_int as usize] as libc::c_int
+                                        - (*mvc.offset(0 as libc::c_int as isize))
+                                            [0 as libc::c_int as usize]
+                                            as libc::c_int)
+                                        + abs((*m).mvp[1 as libc::c_int as usize] as libc::c_int
+                                            - (*mvc.offset(0 as libc::c_int as isize))
+                                                [1 as libc::c_int as usize]
+                                                as libc::c_int);
                                     denom += 1;
                                     denom;
                                 }
@@ -4415,8 +3987,8 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 3 as libc::c_int
                             };
                             i_me_range = (i_me_range
-                                * range_mul[mvd_ctx as usize][sad_ctx as usize]
-                                    as libc::c_int) >> 2 as libc::c_int;
+                                * range_mul[mvd_ctx as usize][sad_ctx as usize] as libc::c_int)
+                                >> 2 as libc::c_int;
                         }
                         let mut i_4: libc::c_int = cross_start;
                         if i_me_range
@@ -4431,9 +4003,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     .offset(omx as isize)
                                     .offset((omy * stride) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_14
                                         .offset(i_4 as isize)
@@ -4450,42 +4020,32 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     stride as intptr_t,
                                     costs.as_mut_ptr(),
                                 );
-                                costs[0 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(((omx + i_4) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[1 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(((omx + -i_4) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[2 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + (i_4 + 2 as libc::c_int)) * 4 as libc::c_int)
-                                                as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
-                                costs[3 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + (-i_4 - 2 as libc::c_int)) * 4 as libc::c_int)
-                                                as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                            ) as libc::c_int;
+                                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + i_4) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + -i_4) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[2 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                    ((omx + (i_4 + 2 as libc::c_int)) * 4 as libc::c_int) as isize,
+                                )
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
+                                costs[3 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                    ((omx + (-i_4 - 2 as libc::c_int)) * 4 as libc::c_int) as isize,
+                                )
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + 0 as libc::c_int) * 4 as libc::c_int) as isize,
+                                    ) as libc::c_int;
                                 if costs[0 as libc::c_int as usize] < bcost {
                                     bcost = costs[0 as libc::c_int as usize];
                                     bmx = omx + i_4;
@@ -4511,23 +4071,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         }
                         while i_4 < i_me_range {
                             if omx + i_4 <= mv_x_max {
-                                let mut cost_8: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_8: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset((omy * stride + (omx + i_4)) as isize),
+                                    &mut *p_fref_w.offset((omy * stride + (omx + i_4)) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx
-                                        .offset(((omx + i_4) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset(((omx + i_4) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_8 < bcost {
                                     bcost = cost_8;
                                     bmx = omx + i_4;
@@ -4535,23 +4089,17 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 }
                             }
                             if omx - i_4 >= mv_x_min {
-                                let mut cost_9: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_9: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset((omy * stride + (omx - i_4)) as isize),
+                                    &mut *p_fref_w.offset((omy * stride + (omx - i_4)) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx
-                                        .offset(((omx - i_4) * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset(((omx - i_4) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset((omy * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_9 < bcost {
                                     bcost = cost_9;
                                     bmx = omx - i_4;
@@ -4568,16 +4116,12 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 omy - mv_y_min
                             })
                         {
-                            while i_4
-                                < (i_me_range >> 1 as libc::c_int) - 2 as libc::c_int
-                            {
+                            while i_4 < (i_me_range >> 1 as libc::c_int) - 2 as libc::c_int {
                                 let mut pix_base_15: *mut pixel = p_fref_w
                                     .offset(omx as isize)
                                     .offset((omy * stride) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_15
                                         .offset(0 as libc::c_int as isize)
@@ -4594,42 +4138,30 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     stride as intptr_t,
                                     costs.as_mut_ptr(),
                                 );
-                                costs[0 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + i_4) * 4 as libc::c_int) as isize)
-                                            as libc::c_int;
-                                costs[1 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + -i_4) * 4 as libc::c_int) as isize)
-                                            as libc::c_int;
-                                costs[2 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + (i_4 + 2 as libc::c_int)) * 4 as libc::c_int)
-                                                    as isize,
-                                            ) as libc::c_int;
-                                costs[3 as libc::c_int as usize]
-                                    += *p_cost_mvx
-                                        .offset(
-                                            ((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(
-                                                ((omy + (-i_4 - 2 as libc::c_int)) * 4 as libc::c_int)
-                                                    as isize,
-                                            ) as libc::c_int;
+                                costs[0 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + i_4) * 4 as libc::c_int) as isize)
+                                        as libc::c_int;
+                                costs[1 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + -i_4) * 4 as libc::c_int) as isize)
+                                        as libc::c_int;
+                                costs[2 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + (i_4 + 2 as libc::c_int)) * 4 as libc::c_int)
+                                            as isize,
+                                    ) as libc::c_int;
+                                costs[3 as libc::c_int as usize] += *p_cost_mvx
+                                    .offset(((omx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(
+                                        ((omy + (-i_4 - 2 as libc::c_int)) * 4 as libc::c_int)
+                                            as isize,
+                                    ) as libc::c_int;
                                 if costs[0 as libc::c_int as usize] < bcost {
                                     bcost = costs[0 as libc::c_int as usize];
                                     bmx = omx + 0 as libc::c_int;
@@ -4655,23 +4187,18 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         }
                         while i_4 < i_me_range >> 1 as libc::c_int {
                             if omy + i_4 <= mv_y_max {
-                                let mut cost_10: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_10: libc::c_int = ((*h).pixf.fpelcmp
+                                    [i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset(((omy + i_4) * stride + omx) as isize),
+                                    &mut *p_fref_w.offset(((omy + i_4) * stride + omx) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx.offset((omx * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy + i_4) * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset((omx * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy + i_4) * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_10 < bcost {
                                     bcost = cost_10;
                                     bmx = omx;
@@ -4679,23 +4206,18 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 }
                             }
                             if omy - i_4 >= mv_y_min {
-                                let mut cost_11: libc::c_int = ((*h)
-                                    .pixf
-                                    .fpelcmp[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                let mut cost_11: libc::c_int = ((*h).pixf.fpelcmp
+                                    [i_pixel as usize])
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     16 as libc::c_int as intptr_t,
-                                    &mut *p_fref_w
-                                        .offset(((omy - i_4) * stride + omx) as isize),
+                                    &mut *p_fref_w.offset(((omy - i_4) * stride + omx) as isize),
                                     stride as intptr_t,
-                                )
-                                    + (*p_cost_mvx.offset((omx * 4 as libc::c_int) as isize)
-                                        as libc::c_int
-                                        + *p_cost_mvy
-                                            .offset(((omy - i_4) * 4 as libc::c_int) as isize)
-                                            as libc::c_int);
+                                ) + (*p_cost_mvx
+                                    .offset((omx * 4 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    + *p_cost_mvy.offset(((omy - i_4) * 4 as libc::c_int) as isize)
+                                        as libc::c_int);
                                 if cost_11 < bcost {
                                     bcost = cost_11;
                                     bmx = omx;
@@ -4708,9 +4230,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             .offset(omx as isize)
                             .offset((omy * stride) as isize);
                         ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                            .expect("non-null function pointer")(
                             p_fenc,
                             pix_base_16
                                 .offset(-(2 as libc::c_int) as isize)
@@ -4727,42 +4247,30 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             stride as intptr_t,
                             costs.as_mut_ptr(),
                         );
-                        costs[0 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[1 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[2 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                        costs[3 as libc::c_int as usize]
-                            += *p_cost_mvx
-                                .offset(
-                                    ((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                ) as libc::c_int
-                                + *p_cost_mvy
-                                    .offset(
-                                        ((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
+                        costs[0 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[1 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[2 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
+                        costs[3 as libc::c_int as usize] += *p_cost_mvx
+                            .offset(((omx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                            as libc::c_int
+                            + *p_cost_mvy
+                                .offset(((omy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                                as libc::c_int;
                         if costs[0 as libc::c_int as usize] < bcost {
                             bcost = costs[0 as libc::c_int as usize];
                             bmx = omx + -(2 as libc::c_int);
@@ -4785,29 +4293,20 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         }
                         omx = bmx;
                         omy = bmy;
-                        let mut p_cost_omvx: *const uint16_t = p_cost_mvx
-                            .offset((omx * 4 as libc::c_int) as isize);
-                        let mut p_cost_omvy: *const uint16_t = p_cost_mvy
-                            .offset((omy * 4 as libc::c_int) as isize);
+                        let mut p_cost_omvx: *const uint16_t =
+                            p_cost_mvx.offset((omx * 4 as libc::c_int) as isize);
+                        let mut p_cost_omvy: *const uint16_t =
+                            p_cost_mvy.offset((omy * 4 as libc::c_int) as isize);
                         let mut i_5: libc::c_int = 1 as libc::c_int;
                         loop {
                             static mut hex4: [[int8_t; 2]; 16] = [
                                 [0 as libc::c_int as int8_t, -(4 as libc::c_int) as int8_t],
                                 [0 as libc::c_int as int8_t, 4 as libc::c_int as int8_t],
-                                [
-                                    -(2 as libc::c_int) as int8_t,
-                                    -(3 as libc::c_int) as int8_t,
-                                ],
+                                [-(2 as libc::c_int) as int8_t, -(3 as libc::c_int) as int8_t],
                                 [2 as libc::c_int as int8_t, -(3 as libc::c_int) as int8_t],
-                                [
-                                    -(4 as libc::c_int) as int8_t,
-                                    -(2 as libc::c_int) as int8_t,
-                                ],
+                                [-(4 as libc::c_int) as int8_t, -(2 as libc::c_int) as int8_t],
                                 [4 as libc::c_int as int8_t, -(2 as libc::c_int) as int8_t],
-                                [
-                                    -(4 as libc::c_int) as int8_t,
-                                    -(1 as libc::c_int) as int8_t,
-                                ],
+                                [-(4 as libc::c_int) as int8_t, -(1 as libc::c_int) as int8_t],
                                 [4 as libc::c_int as int8_t, -(1 as libc::c_int) as int8_t],
                                 [-(4 as libc::c_int) as int8_t, 0 as libc::c_int as int8_t],
                                 [4 as libc::c_int as int8_t, 0 as libc::c_int as int8_t],
@@ -4852,33 +4351,36 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 let mut j: libc::c_int = 0 as libc::c_int;
                                 while j < 16 as libc::c_int {
                                     let mut mx_1: libc::c_int = omx
-                                        + hex4[j as usize][0 as libc::c_int as usize] as libc::c_int
+                                        + hex4[j as usize][0 as libc::c_int as usize]
+                                            as libc::c_int
                                             * i_5;
                                     let mut my_1: libc::c_int = omy
-                                        + hex4[j as usize][1 as libc::c_int as usize] as libc::c_int
+                                        + hex4[j as usize][1 as libc::c_int as usize]
+                                            as libc::c_int
                                             * i_5;
-                                    if ((((mx_1 as uint32_t) << 16 as libc::c_int) | my_1 as uint32_t & 0x7fff as libc::c_int as uint32_t)
+                                    if ((((mx_1 as uint32_t) << 16 as libc::c_int)
+                                        | my_1 as uint32_t & 0x7fff as libc::c_int as uint32_t)
                                         .wrapping_add(mv_min)
-                                        | mv_max
-                                            .wrapping_sub(
-                                                ((mx_1 as uint32_t) << 16 as libc::c_int) | my_1 as uint32_t & 0x7fff as libc::c_int as uint32_t,
-                                            )) & 0x80004000 as libc::c_uint == 0
+                                        | mv_max.wrapping_sub(
+                                            ((mx_1 as uint32_t) << 16 as libc::c_int)
+                                                | my_1 as uint32_t
+                                                    & 0x7fff as libc::c_int as uint32_t,
+                                        ))
+                                        & 0x80004000 as libc::c_uint
+                                        == 0
                                     {
-                                        let mut cost_12: libc::c_int = ((*h)
-                                            .pixf
-                                            .fpelcmp[i_pixel as usize])
-                                            .expect(
-                                                "non-null function pointer",
-                                            )(
+                                        let mut cost_12: libc::c_int = ((*h).pixf.fpelcmp
+                                            [i_pixel as usize])
+                                            .expect("non-null function pointer")(
                                             p_fenc,
                                             16 as libc::c_int as intptr_t,
                                             &mut *p_fref_w.offset((my_1 * stride + mx_1) as isize),
                                             stride as intptr_t,
-                                        )
-                                            + (*p_cost_mvx.offset((mx_1 * 4 as libc::c_int) as isize)
-                                                as libc::c_int
-                                                + *p_cost_mvy.offset((my_1 * 4 as libc::c_int) as isize)
-                                                    as libc::c_int);
+                                        ) + (*p_cost_mvx
+                                            .offset((mx_1 * 4 as libc::c_int) as isize)
+                                            as libc::c_int
+                                            + *p_cost_mvy.offset((my_1 * 4 as libc::c_int) as isize)
+                                                as libc::c_int);
                                         if cost_12 < bcost {
                                             bcost = cost_12;
                                             bmx = mx_1;
@@ -4895,293 +4397,281 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     .offset(((omy - 4 as libc::c_int * i_5) * stride) as isize);
                                 let mut dy: libc::c_int = i_5 * stride;
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_17
                                         .offset((0 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((-(4 as libc::c_int) - 2 as libc::c_int * 0 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(4 as libc::c_int)
+                                                - 2 as libc::c_int * 0 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((0 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((4 as libc::c_int - 2 as libc::c_int * 0 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((4 as libc::c_int
+                                                - 2 as libc::c_int * 0 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset(-((2 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((-(3 as libc::c_int) - 2 as libc::c_int * 0 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(3 as libc::c_int)
+                                                - 2 as libc::c_int * 0 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((2 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((-(3 as libc::c_int) - 2 as libc::c_int * 0 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(3 as libc::c_int)
+                                                - 2 as libc::c_int * 0 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     stride as intptr_t,
                                     costs
                                         .as_mut_ptr()
                                         .offset((4 as libc::c_int * 0 as libc::c_int) as isize),
                                 );
-                                pix_base_17 = pix_base_17
-                                    .offset((2 as libc::c_int * dy) as isize);
+                                pix_base_17 = pix_base_17.offset((2 as libc::c_int * dy) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_17
                                         .offset(-((4 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((-(2 as libc::c_int) - 2 as libc::c_int * 1 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(2 as libc::c_int)
+                                                - 2 as libc::c_int * 1 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((4 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((-(2 as libc::c_int) - 2 as libc::c_int * 1 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(2 as libc::c_int)
+                                                - 2 as libc::c_int * 1 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset(-((4 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((-(1 as libc::c_int) - 2 as libc::c_int * 1 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(1 as libc::c_int)
+                                                - 2 as libc::c_int * 1 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((4 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((-(1 as libc::c_int) - 2 as libc::c_int * 1 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((-(1 as libc::c_int)
+                                                - 2 as libc::c_int * 1 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     stride as intptr_t,
                                     costs
                                         .as_mut_ptr()
                                         .offset((4 as libc::c_int * 1 as libc::c_int) as isize),
                                 );
-                                pix_base_17 = pix_base_17
-                                    .offset((2 as libc::c_int * dy) as isize);
+                                pix_base_17 = pix_base_17.offset((2 as libc::c_int * dy) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_17
                                         .offset(-((4 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((0 as libc::c_int - 2 as libc::c_int * 2 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((0 as libc::c_int
+                                                - 2 as libc::c_int * 2 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((4 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((0 as libc::c_int - 2 as libc::c_int * 2 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((0 as libc::c_int
+                                                - 2 as libc::c_int * 2 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset(-((4 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((1 as libc::c_int - 2 as libc::c_int * 2 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((1 as libc::c_int
+                                                - 2 as libc::c_int * 2 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((4 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((1 as libc::c_int - 2 as libc::c_int * 2 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((1 as libc::c_int
+                                                - 2 as libc::c_int * 2 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     stride as intptr_t,
                                     costs
                                         .as_mut_ptr()
                                         .offset((4 as libc::c_int * 2 as libc::c_int) as isize),
                                 );
-                                pix_base_17 = pix_base_17
-                                    .offset((2 as libc::c_int * dy) as isize);
+                                pix_base_17 = pix_base_17.offset((2 as libc::c_int * dy) as isize);
                                 ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                    .expect("non-null function pointer")(
                                     p_fenc,
                                     pix_base_17
                                         .offset(-((4 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((2 as libc::c_int - 2 as libc::c_int * 3 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((2 as libc::c_int
+                                                - 2 as libc::c_int * 3 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((4 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((2 as libc::c_int - 2 as libc::c_int * 3 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((2 as libc::c_int
+                                                - 2 as libc::c_int * 3 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset(-((2 as libc::c_int * i_5) as isize))
                                         .offset(
-                                            ((3 as libc::c_int - 2 as libc::c_int * 3 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((3 as libc::c_int
+                                                - 2 as libc::c_int * 3 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     pix_base_17
                                         .offset((2 as libc::c_int * i_5) as isize)
                                         .offset(
-                                            ((3 as libc::c_int - 2 as libc::c_int * 3 as libc::c_int
-                                                + 4 as libc::c_int) * dy) as isize,
+                                            ((3 as libc::c_int
+                                                - 2 as libc::c_int * 3 as libc::c_int
+                                                + 4 as libc::c_int)
+                                                * dy)
+                                                as isize,
                                         ),
                                     stride as intptr_t,
                                     costs
                                         .as_mut_ptr()
                                         .offset((4 as libc::c_int * 3 as libc::c_int) as isize),
                                 );
-                                pix_base_17 = pix_base_17
-                                    .offset((2 as libc::c_int * dy) as isize);
-                                costs[0 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[1 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[2 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(3 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[3 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(3 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[4 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[5 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[6 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(1 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[7 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (-(1 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[8 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[9 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[10 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (1 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[11 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (1 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[12 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[13 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[14 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (3 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
-                                costs[15 as libc::c_int as usize]
-                                    += *p_cost_omvx
-                                        .offset(
-                                            (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                        ) as libc::c_int
-                                        + *p_cost_omvy
-                                            .offset(
-                                                (3 as libc::c_int * 4 as libc::c_int * i_5) as isize,
-                                            ) as libc::c_int;
+                                pix_base_17 = pix_base_17.offset((2 as libc::c_int * dy) as isize);
+                                costs[0 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((0 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[1 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((0 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (4 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[2 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(3 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[3 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((2 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(3 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[4 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[5 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((4 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[6 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(1 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[7 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((4 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (-(1 as libc::c_int) * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[8 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[9 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((4 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (0 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[10 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (1 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[11 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((4 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (1 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[12 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(4 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[13 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((4 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (2 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[14 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((-(2 as libc::c_int) * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (3 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
+                                costs[15 as libc::c_int as usize] += *p_cost_omvx
+                                    .offset((2 as libc::c_int * 4 as libc::c_int * i_5) as isize)
+                                    as libc::c_int
+                                    + *p_cost_omvy.offset(
+                                        (3 as libc::c_int * 4 as libc::c_int * i_5) as isize,
+                                    ) as libc::c_int;
                                 if costs[0 as libc::c_int as usize] < bcost {
                                     bcost = costs[0 as libc::c_int as usize];
                                     dir_0 = 0 as libc::c_int * 16 as libc::c_int
@@ -5266,7 +4756,8 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     bmx = omx + i_5 * (dir_0 >> 4 as libc::c_int);
                                     bmy = omy
                                         + i_5
-                                            * (((dir_0 as uint32_t) << 28 as libc::c_int) as int32_t
+                                            * (((dir_0 as uint32_t) << 28 as libc::c_int)
+                                                as int32_t
                                                 >> 28 as libc::c_int);
                                 }
                             }
@@ -5275,8 +4766,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 break;
                             }
                         }
-                        if bmy <= mv_y_max && bmy >= mv_y_min && bmx <= mv_x_max
-                            && bmx >= mv_x_min
+                        if bmy <= mv_y_max && bmy >= mv_y_min && bmx <= mv_x_max && bmx >= mv_x_min
                         {
                             current_block = 10359272191501572242;
                         } else {
@@ -5315,22 +4805,19 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             } else {
                 PIXEL_4x4 as libc::c_int
             };
-            let mut delta: libc::c_int = x264_pixel_size[sad_size as usize].w
-                as libc::c_int;
+            let mut delta: libc::c_int = x264_pixel_size[sad_size as usize].w as libc::c_int;
             let mut xs: *mut int16_t = (*h).scratch_buffer as *mut int16_t;
             let mut xn: libc::c_int = 0;
-            let mut cost_fpel_mvx: *mut uint16_t = ((*h)
-                .cost_mv_fpel[(*h).mb.i_qp
-                as usize][(-((*m).mvp[0 as libc::c_int as usize] as libc::c_int)
-                & 3 as libc::c_int) as usize])
-                .offset(
-                    (-((*m).mvp[0 as libc::c_int as usize] as libc::c_int)
-                        >> 2 as libc::c_int) as isize,
-                );
-            ((*h).pixf.sad_x4[sad_size as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            let mut cost_fpel_mvx: *mut uint16_t =
+                ((*h).cost_mv_fpel[(*h).mb.i_qp as usize][(-((*m).mvp[0 as libc::c_int as usize]
+                    as libc::c_int)
+                    & 3 as libc::c_int)
+                    as usize])
+                    .offset(
+                        (-((*m).mvp[0 as libc::c_int as usize] as libc::c_int) >> 2 as libc::c_int)
+                            as isize,
+                    );
+            ((*h).pixf.sad_x4[sad_size as usize]).expect("non-null function pointer")(
                 x264_zero.as_mut_ptr() as *mut pixel,
                 p_fenc,
                 p_fenc.offset(delta as isize),
@@ -5342,12 +4829,11 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 enc_dc.as_mut_ptr(),
             );
             if delta == 4 as libc::c_int {
-                sums_base = sums_base
-                    .offset(
-                        (stride
-                            * ((*(*h).fenc).i_lines[0 as libc::c_int as usize]
-                                + 32 as libc::c_int * 2 as libc::c_int)) as isize,
-                    );
+                sums_base = sums_base.offset(
+                    (stride
+                        * ((*(*h).fenc).i_lines[0 as libc::c_int as usize]
+                            + 32 as libc::c_int * 2 as libc::c_int)) as isize,
+                );
             }
             if i_pixel == PIXEL_16x16 as libc::c_int
                 || i_pixel == PIXEL_8x16 as libc::c_int
@@ -5355,15 +4841,13 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             {
                 delta *= stride;
             }
-            if i_pixel == PIXEL_8x16 as libc::c_int
-                || i_pixel == PIXEL_4x8 as libc::c_int
-            {
+            if i_pixel == PIXEL_8x16 as libc::c_int || i_pixel == PIXEL_4x8 as libc::c_int {
                 enc_dc[1 as libc::c_int as usize] = enc_dc[2 as libc::c_int as usize];
             }
             if (*h).mb.i_me_method == 4 as libc::c_int {
-                let mut mvsads: *mut mvsad_t = xs
-                    .offset(((width + 31 as libc::c_int) & !(31 as libc::c_int)) as isize)
-                    .offset(4 as libc::c_int as isize) as *mut mvsad_t;
+                let mut mvsads: *mut mvsad_t =
+                    xs.offset(((width + 31 as libc::c_int) & !(31 as libc::c_int)) as isize)
+                        .offset(4 as libc::c_int as isize) as *mut mvsad_t;
                 let mut nmvsad: libc::c_int = 0 as libc::c_int;
                 let mut limit: libc::c_int = 0;
                 let mut sad_thresh: libc::c_int = if i_me_range <= 16 as libc::c_int {
@@ -5373,30 +4857,24 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 } else {
                     12 as libc::c_int
                 };
-                let mut bsad: libc::c_int = ((*h).pixf.sad[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
-                    p_fenc,
-                    16 as libc::c_int as intptr_t,
-                    p_fref_w.offset((bmy * stride) as isize).offset(bmx as isize),
-                    stride as intptr_t,
-                )
-                    + (*p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize)
-                        as libc::c_int
-                        + *p_cost_mvy.offset((bmy * 4 as libc::c_int) as isize)
-                            as libc::c_int);
+                let mut bsad: libc::c_int =
+                    ((*h).pixf.sad[i_pixel as usize]).expect("non-null function pointer")(
+                        p_fenc,
+                        16 as libc::c_int as intptr_t,
+                        p_fref_w
+                            .offset((bmy * stride) as isize)
+                            .offset(bmx as isize),
+                        stride as intptr_t,
+                    ) + (*p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize) as libc::c_int
+                        + *p_cost_mvy.offset((bmy * 4 as libc::c_int) as isize) as libc::c_int);
                 let mut my_2: libc::c_int = min_y;
                 while my_2 <= max_y {
                     let mut i_6: libc::c_int = 0;
-                    let mut ycost: libc::c_int = *p_cost_mvy
-                        .offset((my_2 * 4 as libc::c_int) as isize) as libc::c_int;
+                    let mut ycost: libc::c_int =
+                        *p_cost_mvy.offset((my_2 * 4 as libc::c_int) as isize) as libc::c_int;
                     if bsad > ycost {
                         bsad -= ycost;
-                        xn = ((*h).pixf.ads[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        xn = ((*h).pixf.ads[i_pixel as usize]).expect("non-null function pointer")(
                             enc_dc.as_mut_ptr(),
                             sums_base
                                 .offset(min_x as isize)
@@ -5414,22 +4892,15 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 .offset((my_2 * stride) as isize);
                             let mut sads: [libc::c_int; 4] = [0; 4];
                             ((*h).pixf.sad_x3[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                                .expect("non-null function pointer")(
                                 p_fenc,
-                                ref_0
-                                    .offset(*xs.offset(i_6 as isize) as libc::c_int as isize),
-                                ref_0
-                                    .offset(
-                                        *xs.offset((i_6 + 1 as libc::c_int) as isize) as libc::c_int
-                                            as isize,
-                                    ),
-                                ref_0
-                                    .offset(
-                                        *xs.offset((i_6 + 2 as libc::c_int) as isize) as libc::c_int
-                                            as isize,
-                                    ),
+                                ref_0.offset(*xs.offset(i_6 as isize) as libc::c_int as isize),
+                                ref_0.offset(*xs.offset((i_6 + 1 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    as isize),
+                                ref_0.offset(*xs.offset((i_6 + 2 as libc::c_int) as isize)
+                                    as libc::c_int
+                                    as isize),
                                 stride as intptr_t,
                                 sads.as_mut_ptr(),
                             );
@@ -5444,13 +4915,12 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                         bsad = sad;
                                     }
                                     (*mvsads.offset(nmvsad as isize)).sad = sad + ycost;
-                                    (*mvsads.offset(nmvsad as isize))
-                                        .mv[0 as libc::c_int
-                                        as usize] = (min_x
+                                    (*mvsads.offset(nmvsad as isize)).mv
+                                        [0 as libc::c_int as usize] = (min_x
                                         + *xs.offset((i_6 + j_0) as isize) as libc::c_int)
                                         as int16_t;
-                                    (*mvsads.offset(nmvsad as isize))
-                                        .mv[1 as libc::c_int as usize] = my_2 as int16_t;
+                                    (*mvsads.offset(nmvsad as isize)).mv
+                                        [1 as libc::c_int as usize] = my_2 as int16_t;
                                     nmvsad += 1;
                                     nmvsad;
                                 }
@@ -5460,32 +4930,28 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             i_6 += 3 as libc::c_int;
                         }
                         while i_6 < xn {
-                            let mut mx_2: libc::c_int = min_x
-                                + *xs.offset(i_6 as isize) as libc::c_int;
-                            let mut sad_0: libc::c_int = ((*h)
-                                .pixf
-                                .sad[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            let mut mx_2: libc::c_int =
+                                min_x + *xs.offset(i_6 as isize) as libc::c_int;
+                            let mut sad_0: libc::c_int = ((*h).pixf.sad[i_pixel as usize])
+                                .expect("non-null function pointer")(
                                 p_fenc,
                                 16 as libc::c_int as intptr_t,
                                 p_fref_w
                                     .offset(mx_2 as isize)
                                     .offset((my_2 * stride) as isize),
                                 stride as intptr_t,
-                            )
-                                + *cost_fpel_mvx.offset(*xs.offset(i_6 as isize) as isize)
-                                    as libc::c_int;
+                            ) + *cost_fpel_mvx
+                                .offset(*xs.offset(i_6 as isize) as isize)
+                                as libc::c_int;
                             if sad_0 < (bsad * sad_thresh) >> 3 as libc::c_int {
                                 if sad_0 < bsad {
                                     bsad = sad_0;
                                 }
                                 (*mvsads.offset(nmvsad as isize)).sad = sad_0 + ycost;
-                                (*mvsads.offset(nmvsad as isize))
-                                    .mv[0 as libc::c_int as usize] = mx_2 as int16_t;
-                                (*mvsads.offset(nmvsad as isize))
-                                    .mv[1 as libc::c_int as usize] = my_2 as int16_t;
+                                (*mvsads.offset(nmvsad as isize)).mv[0 as libc::c_int as usize] =
+                                    mx_2 as int16_t;
+                                (*mvsads.offset(nmvsad as isize)).mv[1 as libc::c_int as usize] =
+                                    my_2 as int16_t;
                                 nmvsad += 1;
                                 nmvsad;
                             }
@@ -5502,9 +4968,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 while nmvsad > limit * 2 as libc::c_int && sad_thresh > bsad {
                     let mut i_7: libc::c_int = 0 as libc::c_int;
                     sad_thresh = (sad_thresh + bsad) >> 1 as libc::c_int;
-                    while i_7 < nmvsad
-                        && (*mvsads.offset(i_7 as isize)).sad <= sad_thresh
-                    {
+                    while i_7 < nmvsad && (*mvsads.offset(i_7 as isize)).sad <= sad_thresh {
                         i_7 += 1;
                         i_7;
                     }
@@ -5516,11 +4980,11 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             && ::core::mem::size_of::<mvsad_t>() as libc::c_ulong
                                 == 8 as libc::c_int as libc::c_ulong
                         {
-                            let fresh0 = &mut (*(&mut *mvsads.offset(i_7 as isize)
-                                as *mut mvsad_t as *mut x264_union64_t))
+                            let fresh0 = &mut (*(&mut *mvsads.offset(i_7 as isize) as *mut mvsad_t
+                                as *mut x264_union64_t))
                                 .i;
-                            *fresh0 = (*(&mut *mvsads.offset(j_1 as isize)
-                                as *mut mvsad_t as *mut x264_union64_t))
+                            *fresh0 = (*(&mut *mvsads.offset(j_1 as isize) as *mut mvsad_t
+                                as *mut x264_union64_t))
                                 .i;
                             let mut mvsad: uint64_t = *fresh0;
                             sad_1 = mvsad as uint32_t;
@@ -5533,12 +4997,10 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                 .i;
                             (*mvsads.offset(i_7 as isize)).sad = sad_1 as libc::c_int;
                         }
-                        i_7 = (i_7 as uint32_t)
-                            .wrapping_add(
-                                sad_1
-                                    .wrapping_sub((sad_thresh + 1 as libc::c_int) as uint32_t)
-                                    >> 31 as libc::c_int,
-                            ) as libc::c_int as libc::c_int;
+                        i_7 = (i_7 as uint32_t).wrapping_add(
+                            sad_1.wrapping_sub((sad_thresh + 1 as libc::c_int) as uint32_t)
+                                >> 31 as libc::c_int,
+                        ) as libc::c_int as libc::c_int;
                         j_1 += 1;
                         j_1;
                     }
@@ -5548,9 +5010,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                     let mut bi: libc::c_int = 0 as libc::c_int;
                     let mut i_8: libc::c_int = 1 as libc::c_int;
                     while i_8 < nmvsad {
-                        if (*mvsads.offset(i_8 as isize)).sad
-                            > (*mvsads.offset(bi as isize)).sad
-                        {
+                        if (*mvsads.offset(i_8 as isize)).sad > (*mvsads.offset(bi as isize)).sad {
                             bi = i_8;
                         }
                         i_8 += 1;
@@ -5573,40 +5033,37 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 let mut i_9: libc::c_int = 0 as libc::c_int;
                 while i_9 < nmvsad {
                     let mut cost_13: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                        .expect("non-null function pointer")(
                         p_fenc,
                         16 as libc::c_int as intptr_t,
-                        &mut *p_fref_w
-                            .offset(
-                                (*((*mvsads.offset(i_9 as isize)).mv)
+                        &mut *p_fref_w.offset(
+                            (*((*mvsads.offset(i_9 as isize)).mv)
+                                .as_mut_ptr()
+                                .offset(1 as libc::c_int as isize)
+                                as libc::c_int
+                                * stride
+                                + *((*mvsads.offset(i_9 as isize)).mv)
                                     .as_mut_ptr()
-                                    .offset(1 as libc::c_int as isize) as libc::c_int * stride
-                                    + *((*mvsads.offset(i_9 as isize)).mv)
-                                        .as_mut_ptr()
-                                        .offset(0 as libc::c_int as isize) as libc::c_int) as isize,
-                            ),
+                                    .offset(0 as libc::c_int as isize)
+                                    as libc::c_int) as isize,
+                        ),
                         stride as intptr_t,
-                    )
-                        + (*p_cost_mvx
-                            .offset(
-                                ((*mvsads.offset(i_9 as isize))
-                                    .mv[0 as libc::c_int as usize] as libc::c_int
-                                    * 4 as libc::c_int) as isize,
-                            ) as libc::c_int
-                            + *p_cost_mvy
-                                .offset(
-                                    ((*mvsads.offset(i_9 as isize))
-                                        .mv[1 as libc::c_int as usize] as libc::c_int
-                                        * 4 as libc::c_int) as isize,
-                                ) as libc::c_int);
+                    ) + (*p_cost_mvx.offset(
+                        ((*mvsads.offset(i_9 as isize)).mv[0 as libc::c_int as usize]
+                            as libc::c_int
+                            * 4 as libc::c_int) as isize,
+                    ) as libc::c_int
+                        + *p_cost_mvy.offset(
+                            ((*mvsads.offset(i_9 as isize)).mv[1 as libc::c_int as usize]
+                                as libc::c_int
+                                * 4 as libc::c_int) as isize,
+                        ) as libc::c_int);
                     if cost_13 < bcost {
                         bcost = cost_13;
-                        bmx = (*mvsads.offset(i_9 as isize))
-                            .mv[0 as libc::c_int as usize] as libc::c_int;
-                        bmy = (*mvsads.offset(i_9 as isize))
-                            .mv[1 as libc::c_int as usize] as libc::c_int;
+                        bmx = (*mvsads.offset(i_9 as isize)).mv[0 as libc::c_int as usize]
+                            as libc::c_int;
+                        bmy = (*mvsads.offset(i_9 as isize)).mv[1 as libc::c_int as usize]
+                            as libc::c_int;
                     }
                     i_9 += 1;
                     i_9;
@@ -5615,14 +5072,11 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                 let mut my_3: libc::c_int = min_y;
                 while my_3 <= max_y {
                     let mut i_10: libc::c_int = 0;
-                    let mut ycost_0: libc::c_int = *p_cost_mvy
-                        .offset((my_3 * 4 as libc::c_int) as isize) as libc::c_int;
+                    let mut ycost_0: libc::c_int =
+                        *p_cost_mvy.offset((my_3 * 4 as libc::c_int) as isize) as libc::c_int;
                     if bcost > ycost_0 {
                         bcost -= ycost_0;
-                        xn = ((*h).pixf.ads[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        xn = ((*h).pixf.ads[i_pixel as usize]).expect("non-null function pointer")(
                             enc_dc.as_mut_ptr(),
                             sums_base
                                 .offset(min_x as isize)
@@ -5636,9 +5090,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                         i_10 = 0 as libc::c_int;
                         while i_10 < xn - 2 as libc::c_int {
                             ((*h).pixf.fpelcmp_x3[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                                .expect("non-null function pointer")(
                                 p_fenc,
                                 p_fref_w
                                     .offset(
@@ -5649,39 +5101,40 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                                     .offset(
                                         (min_x
                                             + *xs.offset((i_10 + 1 as libc::c_int) as isize)
-                                                as libc::c_int) as isize,
+                                                as libc::c_int)
+                                            as isize,
                                     )
                                     .offset((my_3 * stride) as isize),
                                 p_fref_w
                                     .offset(
                                         (min_x
                                             + *xs.offset((i_10 + 2 as libc::c_int) as isize)
-                                                as libc::c_int) as isize,
+                                                as libc::c_int)
+                                            as isize,
                                     )
                                     .offset((my_3 * stride) as isize),
                                 stride as intptr_t,
                                 costs.as_mut_ptr(),
                             );
-                            costs[0 as libc::c_int as usize]
-                                += *p_cost_mvx
-                                    .offset(
-                                        ((min_x + *xs.offset(i_10 as isize) as libc::c_int)
-                                            * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                            costs[1 as libc::c_int as usize]
-                                += *p_cost_mvx
-                                    .offset(
-                                        ((min_x
-                                            + *xs.offset((i_10 + 1 as libc::c_int) as isize)
-                                                as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
-                            costs[2 as libc::c_int as usize]
-                                += *p_cost_mvx
-                                    .offset(
-                                        ((min_x
-                                            + *xs.offset((i_10 + 2 as libc::c_int) as isize)
-                                                as libc::c_int) * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int;
+                            costs[0 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                ((min_x + *xs.offset(i_10 as isize) as libc::c_int)
+                                    * 4 as libc::c_int) as isize,
+                            )
+                                as libc::c_int;
+                            costs[1 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                ((min_x
+                                    + *xs.offset((i_10 + 1 as libc::c_int) as isize)
+                                        as libc::c_int)
+                                    * 4 as libc::c_int) as isize,
+                            )
+                                as libc::c_int;
+                            costs[2 as libc::c_int as usize] += *p_cost_mvx.offset(
+                                ((min_x
+                                    + *xs.offset((i_10 + 2 as libc::c_int) as isize)
+                                        as libc::c_int)
+                                    * 4 as libc::c_int) as isize,
+                            )
+                                as libc::c_int;
                             if costs[0 as libc::c_int as usize] < bcost {
                                 bcost = costs[0 as libc::c_int as usize];
                                 bmx = min_x + *xs.offset(i_10 as isize) as libc::c_int;
@@ -5690,44 +5143,36 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
                             if costs[1 as libc::c_int as usize] < bcost {
                                 bcost = costs[1 as libc::c_int as usize];
                                 bmx = min_x
-                                    + *xs.offset((i_10 + 1 as libc::c_int) as isize)
-                                        as libc::c_int;
+                                    + *xs.offset((i_10 + 1 as libc::c_int) as isize) as libc::c_int;
                                 bmy = my_3;
                             }
                             if costs[2 as libc::c_int as usize] < bcost {
                                 bcost = costs[2 as libc::c_int as usize];
                                 bmx = min_x
-                                    + *xs.offset((i_10 + 2 as libc::c_int) as isize)
-                                        as libc::c_int;
+                                    + *xs.offset((i_10 + 2 as libc::c_int) as isize) as libc::c_int;
                                 bmy = my_3;
                             }
                             i_10 += 3 as libc::c_int;
                         }
                         bcost += ycost_0;
                         while i_10 < xn {
-                            let mut cost_14: libc::c_int = ((*h)
-                                .pixf
-                                .fpelcmp[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            let mut cost_14: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
+                                .expect("non-null function pointer")(
                                 p_fenc,
                                 16 as libc::c_int as intptr_t,
-                                &mut *p_fref_w
-                                    .offset(
-                                        (my_3 * stride
-                                            + (min_x + *xs.offset(i_10 as isize) as libc::c_int))
-                                            as isize,
-                                    ),
+                                &mut *p_fref_w.offset(
+                                    (my_3 * stride
+                                        + (min_x + *xs.offset(i_10 as isize) as libc::c_int))
+                                        as isize,
+                                ),
                                 stride as intptr_t,
+                            ) + (*p_cost_mvx.offset(
+                                ((min_x + *xs.offset(i_10 as isize) as libc::c_int)
+                                    * 4 as libc::c_int) as isize,
                             )
-                                + (*p_cost_mvx
-                                    .offset(
-                                        ((min_x + *xs.offset(i_10 as isize) as libc::c_int)
-                                            * 4 as libc::c_int) as isize,
-                                    ) as libc::c_int
-                                    + *p_cost_mvy.offset((my_3 * 4 as libc::c_int) as isize)
-                                        as libc::c_int);
+                                as libc::c_int
+                                + *p_cost_mvy.offset((my_3 * 4 as libc::c_int) as isize)
+                                    as libc::c_int);
                             if cost_14 < bcost {
                                 bcost = cost_14;
                                 bmx = min_x + *xs.offset(i_10 as isize) as libc::c_int;
@@ -5751,10 +5196,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         let mut pix_base_0: *mut pixel = p_fref_w
             .offset(bmx as isize)
             .offset((bmy * stride) as isize);
-        ((*h).pixf.fpelcmp_x3[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).pixf.fpelcmp_x3[i_pixel as usize]).expect("non-null function pointer")(
             p_fenc,
             pix_base_0
                 .offset(-(2 as libc::c_int) as isize)
@@ -5768,34 +5210,25 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             stride as intptr_t,
             costs.as_mut_ptr(),
         );
-        costs[0 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        costs[1 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        costs[2 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
+        costs[0 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[1 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[2 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
         let mut pix_base_1: *mut pixel = p_fref_w
             .offset(bmx as isize)
             .offset((bmy * stride) as isize);
-        ((*h).pixf.fpelcmp_x3[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).pixf.fpelcmp_x3[i_pixel as usize]).expect("non-null function pointer")(
             p_fenc,
             pix_base_1
                 .offset(2 as libc::c_int as isize)
@@ -5812,206 +5245,166 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         *costs
             .as_mut_ptr()
             .offset(4 as libc::c_int as isize)
-            .offset(0 as libc::c_int as isize)
-            += *p_cost_mvx
-                .offset(((bmx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
+            .offset(0 as libc::c_int as isize) += *p_cost_mvx
+            .offset(((bmx + 2 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
         *costs
             .as_mut_ptr()
             .offset(4 as libc::c_int as isize)
-            .offset(1 as libc::c_int as isize)
-            += *p_cost_mvx
-                .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        ((bmy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                    ) as libc::c_int;
+            .offset(1 as libc::c_int as isize) += *p_cost_mvx
+            .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int;
         *costs
             .as_mut_ptr()
             .offset(4 as libc::c_int as isize)
-            .offset(2 as libc::c_int as isize)
-            += *p_cost_mvx
-                .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        ((bmy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize,
-                    ) as libc::c_int;
+            .offset(2 as libc::c_int as isize) += *p_cost_mvx
+            .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + -(2 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int;
         bcost <<= 3 as libc::c_int;
-        if ((costs[0 as libc::c_int as usize] << 3 as libc::c_int)
-            + 2 as libc::c_int) < bcost
-        {
-            bcost = (costs[0 as libc::c_int as usize] << 3 as libc::c_int)
-                + 2 as libc::c_int;
+        if ((costs[0 as libc::c_int as usize] << 3 as libc::c_int) + 2 as libc::c_int) < bcost {
+            bcost = (costs[0 as libc::c_int as usize] << 3 as libc::c_int) + 2 as libc::c_int;
         }
-        if ((costs[1 as libc::c_int as usize] << 3 as libc::c_int)
-            + 3 as libc::c_int) < bcost
-        {
-            bcost = (costs[1 as libc::c_int as usize] << 3 as libc::c_int)
-                + 3 as libc::c_int;
+        if ((costs[1 as libc::c_int as usize] << 3 as libc::c_int) + 3 as libc::c_int) < bcost {
+            bcost = (costs[1 as libc::c_int as usize] << 3 as libc::c_int) + 3 as libc::c_int;
         }
-        if ((costs[2 as libc::c_int as usize] << 3 as libc::c_int)
-            + 4 as libc::c_int) < bcost
-        {
-            bcost = (costs[2 as libc::c_int as usize] << 3 as libc::c_int)
-                + 4 as libc::c_int;
+        if ((costs[2 as libc::c_int as usize] << 3 as libc::c_int) + 4 as libc::c_int) < bcost {
+            bcost = (costs[2 as libc::c_int as usize] << 3 as libc::c_int) + 4 as libc::c_int;
         }
-        if ((costs[4 as libc::c_int as usize] << 3 as libc::c_int)
-            + 5 as libc::c_int) < bcost
-        {
-            bcost = (costs[4 as libc::c_int as usize] << 3 as libc::c_int)
-                + 5 as libc::c_int;
+        if ((costs[4 as libc::c_int as usize] << 3 as libc::c_int) + 5 as libc::c_int) < bcost {
+            bcost = (costs[4 as libc::c_int as usize] << 3 as libc::c_int) + 5 as libc::c_int;
         }
-        if ((costs[5 as libc::c_int as usize] << 3 as libc::c_int)
-            + 6 as libc::c_int) < bcost
-        {
-            bcost = (costs[5 as libc::c_int as usize] << 3 as libc::c_int)
-                + 6 as libc::c_int;
+        if ((costs[5 as libc::c_int as usize] << 3 as libc::c_int) + 6 as libc::c_int) < bcost {
+            bcost = (costs[5 as libc::c_int as usize] << 3 as libc::c_int) + 6 as libc::c_int;
         }
-        if ((costs[6 as libc::c_int as usize] << 3 as libc::c_int)
-            + 7 as libc::c_int) < bcost
-        {
-            bcost = (costs[6 as libc::c_int as usize] << 3 as libc::c_int)
-                + 7 as libc::c_int;
+        if ((costs[6 as libc::c_int as usize] << 3 as libc::c_int) + 7 as libc::c_int) < bcost {
+            bcost = (costs[6 as libc::c_int as usize] << 3 as libc::c_int) + 7 as libc::c_int;
         }
         if bcost & 7 as libc::c_int != 0 {
             let mut dir: libc::c_int = (bcost & 7 as libc::c_int) - 2 as libc::c_int;
-            bmx
-                += hex2[(dir + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
-                    as libc::c_int;
-            bmy
-                += hex2[(dir + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
-                    as libc::c_int;
-            let mut i_2: libc::c_int = (i_me_range >> 1 as libc::c_int)
-                - 1 as libc::c_int;
+            bmx +=
+                hex2[(dir + 1 as libc::c_int) as usize][0 as libc::c_int as usize] as libc::c_int;
+            bmy +=
+                hex2[(dir + 1 as libc::c_int) as usize][1 as libc::c_int as usize] as libc::c_int;
+            let mut i_2: libc::c_int = (i_me_range >> 1 as libc::c_int) - 1 as libc::c_int;
             while i_2 > 0 as libc::c_int
-                && ((((bmx as uint32_t) << 16 as libc::c_int) | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t)
+                && ((((bmx as uint32_t) << 16 as libc::c_int)
+                    | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t)
                     .wrapping_add(mv_min)
-                    | mv_max
-                        .wrapping_sub(
-                            ((bmx as uint32_t) << 16 as libc::c_int) | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t,
-                        )) & 0x80004000 as libc::c_uint == 0
+                    | mv_max.wrapping_sub(
+                        ((bmx as uint32_t) << 16 as libc::c_int)
+                            | bmy as uint32_t & 0x7fff as libc::c_int as uint32_t,
+                    ))
+                    & 0x80004000 as libc::c_uint
+                    == 0
             {
                 let mut pix_base_2: *mut pixel = p_fref_w
                     .offset(bmx as isize)
                     .offset((bmy * stride) as isize);
-                ((*h).pixf.fpelcmp_x3[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).pixf.fpelcmp_x3[i_pixel as usize]).expect("non-null function pointer")(
                     p_fenc,
                     pix_base_2
                         .offset(
-                            hex2[(dir + 0 as libc::c_int)
-                                as usize][0 as libc::c_int as usize] as libc::c_int as isize,
+                            hex2[(dir + 0 as libc::c_int) as usize][0 as libc::c_int as usize]
+                                as libc::c_int as isize,
                         )
                         .offset(
-                            (hex2[(dir + 0 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int
+                            (hex2[(dir + 0 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int
                                 * stride) as isize,
                         ),
                     pix_base_2
                         .offset(
-                            hex2[(dir + 1 as libc::c_int)
-                                as usize][0 as libc::c_int as usize] as libc::c_int as isize,
+                            hex2[(dir + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                                as libc::c_int as isize,
                         )
                         .offset(
-                            (hex2[(dir + 1 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int
+                            (hex2[(dir + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int
                                 * stride) as isize,
                         ),
                     pix_base_2
                         .offset(
-                            hex2[(dir + 2 as libc::c_int)
-                                as usize][0 as libc::c_int as usize] as libc::c_int as isize,
+                            hex2[(dir + 2 as libc::c_int) as usize][0 as libc::c_int as usize]
+                                as libc::c_int as isize,
                         )
                         .offset(
-                            (hex2[(dir + 2 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int
+                            (hex2[(dir + 2 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int
                                 * stride) as isize,
                         ),
                     stride as intptr_t,
                     costs.as_mut_ptr(),
                 );
-                costs[0 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(
-                            ((bmx
-                                + hex2[(dir + 0 as libc::c_int)
-                                    as usize][0 as libc::c_int as usize] as libc::c_int)
-                                * 4 as libc::c_int) as isize,
-                        ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy
-                                    + hex2[(dir + 0 as libc::c_int)
-                                        as usize][1 as libc::c_int as usize] as libc::c_int)
-                                    * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[1 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(
-                            ((bmx
-                                + hex2[(dir + 1 as libc::c_int)
-                                    as usize][0 as libc::c_int as usize] as libc::c_int)
-                                * 4 as libc::c_int) as isize,
-                        ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy
-                                    + hex2[(dir + 1 as libc::c_int)
-                                        as usize][1 as libc::c_int as usize] as libc::c_int)
-                                    * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
-                costs[2 as libc::c_int as usize]
-                    += *p_cost_mvx
-                        .offset(
-                            ((bmx
-                                + hex2[(dir + 2 as libc::c_int)
-                                    as usize][0 as libc::c_int as usize] as libc::c_int)
-                                * 4 as libc::c_int) as isize,
-                        ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                ((bmy
-                                    + hex2[(dir + 2 as libc::c_int)
-                                        as usize][1 as libc::c_int as usize] as libc::c_int)
-                                    * 4 as libc::c_int) as isize,
-                            ) as libc::c_int;
+                costs[0 as libc::c_int as usize] += *p_cost_mvx.offset(
+                    ((bmx
+                        + hex2[(dir + 0 as libc::c_int) as usize][0 as libc::c_int as usize]
+                            as libc::c_int)
+                        * 4 as libc::c_int) as isize,
+                ) as libc::c_int
+                    + *p_cost_mvy.offset(
+                        ((bmy
+                            + hex2[(dir + 0 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int)
+                            * 4 as libc::c_int) as isize,
+                    ) as libc::c_int;
+                costs[1 as libc::c_int as usize] += *p_cost_mvx.offset(
+                    ((bmx
+                        + hex2[(dir + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                            as libc::c_int)
+                        * 4 as libc::c_int) as isize,
+                ) as libc::c_int
+                    + *p_cost_mvy.offset(
+                        ((bmy
+                            + hex2[(dir + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int)
+                            * 4 as libc::c_int) as isize,
+                    ) as libc::c_int;
+                costs[2 as libc::c_int as usize] += *p_cost_mvx.offset(
+                    ((bmx
+                        + hex2[(dir + 2 as libc::c_int) as usize][0 as libc::c_int as usize]
+                            as libc::c_int)
+                        * 4 as libc::c_int) as isize,
+                ) as libc::c_int
+                    + *p_cost_mvy.offset(
+                        ((bmy
+                            + hex2[(dir + 2 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int)
+                            * 4 as libc::c_int) as isize,
+                    ) as libc::c_int;
                 bcost &= !(7 as libc::c_int);
-                if ((costs[0 as libc::c_int as usize] << 3 as libc::c_int)
-                    + 1 as libc::c_int) < bcost
+                if ((costs[0 as libc::c_int as usize] << 3 as libc::c_int) + 1 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[0 as libc::c_int as usize] << 3 as libc::c_int)
-                        + 1 as libc::c_int;
+                    bcost =
+                        (costs[0 as libc::c_int as usize] << 3 as libc::c_int) + 1 as libc::c_int;
                 }
-                if ((costs[1 as libc::c_int as usize] << 3 as libc::c_int)
-                    + 2 as libc::c_int) < bcost
+                if ((costs[1 as libc::c_int as usize] << 3 as libc::c_int) + 2 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[1 as libc::c_int as usize] << 3 as libc::c_int)
-                        + 2 as libc::c_int;
+                    bcost =
+                        (costs[1 as libc::c_int as usize] << 3 as libc::c_int) + 2 as libc::c_int;
                 }
-                if ((costs[2 as libc::c_int as usize] << 3 as libc::c_int)
-                    + 3 as libc::c_int) < bcost
+                if ((costs[2 as libc::c_int as usize] << 3 as libc::c_int) + 3 as libc::c_int)
+                    < bcost
                 {
-                    bcost = (costs[2 as libc::c_int as usize] << 3 as libc::c_int)
-                        + 3 as libc::c_int;
+                    bcost =
+                        (costs[2 as libc::c_int as usize] << 3 as libc::c_int) + 3 as libc::c_int;
                 }
                 if bcost & 7 as libc::c_int == 0 {
                     break;
                 }
                 dir += (bcost & 7 as libc::c_int) - 2 as libc::c_int;
                 dir = mod6m1[(dir + 1 as libc::c_int) as usize] as libc::c_int;
-                bmx
-                    += hex2[(dir + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int;
-                bmy
-                    += hex2[(dir + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int;
+                bmx += hex2[(dir + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int;
+                bmy += hex2[(dir + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                    as libc::c_int;
                 i_2 -= 1;
                 i_2;
             }
@@ -6021,10 +5414,7 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         let mut pix_base_3: *mut pixel = p_fref_w
             .offset(bmx as isize)
             .offset((bmy * stride) as isize);
-        ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
             p_fenc,
             pix_base_3
                 .offset(0 as libc::c_int as isize)
@@ -6041,66 +5431,42 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             stride as intptr_t,
             costs.as_mut_ptr(),
         );
-        costs[0 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        ((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                    ) as libc::c_int;
-        costs[1 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        costs[2 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        costs[3 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-            + 1 as libc::c_int) < bcost
-        {
-            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-                + 1 as libc::c_int;
+        costs[0 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[1 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[2 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[3 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 0 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int) < bcost {
+            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int;
         }
-        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-            + 2 as libc::c_int) < bcost
-        {
-            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-                + 2 as libc::c_int;
+        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 2 as libc::c_int) < bcost {
+            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 2 as libc::c_int;
         }
-        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-            + 3 as libc::c_int) < bcost
-        {
-            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-                + 3 as libc::c_int;
+        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int) < bcost {
+            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int;
         }
-        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-            + 4 as libc::c_int) < bcost
-        {
-            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-                + 4 as libc::c_int;
+        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int) < bcost {
+            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int;
         }
         let mut pix_base_4: *mut pixel = p_fref_w
             .offset(bmx as isize)
             .offset((bmy * stride) as isize);
-        ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
             p_fenc,
             pix_base_4
                 .offset(-(1 as libc::c_int) as isize)
@@ -6117,74 +5483,48 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
             stride as intptr_t,
             costs.as_mut_ptr(),
         );
-        costs[0 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        ((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                    ) as libc::c_int;
-        costs[1 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        costs[2 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        ((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize,
-                    ) as libc::c_int;
-        costs[3 as libc::c_int as usize]
-            += *p_cost_mvx
-                .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                as libc::c_int
-                + *p_cost_mvy
-                    .offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
-                    as libc::c_int;
-        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-            + 5 as libc::c_int) < bcost
-        {
-            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-                + 5 as libc::c_int;
+        costs[0 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[1 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[2 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + -(1 as libc::c_int)) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        costs[3 as libc::c_int as usize] += *p_cost_mvx
+            .offset(((bmx + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(((bmy + 1 as libc::c_int) * 4 as libc::c_int) as isize)
+                as libc::c_int;
+        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 5 as libc::c_int) < bcost {
+            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 5 as libc::c_int;
         }
-        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-            + 6 as libc::c_int) < bcost
-        {
-            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-                + 6 as libc::c_int;
+        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 6 as libc::c_int) < bcost {
+            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 6 as libc::c_int;
         }
-        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-            + 7 as libc::c_int) < bcost
-        {
-            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-                + 7 as libc::c_int;
+        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 7 as libc::c_int) < bcost {
+            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 7 as libc::c_int;
         }
-        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-            + 8 as libc::c_int) < bcost
-        {
-            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-                + 8 as libc::c_int;
+        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 8 as libc::c_int) < bcost {
+            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 8 as libc::c_int;
         }
-        bmx
-            += square1[(bcost & 15 as libc::c_int)
-                as usize][0 as libc::c_int as usize] as libc::c_int;
-        bmy
-            += square1[(bcost & 15 as libc::c_int)
-                as usize][1 as libc::c_int as usize] as libc::c_int;
+        bmx +=
+            square1[(bcost & 15 as libc::c_int) as usize][0 as libc::c_int as usize] as libc::c_int;
+        bmy +=
+            square1[(bcost & 15 as libc::c_int) as usize][1 as libc::c_int as usize] as libc::c_int;
         bcost >>= 4 as libc::c_int;
     }
     let mut bmv: uint32_t = pack16to32_mask(bmx, bmy);
     let mut bmv_spel: uint32_t = (bmv * 4 as libc::c_int as uint32_t) & 0xfffcfffc as libc::c_uint;
     if (*h).mb.i_subpel_refine < 3 as libc::c_int {
-        (*m)
-            .cost_mv = *p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize)
-            as libc::c_int
+        (*m).cost_mv = *p_cost_mvx.offset((bmx * 4 as libc::c_int) as isize) as libc::c_int
             + *p_cost_mvy.offset((bmy * 4 as libc::c_int) as isize) as libc::c_int;
         (*m).cost = bcost;
         if bmv == pmv {
@@ -6192,31 +5532,42 @@ pub unsafe extern "C" fn x264_8_me_search_ref(
         }
         (*(((*m).mv).as_mut_ptr() as *mut x264_union32_t)).i = bmv_spel;
     } else {
-        (*(((*m).mv).as_mut_ptr() as *mut x264_union32_t))
-            .i = if bpred_cost < bcost { bpred_mv } else { bmv_spel };
-        (*m).cost = if bpred_cost < bcost { bpred_cost } else { bcost };
+        (*(((*m).mv).as_mut_ptr() as *mut x264_union32_t)).i = if bpred_cost < bcost {
+            bpred_mv
+        } else {
+            bmv_spel
+        };
+        (*m).cost = if bpred_cost < bcost {
+            bpred_cost
+        } else {
+            bcost
+        };
     }
     if (*h).mb.i_subpel_refine >= 2 as libc::c_int {
-        let mut hpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine
-            as usize][2 as libc::c_int as usize] as libc::c_int;
-        let mut qpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine
-            as usize][3 as libc::c_int as usize] as libc::c_int;
+        let mut hpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine as usize]
+            [2 as libc::c_int as usize] as libc::c_int;
+        let mut qpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine as usize]
+            [3 as libc::c_int as usize] as libc::c_int;
         refine_subpel(h, m, hpel, qpel, p_halfpel_thresh, 0 as libc::c_int);
     }
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_me_refine_qpel(
-    mut h: *mut x264_t,
-    mut m: *mut x264_me_t,
-) {
-    let mut hpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine
-        as usize][0 as libc::c_int as usize] as libc::c_int;
-    let mut qpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine
-        as usize][1 as libc::c_int as usize] as libc::c_int;
+pub unsafe extern "C" fn x264_8_me_refine_qpel(mut h: *mut x264_t, mut m: *mut x264_me_t) {
+    let mut hpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine as usize]
+        [0 as libc::c_int as usize] as libc::c_int;
+    let mut qpel: libc::c_int = subpel_iterations[(*h).mb.i_subpel_refine as usize]
+        [1 as libc::c_int as usize] as libc::c_int;
     if (*m).i_pixel <= PIXEL_8x8 as libc::c_int {
         (*m).cost -= (*m).i_ref_cost;
     }
-    refine_subpel(h, m, hpel, qpel, std::ptr::null_mut::<libc::c_int>(), 1 as libc::c_int);
+    refine_subpel(
+        h,
+        m,
+        hpel,
+        qpel,
+        std::ptr::null_mut::<libc::c_int>(),
+        1 as libc::c_int,
+    );
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_me_refine_qpel_refdupe(
@@ -6229,13 +5580,13 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_refdupe(
         m,
         0 as libc::c_int,
         if (2 as libc::c_int)
-            < subpel_iterations[(*h).mb.i_subpel_refine
-                as usize][3 as libc::c_int as usize] as libc::c_int
+            < subpel_iterations[(*h).mb.i_subpel_refine as usize][3 as libc::c_int as usize]
+                as libc::c_int
         {
             2 as libc::c_int
         } else {
-            subpel_iterations[(*h).mb.i_subpel_refine
-                as usize][3 as libc::c_int as usize] as libc::c_int
+            subpel_iterations[(*h).mb.i_subpel_refine as usize][3 as libc::c_int as usize]
+                as libc::c_int
         },
         p_halfpel_thresh,
         0 as libc::c_int,
@@ -6251,21 +5602,18 @@ unsafe extern "C" fn refine_subpel(
 ) {
     let bw: libc::c_int = x264_pixel_size[(*m).i_pixel as usize].w as libc::c_int;
     let bh: libc::c_int = x264_pixel_size[(*m).i_pixel as usize].h as libc::c_int;
-    let mut p_cost_mvx: *const uint16_t = ((*m).p_cost_mv)
-        .offset(-((*m).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
-    let mut p_cost_mvy: *const uint16_t = ((*m).p_cost_mv)
-        .offset(-((*m).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_mvx: *const uint16_t =
+        ((*m).p_cost_mv).offset(-((*m).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_mvy: *const uint16_t =
+        ((*m).p_cost_mv).offset(-((*m).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
     let i_pixel: libc::c_int = (*m).i_pixel;
     let b_chroma_me: libc::c_int = ((*h).mb.b_chroma_me != 0
         && (i_pixel <= PIXEL_8x8 as libc::c_int
-            || (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int)) as libc::c_int;
-    let mut chromapix: libc::c_int = (*h).luma2chroma_pixel[i_pixel as usize]
+            || (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int))
         as libc::c_int;
+    let mut chromapix: libc::c_int = (*h).luma2chroma_pixel[i_pixel as usize] as libc::c_int;
     let mut chroma_v_shift: libc::c_int = (*h).mb.chroma_v_shift;
-    let mut mvy_offset: libc::c_int = if chroma_v_shift & (*h).mb.b_interlaced
-        & (*m).i_ref != 0
-    {
+    let mut mvy_offset: libc::c_int = if chroma_v_shift & (*h).mb.b_interlaced & (*m).i_ref != 0 {
         ((*h).mb.i_mb_y & 1 as libc::c_int) * 4 as libc::c_int - 2 as libc::c_int
     } else {
         0 as libc::c_int
@@ -6291,10 +5639,7 @@ unsafe extern "C" fn refine_subpel(
             );
             if (mx - bmx) | (my - bmy) != 0 {
                 let mut stride: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src: *mut pixel = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut src: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                     pix.as_mut_ptr(),
                     &mut stride,
                     ((*m).p_fref).as_mut_ptr(),
@@ -6306,9 +5651,7 @@ unsafe extern "C" fn refine_subpel(
                     &*((*m).weight).offset(0 as libc::c_int as isize),
                 );
                 let mut cost: libc::c_int = ((*h).pixf.fpelcmp[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                    .expect("non-null function pointer")(
                     (*m).p_fenc[0 as libc::c_int as usize],
                     16 as libc::c_int as intptr_t,
                     src,
@@ -6332,10 +5675,7 @@ unsafe extern "C" fn refine_subpel(
             let mut src1: *mut pixel = std::ptr::null_mut::<pixel>();
             let mut src2: *mut pixel = std::ptr::null_mut::<pixel>();
             let mut src3: *mut pixel = std::ptr::null_mut::<pixel>();
-            src0 = ((*h).mc.get_ref)
-                .expect(
-                    "non-null function pointer",
-                )(
+            src0 = ((*h).mc.get_ref).expect("non-null function pointer")(
                 pix.as_mut_ptr(),
                 &mut stride_0,
                 ((*m).p_fref).as_mut_ptr(),
@@ -6346,10 +5686,7 @@ unsafe extern "C" fn refine_subpel(
                 bh + 1 as libc::c_int,
                 &*((*m).weight).offset(0 as libc::c_int as isize),
             );
-            src2 = ((*h).mc.get_ref)
-                .expect(
-                    "non-null function pointer",
-                )(
+            src2 = ((*h).mc.get_ref).expect("non-null function pointer")(
                 pix.as_mut_ptr().offset(32 as libc::c_int as isize),
                 &mut stride_0,
                 ((*m).p_fref).as_mut_ptr(),
@@ -6362,10 +5699,7 @@ unsafe extern "C" fn refine_subpel(
             );
             src1 = src0.offset(stride_0 as isize);
             src3 = src2.offset(1 as libc::c_int as isize);
-            ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
                 (*m).p_fenc[0 as libc::c_int as usize],
                 src0,
                 src1,
@@ -6374,53 +5708,35 @@ unsafe extern "C" fn refine_subpel(
                 stride_0,
                 costs.as_mut_ptr(),
             );
-            costs[0 as libc::c_int as usize]
-                += *p_cost_mvx.offset(omx as isize) as libc::c_int
-                    + *p_cost_mvy.offset((omy - 2 as libc::c_int) as isize)
-                        as libc::c_int;
-            costs[1 as libc::c_int as usize]
-                += *p_cost_mvx.offset(omx as isize) as libc::c_int
-                    + *p_cost_mvy.offset((omy + 2 as libc::c_int) as isize)
-                        as libc::c_int;
-            costs[2 as libc::c_int as usize]
-                += *p_cost_mvx.offset((omx - 2 as libc::c_int) as isize) as libc::c_int
+            costs[0 as libc::c_int as usize] += *p_cost_mvx.offset(omx as isize) as libc::c_int
+                + *p_cost_mvy.offset((omy - 2 as libc::c_int) as isize) as libc::c_int;
+            costs[1 as libc::c_int as usize] += *p_cost_mvx.offset(omx as isize) as libc::c_int
+                + *p_cost_mvy.offset((omy + 2 as libc::c_int) as isize) as libc::c_int;
+            costs[2 as libc::c_int as usize] +=
+                *p_cost_mvx.offset((omx - 2 as libc::c_int) as isize) as libc::c_int
                     + *p_cost_mvy.offset(omy as isize) as libc::c_int;
-            costs[3 as libc::c_int as usize]
-                += *p_cost_mvx.offset((omx + 2 as libc::c_int) as isize) as libc::c_int
+            costs[3 as libc::c_int as usize] +=
+                *p_cost_mvx.offset((omx + 2 as libc::c_int) as isize) as libc::c_int
                     + *p_cost_mvy.offset(omy as isize) as libc::c_int;
-            if ((costs[0 as libc::c_int as usize] << 6 as libc::c_int)
-                + 2 as libc::c_int) < bcost
-            {
-                bcost = (costs[0 as libc::c_int as usize] << 6 as libc::c_int)
-                    + 2 as libc::c_int;
+            if ((costs[0 as libc::c_int as usize] << 6 as libc::c_int) + 2 as libc::c_int) < bcost {
+                bcost = (costs[0 as libc::c_int as usize] << 6 as libc::c_int) + 2 as libc::c_int;
             }
-            if ((costs[1 as libc::c_int as usize] << 6 as libc::c_int)
-                + 6 as libc::c_int) < bcost
-            {
-                bcost = (costs[1 as libc::c_int as usize] << 6 as libc::c_int)
-                    + 6 as libc::c_int;
+            if ((costs[1 as libc::c_int as usize] << 6 as libc::c_int) + 6 as libc::c_int) < bcost {
+                bcost = (costs[1 as libc::c_int as usize] << 6 as libc::c_int) + 6 as libc::c_int;
             }
-            if ((costs[2 as libc::c_int as usize] << 6 as libc::c_int)
-                + 16 as libc::c_int) < bcost
+            if ((costs[2 as libc::c_int as usize] << 6 as libc::c_int) + 16 as libc::c_int) < bcost
             {
-                bcost = (costs[2 as libc::c_int as usize] << 6 as libc::c_int)
-                    + 16 as libc::c_int;
+                bcost = (costs[2 as libc::c_int as usize] << 6 as libc::c_int) + 16 as libc::c_int;
             }
-            if ((costs[3 as libc::c_int as usize] << 6 as libc::c_int)
-                + 48 as libc::c_int) < bcost
+            if ((costs[3 as libc::c_int as usize] << 6 as libc::c_int) + 48 as libc::c_int) < bcost
             {
-                bcost = (costs[3 as libc::c_int as usize] << 6 as libc::c_int)
-                    + 48 as libc::c_int;
+                bcost = (costs[3 as libc::c_int as usize] << 6 as libc::c_int) + 48 as libc::c_int;
             }
             if bcost & 63 as libc::c_int == 0 {
                 break;
             }
-            bmx
-                -= ((bcost as uint32_t) << 26 as libc::c_int) as int32_t
-                    >> 29 as libc::c_int;
-            bmy
-                -= ((bcost as uint32_t) << 29 as libc::c_int) as int32_t
-                    >> 29 as libc::c_int;
+            bmx -= ((bcost as uint32_t) << 26 as libc::c_int) as int32_t >> 29 as libc::c_int;
+            bmy -= ((bcost as uint32_t) << 29 as libc::c_int) as int32_t >> 29 as libc::c_int;
             bcost &= !(63 as libc::c_int);
             i -= 1;
             i;
@@ -6429,15 +5745,13 @@ unsafe extern "C" fn refine_subpel(
     }
     if b_refine_qpel == 0
         && ((*h).pixf.mbcmp_unaligned[0 as libc::c_int as usize]
-            != (*h).pixf.fpelcmp[0 as libc::c_int as usize] || b_chroma_me != 0)
+            != (*h).pixf.fpelcmp[0 as libc::c_int as usize]
+            || b_chroma_me != 0)
     {
         bcost = (1 as libc::c_int) << 28 as libc::c_int;
         if b_refine_qpel != 0 || -(1 as libc::c_int) ^ 1 as libc::c_int != odir {
             let mut stride_1: intptr_t = 16 as libc::c_int as intptr_t;
-            let mut src_0: *mut pixel = ((*h).mc.get_ref)
-                .expect(
-                    "non-null function pointer",
-                )(
+            let mut src_0: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                 pix.as_mut_ptr(),
                 &mut stride_1,
                 &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
@@ -6449,9 +5763,7 @@ unsafe extern "C" fn refine_subpel(
                 &*((*m).weight).offset(0 as libc::c_int as isize),
             );
             let mut cost_0: libc::c_int = ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+                .expect("non-null function pointer")(
                 (*m).p_fenc[0 as libc::c_int as usize],
                 16 as libc::c_int as intptr_t,
                 src_0,
@@ -6459,19 +5771,12 @@ unsafe extern "C" fn refine_subpel(
             ) + *p_cost_mvx.offset(bmx as isize) as libc::c_int
                 + *p_cost_mvy.offset(bmy as isize) as libc::c_int;
             if b_chroma_me != 0 && cost_0 < bcost {
-                if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                    == CHROMA_444 as libc::c_int
-                {
+                if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
                     stride_1 = 16 as libc::c_int as intptr_t;
-                    src_0 = ((*h).mc.get_ref)
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    src_0 = ((*h).mc.get_ref).expect("non-null function pointer")(
                         pix.as_mut_ptr(),
                         &mut stride_1,
-                        &mut *((*m).p_fref)
-                            .as_mut_ptr()
-                            .offset(4 as libc::c_int as isize),
+                        &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                         (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                         bmx,
                         bmy,
@@ -6479,27 +5784,19 @@ unsafe extern "C" fn refine_subpel(
                         bh,
                         &*((*m).weight).offset(1 as libc::c_int as isize),
                     );
-                    cost_0
-                        += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (*m).p_fenc[1 as libc::c_int as usize],
-                            16 as libc::c_int as intptr_t,
-                            src_0,
-                            stride_1,
-                        );
+                    cost_0 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                        .expect("non-null function pointer")(
+                        (*m).p_fenc[1 as libc::c_int as usize],
+                        16 as libc::c_int as intptr_t,
+                        src_0,
+                        stride_1,
+                    );
                     if cost_0 < bcost {
                         stride_1 = 16 as libc::c_int as intptr_t;
-                        src_0 = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        src_0 = ((*h).mc.get_ref).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             &mut stride_1,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(8 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                             (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
                             bmx,
                             bmy,
@@ -6507,22 +5804,16 @@ unsafe extern "C" fn refine_subpel(
                             bh,
                             &*((*m).weight).offset(2 as libc::c_int as isize),
                         );
-                        cost_0
-                            += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[2 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                src_0,
-                                stride_1,
-                            );
+                        cost_0 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[2 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            src_0,
+                            stride_1,
+                        );
                     }
                 } else {
-                    ((*h).mc.mc_chroma)
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    ((*h).mc.mc_chroma).expect("non-null function pointer")(
                         pix.as_mut_ptr(),
                         pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                         16 as libc::c_int as intptr_t,
@@ -6533,14 +5824,10 @@ unsafe extern "C" fn refine_subpel(
                         bw >> 1 as libc::c_int,
                         bh >> chroma_v_shift,
                     );
-                    if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                        .is_null()
-                    {
+                    if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null() {
                         (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                             .offset((bw >> 3 as libc::c_int) as isize))
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        .expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             16 as libc::c_int as intptr_t,
                             pix.as_mut_ptr(),
@@ -6549,26 +5836,19 @@ unsafe extern "C" fn refine_subpel(
                             bh >> chroma_v_shift,
                         );
                     }
-                    cost_0
-                        += ((*h).pixf.mbcmp[chromapix as usize])
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (*m).p_fenc[1 as libc::c_int as usize],
-                            16 as libc::c_int as intptr_t,
-                            pix.as_mut_ptr(),
-                            16 as libc::c_int as intptr_t,
-                        );
+                    cost_0 += ((*h).pixf.mbcmp[chromapix as usize])
+                        .expect("non-null function pointer")(
+                        (*m).p_fenc[1 as libc::c_int as usize],
+                        16 as libc::c_int as intptr_t,
+                        pix.as_mut_ptr(),
+                        16 as libc::c_int as intptr_t,
+                    );
                     if cost_0 < bcost {
-                        if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                                 16 as libc::c_int as intptr_t,
                                 pix.as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -6577,16 +5857,13 @@ unsafe extern "C" fn refine_subpel(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        cost_0
-                            += ((*h).pixf.mbcmp[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[2 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                pix.as_mut_ptr().offset(8 as libc::c_int as isize),
-                                16 as libc::c_int as intptr_t,
-                            );
+                        cost_0 += ((*h).pixf.mbcmp[chromapix as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[2 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            pix.as_mut_ptr().offset(8 as libc::c_int as isize),
+                            16 as libc::c_int as intptr_t,
+                        );
                     }
                 }
             }
@@ -6624,10 +5901,7 @@ unsafe extern "C" fn refine_subpel(
             let mut omy_0: libc::c_int = bmy;
             if b_refine_qpel != 0 || 0 as libc::c_int ^ 1 as libc::c_int != odir {
                 let mut stride_2: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src_1: *mut pixel = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut src_1: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                     pix.as_mut_ptr(),
                     &mut stride_2,
                     &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
@@ -6638,33 +5912,21 @@ unsafe extern "C" fn refine_subpel(
                     bh,
                     &*((*m).weight).offset(0 as libc::c_int as isize),
                 );
-                let mut cost_1: libc::c_int = ((*h)
-                    .pixf
-                    .mbcmp_unaligned[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut cost_1: libc::c_int = ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                    .expect("non-null function pointer")(
                     (*m).p_fenc[0 as libc::c_int as usize],
                     16 as libc::c_int as intptr_t,
                     src_1,
                     stride_2,
                 ) + *p_cost_mvx.offset(omx_0 as isize) as libc::c_int
-                    + *p_cost_mvy.offset((omy_0 - 1 as libc::c_int) as isize)
-                        as libc::c_int;
+                    + *p_cost_mvy.offset((omy_0 - 1 as libc::c_int) as isize) as libc::c_int;
                 if b_chroma_me != 0 && cost_1 < bcost {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
                         stride_2 = 16 as libc::c_int as intptr_t;
-                        src_1 = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        src_1 = ((*h).mc.get_ref).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             &mut stride_2,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0,
                             omy_0 - 1 as libc::c_int,
@@ -6672,27 +5934,19 @@ unsafe extern "C" fn refine_subpel(
                             bh,
                             &*((*m).weight).offset(1 as libc::c_int as isize),
                         );
-                        cost_1
-                            += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                src_1,
-                                stride_2,
-                            );
+                        cost_1 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            src_1,
+                            stride_2,
+                        );
                         if cost_1 < bcost {
                             stride_2 = 16 as libc::c_int as intptr_t;
-                            src_1 = ((*h).mc.get_ref)
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            src_1 = ((*h).mc.get_ref).expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 &mut stride_2,
-                                &mut *((*m).p_fref)
-                                    .as_mut_ptr()
-                                    .offset(8 as libc::c_int as isize),
+                                &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                                 (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
                                 omx_0,
                                 omy_0 - 1 as libc::c_int,
@@ -6700,41 +5954,32 @@ unsafe extern "C" fn refine_subpel(
                                 bh,
                                 &*((*m).weight).offset(2 as libc::c_int as isize),
                             );
-                            cost_1
-                                += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    src_1,
-                                    stride_2,
-                                );
+                            cost_1 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                src_1,
+                                stride_2,
+                            );
                         }
                     } else {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                             16 as libc::c_int as intptr_t,
                             (*m).p_fref[4 as libc::c_int as usize],
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0,
-                            (2 as libc::c_int * (omy_0 - 1 as libc::c_int + mvy_offset)) >> chroma_v_shift,
+                            (2 as libc::c_int * (omy_0 - 1 as libc::c_int + mvy_offset))
+                                >> chroma_v_shift,
                             bw >> 1 as libc::c_int,
                             bh >> chroma_v_shift,
                         );
-                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(1 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 16 as libc::c_int as intptr_t,
                                 pix.as_mut_ptr(),
@@ -6743,27 +5988,20 @@ unsafe extern "C" fn refine_subpel(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        cost_1
-                            += ((*h).pixf.mbcmp[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                pix.as_mut_ptr(),
-                                16 as libc::c_int as intptr_t,
-                            );
+                        cost_1 += ((*h).pixf.mbcmp[chromapix as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            pix.as_mut_ptr(),
+                            16 as libc::c_int as intptr_t,
+                        );
                         if cost_1 < bcost {
-                            if !((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .is_null()
                             {
-                                (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                    .weightfn)
+                                (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                     .offset((bw >> 3 as libc::c_int) as isize))
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                .expect("non-null function pointer")(
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                                     16 as libc::c_int as intptr_t,
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -6772,16 +6010,13 @@ unsafe extern "C" fn refine_subpel(
                                     bh >> chroma_v_shift,
                                 );
                             }
-                            cost_1
-                                += ((*h).pixf.mbcmp[chromapix as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    pix.as_mut_ptr().offset(8 as libc::c_int as isize),
-                                    16 as libc::c_int as intptr_t,
-                                );
+                            cost_1 += ((*h).pixf.mbcmp[chromapix as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                pix.as_mut_ptr().offset(8 as libc::c_int as isize),
+                                16 as libc::c_int as intptr_t,
+                            );
                         }
                     }
                 }
@@ -6794,10 +6029,7 @@ unsafe extern "C" fn refine_subpel(
             }
             if b_refine_qpel != 0 || 1 as libc::c_int ^ 1 as libc::c_int != odir {
                 let mut stride_3: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src_2: *mut pixel = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut src_2: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                     pix.as_mut_ptr(),
                     &mut stride_3,
                     &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
@@ -6808,33 +6040,21 @@ unsafe extern "C" fn refine_subpel(
                     bh,
                     &*((*m).weight).offset(0 as libc::c_int as isize),
                 );
-                let mut cost_2: libc::c_int = ((*h)
-                    .pixf
-                    .mbcmp_unaligned[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut cost_2: libc::c_int = ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                    .expect("non-null function pointer")(
                     (*m).p_fenc[0 as libc::c_int as usize],
                     16 as libc::c_int as intptr_t,
                     src_2,
                     stride_3,
                 ) + *p_cost_mvx.offset(omx_0 as isize) as libc::c_int
-                    + *p_cost_mvy.offset((omy_0 + 1 as libc::c_int) as isize)
-                        as libc::c_int;
+                    + *p_cost_mvy.offset((omy_0 + 1 as libc::c_int) as isize) as libc::c_int;
                 if b_chroma_me != 0 && cost_2 < bcost {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
                         stride_3 = 16 as libc::c_int as intptr_t;
-                        src_2 = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        src_2 = ((*h).mc.get_ref).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             &mut stride_3,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0,
                             omy_0 + 1 as libc::c_int,
@@ -6842,27 +6062,19 @@ unsafe extern "C" fn refine_subpel(
                             bh,
                             &*((*m).weight).offset(1 as libc::c_int as isize),
                         );
-                        cost_2
-                            += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                src_2,
-                                stride_3,
-                            );
+                        cost_2 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            src_2,
+                            stride_3,
+                        );
                         if cost_2 < bcost {
                             stride_3 = 16 as libc::c_int as intptr_t;
-                            src_2 = ((*h).mc.get_ref)
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            src_2 = ((*h).mc.get_ref).expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 &mut stride_3,
-                                &mut *((*m).p_fref)
-                                    .as_mut_ptr()
-                                    .offset(8 as libc::c_int as isize),
+                                &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                                 (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
                                 omx_0,
                                 omy_0 + 1 as libc::c_int,
@@ -6870,41 +6082,32 @@ unsafe extern "C" fn refine_subpel(
                                 bh,
                                 &*((*m).weight).offset(2 as libc::c_int as isize),
                             );
-                            cost_2
-                                += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    src_2,
-                                    stride_3,
-                                );
+                            cost_2 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                src_2,
+                                stride_3,
+                            );
                         }
                     } else {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                             16 as libc::c_int as intptr_t,
                             (*m).p_fref[4 as libc::c_int as usize],
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0,
-                            (2 as libc::c_int * (omy_0 + 1 as libc::c_int + mvy_offset)) >> chroma_v_shift,
+                            (2 as libc::c_int * (omy_0 + 1 as libc::c_int + mvy_offset))
+                                >> chroma_v_shift,
                             bw >> 1 as libc::c_int,
                             bh >> chroma_v_shift,
                         );
-                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(1 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 16 as libc::c_int as intptr_t,
                                 pix.as_mut_ptr(),
@@ -6913,27 +6116,20 @@ unsafe extern "C" fn refine_subpel(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        cost_2
-                            += ((*h).pixf.mbcmp[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                pix.as_mut_ptr(),
-                                16 as libc::c_int as intptr_t,
-                            );
+                        cost_2 += ((*h).pixf.mbcmp[chromapix as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            pix.as_mut_ptr(),
+                            16 as libc::c_int as intptr_t,
+                        );
                         if cost_2 < bcost {
-                            if !((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .is_null()
                             {
-                                (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                    .weightfn)
+                                (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                     .offset((bw >> 3 as libc::c_int) as isize))
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                .expect("non-null function pointer")(
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                                     16 as libc::c_int as intptr_t,
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -6942,16 +6138,13 @@ unsafe extern "C" fn refine_subpel(
                                     bh >> chroma_v_shift,
                                 );
                             }
-                            cost_2
-                                += ((*h).pixf.mbcmp[chromapix as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    pix.as_mut_ptr().offset(8 as libc::c_int as isize),
-                                    16 as libc::c_int as intptr_t,
-                                );
+                            cost_2 += ((*h).pixf.mbcmp[chromapix as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                pix.as_mut_ptr().offset(8 as libc::c_int as isize),
+                                16 as libc::c_int as intptr_t,
+                            );
                         }
                     }
                 }
@@ -6964,10 +6157,7 @@ unsafe extern "C" fn refine_subpel(
             }
             if b_refine_qpel != 0 || 2 as libc::c_int ^ 1 as libc::c_int != odir {
                 let mut stride_4: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src_3: *mut pixel = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut src_3: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                     pix.as_mut_ptr(),
                     &mut stride_4,
                     &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
@@ -6978,34 +6168,22 @@ unsafe extern "C" fn refine_subpel(
                     bh,
                     &*((*m).weight).offset(0 as libc::c_int as isize),
                 );
-                let mut cost_3: libc::c_int = ((*h)
-                    .pixf
-                    .mbcmp_unaligned[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
-                    (*m).p_fenc[0 as libc::c_int as usize],
-                    16 as libc::c_int as intptr_t,
-                    src_3,
-                    stride_4,
-                )
-                    + *p_cost_mvx.offset((omx_0 - 1 as libc::c_int) as isize)
-                        as libc::c_int
-                    + *p_cost_mvy.offset(omy_0 as isize) as libc::c_int;
+                let mut cost_3: libc::c_int =
+                    ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                        .expect("non-null function pointer")(
+                        (*m).p_fenc[0 as libc::c_int as usize],
+                        16 as libc::c_int as intptr_t,
+                        src_3,
+                        stride_4,
+                    ) + *p_cost_mvx.offset((omx_0 - 1 as libc::c_int) as isize) as libc::c_int
+                        + *p_cost_mvy.offset(omy_0 as isize) as libc::c_int;
                 if b_chroma_me != 0 && cost_3 < bcost {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
                         stride_4 = 16 as libc::c_int as intptr_t;
-                        src_3 = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        src_3 = ((*h).mc.get_ref).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             &mut stride_4,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0 - 1 as libc::c_int,
                             omy_0,
@@ -7013,27 +6191,19 @@ unsafe extern "C" fn refine_subpel(
                             bh,
                             &*((*m).weight).offset(1 as libc::c_int as isize),
                         );
-                        cost_3
-                            += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                src_3,
-                                stride_4,
-                            );
+                        cost_3 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            src_3,
+                            stride_4,
+                        );
                         if cost_3 < bcost {
                             stride_4 = 16 as libc::c_int as intptr_t;
-                            src_3 = ((*h).mc.get_ref)
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            src_3 = ((*h).mc.get_ref).expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 &mut stride_4,
-                                &mut *((*m).p_fref)
-                                    .as_mut_ptr()
-                                    .offset(8 as libc::c_int as isize),
+                                &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                                 (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
                                 omx_0 - 1 as libc::c_int,
                                 omy_0,
@@ -7041,22 +6211,16 @@ unsafe extern "C" fn refine_subpel(
                                 bh,
                                 &*((*m).weight).offset(2 as libc::c_int as isize),
                             );
-                            cost_3
-                                += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    src_3,
-                                    stride_4,
-                                );
+                            cost_3 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                src_3,
+                                stride_4,
+                            );
                         }
                     } else {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                             16 as libc::c_int as intptr_t,
@@ -7067,15 +6231,11 @@ unsafe extern "C" fn refine_subpel(
                             bw >> 1 as libc::c_int,
                             bh >> chroma_v_shift,
                         );
-                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(1 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 16 as libc::c_int as intptr_t,
                                 pix.as_mut_ptr(),
@@ -7084,27 +6244,20 @@ unsafe extern "C" fn refine_subpel(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        cost_3
-                            += ((*h).pixf.mbcmp[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                pix.as_mut_ptr(),
-                                16 as libc::c_int as intptr_t,
-                            );
+                        cost_3 += ((*h).pixf.mbcmp[chromapix as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            pix.as_mut_ptr(),
+                            16 as libc::c_int as intptr_t,
+                        );
                         if cost_3 < bcost {
-                            if !((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .is_null()
                             {
-                                (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                    .weightfn)
+                                (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                     .offset((bw >> 3 as libc::c_int) as isize))
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                .expect("non-null function pointer")(
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                                     16 as libc::c_int as intptr_t,
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -7113,16 +6266,13 @@ unsafe extern "C" fn refine_subpel(
                                     bh >> chroma_v_shift,
                                 );
                             }
-                            cost_3
-                                += ((*h).pixf.mbcmp[chromapix as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    pix.as_mut_ptr().offset(8 as libc::c_int as isize),
-                                    16 as libc::c_int as intptr_t,
-                                );
+                            cost_3 += ((*h).pixf.mbcmp[chromapix as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                pix.as_mut_ptr().offset(8 as libc::c_int as isize),
+                                16 as libc::c_int as intptr_t,
+                            );
                         }
                     }
                 }
@@ -7135,10 +6285,7 @@ unsafe extern "C" fn refine_subpel(
             }
             if b_refine_qpel != 0 || 3 as libc::c_int ^ 1 as libc::c_int != odir {
                 let mut stride_5: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src_4: *mut pixel = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                let mut src_4: *mut pixel = ((*h).mc.get_ref).expect("non-null function pointer")(
                     pix.as_mut_ptr(),
                     &mut stride_5,
                     &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
@@ -7149,34 +6296,22 @@ unsafe extern "C" fn refine_subpel(
                     bh,
                     &*((*m).weight).offset(0 as libc::c_int as isize),
                 );
-                let mut cost_4: libc::c_int = ((*h)
-                    .pixf
-                    .mbcmp_unaligned[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
-                    (*m).p_fenc[0 as libc::c_int as usize],
-                    16 as libc::c_int as intptr_t,
-                    src_4,
-                    stride_5,
-                )
-                    + *p_cost_mvx.offset((omx_0 + 1 as libc::c_int) as isize)
-                        as libc::c_int
-                    + *p_cost_mvy.offset(omy_0 as isize) as libc::c_int;
+                let mut cost_4: libc::c_int =
+                    ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                        .expect("non-null function pointer")(
+                        (*m).p_fenc[0 as libc::c_int as usize],
+                        16 as libc::c_int as intptr_t,
+                        src_4,
+                        stride_5,
+                    ) + *p_cost_mvx.offset((omx_0 + 1 as libc::c_int) as isize) as libc::c_int
+                        + *p_cost_mvy.offset(omy_0 as isize) as libc::c_int;
                 if b_chroma_me != 0 && cost_4 < bcost {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
                         stride_5 = 16 as libc::c_int as intptr_t;
-                        src_4 = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        src_4 = ((*h).mc.get_ref).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             &mut stride_5,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
                             omx_0 + 1 as libc::c_int,
                             omy_0,
@@ -7184,27 +6319,19 @@ unsafe extern "C" fn refine_subpel(
                             bh,
                             &*((*m).weight).offset(1 as libc::c_int as isize),
                         );
-                        cost_4
-                            += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                src_4,
-                                stride_5,
-                            );
+                        cost_4 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            src_4,
+                            stride_5,
+                        );
                         if cost_4 < bcost {
                             stride_5 = 16 as libc::c_int as intptr_t;
-                            src_4 = ((*h).mc.get_ref)
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            src_4 = ((*h).mc.get_ref).expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 &mut stride_5,
-                                &mut *((*m).p_fref)
-                                    .as_mut_ptr()
-                                    .offset(8 as libc::c_int as isize),
+                                &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                                 (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
                                 omx_0 + 1 as libc::c_int,
                                 omy_0,
@@ -7212,22 +6339,16 @@ unsafe extern "C" fn refine_subpel(
                                 bh,
                                 &*((*m).weight).offset(2 as libc::c_int as isize),
                             );
-                            cost_4
-                                += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    src_4,
-                                    stride_5,
-                                );
+                            cost_4 += ((*h).pixf.mbcmp_unaligned[i_pixel as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                src_4,
+                                stride_5,
+                            );
                         }
                     } else {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
                             pix.as_mut_ptr(),
                             pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                             16 as libc::c_int as intptr_t,
@@ -7238,15 +6359,11 @@ unsafe extern "C" fn refine_subpel(
                             bw >> 1 as libc::c_int,
                             bh >> chroma_v_shift,
                         );
-                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(1 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pix.as_mut_ptr(),
                                 16 as libc::c_int as intptr_t,
                                 pix.as_mut_ptr(),
@@ -7255,27 +6372,20 @@ unsafe extern "C" fn refine_subpel(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        cost_4
-                            += ((*h).pixf.mbcmp[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                (*m).p_fenc[1 as libc::c_int as usize],
-                                16 as libc::c_int as intptr_t,
-                                pix.as_mut_ptr(),
-                                16 as libc::c_int as intptr_t,
-                            );
+                        cost_4 += ((*h).pixf.mbcmp[chromapix as usize])
+                            .expect("non-null function pointer")(
+                            (*m).p_fenc[1 as libc::c_int as usize],
+                            16 as libc::c_int as intptr_t,
+                            pix.as_mut_ptr(),
+                            16 as libc::c_int as intptr_t,
+                        );
                         if cost_4 < bcost {
-                            if !((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .is_null()
                             {
-                                (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                    .weightfn)
+                                (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                     .offset((bw >> 3 as libc::c_int) as isize))
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
+                                .expect("non-null function pointer")(
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
                                     16 as libc::c_int as intptr_t,
                                     pix.as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -7284,16 +6394,13 @@ unsafe extern "C" fn refine_subpel(
                                     bh >> chroma_v_shift,
                                 );
                             }
-                            cost_4
-                                += ((*h).pixf.mbcmp[chromapix as usize])
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*m).p_fenc[2 as libc::c_int as usize],
-                                    16 as libc::c_int as intptr_t,
-                                    pix.as_mut_ptr().offset(8 as libc::c_int as isize),
-                                    16 as libc::c_int as intptr_t,
-                                );
+                            cost_4 += ((*h).pixf.mbcmp[chromapix as usize])
+                                .expect("non-null function pointer")(
+                                (*m).p_fenc[2 as libc::c_int as usize],
+                                16 as libc::c_int as intptr_t,
+                                pix.as_mut_ptr().offset(8 as libc::c_int as isize),
+                                16 as libc::c_int as intptr_t,
+                            );
                         }
                     }
                 }
@@ -7317,10 +6424,7 @@ unsafe extern "C" fn refine_subpel(
     {
         let mut omx_1: libc::c_int = bmx;
         let mut omy_1: libc::c_int = bmy;
-        ((*h).mc.mc_luma)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.mc_luma).expect("non-null function pointer")(
             pix.as_mut_ptr(),
             64 as libc::c_int as intptr_t,
             ((*m).p_fref).as_mut_ptr(),
@@ -7331,10 +6435,7 @@ unsafe extern "C" fn refine_subpel(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        ((*h).mc.mc_luma)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.mc_luma).expect("non-null function pointer")(
             pix.as_mut_ptr().offset(16 as libc::c_int as isize),
             64 as libc::c_int as intptr_t,
             ((*m).p_fref).as_mut_ptr(),
@@ -7345,10 +6446,7 @@ unsafe extern "C" fn refine_subpel(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        ((*h).mc.mc_luma)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.mc_luma).expect("non-null function pointer")(
             pix.as_mut_ptr().offset(32 as libc::c_int as isize),
             64 as libc::c_int as intptr_t,
             ((*m).p_fref).as_mut_ptr(),
@@ -7359,10 +6457,7 @@ unsafe extern "C" fn refine_subpel(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        ((*h).mc.mc_luma)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.mc_luma).expect("non-null function pointer")(
             pix.as_mut_ptr().offset(48 as libc::c_int as isize),
             64 as libc::c_int as intptr_t,
             ((*m).p_fref).as_mut_ptr(),
@@ -7373,10 +6468,7 @@ unsafe extern "C" fn refine_subpel(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        ((*h).pixf.fpelcmp_x4[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).pixf.fpelcmp_x4[i_pixel as usize]).expect("non-null function pointer")(
             (*m).p_fenc[0 as libc::c_int as usize],
             pix.as_mut_ptr(),
             pix.as_mut_ptr().offset(16 as libc::c_int as isize),
@@ -7385,56 +6477,37 @@ unsafe extern "C" fn refine_subpel(
             64 as libc::c_int as intptr_t,
             costs.as_mut_ptr(),
         );
-        costs[0 as libc::c_int as usize]
-            += *p_cost_mvx.offset(omx_1 as isize) as libc::c_int
-                + *p_cost_mvy.offset((omy_1 - 1 as libc::c_int) as isize) as libc::c_int;
-        costs[1 as libc::c_int as usize]
-            += *p_cost_mvx.offset(omx_1 as isize) as libc::c_int
-                + *p_cost_mvy.offset((omy_1 + 1 as libc::c_int) as isize) as libc::c_int;
-        costs[2 as libc::c_int as usize]
-            += *p_cost_mvx.offset((omx_1 - 1 as libc::c_int) as isize) as libc::c_int
-                + *p_cost_mvy.offset(omy_1 as isize) as libc::c_int;
-        costs[3 as libc::c_int as usize]
-            += *p_cost_mvx.offset((omx_1 + 1 as libc::c_int) as isize) as libc::c_int
-                + *p_cost_mvy.offset(omy_1 as isize) as libc::c_int;
+        costs[0 as libc::c_int as usize] += *p_cost_mvx.offset(omx_1 as isize) as libc::c_int
+            + *p_cost_mvy.offset((omy_1 - 1 as libc::c_int) as isize) as libc::c_int;
+        costs[1 as libc::c_int as usize] += *p_cost_mvx.offset(omx_1 as isize) as libc::c_int
+            + *p_cost_mvy.offset((omy_1 + 1 as libc::c_int) as isize) as libc::c_int;
+        costs[2 as libc::c_int as usize] += *p_cost_mvx.offset((omx_1 - 1 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(omy_1 as isize) as libc::c_int;
+        costs[3 as libc::c_int as usize] += *p_cost_mvx.offset((omx_1 + 1 as libc::c_int) as isize)
+            as libc::c_int
+            + *p_cost_mvy.offset(omy_1 as isize) as libc::c_int;
         bcost <<= 4 as libc::c_int;
-        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int)
-            < bcost
-        {
-            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int)
-                + 1 as libc::c_int;
+        if ((costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int) < bcost {
+            bcost = (costs[0 as libc::c_int as usize] << 4 as libc::c_int) + 1 as libc::c_int;
         }
-        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int)
-            < bcost
-        {
-            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int)
-                + 3 as libc::c_int;
+        if ((costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int) < bcost {
+            bcost = (costs[1 as libc::c_int as usize] << 4 as libc::c_int) + 3 as libc::c_int;
         }
-        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int)
-            < bcost
-        {
-            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int)
-                + 4 as libc::c_int;
+        if ((costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int) < bcost {
+            bcost = (costs[2 as libc::c_int as usize] << 4 as libc::c_int) + 4 as libc::c_int;
         }
-        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 12 as libc::c_int)
-            < bcost
-        {
-            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int)
-                + 12 as libc::c_int;
+        if ((costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 12 as libc::c_int) < bcost {
+            bcost = (costs[3 as libc::c_int as usize] << 4 as libc::c_int) + 12 as libc::c_int;
         }
-        bmx
-            -= ((bcost as uint32_t) << 28 as libc::c_int) as int32_t
-                >> 30 as libc::c_int;
-        bmy
-            -= ((bcost as uint32_t) << 30 as libc::c_int) as int32_t
-                >> 30 as libc::c_int;
+        bmx -= ((bcost as uint32_t) << 28 as libc::c_int) as int32_t >> 30 as libc::c_int;
+        bmy -= ((bcost as uint32_t) << 30 as libc::c_int) as int32_t >> 30 as libc::c_int;
         bcost >>= 4 as libc::c_int;
     }
     (*m).cost = bcost;
     (*m).mv[0 as libc::c_int as usize] = bmx as int16_t;
     (*m).mv[1 as libc::c_int as usize] = bmy as int16_t;
-    (*m)
-        .cost_mv = *p_cost_mvx.offset(bmx as isize) as libc::c_int
+    (*m).cost_mv = *p_cost_mvx.offset(bmx as isize) as libc::c_int
         + *p_cost_mvy.offset(bmy as isize) as libc::c_int;
 }
 #[no_mangle]
@@ -7451,18 +6524,14 @@ unsafe extern "C" fn me_refine_bidir(
 ) {
     let mut x: libc::c_int = i8 & 1 as libc::c_int;
     let mut y: libc::c_int = i8 >> 1 as libc::c_int;
-    let mut s8: libc::c_int = 4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int
-        + 2 as libc::c_int * x + 16 as libc::c_int * y;
-    let mut cache0_mv: *mut int16_t = ((*h)
-        .mb
-        .cache
-        .mv[0 as libc::c_int as usize][s8 as usize])
-        .as_mut_ptr();
-    let mut cache1_mv: *mut int16_t = ((*h)
-        .mb
-        .cache
-        .mv[1 as libc::c_int as usize][s8 as usize])
-        .as_mut_ptr();
+    let mut s8: libc::c_int = 4 as libc::c_int
+        + 1 as libc::c_int * 8 as libc::c_int
+        + 2 as libc::c_int * x
+        + 16 as libc::c_int * y;
+    let mut cache0_mv: *mut int16_t =
+        ((*h).mb.cache.mv[0 as libc::c_int as usize][s8 as usize]).as_mut_ptr();
+    let mut cache1_mv: *mut int16_t =
+        ((*h).mb.cache.mv[1 as libc::c_int as usize][s8 as usize]).as_mut_ptr();
     let i_pixel: libc::c_int = (*m0).i_pixel;
     let bw: libc::c_int = x264_pixel_size[i_pixel as usize].w as libc::c_int;
     let bh: libc::c_int = x264_pixel_size[i_pixel as usize].h as libc::c_int;
@@ -7470,37 +6539,35 @@ unsafe extern "C" fn me_refine_bidir(
     let mut pixu_buf: [[[pixel; 256]; 9]; 2] = [[[0; 256]; 9]; 2];
     let mut pixv_buf: [[[pixel; 256]; 9]; 2] = [[[0; 256]; 9]; 2];
     let mut src: [[[*mut pixel; 9]; 2]; 3] = [[[std::ptr::null_mut::<pixel>(); 9]; 2]; 3];
-    let mut chromapix: libc::c_int = (*h).luma2chroma_pixel[i_pixel as usize]
-        as libc::c_int;
+    let mut chromapix: libc::c_int = (*h).luma2chroma_pixel[i_pixel as usize] as libc::c_int;
     let mut chroma_v_shift: libc::c_int = (*h).mb.chroma_v_shift;
     let mut chroma_x: libc::c_int = (8 as libc::c_int >> (*h).mb.chroma_h_shift) * x;
     let mut chroma_y: libc::c_int = (8 as libc::c_int >> chroma_v_shift) * y;
     let mut pix: *mut pixel = &mut *(*((*h).mb.pic.p_fdec)
         .as_mut_ptr()
         .offset(0 as libc::c_int as isize))
-        .offset(
-            (8 as libc::c_int * x + 8 as libc::c_int * y * 32 as libc::c_int) as isize,
-        ) as *mut pixel;
+    .offset((8 as libc::c_int * x + 8 as libc::c_int * y * 32 as libc::c_int) as isize)
+        as *mut pixel;
     let mut pixu: *mut pixel = if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-        &mut *(*((*h).mb.pic.p_fdec).as_mut_ptr().offset(1 as libc::c_int as isize))
-            .offset((chroma_x + chroma_y * 32 as libc::c_int) as isize) as *mut pixel
+        &mut *(*((*h).mb.pic.p_fdec)
+            .as_mut_ptr()
+            .offset(1 as libc::c_int as isize))
+        .offset((chroma_x + chroma_y * 32 as libc::c_int) as isize) as *mut pixel
     } else {
         std::ptr::null_mut::<pixel>()
     };
     let mut pixv: *mut pixel = if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-        &mut *(*((*h).mb.pic.p_fdec).as_mut_ptr().offset(2 as libc::c_int as isize))
-            .offset((chroma_x + chroma_y * 32 as libc::c_int) as isize) as *mut pixel
+        &mut *(*((*h).mb.pic.p_fdec)
+            .as_mut_ptr()
+            .offset(2 as libc::c_int as isize))
+        .offset((chroma_x + chroma_y * 32 as libc::c_int) as isize) as *mut pixel
     } else {
         std::ptr::null_mut::<pixel>()
     };
-    let mut ref0: libc::c_int = (*h)
-        .mb
-        .cache
-        .ref_0[0 as libc::c_int as usize][s8 as usize] as libc::c_int;
-    let mut ref1: libc::c_int = (*h)
-        .mb
-        .cache
-        .ref_0[1 as libc::c_int as usize][s8 as usize] as libc::c_int;
+    let mut ref0: libc::c_int =
+        (*h).mb.cache.ref_0[0 as libc::c_int as usize][s8 as usize] as libc::c_int;
+    let mut ref1: libc::c_int =
+        (*h).mb.cache.ref_0[1 as libc::c_int as usize][s8 as usize] as libc::c_int;
     let mv0y_offset: libc::c_int = if chroma_v_shift & (*h).mb.b_interlaced & ref0 != 0 {
         ((*h).mb.i_mb_y & 1 as libc::c_int) * 4 as libc::c_int - 2 as libc::c_int
     } else {
@@ -7519,8 +6586,7 @@ unsafe extern "C" fn me_refine_bidir(
     let mut bcost: libc::c_int = (1 as libc::c_int) << 28 as libc::c_int;
     let mut mc_list0: libc::c_int = 1 as libc::c_int;
     let mut mc_list1: libc::c_int = 1 as libc::c_int;
-    let mut bcostrd: uint64_t = ((1 as libc::c_ulonglong) << 60 as libc::c_int)
-        as uint64_t;
+    let mut bcostrd: uint64_t = ((1 as libc::c_ulonglong) << 60 as libc::c_int) as uint64_t;
     let mut amvd: uint16_t = 0;
     let mut visited: [[[uint8_t; 8]; 8]; 8] = [[[0; 8]; 8]; 8];
     static mut dia4d: [[int8_t; 4]; 33] = [
@@ -7750,18 +6816,15 @@ unsafe extern "C" fn me_refine_bidir(
             ((*m1).mvp).as_mut_ptr(),
         );
     }
-    let mut p_cost_m0x: *const uint16_t = ((*m0).p_cost_mv)
-        .offset(-((*m0).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
-    let mut p_cost_m0y: *const uint16_t = ((*m0).p_cost_mv)
-        .offset(-((*m0).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
-    let mut p_cost_m1x: *const uint16_t = ((*m1).p_cost_mv)
-        .offset(-((*m1).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
-    let mut p_cost_m1y: *const uint16_t = ((*m1).p_cost_mv)
-        .offset(-((*m1).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
-    ((*h).mc.memzero_aligned)
-        .expect(
-            "non-null function pointer",
-        )(
+    let mut p_cost_m0x: *const uint16_t =
+        ((*m0).p_cost_mv).offset(-((*m0).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_m0y: *const uint16_t =
+        ((*m0).p_cost_mv).offset(-((*m0).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_m1x: *const uint16_t =
+        ((*m1).p_cost_mv).offset(-((*m1).mvp[0 as libc::c_int as usize] as libc::c_int as isize));
+    let mut p_cost_m1y: *const uint16_t =
+        ((*m1).p_cost_mv).offset(-((*m1).mvp[1 as libc::c_int as usize] as libc::c_int as isize));
+    ((*h).mc.memzero_aligned).expect("non-null function pointer")(
         visited.as_mut_ptr() as *mut libc::c_void,
         ::core::mem::size_of::<[[[uint8_t; 8]; 8]; 8]>() as libc::c_ulong,
     );
@@ -7776,104 +6839,70 @@ unsafe extern "C" fn me_refine_bidir(
                     + 3 as libc::c_int
                         * square1[j as usize][0 as libc::c_int as usize] as libc::c_int
                     + square1[j as usize][1 as libc::c_int as usize] as libc::c_int;
-                let mut mvx: libc::c_int = bm0x
-                    + square1[j as usize][0 as libc::c_int as usize] as libc::c_int;
-                let mut mvy: libc::c_int = bm0y
-                    + square1[j as usize][1 as libc::c_int as usize] as libc::c_int;
-                stride[0 as libc::c_int
-                    as usize][0 as libc::c_int as usize][i as usize] = bw as intptr_t;
-                src[0 as libc::c_int
-                    as usize][0 as libc::c_int
-                    as usize][i
-                    as usize] = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
-                    (pixy_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
-                    &mut *(*(*stride.as_mut_ptr().offset(0 as libc::c_int as isize))
-                        .as_mut_ptr()
-                        .offset(0 as libc::c_int as isize))
+                let mut mvx: libc::c_int =
+                    bm0x + square1[j as usize][0 as libc::c_int as usize] as libc::c_int;
+                let mut mvy: libc::c_int =
+                    bm0y + square1[j as usize][1 as libc::c_int as usize] as libc::c_int;
+                stride[0 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                    bw as intptr_t;
+                src[0 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                    ((*h).mc.get_ref).expect("non-null function pointer")(
+                        (pixy_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
+                        &mut *(*(*stride.as_mut_ptr().offset(0 as libc::c_int as isize))
+                            .as_mut_ptr()
+                            .offset(0 as libc::c_int as isize))
                         .as_mut_ptr()
                         .offset(i as isize),
-                    &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
-                    (*m).i_stride[0 as libc::c_int as usize] as intptr_t,
-                    mvx,
-                    mvy,
-                    bw,
-                    bh,
-                    x264_zero.as_mut_ptr() as *const x264_weight_t,
-                );
+                        &mut *((*m).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
+                        (*m).i_stride[0 as libc::c_int as usize] as intptr_t,
+                        mvx,
+                        mvy,
+                        bw,
+                        bh,
+                        x264_zero.as_mut_ptr() as *const x264_weight_t,
+                    );
                 if rd != 0 {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
-                        stride[1 as libc::c_int
-                            as usize][0 as libc::c_int
-                            as usize][i as usize] = bw as intptr_t;
-                        src[1 as libc::c_int
-                            as usize][0 as libc::c_int
-                            as usize][i
-                            as usize] = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixu_buf[0 as libc::c_int as usize][i as usize])
-                                .as_mut_ptr(),
-                            &mut *(*(*stride
-                                .as_mut_ptr()
-                                .offset(1 as libc::c_int as isize))
-                                .as_mut_ptr()
-                                .offset(0 as libc::c_int as isize))
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                        stride[1 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                            bw as intptr_t;
+                        src[1 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                            ((*h).mc.get_ref).expect("non-null function pointer")(
+                                (pixu_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
+                                &mut *(*(*stride.as_mut_ptr().offset(1 as libc::c_int as isize))
+                                    .as_mut_ptr()
+                                    .offset(0 as libc::c_int as isize))
                                 .as_mut_ptr()
                                 .offset(i as isize),
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
-                            (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                            mvx,
-                            mvy,
-                            bw,
-                            bh,
-                            x264_zero.as_mut_ptr() as *const x264_weight_t,
-                        );
-                        stride[2 as libc::c_int
-                            as usize][0 as libc::c_int
-                            as usize][i as usize] = bw as intptr_t;
-                        src[2 as libc::c_int
-                            as usize][0 as libc::c_int
-                            as usize][i
-                            as usize] = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixv_buf[0 as libc::c_int as usize][i as usize])
-                                .as_mut_ptr(),
-                            &mut *(*(*stride
-                                .as_mut_ptr()
-                                .offset(2 as libc::c_int as isize))
-                                .as_mut_ptr()
-                                .offset(0 as libc::c_int as isize))
+                                &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
+                                (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
+                                mvx,
+                                mvy,
+                                bw,
+                                bh,
+                                x264_zero.as_mut_ptr() as *const x264_weight_t,
+                            );
+                        stride[2 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                            bw as intptr_t;
+                        src[2 as libc::c_int as usize][0 as libc::c_int as usize][i as usize] =
+                            ((*h).mc.get_ref).expect("non-null function pointer")(
+                                (pixv_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
+                                &mut *(*(*stride.as_mut_ptr().offset(2 as libc::c_int as isize))
+                                    .as_mut_ptr()
+                                    .offset(0 as libc::c_int as isize))
                                 .as_mut_ptr()
                                 .offset(i as isize),
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(8 as libc::c_int as isize),
-                            (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
-                            mvx,
-                            mvy,
-                            bw,
-                            bh,
-                            x264_zero.as_mut_ptr() as *const x264_weight_t,
-                        );
+                                &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
+                                (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
+                                mvx,
+                                mvy,
+                                bw,
+                                bh,
+                                x264_zero.as_mut_ptr() as *const x264_weight_t,
+                            );
                     } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixu_buf[0 as libc::c_int as usize][i as usize])
-                                .as_mut_ptr(),
-                            (pixv_buf[0 as libc::c_int as usize][i as usize])
-                                .as_mut_ptr(),
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
+                            (pixu_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
+                            (pixv_buf[0 as libc::c_int as usize][i as usize]).as_mut_ptr(),
                             8 as libc::c_int as intptr_t,
                             (*m).p_fref[4 as libc::c_int as usize],
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
@@ -7896,104 +6925,76 @@ unsafe extern "C" fn me_refine_bidir(
                     + 3 as libc::c_int
                         * square1[j_0 as usize][0 as libc::c_int as usize] as libc::c_int
                     + square1[j_0 as usize][1 as libc::c_int as usize] as libc::c_int;
-                let mut mvx_0: libc::c_int = bm1x
-                    + square1[j_0 as usize][0 as libc::c_int as usize] as libc::c_int;
-                let mut mvy_0: libc::c_int = bm1y
-                    + square1[j_0 as usize][1 as libc::c_int as usize] as libc::c_int;
-                stride[0 as libc::c_int
-                    as usize][1 as libc::c_int as usize][i_0 as usize] = bw as intptr_t;
-                src[0 as libc::c_int
-                    as usize][1 as libc::c_int
-                    as usize][i_0
-                    as usize] = ((*h).mc.get_ref)
-                    .expect(
-                        "non-null function pointer",
-                    )(
-                    (pixy_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
-                    &mut *(*(*stride.as_mut_ptr().offset(0 as libc::c_int as isize))
-                        .as_mut_ptr()
-                        .offset(1 as libc::c_int as isize))
+                let mut mvx_0: libc::c_int =
+                    bm1x + square1[j_0 as usize][0 as libc::c_int as usize] as libc::c_int;
+                let mut mvy_0: libc::c_int =
+                    bm1y + square1[j_0 as usize][1 as libc::c_int as usize] as libc::c_int;
+                stride[0 as libc::c_int as usize][1 as libc::c_int as usize][i_0 as usize] =
+                    bw as intptr_t;
+                src[0 as libc::c_int as usize][1 as libc::c_int as usize][i_0 as usize] =
+                    ((*h).mc.get_ref).expect("non-null function pointer")(
+                        (pixy_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
+                        &mut *(*(*stride.as_mut_ptr().offset(0 as libc::c_int as isize))
+                            .as_mut_ptr()
+                            .offset(1 as libc::c_int as isize))
                         .as_mut_ptr()
                         .offset(i_0 as isize),
-                    &mut *((*m_0).p_fref).as_mut_ptr().offset(0 as libc::c_int as isize),
-                    (*m_0).i_stride[0 as libc::c_int as usize] as intptr_t,
-                    mvx_0,
-                    mvy_0,
-                    bw,
-                    bh,
-                    x264_zero.as_mut_ptr() as *const x264_weight_t,
-                );
+                        &mut *((*m_0).p_fref)
+                            .as_mut_ptr()
+                            .offset(0 as libc::c_int as isize),
+                        (*m_0).i_stride[0 as libc::c_int as usize] as intptr_t,
+                        mvx_0,
+                        mvy_0,
+                        bw,
+                        bh,
+                        x264_zero.as_mut_ptr() as *const x264_weight_t,
+                    );
                 if rd != 0 {
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
-                        stride[1 as libc::c_int
-                            as usize][1 as libc::c_int
-                            as usize][i_0 as usize] = bw as intptr_t;
-                        src[1 as libc::c_int
-                            as usize][1 as libc::c_int
-                            as usize][i_0
-                            as usize] = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixu_buf[1 as libc::c_int as usize][i_0 as usize])
-                                .as_mut_ptr(),
-                            &mut *(*(*stride
-                                .as_mut_ptr()
-                                .offset(1 as libc::c_int as isize))
-                                .as_mut_ptr()
-                                .offset(1 as libc::c_int as isize))
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                        stride[1 as libc::c_int as usize][1 as libc::c_int as usize]
+                            [i_0 as usize] = bw as intptr_t;
+                        src[1 as libc::c_int as usize][1 as libc::c_int as usize][i_0 as usize] =
+                            ((*h).mc.get_ref).expect("non-null function pointer")(
+                                (pixu_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
+                                &mut *(*(*stride.as_mut_ptr().offset(1 as libc::c_int as isize))
+                                    .as_mut_ptr()
+                                    .offset(1 as libc::c_int as isize))
                                 .as_mut_ptr()
                                 .offset(i_0 as isize),
-                            &mut *((*m_0).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
-                            (*m_0).i_stride[1 as libc::c_int as usize] as intptr_t,
-                            mvx_0,
-                            mvy_0,
-                            bw,
-                            bh,
-                            x264_zero.as_mut_ptr() as *const x264_weight_t,
-                        );
-                        stride[2 as libc::c_int
-                            as usize][1 as libc::c_int
-                            as usize][i_0 as usize] = bw as intptr_t;
-                        src[2 as libc::c_int
-                            as usize][1 as libc::c_int
-                            as usize][i_0
-                            as usize] = ((*h).mc.get_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixv_buf[1 as libc::c_int as usize][i_0 as usize])
-                                .as_mut_ptr(),
-                            &mut *(*(*stride
-                                .as_mut_ptr()
-                                .offset(2 as libc::c_int as isize))
-                                .as_mut_ptr()
-                                .offset(1 as libc::c_int as isize))
+                                &mut *((*m_0).p_fref)
+                                    .as_mut_ptr()
+                                    .offset(4 as libc::c_int as isize),
+                                (*m_0).i_stride[1 as libc::c_int as usize] as intptr_t,
+                                mvx_0,
+                                mvy_0,
+                                bw,
+                                bh,
+                                x264_zero.as_mut_ptr() as *const x264_weight_t,
+                            );
+                        stride[2 as libc::c_int as usize][1 as libc::c_int as usize]
+                            [i_0 as usize] = bw as intptr_t;
+                        src[2 as libc::c_int as usize][1 as libc::c_int as usize][i_0 as usize] =
+                            ((*h).mc.get_ref).expect("non-null function pointer")(
+                                (pixv_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
+                                &mut *(*(*stride.as_mut_ptr().offset(2 as libc::c_int as isize))
+                                    .as_mut_ptr()
+                                    .offset(1 as libc::c_int as isize))
                                 .as_mut_ptr()
                                 .offset(i_0 as isize),
-                            &mut *((*m_0).p_fref)
-                                .as_mut_ptr()
-                                .offset(8 as libc::c_int as isize),
-                            (*m_0).i_stride[2 as libc::c_int as usize] as intptr_t,
-                            mvx_0,
-                            mvy_0,
-                            bw,
-                            bh,
-                            x264_zero.as_mut_ptr() as *const x264_weight_t,
-                        );
+                                &mut *((*m_0).p_fref)
+                                    .as_mut_ptr()
+                                    .offset(8 as libc::c_int as isize),
+                                (*m_0).i_stride[2 as libc::c_int as usize] as intptr_t,
+                                mvx_0,
+                                mvy_0,
+                                bw,
+                                bh,
+                                x264_zero.as_mut_ptr() as *const x264_weight_t,
+                            );
                     } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (pixu_buf[1 as libc::c_int as usize][i_0 as usize])
-                                .as_mut_ptr(),
-                            (pixv_buf[1 as libc::c_int as usize][i_0 as usize])
-                                .as_mut_ptr(),
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
+                            (pixu_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
+                            (pixv_buf[1 as libc::c_int as usize][i_0 as usize]).as_mut_ptr(),
                             8 as libc::c_int as intptr_t,
                             (*m_0).p_fref[4 as libc::c_int as usize],
                             (*m_0).i_stride[1 as libc::c_int as usize] as intptr_t,
@@ -8010,18 +7011,19 @@ unsafe extern "C" fn me_refine_bidir(
         }
         let mut j_1: libc::c_int = (pass != 0) as libc::c_int;
         while j_1 < 33 as libc::c_int {
-            let mut m0x: libc::c_int = dia4d[j_1 as usize][0 as libc::c_int as usize]
-                as libc::c_int + bm0x;
-            let mut m0y: libc::c_int = dia4d[j_1 as usize][1 as libc::c_int as usize]
-                as libc::c_int + bm0y;
-            let mut m1x: libc::c_int = dia4d[j_1 as usize][2 as libc::c_int as usize]
-                as libc::c_int + bm1x;
-            let mut m1y: libc::c_int = dia4d[j_1 as usize][3 as libc::c_int as usize]
-                as libc::c_int + bm1y;
+            let mut m0x: libc::c_int =
+                dia4d[j_1 as usize][0 as libc::c_int as usize] as libc::c_int + bm0x;
+            let mut m0y: libc::c_int =
+                dia4d[j_1 as usize][1 as libc::c_int as usize] as libc::c_int + bm0y;
+            let mut m1x: libc::c_int =
+                dia4d[j_1 as usize][2 as libc::c_int as usize] as libc::c_int + bm1x;
+            let mut m1y: libc::c_int =
+                dia4d[j_1 as usize][3 as libc::c_int as usize] as libc::c_int + bm1y;
             if pass == 0
-                || visited[(m0x & 7 as libc::c_int)
-                    as usize][(m0y & 7 as libc::c_int)
-                    as usize][(m1x & 7 as libc::c_int) as usize] as libc::c_int & ((1 as libc::c_int) << (m1y & 7 as libc::c_int)) == 0
+                || visited[(m0x & 7 as libc::c_int) as usize][(m0y & 7 as libc::c_int) as usize]
+                    [(m1x & 7 as libc::c_int) as usize] as libc::c_int
+                    & ((1 as libc::c_int) << (m1y & 7 as libc::c_int))
+                    == 0
             {
                 let mut i0: libc::c_int = 4 as libc::c_int
                     + 3 as libc::c_int
@@ -8031,32 +7033,23 @@ unsafe extern "C" fn me_refine_bidir(
                     + 3 as libc::c_int
                         * dia4d[j_1 as usize][2 as libc::c_int as usize] as libc::c_int
                     + dia4d[j_1 as usize][3 as libc::c_int as usize] as libc::c_int;
-                visited[(m0x & 7 as libc::c_int)
-                    as usize][(m0y & 7 as libc::c_int)
-                    as usize][(m1x & 7 as libc::c_int)
-                    as usize] = (visited[(m0x & 7 as libc::c_int)
-                    as usize][(m0y & 7 as libc::c_int)
-                    as usize][(m1x & 7 as libc::c_int) as usize] as libc::c_int | ((1 as libc::c_int) << (m1y & 7 as libc::c_int))) as uint8_t;
-                ((*h).mc.avg[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                visited[(m0x & 7 as libc::c_int) as usize][(m0y & 7 as libc::c_int) as usize]
+                    [(m1x & 7 as libc::c_int) as usize] =
+                    (visited[(m0x & 7 as libc::c_int) as usize][(m0y & 7 as libc::c_int) as usize]
+                        [(m1x & 7 as libc::c_int) as usize] as libc::c_int
+                        | ((1 as libc::c_int) << (m1y & 7 as libc::c_int)))
+                        as uint8_t;
+                ((*h).mc.avg[i_pixel as usize]).expect("non-null function pointer")(
                     pix,
                     32 as libc::c_int as intptr_t,
-                    src[0 as libc::c_int
-                        as usize][0 as libc::c_int as usize][i0 as usize],
-                    stride[0 as libc::c_int
-                        as usize][0 as libc::c_int as usize][i0 as usize],
-                    src[0 as libc::c_int
-                        as usize][1 as libc::c_int as usize][i1 as usize],
-                    stride[0 as libc::c_int
-                        as usize][1 as libc::c_int as usize][i1 as usize],
+                    src[0 as libc::c_int as usize][0 as libc::c_int as usize][i0 as usize],
+                    stride[0 as libc::c_int as usize][0 as libc::c_int as usize][i0 as usize],
+                    src[0 as libc::c_int as usize][1 as libc::c_int as usize][i1 as usize],
+                    stride[0 as libc::c_int as usize][1 as libc::c_int as usize][i1 as usize],
                     i_weight,
                 );
                 let mut cost: libc::c_int = ((*h).pixf.mbcmp[i_pixel as usize])
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                    .expect("non-null function pointer")(
                     (*m0).p_fenc[0 as libc::c_int as usize],
                     16 as libc::c_int as intptr_t,
                     pix,
@@ -8068,81 +7061,59 @@ unsafe extern "C" fn me_refine_bidir(
                 if rd != 0 {
                     if cost < bcost + (bcost >> 4 as libc::c_int) {
                         bcost = if cost < bcost { cost } else { bcost };
-                        (*(cache0_mv as *mut x264_union32_t))
-                            .i = pack16to32_mask(m0x, m0y);
-                        (*(cache1_mv as *mut x264_union32_t))
-                            .i = pack16to32_mask(m1x, m1y);
+                        (*(cache0_mv as *mut x264_union32_t)).i = pack16to32_mask(m0x, m0y);
+                        (*(cache1_mv as *mut x264_union32_t)).i = pack16to32_mask(m1x, m1y);
                         if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
                             == CHROMA_444 as libc::c_int
                         {
-                            ((*h).mc.avg[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            ((*h).mc.avg[i_pixel as usize]).expect("non-null function pointer")(
                                 pixu,
                                 32 as libc::c_int as intptr_t,
-                                src[1 as libc::c_int
-                                    as usize][0 as libc::c_int as usize][i0 as usize],
-                                stride[1 as libc::c_int
-                                    as usize][0 as libc::c_int as usize][i0 as usize],
-                                src[1 as libc::c_int
-                                    as usize][1 as libc::c_int as usize][i1 as usize],
-                                stride[1 as libc::c_int
-                                    as usize][1 as libc::c_int as usize][i1 as usize],
+                                src[1 as libc::c_int as usize][0 as libc::c_int as usize]
+                                    [i0 as usize],
+                                stride[1 as libc::c_int as usize][0 as libc::c_int as usize]
+                                    [i0 as usize],
+                                src[1 as libc::c_int as usize][1 as libc::c_int as usize]
+                                    [i1 as usize],
+                                stride[1 as libc::c_int as usize][1 as libc::c_int as usize]
+                                    [i1 as usize],
                                 i_weight,
                             );
-                            ((*h).mc.avg[i_pixel as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            ((*h).mc.avg[i_pixel as usize]).expect("non-null function pointer")(
                                 pixv,
                                 32 as libc::c_int as intptr_t,
-                                src[2 as libc::c_int
-                                    as usize][0 as libc::c_int as usize][i0 as usize],
-                                stride[2 as libc::c_int
-                                    as usize][0 as libc::c_int as usize][i0 as usize],
-                                src[2 as libc::c_int
-                                    as usize][1 as libc::c_int as usize][i1 as usize],
-                                stride[2 as libc::c_int
-                                    as usize][1 as libc::c_int as usize][i1 as usize],
+                                src[2 as libc::c_int as usize][0 as libc::c_int as usize]
+                                    [i0 as usize],
+                                stride[2 as libc::c_int as usize][0 as libc::c_int as usize]
+                                    [i0 as usize],
+                                src[2 as libc::c_int as usize][1 as libc::c_int as usize]
+                                    [i1 as usize],
+                                stride[2 as libc::c_int as usize][1 as libc::c_int as usize]
+                                    [i1 as usize],
                                 i_weight,
                             );
                         } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                            ((*h).mc.avg[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            ((*h).mc.avg[chromapix as usize]).expect("non-null function pointer")(
                                 pixu,
                                 32 as libc::c_int as intptr_t,
-                                (pixu_buf[0 as libc::c_int as usize][i0 as usize])
-                                    .as_mut_ptr(),
+                                (pixu_buf[0 as libc::c_int as usize][i0 as usize]).as_mut_ptr(),
                                 8 as libc::c_int as intptr_t,
-                                (pixu_buf[1 as libc::c_int as usize][i1 as usize])
-                                    .as_mut_ptr(),
+                                (pixu_buf[1 as libc::c_int as usize][i1 as usize]).as_mut_ptr(),
                                 8 as libc::c_int as intptr_t,
                                 i_weight,
                             );
-                            ((*h).mc.avg[chromapix as usize])
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            ((*h).mc.avg[chromapix as usize]).expect("non-null function pointer")(
                                 pixv,
                                 32 as libc::c_int as intptr_t,
-                                (pixv_buf[0 as libc::c_int as usize][i0 as usize])
-                                    .as_mut_ptr(),
+                                (pixv_buf[0 as libc::c_int as usize][i0 as usize]).as_mut_ptr(),
                                 8 as libc::c_int as intptr_t,
-                                (pixv_buf[1 as libc::c_int as usize][i1 as usize])
-                                    .as_mut_ptr(),
+                                (pixv_buf[1 as libc::c_int as usize][i1 as usize]).as_mut_ptr(),
                                 8 as libc::c_int as intptr_t,
                                 i_weight,
                             );
                         }
-                        let mut costrd: uint64_t = x264_8_rd_cost_part(
-                            h,
-                            i_lambda2,
-                            i8 * 4 as libc::c_int,
-                            (*m0).i_pixel,
-                        );
+                        let mut costrd: uint64_t =
+                            x264_8_rd_cost_part(h, i_lambda2, i8 * 4 as libc::c_int, (*m0).i_pixel);
                         if costrd < bcostrd {
                             bcostrd = costrd;
                             bestj = j_1;
@@ -8165,11 +7136,13 @@ unsafe extern "C" fn me_refine_bidir(
         bm1y += dia4d[bestj as usize][3 as libc::c_int as usize] as libc::c_int;
         mc_list0 = (*(&*(*dia4d.as_ptr().offset(bestj as isize))
             .as_ptr()
-            .offset(0 as libc::c_int as isize) as *const int8_t as *mut x264_union16_t))
+            .offset(0 as libc::c_int as isize) as *const int8_t
+            as *mut x264_union16_t))
             .i as libc::c_int;
         mc_list1 = (*(&*(*dia4d.as_ptr().offset(bestj as isize))
             .as_ptr()
-            .offset(2 as libc::c_int as isize) as *const int8_t as *mut x264_union16_t))
+            .offset(2 as libc::c_int as isize) as *const int8_t
+            as *mut x264_union16_t))
             .i as libc::c_int;
         pass += 1;
         pass;
@@ -8185,15 +7158,13 @@ unsafe extern "C" fn me_refine_bidir(
             pack16to32_mask(bm0x, bm0y),
         );
         amvd = pack8to16(
-            (if abs(bm0x - (*m0).mvp[0 as libc::c_int as usize] as libc::c_int)
-                < 33 as libc::c_int
+            (if abs(bm0x - (*m0).mvp[0 as libc::c_int as usize] as libc::c_int) < 33 as libc::c_int
             {
                 abs(bm0x - (*m0).mvp[0 as libc::c_int as usize] as libc::c_int)
             } else {
                 33 as libc::c_int
             }) as uint32_t,
-            (if abs(bm0y - (*m0).mvp[1 as libc::c_int as usize] as libc::c_int)
-                < 33 as libc::c_int
+            (if abs(bm0y - (*m0).mvp[1 as libc::c_int as usize] as libc::c_int) < 33 as libc::c_int
             {
                 abs(bm0y - (*m0).mvp[1 as libc::c_int as usize] as libc::c_int)
             } else {
@@ -8219,15 +7190,13 @@ unsafe extern "C" fn me_refine_bidir(
             pack16to32_mask(bm1x, bm1y),
         );
         amvd = pack8to16(
-            (if abs(bm1x - (*m1).mvp[0 as libc::c_int as usize] as libc::c_int)
-                < 33 as libc::c_int
+            (if abs(bm1x - (*m1).mvp[0 as libc::c_int as usize] as libc::c_int) < 33 as libc::c_int
             {
                 abs(bm1x - (*m1).mvp[0 as libc::c_int as usize] as libc::c_int)
             } else {
                 33 as libc::c_int
             }) as uint32_t,
-            (if abs(bm1y - (*m1).mvp[1 as libc::c_int as usize] as libc::c_int)
-                < 33 as libc::c_int
+            (if abs(bm1y - (*m1).mvp[1 as libc::c_int as usize] as libc::c_int) < 33 as libc::c_int
             {
                 abs(bm1y - (*m1).mvp[1 as libc::c_int as usize] as libc::c_int)
             } else {
@@ -8287,26 +7256,20 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
     mut i4: libc::c_int,
     mut i_list: libc::c_int,
 ) {
-    let mut cache_mv: *mut int16_t = ((*h)
-        .mb
-        .cache
-        .mv[i_list as usize][x264_scan8[i4 as usize] as usize])
-        .as_mut_ptr();
+    let mut cache_mv: *mut int16_t =
+        ((*h).mb.cache.mv[i_list as usize][x264_scan8[i4 as usize] as usize]).as_mut_ptr();
     let mut p_cost_mvx: *const uint16_t = std::ptr::null::<uint16_t>();
     let mut p_cost_mvy: *const uint16_t = std::ptr::null::<uint16_t>();
     let bw: libc::c_int = x264_pixel_size[(*m).i_pixel as usize].w as libc::c_int;
     let bh: libc::c_int = x264_pixel_size[(*m).i_pixel as usize].h as libc::c_int;
     let i_pixel: libc::c_int = (*m).i_pixel;
     let mut chroma_v_shift: libc::c_int = (*h).mb.chroma_v_shift;
-    let mut mvy_offset: libc::c_int = if chroma_v_shift & (*h).mb.b_interlaced
-        & (*m).i_ref != 0
-    {
+    let mut mvy_offset: libc::c_int = if chroma_v_shift & (*h).mb.b_interlaced & (*m).i_ref != 0 {
         ((*h).mb.i_mb_y & 1 as libc::c_int) * 4 as libc::c_int - 2 as libc::c_int
     } else {
         0 as libc::c_int
     };
-    let mut bcost: uint64_t = ((1 as libc::c_ulonglong) << 60 as libc::c_int)
-        as uint64_t;
+    let mut bcost: uint64_t = ((1 as libc::c_ulonglong) << 60 as libc::c_int) as uint64_t;
     let mut bmx: libc::c_int = (*m).mv[0 as libc::c_int as usize] as libc::c_int;
     let mut bmy: libc::c_int = (*m).mv[1 as libc::c_int as usize] as libc::c_int;
     let mut omx: libc::c_int = 0;
@@ -8321,37 +7284,36 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
     let mut pix: *mut pixel = &mut *(*((*h).mb.pic.p_fdec)
         .as_mut_ptr()
         .offset(0 as libc::c_int as isize))
-        .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize) as *mut pixel;
+    .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize)
+        as *mut pixel;
     let mut pixu: *mut pixel = std::ptr::null_mut::<pixel>();
     let mut pixv: *mut pixel = std::ptr::null_mut::<pixel>();
     if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
         pixu = &mut *(*((*h).mb.pic.p_fdec)
             .as_mut_ptr()
             .offset(1 as libc::c_int as isize))
-            .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize)
+        .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize)
             as *mut pixel;
         pixv = &mut *(*((*h).mb.pic.p_fdec)
             .as_mut_ptr()
             .offset(2 as libc::c_int as isize))
-            .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize)
+        .offset(*block_idx_xy_fdec.as_ptr().offset(i4 as isize) as isize)
             as *mut pixel;
     } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
         pixu = &mut *(*((*h).mb.pic.p_fdec)
             .as_mut_ptr()
             .offset(1 as libc::c_int as isize))
-            .offset(
-                ((i8 >> 1 as libc::c_int)
-                    * ((8 as libc::c_int * 32 as libc::c_int) >> chroma_v_shift)
-                    + (i8 & 1 as libc::c_int) * 4 as libc::c_int) as isize,
-            ) as *mut pixel;
+        .offset(
+            ((i8 >> 1 as libc::c_int) * ((8 as libc::c_int * 32 as libc::c_int) >> chroma_v_shift)
+                + (i8 & 1 as libc::c_int) * 4 as libc::c_int) as isize,
+        ) as *mut pixel;
         pixv = &mut *(*((*h).mb.pic.p_fdec)
             .as_mut_ptr()
             .offset(2 as libc::c_int as isize))
-            .offset(
-                ((i8 >> 1 as libc::c_int)
-                    * ((8 as libc::c_int * 32 as libc::c_int) >> chroma_v_shift)
-                    + (i8 & 1 as libc::c_int) * 4 as libc::c_int) as isize,
-            ) as *mut pixel;
+        .offset(
+            ((i8 >> 1 as libc::c_int) * ((8 as libc::c_int * 32 as libc::c_int) >> chroma_v_shift)
+                + (i8 & 1 as libc::c_int) * 4 as libc::c_int) as isize,
+        ) as *mut pixel;
     } else {
         pixu = std::ptr::null_mut::<pixel>();
         pixv = std::ptr::null_mut::<pixel>();
@@ -8371,10 +7333,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
     p_cost_mvx = ((*m).p_cost_mv).offset(-(pmx as isize));
     p_cost_mvy = ((*m).p_cost_mv).offset(-(pmy as isize));
     if 0 as libc::c_int == 0 || !(bmx == pmx && bmy == pmy) {
-        ((*h).mc.mc_luma)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.mc_luma).expect("non-null function pointer")(
             pix,
             32 as libc::c_int as intptr_t,
             ((*m).p_fref).as_mut_ptr(),
@@ -8385,10 +7344,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             bh,
             &*((*m).weight).offset(0 as libc::c_int as isize),
         );
-        bsatd = ((*h).pixf.mbcmp[i_pixel as usize])
-            .expect(
-                "non-null function pointer",
-            )(
+        bsatd = ((*h).pixf.mbcmp[i_pixel as usize]).expect("non-null function pointer")(
             (*m).p_fenc[0 as libc::c_int as usize],
             16 as libc::c_int as intptr_t,
             pix,
@@ -8405,13 +7361,8 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         if 0 as libc::c_int <= bsatd + (bsatd >> 4 as libc::c_int) {
             let mut cost: uint64_t = 0;
             (*(cache_mv as *mut x264_union32_t)).i = pack16to32_mask(bmx, bmy);
-            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int
-            {
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixu,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
@@ -8422,10 +7373,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     bh,
                     &*((*m).weight).offset(1 as libc::c_int as isize),
                 );
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixv,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -8439,10 +7387,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0
                 && (*m).i_pixel <= PIXEL_8x8 as libc::c_int
             {
-                ((*h).mc.mc_chroma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_chroma).expect("non-null function pointer")(
                     pixu,
                     pixv,
                     32 as libc::c_int as intptr_t,
@@ -8453,14 +7398,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     bw >> 1 as libc::c_int,
                     bh >> chroma_v_shift,
                 );
-                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixu,
                         32 as libc::c_int as intptr_t,
                         pixu,
@@ -8469,14 +7410,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                         bh >> chroma_v_shift,
                     );
                 }
-                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixv,
                         32 as libc::c_int as intptr_t,
                         pixv,
@@ -8491,7 +7428,11 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                 bcost = cost;
                 bmx = bmx;
                 bmy = bmy;
-                dir = if 0 as libc::c_int != 0 { 0 as libc::c_int } else { dir };
+                dir = if 0 as libc::c_int != 0 {
+                    0 as libc::c_int
+                } else {
+                    dir
+                };
             }
         }
     } else {
@@ -8504,10 +7445,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         && pmy <= (*h).mb.mv_max_spel[1 as libc::c_int as usize]
     {
         if 0 as libc::c_int == 0 || !(pmx == pmx && pmy == pmy) {
-            ((*h).mc.mc_luma)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.mc_luma).expect("non-null function pointer")(
                 pix,
                 32 as libc::c_int as intptr_t,
                 ((*m).p_fref).as_mut_ptr(),
@@ -8518,10 +7456,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                 bh,
                 &*((*m).weight).offset(0 as libc::c_int as isize),
             );
-            satd = ((*h).pixf.mbcmp[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            satd = ((*h).pixf.mbcmp[i_pixel as usize]).expect("non-null function pointer")(
                 (*m).p_fenc[0 as libc::c_int as usize],
                 16 as libc::c_int as intptr_t,
                 pix,
@@ -8537,13 +7472,8 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         if satd <= bsatd + (bsatd >> 4 as libc::c_int) {
             let mut cost_0: uint64_t = 0;
             (*(cache_mv as *mut x264_union32_t)).i = pack16to32_mask(pmx, pmy);
-            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int
-            {
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixu,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
@@ -8554,10 +7484,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     bh,
                     &*((*m).weight).offset(1 as libc::c_int as isize),
                 );
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixv,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
@@ -8571,10 +7498,7 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0
                 && (*m).i_pixel <= PIXEL_8x8 as libc::c_int
             {
-                ((*h).mc.mc_chroma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_chroma).expect("non-null function pointer")(
                     pixu,
                     pixv,
                     32 as libc::c_int as intptr_t,
@@ -8585,14 +7509,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     bw >> 1 as libc::c_int,
                     bh >> chroma_v_shift,
                 );
-                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixu,
                         32 as libc::c_int as intptr_t,
                         pixu,
@@ -8601,14 +7521,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                         bh >> chroma_v_shift,
                     );
                 }
-                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixv,
                         32 as libc::c_int as intptr_t,
                         pixv,
@@ -8623,7 +7539,11 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                 bcost = cost_0;
                 bmx = pmx;
                 bmy = pmy;
-                dir = if 0 as libc::c_int != 0 { 0 as libc::c_int } else { dir };
+                dir = if 0 as libc::c_int != 0 {
+                    0 as libc::c_int
+                } else {
+                    dir
+                };
             }
         }
         if bmx == pmx && bmy == pmy {
@@ -8646,53 +7566,39 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
     while j < 6 as libc::c_int {
         if 1 as libc::c_int == 0
             || !(omx
-                + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
-                    as libc::c_int == pmx
+                + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize] as libc::c_int
+                == pmx
                 && omy
                     + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
-                        as libc::c_int == pmy)
+                        as libc::c_int
+                    == pmy)
         {
-            ((*h).mc.mc_luma)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.mc_luma).expect("non-null function pointer")(
                 pix,
                 32 as libc::c_int as intptr_t,
                 ((*m).p_fref).as_mut_ptr(),
                 (*m).i_stride[0 as libc::c_int as usize] as intptr_t,
-                omx
-                    + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
-                        as libc::c_int,
-                omy
-                    + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
-                        as libc::c_int,
+                omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int,
+                omy + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                    as libc::c_int,
                 bw,
                 bh,
                 &*((*m).weight).offset(0 as libc::c_int as isize),
             );
-            satd = ((*h).pixf.mbcmp[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            satd = ((*h).pixf.mbcmp[i_pixel as usize]).expect("non-null function pointer")(
                 (*m).p_fenc[0 as libc::c_int as usize],
                 16 as libc::c_int as intptr_t,
                 pix,
                 32 as libc::c_int as intptr_t,
-            )
-                + *p_cost_mvx
-                    .offset(
-                        (omx
-                            + hex2[(j + 1 as libc::c_int)
-                                as usize][0 as libc::c_int as usize] as libc::c_int)
-                            as isize,
-                    ) as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        (omy
-                            + hex2[(j + 1 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int)
-                            as isize,
-                    ) as libc::c_int;
+            ) + *p_cost_mvx.offset(
+                (omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int) as isize,
+            ) as libc::c_int
+                + *p_cost_mvy.offset(
+                    (omy + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int) as isize,
+                ) as libc::c_int;
             if satd < bsatd {
                 bsatd = satd;
             }
@@ -8701,50 +7607,35 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         }
         if satd <= bsatd + (bsatd >> 4 as libc::c_int) {
             let mut cost_1: uint64_t = 0;
-            (*(cache_mv as *mut x264_union32_t))
-                .i = pack16to32_mask(
-                omx
-                    + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
-                        as libc::c_int,
-                omy
-                    + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
-                        as libc::c_int,
+            (*(cache_mv as *mut x264_union32_t)).i = pack16to32_mask(
+                omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int,
+                omy + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                    as libc::c_int,
             );
-            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int
-            {
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixu,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                     (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + hex2[(j + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
-                    omy
-                        + hex2[(j + 1 as libc::c_int)
-                            as usize][1 as libc::c_int as usize] as libc::c_int,
+                    omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
+                    omy + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int,
                     bw,
                     bh,
                     &*((*m).weight).offset(1 as libc::c_int as isize),
                 );
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixv,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                     (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + hex2[(j + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
-                    omy
-                        + hex2[(j + 1 as libc::c_int)
-                            as usize][1 as libc::c_int as usize] as libc::c_int,
+                    omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
+                    omy + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int,
                     bw,
                     bh,
                     &*((*m).weight).offset(2 as libc::c_int as isize),
@@ -8752,34 +7643,27 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0
                 && (*m).i_pixel <= PIXEL_8x8 as libc::c_int
             {
-                ((*h).mc.mc_chroma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_chroma).expect("non-null function pointer")(
                     pixu,
                     pixv,
                     32 as libc::c_int as intptr_t,
                     (*m).p_fref[4 as libc::c_int as usize],
                     (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + hex2[(j + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
+                    omx + hex2[(j + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
                     (2 as libc::c_int
                         * (omy
-                            + hex2[(j + 1 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int
-                            + mvy_offset)) >> chroma_v_shift,
+                            + hex2[(j + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int
+                            + mvy_offset))
+                        >> chroma_v_shift,
                     bw >> 1 as libc::c_int,
                     bh >> chroma_v_shift,
                 );
-                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixu,
                         32 as libc::c_int as intptr_t,
                         pixu,
@@ -8788,14 +7672,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                         bh >> chroma_v_shift,
                     );
                 }
-                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixv,
                         32 as libc::c_int as intptr_t,
                         pixv,
@@ -8823,11 +7703,9 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
     if dir != -(2 as libc::c_int) {
         let mut i: libc::c_int = 1 as libc::c_int;
         while i < 10 as libc::c_int {
-            let odir: libc::c_int = mod6m1[(dir + 1 as libc::c_int) as usize]
-                as libc::c_int;
+            let odir: libc::c_int = mod6m1[(dir + 1 as libc::c_int) as usize] as libc::c_int;
             if bmy < (*h).mb.mv_min_spel[1 as libc::c_int as usize] + 3 as libc::c_int
-                || bmy
-                    > (*h).mb.mv_max_spel[1 as libc::c_int as usize] - 3 as libc::c_int
+                || bmy > (*h).mb.mv_max_spel[1 as libc::c_int as usize] - 3 as libc::c_int
             {
                 break;
             }
@@ -8838,51 +7716,36 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             while j_0 < 3 as libc::c_int {
                 if 1 as libc::c_int == 0
                     || !(omx
-                        + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                            as libc::c_int == pmx
+                        + hex2[(odir + j_0) as usize][0 as libc::c_int as usize] as libc::c_int
+                        == pmx
                         && omy
-                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                as libc::c_int == pmy)
+                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize] as libc::c_int
+                            == pmy)
                 {
-                    ((*h).mc.mc_luma)
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    ((*h).mc.mc_luma).expect("non-null function pointer")(
                         pix,
                         32 as libc::c_int as intptr_t,
                         ((*m).p_fref).as_mut_ptr(),
                         (*m).i_stride[0 as libc::c_int as usize] as intptr_t,
-                        omx
-                            + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                as libc::c_int,
-                        omy
-                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                as libc::c_int,
+                        omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize] as libc::c_int,
+                        omy + hex2[(odir + j_0) as usize][1 as libc::c_int as usize] as libc::c_int,
                         bw,
                         bh,
                         &*((*m).weight).offset(0 as libc::c_int as isize),
                     );
-                    satd = ((*h).pixf.mbcmp[i_pixel as usize])
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    satd = ((*h).pixf.mbcmp[i_pixel as usize]).expect("non-null function pointer")(
                         (*m).p_fenc[0 as libc::c_int as usize],
                         16 as libc::c_int as intptr_t,
                         pix,
                         32 as libc::c_int as intptr_t,
-                    )
-                        + *p_cost_mvx
-                            .offset(
-                                (omx
-                                    + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                        as libc::c_int) as isize,
-                            ) as libc::c_int
-                        + *p_cost_mvy
-                            .offset(
-                                (omy
-                                    + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                        as libc::c_int) as isize,
-                            ) as libc::c_int;
+                    ) + *p_cost_mvx.offset(
+                        (omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
+                            as libc::c_int) as isize,
+                    ) as libc::c_int
+                        + *p_cost_mvy.offset(
+                            (omy + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
+                                as libc::c_int) as isize,
+                        ) as libc::c_int;
                     if satd < bsatd {
                         bsatd = satd;
                     }
@@ -8891,54 +7754,33 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                 }
                 if satd <= bsatd + (bsatd >> 4 as libc::c_int) {
                     let mut cost_2: uint64_t = 0;
-                    (*(cache_mv as *mut x264_union32_t))
-                        .i = pack16to32_mask(
-                        omx
-                            + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                as libc::c_int,
-                        omy
-                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                as libc::c_int,
+                    (*(cache_mv as *mut x264_union32_t)).i = pack16to32_mask(
+                        omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize] as libc::c_int,
+                        omy + hex2[(odir + j_0) as usize][1 as libc::c_int as usize] as libc::c_int,
                     );
-                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                        == CHROMA_444 as libc::c_int
-                    {
-                        ((*h).mc.mc_luma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                    if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                        ((*h).mc.mc_luma).expect("non-null function pointer")(
                             pixu,
                             32 as libc::c_int as intptr_t,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(4 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                            omx
-                                + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                    as libc::c_int,
-                            omy
-                                + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                    as libc::c_int,
+                            omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
+                                as libc::c_int,
+                            omy + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
+                                as libc::c_int,
                             bw,
                             bh,
                             &*((*m).weight).offset(1 as libc::c_int as isize),
                         );
-                        ((*h).mc.mc_luma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_luma).expect("non-null function pointer")(
                             pixv,
                             32 as libc::c_int as intptr_t,
-                            &mut *((*m).p_fref)
-                                .as_mut_ptr()
-                                .offset(8 as libc::c_int as isize),
+                            &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                             (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
-                            omx
-                                + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                    as libc::c_int,
-                            omy
-                                + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                    as libc::c_int,
+                            omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
+                                as libc::c_int,
+                            omy + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
+                                as libc::c_int,
                             bw,
                             bh,
                             &*((*m).weight).offset(2 as libc::c_int as isize),
@@ -8946,34 +7788,28 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0
                         && (*m).i_pixel <= PIXEL_8x8 as libc::c_int
                     {
-                        ((*h).mc.mc_chroma)
-                            .expect(
-                                "non-null function pointer",
-                            )(
+                        ((*h).mc.mc_chroma).expect("non-null function pointer")(
                             pixu,
                             pixv,
                             32 as libc::c_int as intptr_t,
                             (*m).p_fref[4 as libc::c_int as usize],
                             (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                            omx
-                                + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                    as libc::c_int,
+                            omx + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
+                                as libc::c_int,
                             (2 as libc::c_int
                                 * (omy
                                     + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                        as libc::c_int + mvy_offset)) >> chroma_v_shift,
+                                        as libc::c_int
+                                    + mvy_offset))
+                                >> chroma_v_shift,
                             bw >> 1 as libc::c_int,
                             bh >> chroma_v_shift,
                         );
-                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(1 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pixu,
                                 32 as libc::c_int as intptr_t,
                                 pixu,
@@ -8982,15 +7818,11 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                                 bh >> chroma_v_shift,
                             );
                         }
-                        if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                            .is_null()
+                        if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null()
                         {
-                            (*((*((*m).weight).offset(2 as libc::c_int as isize))
-                                .weightfn)
+                            (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                                 .offset((bw >> 3 as libc::c_int) as isize))
-                                .expect(
-                                    "non-null function pointer",
-                                )(
+                            .expect("non-null function pointer")(
                                 pixv,
                                 32 as libc::c_int as intptr_t,
                                 pixv,
@@ -9004,11 +7836,9 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                     if cost_2 < bcost {
                         bcost = cost_2;
                         bmx = omx
-                            + hex2[(odir + j_0) as usize][0 as libc::c_int as usize]
-                                as libc::c_int;
+                            + hex2[(odir + j_0) as usize][0 as libc::c_int as usize] as libc::c_int;
                         bmy = omy
-                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize]
-                                as libc::c_int;
+                            + hex2[(odir + j_0) as usize][1 as libc::c_int as usize] as libc::c_int;
                         dir = if 1 as libc::c_int != 0 {
                             odir - 1 as libc::c_int + j_0
                         } else {
@@ -9033,52 +7863,39 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         if 1 as libc::c_int == 0
             || !(omx
                 + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
-                    as libc::c_int == pmx
+                    as libc::c_int
+                == pmx
                 && omy
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int == pmy)
+                    + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int
+                    == pmy)
         {
-            ((*h).mc.mc_luma)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.mc_luma).expect("non-null function pointer")(
                 pix,
                 32 as libc::c_int as intptr_t,
                 ((*m).p_fref).as_mut_ptr(),
                 (*m).i_stride[0 as libc::c_int as usize] as intptr_t,
-                omx
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int,
-                omy
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int,
+                omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int,
+                omy + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                    as libc::c_int,
                 bw,
                 bh,
                 &*((*m).weight).offset(0 as libc::c_int as isize),
             );
-            satd = ((*h).pixf.mbcmp[i_pixel as usize])
-                .expect(
-                    "non-null function pointer",
-                )(
+            satd = ((*h).pixf.mbcmp[i_pixel as usize]).expect("non-null function pointer")(
                 (*m).p_fenc[0 as libc::c_int as usize],
                 16 as libc::c_int as intptr_t,
                 pix,
                 32 as libc::c_int as intptr_t,
-            )
-                + *p_cost_mvx
-                    .offset(
-                        (omx
-                            + square1[(i_0 + 1 as libc::c_int)
-                                as usize][0 as libc::c_int as usize] as libc::c_int)
-                            as isize,
-                    ) as libc::c_int
-                + *p_cost_mvy
-                    .offset(
-                        (omy
-                            + square1[(i_0 + 1 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int)
-                            as isize,
-                    ) as libc::c_int;
+            ) + *p_cost_mvx.offset(
+                (omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int) as isize,
+            ) as libc::c_int
+                + *p_cost_mvy.offset(
+                    (omy + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int) as isize,
+                ) as libc::c_int;
             if satd < bsatd {
                 bsatd = satd;
             }
@@ -9087,50 +7904,35 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         }
         if satd <= bsatd + (bsatd >> 4 as libc::c_int) {
             let mut cost_3: uint64_t = 0;
-            (*(cache_mv as *mut x264_union32_t))
-                .i = pack16to32_mask(
-                omx
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int,
-                omy
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int,
+            (*(cache_mv as *mut x264_union32_t)).i = pack16to32_mask(
+                omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                    as libc::c_int,
+                omy + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                    as libc::c_int,
             );
-            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int
-            {
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixu,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(4 as libc::c_int as isize),
                     (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + square1[(i_0 + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
-                    omy
-                        + square1[(i_0 + 1 as libc::c_int)
-                            as usize][1 as libc::c_int as usize] as libc::c_int,
+                    omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
+                    omy + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int,
                     bw,
                     bh,
                     &*((*m).weight).offset(1 as libc::c_int as isize),
                 );
-                ((*h).mc.mc_luma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_luma).expect("non-null function pointer")(
                     pixv,
                     32 as libc::c_int as intptr_t,
                     &mut *((*m).p_fref).as_mut_ptr().offset(8 as libc::c_int as isize),
                     (*m).i_stride[2 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + square1[(i_0 + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
-                    omy
-                        + square1[(i_0 + 1 as libc::c_int)
-                            as usize][1 as libc::c_int as usize] as libc::c_int,
+                    omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
+                    omy + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int,
                     bw,
                     bh,
                     &*((*m).weight).offset(2 as libc::c_int as isize),
@@ -9138,34 +7940,27 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0
                 && (*m).i_pixel <= PIXEL_8x8 as libc::c_int
             {
-                ((*h).mc.mc_chroma)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*h).mc.mc_chroma).expect("non-null function pointer")(
                     pixu,
                     pixv,
                     32 as libc::c_int as intptr_t,
                     (*m).p_fref[4 as libc::c_int as usize],
                     (*m).i_stride[1 as libc::c_int as usize] as intptr_t,
-                    omx
-                        + square1[(i_0 + 1 as libc::c_int)
-                            as usize][0 as libc::c_int as usize] as libc::c_int,
+                    omx + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int,
                     (2 as libc::c_int
                         * (omy
-                            + square1[(i_0 + 1 as libc::c_int)
-                                as usize][1 as libc::c_int as usize] as libc::c_int
-                            + mvy_offset)) >> chroma_v_shift,
+                            + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                                as libc::c_int
+                            + mvy_offset))
+                        >> chroma_v_shift,
                     bw >> 1 as libc::c_int,
                     bh >> chroma_v_shift,
                 );
-                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(1 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixu,
                         32 as libc::c_int as intptr_t,
                         pixu,
@@ -9174,14 +7969,10 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
                         bh >> chroma_v_shift,
                     );
                 }
-                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
-                    .is_null()
-                {
+                if !((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn).is_null() {
                     (*((*((*m).weight).offset(2 as libc::c_int as isize)).weightfn)
                         .offset((bw >> 3 as libc::c_int) as isize))
-                        .expect(
-                            "non-null function pointer",
-                        )(
+                    .expect("non-null function pointer")(
                         pixv,
                         32 as libc::c_int as intptr_t,
                         pixv,
@@ -9195,12 +7986,16 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
             if cost_3 < bcost {
                 bcost = cost_3;
                 bmx = omx
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][0 as libc::c_int as usize] as libc::c_int;
+                    + square1[(i_0 + 1 as libc::c_int) as usize][0 as libc::c_int as usize]
+                        as libc::c_int;
                 bmy = omy
-                    + square1[(i_0 + 1 as libc::c_int)
-                        as usize][1 as libc::c_int as usize] as libc::c_int;
-                dir = if 0 as libc::c_int != 0 { 0 as libc::c_int } else { dir };
+                    + square1[(i_0 + 1 as libc::c_int) as usize][1 as libc::c_int as usize]
+                        as libc::c_int;
+                dir = if 0 as libc::c_int != 0 {
+                    0 as libc::c_int
+                } else {
+                    dir
+                };
             }
         }
         i_0 += 1;
@@ -9219,16 +8014,12 @@ pub unsafe extern "C" fn x264_8_me_refine_qpel_rd(
         pack16to32_mask(bmx, bmy),
     );
     amvd = pack8to16(
-        (if abs(bmx - (*m).mvp[0 as libc::c_int as usize] as libc::c_int)
-            < 66 as libc::c_int
-        {
+        (if abs(bmx - (*m).mvp[0 as libc::c_int as usize] as libc::c_int) < 66 as libc::c_int {
             abs(bmx - (*m).mvp[0 as libc::c_int as usize] as libc::c_int)
         } else {
             66 as libc::c_int
         }) as uint32_t,
-        (if abs(bmy - (*m).mvp[1 as libc::c_int as usize] as libc::c_int)
-            < 66 as libc::c_int
-        {
+        (if abs(bmy - (*m).mvp[1 as libc::c_int as usize] as libc::c_int) < 66 as libc::c_int {
             abs(bmy - (*m).mvp[1 as libc::c_int as usize] as libc::c_int)
         } else {
             66 as libc::c_int

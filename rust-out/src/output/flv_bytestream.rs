@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type _IO_wide_data;
@@ -15,11 +23,7 @@ extern "C" {
         _: libc::c_ulong,
         _: *mut FILE,
     ) -> libc::c_ulong;
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn strlen(_: *const libc::c_char) -> libc::c_ulong;
 }
@@ -129,10 +133,7 @@ pub unsafe extern "C" fn flv_put_be24(mut c: *mut flv_buffer, mut val: uint32_t)
     flv_put_byte(c, val as uint8_t);
 }
 #[no_mangle]
-pub unsafe extern "C" fn flv_put_tag(
-    mut c: *mut flv_buffer,
-    mut tag: *const libc::c_char,
-) {
+pub unsafe extern "C" fn flv_put_tag(mut c: *mut flv_buffer, mut tag: *const libc::c_char) {
     while *tag != 0 {
         let fresh0 = tag;
         tag = tag.offset(1);
@@ -140,26 +141,18 @@ pub unsafe extern "C" fn flv_put_tag(
     }
 }
 #[no_mangle]
-pub unsafe extern "C" fn flv_put_amf_string(
-    mut c: *mut flv_buffer,
-    mut str: *const libc::c_char,
-) {
+pub unsafe extern "C" fn flv_put_amf_string(mut c: *mut flv_buffer, mut str: *const libc::c_char) {
     let mut len: uint16_t = strlen(str) as uint16_t;
     flv_put_be16(c, len);
     flv_append_data(c, str as *mut uint8_t, len as libc::c_uint);
 }
 #[no_mangle]
-pub unsafe extern "C" fn flv_put_amf_double(
-    mut c: *mut flv_buffer,
-    mut d: libc::c_double,
-) {
+pub unsafe extern "C" fn flv_put_amf_double(mut c: *mut flv_buffer, mut d: libc::c_double) {
     flv_put_byte(c, AMF_DATA_TYPE_NUMBER as libc::c_int as uint8_t);
     flv_put_be64(c, flv_dbl2int(d));
 }
 #[no_mangle]
-pub unsafe extern "C" fn flv_create_writer(
-    mut filename: *const libc::c_char,
-) -> *mut flv_buffer {
+pub unsafe extern "C" fn flv_create_writer(mut filename: *const libc::c_char) -> *mut flv_buffer {
     let mut c: *mut flv_buffer = calloc(
         1 as libc::c_int as libc::c_ulong,
         ::core::mem::size_of::<flv_buffer>() as libc::c_ulong,

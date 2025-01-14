@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type _IO_wide_data;
@@ -16,18 +24,10 @@ extern "C" {
         _: libc::c_ulong,
         _: *mut FILE,
     ) -> libc::c_ulong;
-    fn fseeko(
-        __stream: *mut FILE,
-        __off: __off64_t,
-        __whence: libc::c_int,
-    ) -> libc::c_int;
+    fn fseeko(__stream: *mut FILE, __off: __off64_t, __whence: libc::c_int) -> libc::c_int;
     fn fileno(__stream: *mut FILE) -> libc::c_int;
     fn fstat(__fd: libc::c_int, __buf: *mut stat) -> libc::c_int;
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn strlen(_: *const libc::c_char) -> libc::c_ulong;
 }
@@ -166,16 +166,25 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
         st_size: 0,
         st_blksize: 0,
         st_blocks: 0,
-        st_atim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_mtim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_ctim: timespec { tv_sec: 0, tv_nsec: 0 },
+        st_atim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_mtim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_ctim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
         __glibc_reserved: [0; 3],
     };
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t == 0o100000 as libc::c_int as __mode_t)
+        as libc::c_int
 }
 unsafe extern "C" fn mk_create_context(
     mut w: *mut mk_writer,
@@ -237,10 +246,7 @@ unsafe extern "C" fn mk_append_context_data(
     (*c).d_cur = ns;
     0 as libc::c_int
 }
-unsafe extern "C" fn mk_write_id(
-    mut c: *mut mk_context,
-    mut id: libc::c_uint,
-) -> libc::c_int {
+unsafe extern "C" fn mk_write_id(mut c: *mut mk_context, mut id: libc::c_uint) -> libc::c_int {
     let mut c_id: [uint8_t; 4] = [
         (id >> 24 as libc::c_int) as uint8_t,
         (id >> 16 as libc::c_int) as uint8_t,
@@ -274,10 +280,7 @@ unsafe extern "C" fn mk_write_id(
         1 as libc::c_int as libc::c_uint,
     )
 }
-unsafe extern "C" fn mk_write_size(
-    mut c: *mut mk_context,
-    mut size: libc::c_uint,
-) -> libc::c_int {
+unsafe extern "C" fn mk_write_size(mut c: *mut mk_context, mut size: libc::c_uint) -> libc::c_int {
     let mut c_size: [uint8_t; 5] = [
         0x8 as libc::c_int as uint8_t,
         (size >> 24 as libc::c_int) as uint8_t,
@@ -286,9 +289,8 @@ unsafe extern "C" fn mk_write_size(
         size as uint8_t,
     ];
     if size < 0x7f as libc::c_int as libc::c_uint {
-        c_size[4 as libc::c_int
-            as usize] = (c_size[4 as libc::c_int as usize] as libc::c_int
-            | 0x80 as libc::c_int) as uint8_t;
+        c_size[4 as libc::c_int as usize] =
+            (c_size[4 as libc::c_int as usize] as libc::c_int | 0x80 as libc::c_int) as uint8_t;
         return mk_append_context_data(
             c,
             c_size.as_mut_ptr().offset(4 as libc::c_int as isize) as *const libc::c_void,
@@ -296,9 +298,8 @@ unsafe extern "C" fn mk_write_size(
         );
     }
     if size < 0x3fff as libc::c_int as libc::c_uint {
-        c_size[3 as libc::c_int
-            as usize] = (c_size[3 as libc::c_int as usize] as libc::c_int
-            | 0x40 as libc::c_int) as uint8_t;
+        c_size[3 as libc::c_int as usize] =
+            (c_size[3 as libc::c_int as usize] as libc::c_int | 0x40 as libc::c_int) as uint8_t;
         return mk_append_context_data(
             c,
             c_size.as_mut_ptr().offset(3 as libc::c_int as isize) as *const libc::c_void,
@@ -306,9 +307,8 @@ unsafe extern "C" fn mk_write_size(
         );
     }
     if size < 0x1fffff as libc::c_int as libc::c_uint {
-        c_size[2 as libc::c_int
-            as usize] = (c_size[2 as libc::c_int as usize] as libc::c_int
-            | 0x20 as libc::c_int) as uint8_t;
+        c_size[2 as libc::c_int as usize] =
+            (c_size[2 as libc::c_int as usize] as libc::c_int | 0x20 as libc::c_int) as uint8_t;
         return mk_append_context_data(
             c,
             c_size.as_mut_ptr().offset(2 as libc::c_int as isize) as *const libc::c_void,
@@ -316,9 +316,8 @@ unsafe extern "C" fn mk_write_size(
         );
     }
     if size < 0xfffffff as libc::c_int as libc::c_uint {
-        c_size[1 as libc::c_int
-            as usize] = (c_size[1 as libc::c_int as usize] as libc::c_int
-            | 0x10 as libc::c_int) as uint8_t;
+        c_size[1 as libc::c_int as usize] =
+            (c_size[1 as libc::c_int as usize] as libc::c_int | 0x10 as libc::c_int) as uint8_t;
         return mk_append_context_data(
             c,
             c_size.as_mut_ptr().offset(1 as libc::c_int as isize) as *const libc::c_void,
@@ -355,8 +354,7 @@ unsafe extern "C" fn mk_flush_context_data(mut c: *mut mk_context) -> libc::c_in
         return 0 as libc::c_int;
     }
     if !((*c).parent).is_null() {
-        if mk_append_context_data((*c).parent, (*c).data, (*c).d_cur) < 0 as libc::c_int
-        {
+        if mk_append_context_data((*c).parent, (*c).data, (*c).d_cur) < 0 as libc::c_int {
             return -(1 as libc::c_int);
         }
     } else if fwrite(
@@ -366,7 +364,7 @@ unsafe extern "C" fn mk_flush_context_data(mut c: *mut mk_context) -> libc::c_in
         (*(*c).owner).fp,
     ) != 1 as libc::c_int as libc::c_ulong
     {
-        return -(1 as libc::c_int)
+        return -(1 as libc::c_int);
     }
     (*c).d_cur = 0 as libc::c_int as libc::c_uint;
     0 as libc::c_int
@@ -429,8 +427,7 @@ unsafe extern "C" fn mk_write_string(
     if mk_write_size(c, len as libc::c_uint) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_append_context_data(c, str as *const libc::c_void, len as libc::c_uint)
-        < 0 as libc::c_int
+    if mk_append_context_data(c, str as *const libc::c_void, len as libc::c_uint) < 0 as libc::c_int
     {
         return -(1 as libc::c_int);
     }
@@ -476,9 +473,7 @@ unsafe extern "C" fn mk_write_uint(
         i = i.wrapping_add(1);
         i;
     }
-    if mk_write_size(c, (8 as libc::c_int as libc::c_uint).wrapping_sub(i))
-        < 0 as libc::c_int
-    {
+    if mk_write_size(c, (8 as libc::c_int as libc::c_uint).wrapping_sub(i)) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     if mk_append_context_data(
@@ -525,9 +520,7 @@ unsafe extern "C" fn mk_write_float(
     0 as libc::c_int
 }
 #[no_mangle]
-pub unsafe extern "C" fn mk_create_writer(
-    mut filename: *const libc::c_char,
-) -> *mut mk_writer {
+pub unsafe extern "C" fn mk_create_writer(mut filename: *const libc::c_char) -> *mut mk_writer {
     let mut w: *mut mk_writer = calloc(
         1 as libc::c_int as libc::c_ulong,
         ::core::mem::size_of::<mk_writer>() as libc::c_ulong,
@@ -535,8 +528,7 @@ pub unsafe extern "C" fn mk_create_writer(
     if w.is_null() {
         return std::ptr::null_mut::<mk_writer>();
     }
-    (*w)
-        .root = mk_create_context(
+    (*w).root = mk_create_context(
         w,
         std::ptr::null_mut::<mk_context>(),
         0 as libc::c_int as libc::c_uint,
@@ -671,9 +663,7 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if mk_write_string(c, 0x5741 as libc::c_int as libc::c_uint, writing_app)
-        < 0 as libc::c_int
-    {
+    if mk_write_string(c, 0x5741 as libc::c_int as libc::c_uint, writing_app) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     if mk_write_uint(
@@ -736,37 +726,36 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if mk_write_string(ti, 0x86 as libc::c_int as libc::c_uint, codec_id)
-        < 0 as libc::c_int
-    {
+    if mk_write_string(ti, 0x86 as libc::c_int as libc::c_uint, codec_id) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if codec_private_size != 0 && mk_write_bin(
+    if codec_private_size != 0
+        && mk_write_bin(
             ti,
             0x63a2 as libc::c_int as libc::c_uint,
             codec_private,
             codec_private_size,
-        ) < 0 as libc::c_int {
+        ) < 0 as libc::c_int
+    {
         return -(1 as libc::c_int);
     }
-    if default_frame_duration != 0 && mk_write_uint(
+    if default_frame_duration != 0
+        && mk_write_uint(
             ti,
             0x23e383 as libc::c_int as libc::c_uint,
             default_frame_duration as uint64_t,
-        ) < 0 as libc::c_int {
+        ) < 0 as libc::c_int
+    {
         return -(1 as libc::c_int);
     }
     v = mk_create_context(w, ti, 0xe0 as libc::c_int as libc::c_uint);
     if v.is_null() {
         return -(1 as libc::c_int);
     }
-    if mk_write_uint(v, 0xb0 as libc::c_int as libc::c_uint, width as uint64_t)
-        < 0 as libc::c_int
-    {
+    if mk_write_uint(v, 0xb0 as libc::c_int as libc::c_uint, width as uint64_t) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_write_uint(v, 0xba as libc::c_int as libc::c_uint, height as uint64_t)
-        < 0 as libc::c_int
+    if mk_write_uint(v, 0xba as libc::c_int as libc::c_uint, height as uint64_t) < 0 as libc::c_int
     {
         return -(1 as libc::c_int);
     }
@@ -778,21 +767,29 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if mk_write_uint(v, 0x54b0 as libc::c_int as libc::c_uint, d_width as uint64_t)
-        < 0 as libc::c_int
+    if mk_write_uint(
+        v,
+        0x54b0 as libc::c_int as libc::c_uint,
+        d_width as uint64_t,
+    ) < 0 as libc::c_int
     {
         return -(1 as libc::c_int);
     }
-    if mk_write_uint(v, 0x54ba as libc::c_int as libc::c_uint, d_height as uint64_t)
-        < 0 as libc::c_int
+    if mk_write_uint(
+        v,
+        0x54ba as libc::c_int as libc::c_uint,
+        d_height as uint64_t,
+    ) < 0 as libc::c_int
     {
         return -(1 as libc::c_int);
     }
-    if stereo_mode >= 0 as libc::c_int && mk_write_uint(
+    if stereo_mode >= 0 as libc::c_int
+        && mk_write_uint(
             v,
             0x53b8 as libc::c_int as libc::c_uint,
             stereo_mode as uint64_t,
-        ) < 0 as libc::c_int {
+        ) < 0 as libc::c_int
+    {
         return -(1 as libc::c_int);
     }
     if mk_close_context(v, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
@@ -831,17 +828,15 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
         return 0 as libc::c_int;
     }
     delta = (*w).frame_tc / (*w).timescale - (*w).cluster_tc_scaled;
-    if (delta as libc::c_longlong > 32767 as libc::c_longlong || (delta as libc::c_longlong) < -(32768 as libc::c_longlong)) && mk_close_cluster(w) < 0 as libc::c_int {
+    if (delta as libc::c_longlong > 32767 as libc::c_longlong
+        || (delta as libc::c_longlong) < -(32768 as libc::c_longlong))
+        && mk_close_cluster(w) < 0 as libc::c_int
+    {
         return -(1 as libc::c_int);
     }
     if ((*w).cluster).is_null() {
         (*w).cluster_tc_scaled = (*w).frame_tc / (*w).timescale;
-        (*w)
-            .cluster = mk_create_context(
-            w,
-            (*w).root,
-            0x1f43b675 as libc::c_int as libc::c_uint,
-        );
+        (*w).cluster = mk_create_context(w, (*w).root, 0x1f43b675 as libc::c_int as libc::c_uint);
         if ((*w).cluster).is_null() {
             return -(1 as libc::c_int);
         }
@@ -860,12 +855,13 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
     } else {
         0 as libc::c_int as libc::c_uint
     };
-    if mk_write_id((*w).cluster, 0xa3 as libc::c_int as libc::c_uint) < 0 as libc::c_int
-    {
+    if mk_write_id((*w).cluster, 0xa3 as libc::c_int as libc::c_uint) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_write_size((*w).cluster, fsize.wrapping_add(4 as libc::c_int as libc::c_uint))
-        < 0 as libc::c_int
+    if mk_write_size(
+        (*w).cluster,
+        fsize.wrapping_add(4 as libc::c_int as libc::c_uint),
+    ) < 0 as libc::c_int
     {
         return -(1 as libc::c_int);
     }
@@ -874,8 +870,9 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
     }
     c_delta_flags[0 as libc::c_int as usize] = (delta >> 8 as libc::c_int) as uint8_t;
     c_delta_flags[1 as libc::c_int as usize] = delta as uint8_t;
-    c_delta_flags[2 as libc::c_int
-        as usize] = ((((*w).keyframe as libc::c_int) << 7 as libc::c_int) | (*w).skippable as libc::c_int) as uint8_t;
+    c_delta_flags[2 as libc::c_int as usize] = ((((*w).keyframe as libc::c_int)
+        << 7 as libc::c_int)
+        | (*w).skippable as libc::c_int) as uint8_t;
     if mk_append_context_data(
         (*w).cluster,
         c_delta_flags.as_mut_ptr() as *const libc::c_void,
@@ -893,7 +890,9 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
         (*(*w).frame).d_cur = 0 as libc::c_int as libc::c_uint;
     }
     (*w).in_frame = 0 as libc::c_int as int8_t;
-    if (*(*w).cluster).d_cur > 1048576 as libc::c_int as libc::c_uint && mk_close_cluster(w) < 0 as libc::c_int {
+    if (*(*w).cluster).d_cur > 1048576 as libc::c_int as libc::c_uint
+        && mk_close_cluster(w) < 0 as libc::c_int
+    {
         return -(1 as libc::c_int);
     }
     0 as libc::c_int
@@ -936,8 +935,7 @@ pub unsafe extern "C" fn mk_add_frame_data(
         return -(1 as libc::c_int);
     }
     if ((*w).frame).is_null() {
-        (*w)
-            .frame = mk_create_context(
+        (*w).frame = mk_create_context(
             w,
             std::ptr::null_mut::<mk_context>(),
             0 as libc::c_int as libc::c_uint,
@@ -949,10 +947,7 @@ pub unsafe extern "C" fn mk_add_frame_data(
     mk_append_context_data((*w).frame, data, size)
 }
 #[no_mangle]
-pub unsafe extern "C" fn mk_close(
-    mut w: *mut mk_writer,
-    mut last_delta: int64_t,
-) -> libc::c_int {
+pub unsafe extern "C" fn mk_close(mut w: *mut mk_writer, mut last_delta: int64_t) -> libc::c_int {
     let mut ret: libc::c_int = 0 as libc::c_int;
     if mk_flush_frame(w) < 0 as libc::c_int || mk_close_cluster(w) < 0 as libc::c_int {
         ret = -(1 as libc::c_int);
@@ -969,7 +964,8 @@ pub unsafe extern "C" fn mk_close(
                 (*w).root,
                 (total_duration as libc::c_double / (*w).timescale as libc::c_double)
                     as libc::c_float,
-            ) < 0 as libc::c_int || mk_flush_context_data((*w).root) < 0 as libc::c_int
+            ) < 0 as libc::c_int
+            || mk_flush_context_data((*w).root) < 0 as libc::c_int
         {
             ret = -(1 as libc::c_int);
         }

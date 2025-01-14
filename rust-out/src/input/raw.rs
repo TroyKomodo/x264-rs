@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type _IO_wide_data;
@@ -14,20 +22,12 @@ extern "C" {
         _: libc::c_ulong,
         _: *mut FILE,
     ) -> libc::c_ulong;
-    fn fseeko(
-        __stream: *mut FILE,
-        __off: __off64_t,
-        __whence: libc::c_int,
-    ) -> libc::c_int;
+    fn fseeko(__stream: *mut FILE, __off: __off64_t, __whence: libc::c_int) -> libc::c_int;
     fn ftello(__stream: *mut FILE) -> __off64_t;
     fn fileno(__stream: *mut FILE) -> libc::c_int;
     fn fstat(__fd: libc::c_int, __buf: *mut stat) -> libc::c_int;
     fn strcasecmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
-    fn memset(
-        _: *mut libc::c_void,
-        _: libc::c_int,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn x264_cli_log(
         name: *const libc::c_char,
@@ -37,17 +37,9 @@ extern "C" {
     );
     fn x264_cli_mmap_close(h: *mut cli_mmap_t);
     fn x264_cli_pic_clean(pic: *mut cli_pic_t);
-    fn x264_cli_munmap(
-        h: *mut cli_mmap_t,
-        addr: *mut libc::c_void,
-        size: int64_t,
-    ) -> libc::c_int;
+    fn x264_cli_munmap(h: *mut cli_mmap_t, addr: *mut libc::c_void, size: int64_t) -> libc::c_int;
     fn x264_cli_csp_depth_factor(csp: libc::c_int) -> libc::c_int;
-    fn x264_cli_mmap(
-        h: *mut cli_mmap_t,
-        offset: int64_t,
-        size: int64_t,
-    ) -> *mut libc::c_void;
+    fn x264_cli_mmap(h: *mut cli_mmap_t, offset: int64_t, size: int64_t) -> *mut libc::c_void;
     fn x264_cli_pic_alloc(
         pic: *mut cli_pic_t,
         csp: libc::c_int,
@@ -211,7 +203,7 @@ pub struct cli_pic_t {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct cli_input_t {
-    pub open_file: Option::<
+    pub open_file: Option<
         unsafe extern "C" fn(
             *mut libc::c_char,
             *mut hnd_t,
@@ -219,7 +211,7 @@ pub struct cli_input_t {
             *mut cli_input_opt_t,
         ) -> libc::c_int,
     >,
-    pub picture_alloc: Option::<
+    pub picture_alloc: Option<
         unsafe extern "C" fn(
             *mut cli_pic_t,
             hnd_t,
@@ -228,14 +220,10 @@ pub struct cli_input_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub read_frame: Option::<
-        unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int,
-    >,
-    pub release_frame: Option::<
-        unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int,
-    >,
-    pub picture_clean: Option::<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()>,
-    pub close_file: Option::<unsafe extern "C" fn(hnd_t) -> libc::c_int>,
+    pub read_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int>,
+    pub release_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int>,
+    pub picture_clean: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()>,
+    pub close_file: Option<unsafe extern "C" fn(hnd_t) -> libc::c_int>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -279,16 +267,25 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
         st_size: 0,
         st_blksize: 0,
         st_blocks: 0,
-        st_atim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_mtim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_ctim: timespec { tv_sec: 0, tv_nsec: 0 },
+        st_atim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_mtim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_ctim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
         __glibc_reserved: [0; 3],
     };
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t == 0o100000 as libc::c_int as __mode_t)
+        as libc::c_int
 }
 unsafe extern "C" fn open_file(
     mut psz_filename: *mut libc::c_char,
@@ -306,7 +303,8 @@ unsafe extern "C" fn open_file(
     if ((*opt).resolution).is_null() {
         let mut p: *mut libc::c_char = psz_filename;
         while *p != 0 {
-            if *p as libc::c_int >= '0' as i32 && *p as libc::c_int <= '9' as i32
+            if *p as libc::c_int >= '0' as i32
+                && *p as libc::c_int <= '9' as i32
                 && sscanf(
                     p,
                     b"%dx%d\0" as *const u8 as *const libc::c_char,
@@ -388,14 +386,8 @@ unsafe extern "C" fn open_file(
     let mut csp: *const x264_cli_csp_t = x264_cli_get_csp((*info).csp);
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*csp).planes {
-        (*h)
-            .plane_size[i
-            as usize] = x264_cli_pic_plane_size(
-            (*info).csp,
-            (*info).width,
-            (*info).height,
-            i,
-        );
+        (*h).plane_size[i as usize] =
+            x264_cli_pic_plane_size((*info).csp, (*info).width, (*info).height, i);
         (*h).frame_size += (*h).plane_size[i as usize];
         (*h).plane_size[i as usize] /= x264_cli_csp_depth_factor((*info).csp) as int64_t;
         i += 1;
@@ -415,9 +407,7 @@ unsafe extern "C" fn open_file(
             return -(1 as libc::c_int);
         }
         if (*h).bit_depth & 7 as libc::c_int == 0 {
-            (*h)
-                .use_mmap = (x264_cli_mmap_init(&mut (*h).mmap, (*h).fh) == 0)
-                as libc::c_int;
+            (*h).use_mmap = (x264_cli_mmap_init(&mut (*h).mmap, (*h).fh) == 0) as libc::c_int;
         }
     }
     *p_handle = h as hnd_t;
@@ -433,13 +423,10 @@ unsafe extern "C" fn read_frame_internal(
     while i < (*pic).img.planes {
         if (*h).use_mmap != 0 {
             if i != 0 {
-                (*pic)
-                    .img
-                    .plane[i
-                    as usize] = ((*pic).img.plane[(i - 1 as libc::c_int) as usize])
+                (*pic).img.plane[i as usize] = ((*pic).img.plane[(i - 1 as libc::c_int) as usize])
                     .offset(
-                        (pixel_depth as int64_t
-                            * (*h).plane_size[(i - 1 as libc::c_int) as usize]) as isize,
+                        (pixel_depth as int64_t * (*h).plane_size[(i - 1 as libc::c_int) as usize])
+                            as isize,
                     );
             }
         } else if fread(
@@ -449,7 +436,7 @@ unsafe extern "C" fn read_frame_internal(
             (*h).fh,
         ) != (*h).plane_size[i as usize] as uint64_t
         {
-            return -(1 as libc::c_int)
+            return -(1 as libc::c_int);
         }
         if bit_depth_uc != 0 {
             let mut plane: *mut uint16_t = (*pic).img.plane[i as usize] as *mut uint16_t;
@@ -457,11 +444,8 @@ unsafe extern "C" fn read_frame_internal(
             let mut lshift: libc::c_int = 16 as libc::c_int - (*h).bit_depth;
             let mut j: int64_t = 0 as libc::c_int as int64_t;
             while j < pixel_count {
-                *plane
-                    .offset(
-                        j as isize,
-                    ) = ((*plane.offset(j as isize) as libc::c_int) << lshift)
-                    as uint16_t;
+                *plane.offset(j as isize) =
+                    ((*plane.offset(j as isize) as libc::c_int) << lshift) as uint16_t;
                 j += 1;
                 j;
             }
@@ -478,10 +462,7 @@ unsafe extern "C" fn read_frame(
 ) -> libc::c_int {
     let mut h: *mut raw_hnd_t = handle as *mut raw_hnd_t;
     if (*h).use_mmap != 0 {
-        (*pic)
-            .img
-            .plane[0 as libc::c_int
-            as usize] = x264_cli_mmap(
+        (*pic).img.plane[0 as libc::c_int as usize] = x264_cli_mmap(
             &mut (*h).mmap,
             i_frame as int64_t * (*h).frame_size,
             (*h).frame_size,
@@ -491,7 +472,11 @@ unsafe extern "C" fn read_frame(
         }
     } else if i_frame > (*h).next_frame {
         if x264_is_regular_file((*h).fh) != 0 {
-            fseeko((*h).fh, i_frame as int64_t * (*h).frame_size, 0 as libc::c_int);
+            fseeko(
+                (*h).fh,
+                i_frame as int64_t * (*h).frame_size,
+                0 as libc::c_int,
+            );
         } else {
             while i_frame > (*h).next_frame {
                 if read_frame_internal(pic, h, 0 as libc::c_int) != 0 {
@@ -508,10 +493,7 @@ unsafe extern "C" fn read_frame(
     (*h).next_frame = i_frame + 1 as libc::c_int;
     0 as libc::c_int
 }
-unsafe extern "C" fn release_frame(
-    mut pic: *mut cli_pic_t,
-    mut handle: hnd_t,
-) -> libc::c_int {
+unsafe extern "C" fn release_frame(mut pic: *mut cli_pic_t, mut handle: hnd_t) -> libc::c_int {
     let mut h: *mut raw_hnd_t = handle as *mut raw_hnd_t;
     if (*h).use_mmap != 0 {
         return x264_cli_munmap(
@@ -551,7 +533,7 @@ unsafe extern "C" fn picture_alloc(
                 ) -> libc::c_int,
         )
     }
-        .expect("non-null function pointer")(pic, csp, width, height)
+    .expect("non-null function pointer")(pic, csp, width, height)
 }
 unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
     let mut h: *mut raw_hnd_t = handle as *mut raw_hnd_t;
@@ -580,7 +562,6 @@ unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
 #[no_mangle]
 pub static mut raw_input: cli_input_t = unsafe {
     {
-        
         cli_input_t {
             open_file: Some(
                 open_file
@@ -603,19 +584,12 @@ pub static mut raw_input: cli_input_t = unsafe {
             ),
             read_frame: Some(
                 read_frame
-                    as unsafe extern "C" fn(
-                        *mut cli_pic_t,
-                        hnd_t,
-                        libc::c_int,
-                    ) -> libc::c_int,
+                    as unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int,
             ),
             release_frame: Some(
-                release_frame
-                    as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int,
+                release_frame as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int,
             ),
-            picture_clean: Some(
-                picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> (),
-            ),
+            picture_clean: Some(picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()),
             close_file: Some(close_file as unsafe extern "C" fn(hnd_t) -> libc::c_int),
         }
     }

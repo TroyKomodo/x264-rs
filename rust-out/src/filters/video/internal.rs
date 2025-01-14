@@ -1,10 +1,14 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 extern "C" {
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn x264_cli_log(
         name: *const libc::c_char,
         i_level: libc::c_int,
@@ -62,10 +66,14 @@ pub unsafe extern "C" fn x264_cli_plane_copy(
         if fresh0 == 0 {
             break;
         }
-        memcpy(dst as *mut libc::c_void, src as *const libc::c_void, w as libc::c_ulong);
+        memcpy(
+            dst as *mut libc::c_void,
+            src as *const libc::c_void,
+            w as libc::c_ulong,
+        );
         dst = dst.offset(i_dst as isize);
         src = src.offset(i_src as isize);
-    };
+    }
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_copy(
@@ -82,7 +90,8 @@ pub unsafe extern "C" fn x264_cli_pic_copy(
         );
         return -(1 as libc::c_int);
     }
-    if (*in_0).img.csp != (*out).img.csp || (*in_0).img.height != (*out).img.height
+    if (*in_0).img.csp != (*out).img.csp
+        || (*in_0).img.height != (*out).img.height
         || (*in_0).img.width != (*out).img.width
     {
         x264_cli_log(

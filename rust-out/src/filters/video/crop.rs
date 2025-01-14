@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type x264_t;
@@ -110,7 +118,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -152,10 +160,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -316,8 +323,8 @@ pub struct x264_cli_csp_t {
 #[repr(C)]
 pub struct cli_vid_filter_t {
     pub name: *const libc::c_char,
-    pub help: Option::<unsafe extern "C" fn(libc::c_int) -> ()>,
-    pub init: Option::<
+    pub help: Option<unsafe extern "C" fn(libc::c_int) -> ()>,
+    pub init: Option<
         unsafe extern "C" fn(
             *mut hnd_t,
             *mut cli_vid_filter_t,
@@ -326,13 +333,10 @@ pub struct cli_vid_filter_t {
             *mut libc::c_char,
         ) -> libc::c_int,
     >,
-    pub get_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub release_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub free: Option::<unsafe extern "C" fn(hnd_t) -> ()>,
+    pub get_frame: Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub release_frame:
+        Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub free: Option<unsafe extern "C" fn(hnd_t) -> ()>,
     pub next: *mut cli_vid_filter_t,
 }
 #[derive(Copy, Clone)]
@@ -361,10 +365,7 @@ unsafe extern "C" fn handle_opts(
 ) -> libc::c_int {
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < 4 as libc::c_int {
-        let mut opt: *mut libc::c_char = x264_get_option(
-            *optlist.offset(i as isize),
-            opts,
-        );
+        let mut opt: *mut libc::c_char = x264_get_option(*optlist.offset(i as isize), opts);
         if opt.is_null() {
             x264_cli_log(
                 b"crop\0" as *const u8 as *const libc::c_char,
@@ -379,8 +380,7 @@ unsafe extern "C" fn handle_opts(
             x264_cli_log(
                 b"crop\0" as *const u8 as *const libc::c_char,
                 0 as libc::c_int,
-                b"%s crop value `%s' is less than 0\n\0" as *const u8
-                    as *const libc::c_char,
+                b"%s crop value `%s' is less than 0\n\0" as *const u8 as *const libc::c_char,
                 *optlist.offset(i as isize),
                 opt,
             );
@@ -439,10 +439,7 @@ unsafe extern "C" fn init(
         b"bottom\0" as *const u8 as *const libc::c_char,
         0 as *const libc::c_char,
     ];
-    let mut opts: *mut *mut libc::c_char = x264_split_options(
-        opt_string,
-        optlist.as_ptr(),
-    );
+    let mut opts: *mut *mut libc::c_char = x264_split_options(opt_string, optlist.as_ptr());
     if opts.is_null() {
         return -(1 as libc::c_int);
     }
@@ -451,13 +448,10 @@ unsafe extern "C" fn init(
     if err != 0 {
         return -(1 as libc::c_int);
     }
-    (*h)
-        .dims[2 as libc::c_int
-        as usize] = (*info).width - (*h).dims[0 as libc::c_int as usize]
-        - (*h).dims[2 as libc::c_int as usize];
-    (*h)
-        .dims[3 as libc::c_int
-        as usize] = (*info).height - (*h).dims[1 as libc::c_int as usize]
+    (*h).dims[2 as libc::c_int as usize] =
+        (*info).width - (*h).dims[0 as libc::c_int as usize] - (*h).dims[2 as libc::c_int as usize];
+    (*h).dims[3 as libc::c_int as usize] = (*info).height
+        - (*h).dims[1 as libc::c_int as usize]
         - (*h).dims[3 as libc::c_int as usize];
     if (*h).dims[2 as libc::c_int as usize] <= 0 as libc::c_int
         || (*h).dims[3 as libc::c_int as usize] <= 0 as libc::c_int
@@ -499,8 +493,11 @@ unsafe extern "C" fn get_frame(
     mut frame: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut crop_hnd_t = handle as *mut crop_hnd_t;
-    if ((*h).prev_filter.get_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, output, frame) != 0
+    if ((*h).prev_filter.get_frame).expect("non-null function pointer")(
+        (*h).prev_hnd,
+        output,
+        frame,
+    ) != 0
     {
         return -(1 as libc::c_int);
     }
@@ -509,17 +506,15 @@ unsafe extern "C" fn get_frame(
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*output).img.planes {
         let mut offset: intptr_t = (((*output).img.stride[i as usize]
-            * (*h).dims[1 as libc::c_int as usize]) as libc::c_float
+            * (*h).dims[1 as libc::c_int as usize])
+            as libc::c_float
             * (*(*h).csp).height[i as usize]) as intptr_t;
         offset = (offset as libc::c_float
             + (*h).dims[0 as libc::c_int as usize] as libc::c_float
                 * (*(*h).csp).width[i as usize]
                 * x264_cli_csp_depth_factor((*output).img.csp) as libc::c_float)
             as intptr_t;
-        (*output)
-            .img
-            .plane[i
-            as usize] = ((*output).img.plane[i as usize]).offset(offset as isize);
+        (*output).img.plane[i as usize] = ((*output).img.plane[i as usize]).offset(offset as isize);
         i += 1;
         i;
     }
@@ -531,8 +526,7 @@ unsafe extern "C" fn release_frame(
     mut frame: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut crop_hnd_t = handle as *mut crop_hnd_t;
-    ((*h).prev_filter.release_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, pic, frame)
+    ((*h).prev_filter.release_frame).expect("non-null function pointer")((*h).prev_hnd, pic, frame)
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut crop_hnd_t = handle as *mut crop_hnd_t;
@@ -542,35 +536,25 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut crop_filter: cli_vid_filter_t = unsafe {
     {
-        
         cli_vid_filter_t {
             name: b"crop\0" as *const u8 as *const libc::c_char,
             help: Some(help as unsafe extern "C" fn(libc::c_int) -> ()),
             init: Some(
-                init
-                    as unsafe extern "C" fn(
-                        *mut hnd_t,
-                        *mut cli_vid_filter_t,
-                        *mut video_info_t,
-                        *mut x264_param_t,
-                        *mut libc::c_char,
-                    ) -> libc::c_int,
+                init as unsafe extern "C" fn(
+                    *mut hnd_t,
+                    *mut cli_vid_filter_t,
+                    *mut video_info_t,
+                    *mut x264_param_t,
+                    *mut libc::c_char,
+                ) -> libc::c_int,
             ),
             get_frame: Some(
                 get_frame
-                    as unsafe extern "C" fn(
-                        hnd_t,
-                        *mut cli_pic_t,
-                        libc::c_int,
-                    ) -> libc::c_int,
+                    as unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
             ),
             release_frame: Some(
                 release_frame
-                    as unsafe extern "C" fn(
-                        hnd_t,
-                        *mut cli_pic_t,
-                        libc::c_int,
-                    ) -> libc::c_int,
+                    as unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,

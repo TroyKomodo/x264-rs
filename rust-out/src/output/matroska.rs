@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type x264_t;
@@ -6,11 +14,7 @@ extern "C" {
     fn malloc(_: libc::c_ulong) -> *mut libc::c_void;
     fn calloc(_: libc::c_ulong, _: libc::c_ulong) -> *mut libc::c_void;
     fn free(_: *mut libc::c_void);
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn mk_create_writer(filename: *const libc::c_char) -> *mut mk_writer;
     fn mk_write_header(
         w: *mut mk_writer,
@@ -126,7 +130,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -168,10 +172,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -300,7 +303,7 @@ pub struct x264_sei_payload_t {
 pub struct x264_sei_t {
     pub num_payloads: libc::c_int,
     pub payloads: *mut x264_sei_payload_t,
-    pub sei_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub sei_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -314,9 +317,9 @@ pub struct x264_image_t {
 #[repr(C)]
 pub struct x264_image_properties_t {
     pub quant_offsets: *mut libc::c_float,
-    pub quant_offsets_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub quant_offsets_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub f_ssim: libc::c_double,
     pub f_psnr_avg: libc::c_double,
     pub f_psnr: [libc::c_double; 3],
@@ -347,30 +350,15 @@ pub struct cli_output_opt_t {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct cli_output_t {
-    pub open_file: Option::<
-        unsafe extern "C" fn(
-            *mut libc::c_char,
-            *mut hnd_t,
-            *mut cli_output_opt_t,
-        ) -> libc::c_int,
+    pub open_file: Option<
+        unsafe extern "C" fn(*mut libc::c_char, *mut hnd_t, *mut cli_output_opt_t) -> libc::c_int,
     >,
-    pub set_param: Option::<
-        unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int,
+    pub set_param: Option<unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int>,
+    pub write_headers: Option<unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int>,
+    pub write_frame: Option<
+        unsafe extern "C" fn(hnd_t, *mut uint8_t, libc::c_int, *mut x264_picture_t) -> libc::c_int,
     >,
-    pub write_headers: Option::<
-        unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int,
-    >,
-    pub write_frame: Option::<
-        unsafe extern "C" fn(
-            hnd_t,
-            *mut uint8_t,
-            libc::c_int,
-            *mut x264_picture_t,
-        ) -> libc::c_int,
-    >,
-    pub close_file: Option::<
-        unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
-    >,
+    pub close_file: Option<unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -435,18 +423,14 @@ static mut stereo_h_div: [uint8_t; 7] = [
     1 as libc::c_int as uint8_t,
     1 as libc::c_int as uint8_t,
 ];
-unsafe extern "C" fn set_param(
-    mut handle: hnd_t,
-    mut p_param: *mut x264_param_t,
-) -> libc::c_int {
+unsafe extern "C" fn set_param(mut handle: hnd_t, mut p_param: *mut x264_param_t) -> libc::c_int {
     let mut p_mkv: *mut mkv_hnd_t = handle as *mut mkv_hnd_t;
     let mut dw: int64_t = 0;
     let mut dh: int64_t = 0;
-    if (*p_param).i_fps_num > 0 as libc::c_int as uint32_t && (*p_param).b_vfr_input == 0
-    {
-        (*p_mkv)
-            .frame_duration = (*p_param).i_fps_den as int64_t
-            * 1000000000 as libc::c_int as int64_t / (*p_param).i_fps_num as int64_t;
+    if (*p_param).i_fps_num > 0 as libc::c_int as uint32_t && (*p_param).b_vfr_input == 0 {
+        (*p_mkv).frame_duration = (*p_param).i_fps_den as int64_t
+            * 1000000000 as libc::c_int as int64_t
+            / (*p_param).i_fps_num as int64_t;
     } else {
         (*p_mkv).frame_duration = 0 as libc::c_int as int64_t;
     }
@@ -459,21 +443,20 @@ unsafe extern "C" fn set_param(
     if (*p_param).i_frame_packing >= 0 as libc::c_int
         && (*p_param).i_frame_packing < 7 as libc::c_int
     {
-        (*p_mkv)
-            .stereo_mode = stereo_modes[(*p_param).i_frame_packing as usize]
-            as libc::c_int;
+        (*p_mkv).stereo_mode = stereo_modes[(*p_param).i_frame_packing as usize] as libc::c_int;
         dw /= stereo_w_div[(*p_param).i_frame_packing as usize] as int64_t;
         dh /= stereo_h_div[(*p_param).i_frame_packing as usize] as int64_t;
     }
-    if (*p_param).vui.i_sar_width != 0 && (*p_param).vui.i_sar_height != 0
+    if (*p_param).vui.i_sar_width != 0
+        && (*p_param).vui.i_sar_height != 0
         && (*p_param).vui.i_sar_width != (*p_param).vui.i_sar_height
     {
         if (*p_param).vui.i_sar_width > (*p_param).vui.i_sar_height {
-            dw = dw * (*p_param).vui.i_sar_width as int64_t
-                / (*p_param).vui.i_sar_height as int64_t;
+            dw =
+                dw * (*p_param).vui.i_sar_width as int64_t / (*p_param).vui.i_sar_height as int64_t;
         } else {
-            dh = dh * (*p_param).vui.i_sar_height as int64_t
-                / (*p_param).vui.i_sar_width as int64_t;
+            dh =
+                dh * (*p_param).vui.i_sar_height as int64_t / (*p_param).vui.i_sar_width as int64_t;
         }
     }
     (*p_mkv).d_width = dw as libc::c_int;
@@ -482,31 +465,35 @@ unsafe extern "C" fn set_param(
     (*p_mkv).i_timebase_den = (*p_param).i_timebase_den;
     0 as libc::c_int
 }
-unsafe extern "C" fn write_headers(
-    mut handle: hnd_t,
-    mut p_nal: *mut x264_nal_t,
-) -> libc::c_int {
+unsafe extern "C" fn write_headers(mut handle: hnd_t, mut p_nal: *mut x264_nal_t) -> libc::c_int {
     let mut p_mkv: *mut mkv_hnd_t = handle as *mut mkv_hnd_t;
-    let mut sps_size: libc::c_int = (*p_nal.offset(0 as libc::c_int as isize)).i_payload
-        - 4 as libc::c_int;
-    let mut pps_size: libc::c_int = (*p_nal.offset(1 as libc::c_int as isize)).i_payload
-        - 4 as libc::c_int;
+    let mut sps_size: libc::c_int =
+        (*p_nal.offset(0 as libc::c_int as isize)).i_payload - 4 as libc::c_int;
+    let mut pps_size: libc::c_int =
+        (*p_nal.offset(1 as libc::c_int as isize)).i_payload - 4 as libc::c_int;
     let mut sei_size: libc::c_int = (*p_nal.offset(2 as libc::c_int as isize)).i_payload;
-    let mut sps: *mut uint8_t = ((*p_nal.offset(0 as libc::c_int as isize)).p_payload)
-        .offset(4 as libc::c_int as isize);
-    let mut pps: *mut uint8_t = ((*p_nal.offset(1 as libc::c_int as isize)).p_payload)
-        .offset(4 as libc::c_int as isize);
+    let mut sps: *mut uint8_t =
+        ((*p_nal.offset(0 as libc::c_int as isize)).p_payload).offset(4 as libc::c_int as isize);
+    let mut pps: *mut uint8_t =
+        ((*p_nal.offset(1 as libc::c_int as isize)).p_payload).offset(4 as libc::c_int as isize);
     let mut sei: *mut uint8_t = (*p_nal.offset(2 as libc::c_int as isize)).p_payload;
     let mut ret: libc::c_int = 0;
     let mut avcC: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     let mut avcC_len: libc::c_int = 0;
-    if (*p_mkv).width == 0 || (*p_mkv).height == 0 || (*p_mkv).d_width == 0
+    if (*p_mkv).width == 0
+        || (*p_mkv).height == 0
+        || (*p_mkv).d_width == 0
         || (*p_mkv).d_height == 0
     {
         return -(1 as libc::c_int);
     }
-    avcC_len = 5 as libc::c_int + 1 as libc::c_int + 2 as libc::c_int + sps_size
-        + 1 as libc::c_int + 2 as libc::c_int + pps_size;
+    avcC_len = 5 as libc::c_int
+        + 1 as libc::c_int
+        + 2 as libc::c_int
+        + sps_size
+        + 1 as libc::c_int
+        + 2 as libc::c_int
+        + pps_size;
     avcC = malloc(avcC_len as libc::c_ulong) as *mut uint8_t;
     if avcC.is_null() {
         return -(1 as libc::c_int);
@@ -525,14 +512,12 @@ unsafe extern "C" fn write_headers(
         sps_size as libc::c_ulong,
     );
     *avcC.offset((8 as libc::c_int + sps_size) as isize) = 1 as libc::c_int as uint8_t;
-    *avcC
-        .offset(
-            (9 as libc::c_int + sps_size) as isize,
-        ) = (pps_size >> 8 as libc::c_int) as uint8_t;
+    *avcC.offset((9 as libc::c_int + sps_size) as isize) =
+        (pps_size >> 8 as libc::c_int) as uint8_t;
     *avcC.offset((10 as libc::c_int + sps_size) as isize) = pps_size as uint8_t;
     memcpy(
-        avcC.offset(11 as libc::c_int as isize).offset(sps_size as isize)
-            as *mut libc::c_void,
+        avcC.offset(11 as libc::c_int as isize)
+            .offset(sps_size as isize) as *mut libc::c_void,
         pps as *const libc::c_void,
         pps_size as libc::c_ulong,
     );
@@ -592,9 +577,10 @@ unsafe extern "C" fn write_frame(
     {
         return -(1 as libc::c_int);
     }
-    let mut i_stamp: int64_t = ((*p_picture).i_pts as libc::c_double * 1e9f64
-        * (*p_mkv).i_timebase_num as libc::c_double
-        / (*p_mkv).i_timebase_den as libc::c_double + 0.5f64) as int64_t;
+    let mut i_stamp: int64_t =
+        ((*p_picture).i_pts as libc::c_double * 1e9f64 * (*p_mkv).i_timebase_num as libc::c_double
+            / (*p_mkv).i_timebase_den as libc::c_double
+            + 0.5f64) as int64_t;
     (*p_mkv).b_writing_frame = 0 as libc::c_int as libc::c_char;
     if mk_set_frame_flags(
         (*p_mkv).w,
@@ -617,7 +603,8 @@ unsafe extern "C" fn close_file(
     let mut i_last_delta: int64_t = 0;
     i_last_delta = if (*p_mkv).i_timebase_den != 0 {
         (((largest_pts - second_largest_pts) * (*p_mkv).i_timebase_num as int64_t
-            / (*p_mkv).i_timebase_den as int64_t) as libc::c_double + 0.5f64) as int64_t
+            / (*p_mkv).i_timebase_den as int64_t) as libc::c_double
+            + 0.5f64) as int64_t
     } else {
         0 as libc::c_int as int64_t
     };
@@ -628,7 +615,6 @@ unsafe extern "C" fn close_file(
 #[no_mangle]
 pub static mut mkv_output: cli_output_t = unsafe {
     {
-        
         cli_output_t {
             open_file: Some(
                 open_file
@@ -639,12 +625,10 @@ pub static mut mkv_output: cli_output_t = unsafe {
                     ) -> libc::c_int,
             ),
             set_param: Some(
-                set_param
-                    as unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int,
+                set_param as unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int,
             ),
             write_headers: Some(
-                write_headers
-                    as unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int,
+                write_headers as unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int,
             ),
             write_frame: Some(
                 write_frame
@@ -656,8 +640,7 @@ pub static mut mkv_output: cli_output_t = unsafe {
                     ) -> libc::c_int,
             ),
             close_file: Some(
-                close_file
-                    as unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
+                close_file as unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
             ),
         }
     }

@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type x264_t;
@@ -95,7 +103,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -137,10 +145,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -291,8 +298,8 @@ pub struct cli_pic_t {
 #[repr(C)]
 pub struct cli_vid_filter_t {
     pub name: *const libc::c_char,
-    pub help: Option::<unsafe extern "C" fn(libc::c_int) -> ()>,
-    pub init: Option::<
+    pub help: Option<unsafe extern "C" fn(libc::c_int) -> ()>,
+    pub init: Option<
         unsafe extern "C" fn(
             *mut hnd_t,
             *mut cli_vid_filter_t,
@@ -301,17 +308,14 @@ pub struct cli_vid_filter_t {
             *mut libc::c_char,
         ) -> libc::c_int,
     >,
-    pub get_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub release_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub free: Option::<unsafe extern "C" fn(hnd_t) -> ()>,
+    pub get_frame: Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub release_frame:
+        Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub free: Option<unsafe extern "C" fn(hnd_t) -> ()>,
     pub next: *mut cli_vid_filter_t,
 }
-static mut first_filter: *mut cli_vid_filter_t = 0 as *const cli_vid_filter_t
-    as *mut cli_vid_filter_t;
+static mut first_filter: *mut cli_vid_filter_t =
+    0 as *const cli_vid_filter_t as *mut cli_vid_filter_t;
 unsafe extern "C" fn register_vid_filter(mut new_filter: *mut cli_vid_filter_t) {
     let mut filter_i: *mut cli_vid_filter_t = first_filter;
     while !((*filter_i).next).is_null() {
@@ -373,9 +377,9 @@ pub unsafe extern "C" fn x264_init_vid_filter(
         );
         return -(1 as libc::c_int);
     }
-    if ((*filter_i).init)
-        .expect("non-null function pointer")(handle, filter, info, param, opt_string)
-        != 0
+    if ((*filter_i).init).expect("non-null function pointer")(
+        handle, filter, info, param, opt_string,
+    ) != 0
     {
         return -(1 as libc::c_int);
     }

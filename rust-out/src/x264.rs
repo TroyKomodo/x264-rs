@@ -1,12 +1,20 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(c_variadic, extern_types, core_intrinsics)]
 
+mod autocomplete;
 mod common;
 mod encoder;
 mod filters;
 mod input;
 mod output;
-mod autocomplete;
 
 extern "C" {
     pub type _IO_wide_data;
@@ -20,32 +28,16 @@ extern "C" {
     fn fprintf(_: *mut FILE, _: *const libc::c_char, _: ...) -> libc::c_int;
     fn printf(_: *const libc::c_char, _: ...) -> libc::c_int;
     fn sprintf(_: *mut libc::c_char, _: *const libc::c_char, _: ...) -> libc::c_int;
-    fn vfprintf(
-        _: *mut FILE,
-        _: *const libc::c_char,
-        _: ::core::ffi::VaList,
-    ) -> libc::c_int;
+    fn vfprintf(_: *mut FILE, _: *const libc::c_char, _: ::core::ffi::VaList) -> libc::c_int;
     fn fscanf(_: *mut FILE, _: *const libc::c_char, _: ...) -> libc::c_int;
     fn sscanf(_: *const libc::c_char, _: *const libc::c_char, _: ...) -> libc::c_int;
-    fn fseeko(
-        __stream: *mut FILE,
-        __off: __off64_t,
-        __whence: libc::c_int,
-    ) -> libc::c_int;
+    fn fseeko(__stream: *mut FILE, __off: __off64_t, __whence: libc::c_int) -> libc::c_int;
     fn ftello(__stream: *mut FILE) -> __off64_t;
     fn fileno(__stream: *mut FILE) -> libc::c_int;
     fn stat(__file: *const libc::c_char, __buf: *mut stat) -> libc::c_int;
     fn fstat(__fd: libc::c_int, __buf: *mut stat) -> libc::c_int;
-    fn strtol(
-        _: *const libc::c_char,
-        _: *mut *mut libc::c_char,
-        _: libc::c_int,
-    ) -> libc::c_long;
-    fn strtoul(
-        _: *const libc::c_char,
-        _: *mut *mut libc::c_char,
-        _: libc::c_int,
-    ) -> libc::c_ulong;
+    fn strtol(_: *const libc::c_char, _: *mut *mut libc::c_char, _: libc::c_int) -> libc::c_long;
+    fn strtoul(_: *const libc::c_char, _: *mut *mut libc::c_char, _: libc::c_int) -> libc::c_ulong;
     fn exit(_: libc::c_int) -> !;
     fn fmod(_: libc::c_double, _: libc::c_double) -> libc::c_double;
     static x264_levels: [x264_level_t; 0];
@@ -62,10 +54,7 @@ extern "C" {
         tune: *const libc::c_char,
     ) -> libc::c_int;
     fn x264_param_apply_fastfirstpass(_: *mut x264_param_t);
-    fn x264_param_apply_profile(
-        _: *mut x264_param_t,
-        profile: *const libc::c_char,
-    ) -> libc::c_int;
+    fn x264_param_apply_profile(_: *mut x264_param_t, profile: *const libc::c_char) -> libc::c_int;
     static x264_chroma_format: libc::c_int;
     fn x264_picture_init(pic: *mut x264_picture_t);
     fn x264_encoder_open_164(_: *mut x264_param_t) -> *mut x264_t;
@@ -86,26 +75,15 @@ extern "C" {
     fn x264_encoder_delayed_frames(_: *mut x264_t) -> libc::c_int;
     fn strcasecmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn x264_mdate() -> int64_t;
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
-    fn memset(
-        _: *mut libc::c_void,
-        _: libc::c_int,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
+    fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
     fn strcpy(_: *mut libc::c_char, _: *const libc::c_char) -> *mut libc::c_char;
     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn strcspn(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_ulong;
     fn strlen(_: *const libc::c_char) -> libc::c_ulong;
     fn x264_cpu_num_processors() -> libc::c_int;
     fn x264_reduce_fraction(n: *mut uint32_t, d: *mut uint32_t);
-    fn x264_cli_autocomplete(
-        prev: *const libc::c_char,
-        cur: *const libc::c_char,
-    ) -> libc::c_int;
+    fn x264_cli_autocomplete(prev: *const libc::c_char, cur: *const libc::c_char) -> libc::c_int;
     fn signal(__sig: libc::c_int, __handler: __sighandler_t) -> __sighandler_t;
     static mut optarg: *mut libc::c_char;
     static mut optind: libc::c_int;
@@ -302,7 +280,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -344,10 +322,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -502,7 +479,7 @@ pub struct x264_sei_payload_t {
 pub struct x264_sei_t {
     pub num_payloads: libc::c_int,
     pub payloads: *mut x264_sei_payload_t,
-    pub sei_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub sei_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -516,9 +493,9 @@ pub struct x264_image_t {
 #[repr(C)]
 pub struct x264_image_properties_t {
     pub quant_offsets: *mut libc::c_float,
-    pub quant_offsets_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub quant_offsets_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub f_ssim: libc::c_double,
     pub f_psnr_avg: libc::c_double,
     pub f_psnr: [libc::c_double; 3],
@@ -545,7 +522,7 @@ pub type C2RustUnnamed_5 = libc::c_int;
 pub const RANGE_PC: C2RustUnnamed_5 = 1;
 pub const RANGE_TV: C2RustUnnamed_5 = 0;
 pub const RANGE_AUTO: C2RustUnnamed_5 = -1;
-pub type __sighandler_t = Option::<unsafe extern "C" fn(libc::c_int) -> ()>;
+pub type __sighandler_t = Option<unsafe extern "C" fn(libc::c_int) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct option {
@@ -609,7 +586,7 @@ pub struct cli_pic_t {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct cli_input_t {
-    pub open_file: Option::<
+    pub open_file: Option<
         unsafe extern "C" fn(
             *mut libc::c_char,
             *mut hnd_t,
@@ -617,7 +594,7 @@ pub struct cli_input_t {
             *mut cli_input_opt_t,
         ) -> libc::c_int,
     >,
-    pub picture_alloc: Option::<
+    pub picture_alloc: Option<
         unsafe extern "C" fn(
             *mut cli_pic_t,
             hnd_t,
@@ -626,14 +603,10 @@ pub struct cli_input_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub read_frame: Option::<
-        unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int,
-    >,
-    pub release_frame: Option::<
-        unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int,
-    >,
-    pub picture_clean: Option::<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()>,
-    pub close_file: Option::<unsafe extern "C" fn(hnd_t) -> libc::c_int>,
+    pub read_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int>,
+    pub release_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int>,
+    pub picture_clean: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()>,
+    pub close_file: Option<unsafe extern "C" fn(hnd_t) -> libc::c_int>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -653,37 +626,22 @@ pub struct cli_output_opt_t {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct cli_output_t {
-    pub open_file: Option::<
-        unsafe extern "C" fn(
-            *mut libc::c_char,
-            *mut hnd_t,
-            *mut cli_output_opt_t,
-        ) -> libc::c_int,
+    pub open_file: Option<
+        unsafe extern "C" fn(*mut libc::c_char, *mut hnd_t, *mut cli_output_opt_t) -> libc::c_int,
     >,
-    pub set_param: Option::<
-        unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int,
+    pub set_param: Option<unsafe extern "C" fn(hnd_t, *mut x264_param_t) -> libc::c_int>,
+    pub write_headers: Option<unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int>,
+    pub write_frame: Option<
+        unsafe extern "C" fn(hnd_t, *mut uint8_t, libc::c_int, *mut x264_picture_t) -> libc::c_int,
     >,
-    pub write_headers: Option::<
-        unsafe extern "C" fn(hnd_t, *mut x264_nal_t) -> libc::c_int,
-    >,
-    pub write_frame: Option::<
-        unsafe extern "C" fn(
-            hnd_t,
-            *mut uint8_t,
-            libc::c_int,
-            *mut x264_picture_t,
-        ) -> libc::c_int,
-    >,
-    pub close_file: Option::<
-        unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
-    >,
+    pub close_file: Option<unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct cli_vid_filter_t {
     pub name: *const libc::c_char,
-    pub help: Option::<unsafe extern "C" fn(libc::c_int) -> ()>,
-    pub init: Option::<
+    pub help: Option<unsafe extern "C" fn(libc::c_int) -> ()>,
+    pub init: Option<
         unsafe extern "C" fn(
             *mut hnd_t,
             *mut cli_vid_filter_t,
@@ -692,13 +650,10 @@ pub struct cli_vid_filter_t {
             *mut libc::c_char,
         ) -> libc::c_int,
     >,
-    pub get_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub release_frame: Option::<
-        unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int,
-    >,
-    pub free: Option::<unsafe extern "C" fn(hnd_t) -> ()>,
+    pub get_frame: Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub release_frame:
+        Option<unsafe extern "C" fn(hnd_t, *mut cli_pic_t, libc::c_int) -> libc::c_int>,
+    pub free: Option<unsafe extern "C" fn(hnd_t) -> ()>,
     pub next: *mut cli_vid_filter_t,
 }
 #[derive(Copy, Clone)]
@@ -859,9 +814,7 @@ static mut x264_avcintra_flavor_names: [*const libc::c_char; 3] = [
     0 as *const libc::c_char,
 ];
 #[inline]
-unsafe extern "C" fn x264_is_regular_file_path(
-    mut filename: *const libc::c_char,
-) -> libc::c_int {
+unsafe extern "C" fn x264_is_regular_file_path(mut filename: *const libc::c_char) -> libc::c_int {
     let mut file_stat: stat = stat {
         st_dev: 0,
         st_ino: 0,
@@ -874,16 +827,25 @@ unsafe extern "C" fn x264_is_regular_file_path(
         st_size: 0,
         st_blksize: 0,
         st_blocks: 0,
-        st_atim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_mtim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_ctim: timespec { tv_sec: 0, tv_nsec: 0 },
+        st_atim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_mtim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_ctim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
         __glibc_reserved: [0; 3],
     };
     if stat(filename, &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t == 0o100000 as libc::c_int as __mode_t)
+        as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_int {
@@ -899,21 +861,28 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
         st_size: 0,
         st_blksize: 0,
         st_blocks: 0,
-        st_atim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_mtim: timespec { tv_sec: 0, tv_nsec: 0 },
-        st_ctim: timespec { tv_sec: 0, tv_nsec: 0 },
+        st_atim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_mtim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
+        st_ctim: timespec {
+            tv_sec: 0,
+            tv_nsec: 0,
+        },
         __glibc_reserved: [0; 3],
     };
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t == 0o100000 as libc::c_int as __mode_t)
+        as libc::c_int
 }
 #[inline]
-unsafe extern "C" fn get_filename_extension(
-    mut filename: *mut libc::c_char,
-) -> *mut libc::c_char {
+unsafe extern "C" fn get_filename_extension(mut filename: *mut libc::c_char) -> *mut libc::c_char {
     let mut ext: *mut libc::c_char = filename.offset(strlen(filename) as isize);
     while *ext as libc::c_int != '.' as i32 && ext > filename {
         ext = ext.offset(-1);
@@ -1059,7 +1028,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         fps_factor: 0.,
     },
     {
-        
         cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
@@ -1092,7 +1060,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         }
     },
     {
-        
         cli_pulldown_t {
             mod_0: 4 as libc::c_int,
             pattern: [
@@ -1125,7 +1092,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         }
     },
     {
-        
         cli_pulldown_t {
             mod_0: 2 as libc::c_int,
             pattern: [
@@ -1158,7 +1124,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         }
     },
     {
-        
         cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
@@ -1191,7 +1156,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         }
     },
     {
-        
         cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
@@ -1224,7 +1188,6 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         }
     },
     {
-        
         cli_pulldown_t {
             mod_0: 24 as libc::c_int,
             pattern: [
@@ -1283,26 +1246,27 @@ pub unsafe extern "C" fn x264_cli_log(
     let mut s_level: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     match i_level {
         0 => {
-            s_level = b"error\0" as *const u8 as *const libc::c_char
-                as *mut libc::c_char;
+            s_level = b"error\0" as *const u8 as *const libc::c_char as *mut libc::c_char;
         }
         1 => {
-            s_level = b"warning\0" as *const u8 as *const libc::c_char
-                as *mut libc::c_char;
+            s_level = b"warning\0" as *const u8 as *const libc::c_char as *mut libc::c_char;
         }
         2 => {
             s_level = b"info\0" as *const u8 as *const libc::c_char as *mut libc::c_char;
         }
         3 => {
-            s_level = b"debug\0" as *const u8 as *const libc::c_char
-                as *mut libc::c_char;
+            s_level = b"debug\0" as *const u8 as *const libc::c_char as *mut libc::c_char;
         }
         _ => {
-            s_level = b"unknown\0" as *const u8 as *const libc::c_char
-                as *mut libc::c_char;
+            s_level = b"unknown\0" as *const u8 as *const libc::c_char as *mut libc::c_char;
         }
     }
-    fprintf(stderr, b"%s [%s]: \0" as *const u8 as *const libc::c_char, name, s_level);
+    fprintf(
+        stderr,
+        b"%s [%s]: \0" as *const u8 as *const libc::c_char,
+        name,
+        s_level,
+    );
     let mut arg: ::core::ffi::VaListImpl;
     arg = args.clone();
     vfprintf(stderr, fmt, arg.as_va_list());
@@ -1325,22 +1289,17 @@ unsafe extern "C" fn print_version_info() {
     printf(b"built on Jan 14 2025, \0" as *const u8 as *const libc::c_char);
     printf(b"clang: 18.1.3 (1ubuntu1)\n\0" as *const u8 as *const libc::c_char);
     printf(
-        b"x264 configuration: --chroma-format=%s\n\0" as *const u8
-            as *const libc::c_char,
+        b"x264 configuration: --chroma-format=%s\n\0" as *const u8 as *const libc::c_char,
         chroma_format_names[0 as libc::c_int as usize],
     );
     printf(
-        b"libx264 configuration: --chroma-format=%s\n\0" as *const u8
-            as *const libc::c_char,
+        b"libx264 configuration: --chroma-format=%s\n\0" as *const u8 as *const libc::c_char,
         chroma_format_names[x264_chroma_format as usize],
     );
     printf(b"x264 license: \0" as *const u8 as *const libc::c_char);
     printf(b"GPL version 2 or later\n\0" as *const u8 as *const libc::c_char);
 }
-unsafe fn main_0(
-    mut argc: libc::c_int,
-    mut argv: *mut *mut libc::c_char,
-) -> libc::c_int {
+unsafe fn main_0(mut argc: libc::c_int, mut argv: *mut *mut libc::c_char) -> libc::c_int {
     if argc == 4 as libc::c_int
         && strcmp(
             *argv.offset(1 as libc::c_int as isize),
@@ -1527,7 +1486,6 @@ unsafe fn main_0(
         opaque: std::ptr::null_mut::<libc::c_void>(),
     };
     let mut opt: cli_opt_t = {
-        
         cli_opt_t {
             b_progress: 0 as libc::c_int,
             i_seek: 0,
@@ -1557,10 +1515,11 @@ unsafe fn main_0(
         (cli_input.close_file).expect("non-null function pointer")(opt.hin);
     }
     if !(opt.hout).is_null() {
-        (cli_output.close_file)
-            .expect(
-                "non-null function pointer",
-            )(opt.hout, 0 as libc::c_int as int64_t, 0 as libc::c_int as int64_t);
+        (cli_output.close_file).expect("non-null function pointer")(
+            opt.hout,
+            0 as libc::c_int as int64_t,
+            0 as libc::c_int as int64_t,
+        );
     }
     if !(opt.tcfile_out).is_null() {
         fclose(opt.tcfile_out);
@@ -1580,9 +1539,7 @@ unsafe extern "C" fn strtable_lookup(
         i += 1;
         i;
     }
-    if idx >= 0 as libc::c_int && idx < i
-        && **table.offset(idx as isize) as libc::c_int != 0
-    {
+    if idx >= 0 as libc::c_int && idx < i && **table.offset(idx as isize) as libc::c_int != 0 {
         *table.offset(idx as isize)
     } else {
         b"???\0" as *const u8 as *const libc::c_char
@@ -1598,19 +1555,13 @@ unsafe extern "C" fn stringify_names(
     while !(*names.offset(i as isize)).is_null() {
         if **names.offset(i as isize) != 0 {
             if p != buf {
-                p = p
-                    .offset(
-                        sprintf(p, b", \0" as *const u8 as *const libc::c_char) as isize,
-                    );
+                p = p.offset(sprintf(p, b", \0" as *const u8 as *const libc::c_char) as isize);
             }
-            p = p
-                .offset(
-                    sprintf(
-                        p,
-                        b"%s\0" as *const u8 as *const libc::c_char,
-                        *names.offset(i as isize),
-                    ) as isize,
-                );
+            p = p.offset(sprintf(
+                p,
+                b"%s\0" as *const u8 as *const libc::c_char,
+                *names.offset(i as isize),
+            ) as isize);
         }
         i += 1;
         i;
@@ -1624,13 +1575,8 @@ unsafe extern "C" fn print_csp_name_internal(
 ) {
     if !name.is_null() {
         let mut name_len: size_t = strlen(name);
-        if (*line_len).wrapping_add(name_len)
-            > (80 as libc::c_int - 2 as libc::c_int) as size_t
-        {
-            printf(
-                b"\n                                \0" as *const u8
-                    as *const libc::c_char,
-            );
+        if (*line_len).wrapping_add(name_len) > (80 as libc::c_int - 2 as libc::c_int) as size_t {
+            printf(b"\n                                \0" as *const u8 as *const libc::c_char);
             *line_len = 32 as libc::c_int as size_t;
         }
         printf(b"%s\0" as *const u8 as *const libc::c_char, name);
@@ -1680,14 +1626,10 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(b"      Constant quality mode:\n\0" as *const u8 as *const libc::c_char);
     printf(
-        b"            x264 --crf 24 -o <output> <input>\n\0" as *const u8
-            as *const libc::c_char,
+        b"            x264 --crf 24 -o <output> <input>\n\0" as *const u8 as *const libc::c_char,
     );
     printf(b"\n\0" as *const u8 as *const libc::c_char);
-    printf(
-        b"      Two-pass with a bitrate of 1000kbps:\n\0" as *const u8
-            as *const libc::c_char,
-    );
+    printf(b"      Two-pass with a bitrate of 1000kbps:\n\0" as *const u8 as *const libc::c_char);
     printf(
         b"            x264 --pass 1 --bitrate 1000 -o <output> <input>\n\0" as *const u8
             as *const libc::c_char,
@@ -1698,18 +1640,15 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     );
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(b"      Lossless:\n\0" as *const u8 as *const libc::c_char);
-    printf(
-        b"            x264 --qp 0 -o <output> <input>\n\0" as *const u8
-            as *const libc::c_char,
-    );
+    printf(b"            x264 --qp 0 -o <output> <input>\n\0" as *const u8 as *const libc::c_char);
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(
         b"      Maximum PSNR at the cost of speed and visual quality:\n\0" as *const u8
             as *const libc::c_char,
     );
     printf(
-        b"            x264 --preset placebo --tune psnr -o <output> <input>\n\0"
-            as *const u8 as *const libc::c_char,
+        b"            x264 --preset placebo --tune psnr -o <output> <input>\n\0" as *const u8
+            as *const libc::c_char,
     );
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(
@@ -1717,8 +1656,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
             as *const libc::c_char,
     );
     printf(
-        b"            x264 --vbv-bufsize 2000 --bitrate 1000 -o <output> <input>\n\0"
-            as *const u8 as *const libc::c_char,
+        b"            x264 --vbv-bufsize 2000 --bitrate 1000 -o <output> <input>\n\0" as *const u8
+            as *const libc::c_char,
     );
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(b"Presets:\n\0" as *const u8 as *const libc::c_char);
@@ -1734,8 +1673,7 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
         );
     } else {
         printf(
-            b"                                  - %s\n\0" as *const u8
-                as *const libc::c_char,
+            b"                                  - %s\n\0" as *const u8 as *const libc::c_char,
             stringify_names(buf.as_mut_ptr(), x264_valid_profile_names.as_ptr()),
         );
     }
@@ -1784,8 +1722,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     printf(b"Frame-type options:\n\0" as *const u8 as *const libc::c_char);
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     printf(
-        b"  -I, --keyint <integer or \"infinite\"> Maximum GOP size [%d]\n\0"
-            as *const u8 as *const libc::c_char,
+        b"  -I, --keyint <integer or \"infinite\"> Maximum GOP size [%d]\n\0" as *const u8
+            as *const libc::c_char,
         (*defaults).i_keyint_max,
     );
     if longhelp == 2 as libc::c_int {
@@ -1796,8 +1734,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --no-scenecut           Disable adaptive I-frame decision\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --no-scenecut           Disable adaptive I-frame decision\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -1849,14 +1787,13 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"      --no-cabac              Disable CABAC\n\0" as *const u8
-                as *const libc::c_char,
+            b"      --no-cabac              Disable CABAC\n\0" as *const u8 as *const libc::c_char,
         );
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"  -r, --ref <integer>         Number of reference frames [%d]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"  -r, --ref <integer>         Number of reference frames [%d]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).i_frame_reference,
         );
     }
@@ -1868,8 +1805,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"  -f, --deblock <alpha:beta>  Loop filter parameters [%d:%d]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"  -f, --deblock <alpha:beta>  Loop filter parameters [%d:%d]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).i_deblocking_filter_alphac0,
             (*defaults).i_deblocking_filter_beta,
         );
@@ -1910,8 +1847,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
         );
     }
     printf(
-        b"      --tff                   Enable interlaced mode (top field first)\n\0"
-            as *const u8 as *const libc::c_char,
+        b"      --tff                   Enable interlaced mode (top field first)\n\0" as *const u8
+            as *const libc::c_char,
     );
     printf(
         b"      --bff                   Enable interlaced mode (bottom field first)\n\0"
@@ -1919,8 +1856,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     );
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --constrained-intra     Enable constrained intra prediction.\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --constrained-intra     Enable constrained intra prediction.\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     printf(
@@ -1945,8 +1882,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     printf(b"\n\0" as *const u8 as *const libc::c_char);
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"  -q, --qp <integer>          Force constant QP (0-%d, 0=lossless)\n\0"
-                as *const u8 as *const libc::c_char,
+            b"  -q, --qp <integer>          Force constant QP (0-%d, 0=lossless)\n\0" as *const u8
+                as *const libc::c_char,
             51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int + 18 as libc::c_int,
         );
     }
@@ -1955,8 +1892,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
             as *const libc::c_char,
     );
     printf(
-        b"      --crf <float>           Quality-based VBR (%d-51) [%.1f]\n\0"
-            as *const u8 as *const libc::c_char,
+        b"      --crf <float>           Quality-based VBR (%d-51) [%.1f]\n\0" as *const u8
+            as *const libc::c_char,
         51 as libc::c_int - (51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int),
         (*defaults).rc.f_rf_constant as libc::c_double,
     );
@@ -1973,14 +1910,14 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
         (*defaults).rc.i_vbv_max_bitrate,
     );
     printf(
-        b"      --vbv-bufsize <integer> Set size of the VBV buffer (kbit) [%d]\n\0"
-            as *const u8 as *const libc::c_char,
+        b"      --vbv-bufsize <integer> Set size of the VBV buffer (kbit) [%d]\n\0" as *const u8
+            as *const libc::c_char,
         (*defaults).rc.i_vbv_buffer_size,
     );
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --vbv-init <float>      Initial VBV buffer occupancy [%.1f]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --vbv-init <float>      Initial VBV buffer occupancy [%.1f]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).rc.f_vbv_buffer_init as libc::c_double,
         );
     }
@@ -2002,13 +1939,11 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
             b"      --qpmax <integer>       Set max QP [%d]\n\0" as *const u8
                 as *const libc::c_char,
             if (*defaults).rc.i_qp_max
-                < 51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int
-                    + 18 as libc::c_int
+                < 51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int + 18 as libc::c_int
             {
                 (*defaults).rc.i_qp_max
             } else {
-                51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int
-                    + 18 as libc::c_int
+                51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int + 18 as libc::c_int
             },
         );
     }
@@ -2028,15 +1963,15 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --ipratio <float>       QP factor between I and P [%.2f]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --ipratio <float>       QP factor between I and P [%.2f]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).rc.f_ip_factor as libc::c_double,
         );
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --pbratio <float>       QP factor between P and B [%.2f]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --pbratio <float>       QP factor between P and B [%.2f]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).rc.f_pb_factor as libc::c_double,
         );
     }
@@ -2076,15 +2011,15 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"      --stats <string>        Filename for 2 pass stats [\"%s\"]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --stats <string>        Filename for 2 pass stats [\"%s\"]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).rc.psz_stat_out,
         );
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --no-mbtree             Disable mb-tree ratecontrol.\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --no-mbtree             Disable mb-tree ratecontrol.\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2219,8 +2154,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
         );
     } else if longhelp >= 1 as libc::c_int {
         printf(
-            b"                                  decision quality: 1=fast, 11=best\n\0"
-                as *const u8 as *const libc::c_char,
+            b"                                  decision quality: 1=fast, 11=best\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp >= 1 as libc::c_int {
@@ -2245,8 +2180,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --no-chroma-me          Ignore chroma in motion estimation\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --no-chroma-me          Ignore chroma in motion estimation\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp >= 1 as libc::c_int {
@@ -2352,9 +2287,7 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
         printf(b"\n\0" as *const u8 as *const libc::c_char);
     }
     if longhelp == 2 as libc::c_int {
-        printf(
-            b"Video Usability Info (Annex E):\n\0" as *const u8 as *const libc::c_char,
-        );
+        printf(b"Video Usability Info (Annex E):\n\0" as *const u8 as *const libc::c_char);
     }
     if longhelp == 2 as libc::c_int {
         printf(
@@ -2457,8 +2390,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --pic-struct            Force pic_struct in Picture Timing SEI\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --pic-struct            Force pic_struct in Picture Timing SEI\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2513,8 +2446,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"      --input-depth <integer> Specify input bit depth for raw input\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --input-depth <integer> Specify input bit depth for raw input\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp >= 1 as libc::c_int {
@@ -2539,8 +2472,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"      --index <string>        Filename for input index file\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --index <string>        Filename for input index file\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     printf(
@@ -2548,20 +2481,19 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
             as *const libc::c_char,
     );
     printf(
-        b"      --fps <float|rational>  Specify framerate\n\0" as *const u8
-            as *const libc::c_char,
+        b"      --fps <float|rational>  Specify framerate\n\0" as *const u8 as *const libc::c_char,
     );
     printf(
         b"      --seek <integer>        First frame to encode\n\0" as *const u8
             as *const libc::c_char,
     );
     printf(
-        b"      --frames <integer>      Maximum number of frames to encode\n\0"
-            as *const u8 as *const libc::c_char,
+        b"      --frames <integer>      Maximum number of frames to encode\n\0" as *const u8
+            as *const libc::c_char,
     );
     printf(
-        b"      --level <string>        Specify level (as defined by Annex A)\n\0"
-            as *const u8 as *const libc::c_char,
+        b"      --level <string>        Specify level (as defined by Annex A)\n\0" as *const u8
+            as *const libc::c_char,
     );
     if longhelp >= 1 as libc::c_int {
         printf(
@@ -2605,10 +2537,7 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
                 as *const u8 as *const libc::c_char,
         );
     }
-    printf(
-        b"      --quiet                 Quiet Mode\n\0" as *const u8
-            as *const libc::c_char,
-    );
+    printf(b"      --quiet                 Quiet Mode\n\0" as *const u8 as *const libc::c_char);
     if longhelp >= 1 as libc::c_int {
         printf(
             b"      --log-level <string>    Specify the maximum level of logging [\"%s\"]\n                                  - %s\n\0"
@@ -2634,8 +2563,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp >= 1 as libc::c_int {
         printf(
-            b"      --threads <integer>     Force a specific number of threads\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --threads <integer>     Force a specific number of threads\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2652,8 +2581,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --thread-input          Run Avisynth in its own thread\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --thread-input          Run Avisynth in its own thread\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2682,8 +2611,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --no-asm                Disable all CPU optimizations\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --no-asm                Disable all CPU optimizations\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2700,8 +2629,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --opencl-device <integer> Specify OpenCL device ordinal\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --opencl-device <integer> Specify OpenCL device ordinal\n\0" as *const u8
+                as *const libc::c_char,
         );
     }
     if longhelp == 2 as libc::c_int {
@@ -2712,8 +2641,8 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     }
     if longhelp == 2 as libc::c_int {
         printf(
-            b"      --sps-id <integer>      Set SPS and PPS id numbers [%d]\n\0"
-                as *const u8 as *const libc::c_char,
+            b"      --sps-id <integer>      Set SPS and PPS id numbers [%d]\n\0" as *const u8
+                as *const libc::c_char,
             (*defaults).i_sps_id,
         );
     }
@@ -2772,14 +2701,12 @@ unsafe extern "C" fn help(mut defaults: *mut x264_param_t, mut longhelp: libc::c
     printf(b"\n\0" as *const u8 as *const libc::c_char);
 }
 static mut short_options: [libc::c_char; 30] = unsafe {
-    *::core::mem::transmute::<
-        &[u8; 30],
-        &mut [libc::c_char; 30],
-    >(b"8A:B:b:f:hI:i:m:o:p:q:r:t:Vvw\0")
+    *::core::mem::transmute::<&[u8; 30], &mut [libc::c_char; 30]>(
+        b"8A:B:b:f:hI:i:m:o:p:q:r:t:Vvw\0",
+    )
 };
 static mut long_options: [option; 169] = [
     {
-        
         option {
             name: b"help\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2788,7 +2715,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"longhelp\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2797,7 +2723,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"fullhelp\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2806,7 +2731,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"version\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2815,7 +2739,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"profile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2824,7 +2747,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"preset\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2833,7 +2755,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"tune\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2842,7 +2763,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slow-firstpass\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2851,7 +2771,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"bitrate\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2860,7 +2779,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"bframes\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2869,7 +2787,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"b-adapt\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2878,7 +2795,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-b-adapt\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2887,7 +2803,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"b-bias\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2896,7 +2811,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"b-pyramid\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2905,7 +2819,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"open-gop\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2914,7 +2827,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"bluray-compat\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2923,7 +2835,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"avcintra-class\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2932,7 +2843,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"avcintra-flavor\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2941,7 +2851,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"min-keyint\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2950,7 +2859,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"keyint\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2959,7 +2867,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"intra-refresh\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2968,7 +2875,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"scenecut\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -2977,7 +2883,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-scenecut\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2986,7 +2891,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"nf\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -2995,7 +2899,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-deblock\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3004,7 +2907,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"filter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3013,7 +2915,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"deblock\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3022,7 +2923,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3031,7 +2931,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"tff\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3040,7 +2939,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"bff\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3049,7 +2947,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3058,7 +2955,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"constrained-intra\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3067,7 +2963,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cabac\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3076,7 +2971,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-cabac\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3085,7 +2979,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3094,7 +2987,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qpmin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3103,7 +2995,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qpmax\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3112,7 +3003,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qpstep\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3121,7 +3011,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"crf\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3130,7 +3019,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"rc-lookahead\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3139,7 +3027,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"ref\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3148,7 +3035,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"asm\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3157,7 +3043,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-asm\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3166,7 +3051,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"opencl\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3175,7 +3059,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"opencl-clbin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3184,7 +3067,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"opencl-device\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3193,7 +3075,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"sar\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3202,7 +3083,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"fps\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3211,7 +3091,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"frames\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3220,7 +3099,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"seek\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3229,7 +3107,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"output\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3238,7 +3115,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"muxer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3247,7 +3123,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"demuxer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3256,7 +3131,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"stdout\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3265,7 +3139,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"stdin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3274,7 +3147,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"index\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3283,7 +3155,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"analyse\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3292,7 +3163,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"partitions\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3301,7 +3171,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"direct\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3310,7 +3179,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"weightb\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3319,7 +3187,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-weightb\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3328,7 +3195,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"weightp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3337,7 +3203,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"me\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3346,7 +3211,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"merange\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3355,7 +3219,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"mvrange\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3364,7 +3227,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"mvrange-thread\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3373,7 +3235,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"subme\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3382,7 +3243,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"psy-rd\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3391,7 +3251,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-psy\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3400,7 +3259,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"psy\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3409,7 +3267,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"mixed-refs\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3418,7 +3275,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-mixed-refs\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3427,7 +3283,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-chroma-me\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3436,7 +3291,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"8x8dct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3445,7 +3299,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-8x8dct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3454,7 +3307,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"trellis\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3463,7 +3315,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"fast-pskip\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3472,7 +3323,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-fast-pskip\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3481,7 +3331,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-dct-decimate\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3490,7 +3339,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"aq-strength\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3499,7 +3347,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"aq-mode\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3508,7 +3355,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"deadzone-inter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3517,7 +3363,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"deadzone-intra\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3526,7 +3371,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"level\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3535,7 +3379,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"ratetol\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3544,7 +3387,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"vbv-maxrate\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3553,7 +3395,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"vbv-bufsize\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3562,7 +3403,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"vbv-init\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3571,7 +3411,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"crf-max\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3580,7 +3419,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"ipratio\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3589,7 +3427,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"pbratio\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3598,7 +3435,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"chroma-qp-offset\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3607,7 +3443,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"pass\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3616,7 +3451,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"stats\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3625,7 +3459,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qcomp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3634,7 +3467,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"mbtree\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3643,7 +3475,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-mbtree\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3652,7 +3483,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qblur\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3661,7 +3491,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cplxblur\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3670,7 +3499,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"zones\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3679,7 +3507,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"qpfile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3688,7 +3515,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"threads\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3697,7 +3523,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"lookahead-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3706,7 +3531,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"sliced-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3715,7 +3539,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-sliced-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3724,7 +3547,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slice-max-size\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3733,7 +3555,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slice-max-mbs\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3742,7 +3563,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slice-min-mbs\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3751,7 +3571,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slices\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3760,7 +3579,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"slices-max\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3769,7 +3587,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"thread-input\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3778,7 +3595,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"sync-lookahead\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3787,7 +3603,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"non-deterministic\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3796,7 +3611,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cpu-independent\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3805,7 +3619,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"psnr\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3814,7 +3627,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"ssim\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3823,7 +3635,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"quiet\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3832,7 +3643,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"verbose\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3841,7 +3651,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"log-level\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3850,7 +3659,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"no-progress\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3859,7 +3667,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"dump-yuv\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3868,7 +3675,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"sps-id\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3877,7 +3683,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"aud\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -3886,7 +3691,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"nr\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3895,7 +3699,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3904,7 +3707,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqmfile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3913,7 +3715,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3922,7 +3723,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4i\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3931,7 +3731,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4iy\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3940,7 +3739,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4ic\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3949,7 +3747,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4p\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3958,7 +3755,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4py\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3967,7 +3763,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm4pc\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3976,7 +3771,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm8\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3985,7 +3779,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm8i\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -3994,7 +3787,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cqm8p\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4003,7 +3795,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"overscan\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4012,7 +3803,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"videoformat\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4021,7 +3811,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"range\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4030,7 +3819,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"colorprim\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4039,7 +3827,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"transfer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4048,7 +3835,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"colormatrix\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4057,7 +3843,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"chromaloc\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4066,7 +3851,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"force-cfr\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4075,7 +3859,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"tcfile-in\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4084,7 +3867,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"tcfile-out\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4093,7 +3875,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"timebase\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4102,7 +3883,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"pic-struct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4111,7 +3891,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"crop-rect\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4120,7 +3899,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"nal-hrd\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4129,7 +3907,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"pulldown\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4138,7 +3915,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"fake-interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4147,7 +3923,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"frame-packing\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4156,7 +3931,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"mastering-display\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4165,7 +3939,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"cll\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4174,7 +3947,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"alternative-transfer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4183,7 +3955,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"vf\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4192,7 +3963,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"video-filter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4201,7 +3971,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"input-fmt\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4210,7 +3979,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"input-res\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4219,7 +3987,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"input-csp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4228,7 +3995,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"input-depth\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4237,7 +4003,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"output-depth\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4246,7 +4011,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"dts-compress\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4255,7 +4019,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"output-csp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4264,7 +4027,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"input-range\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
@@ -4273,7 +4035,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"stitchable\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4282,7 +4043,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: b"filler\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4291,7 +4051,6 @@ static mut long_options: [option; 169] = [
         }
     },
     {
-        
         option {
             name: 0 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
@@ -4315,8 +4074,7 @@ unsafe extern "C" fn select_output(
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
             0 as libc::c_int,
-            b"not compiled with MP4 output support\n\0" as *const u8
-                as *const libc::c_char,
+            b"not compiled with MP4 output support\n\0" as *const u8 as *const libc::c_char,
         );
         return -(1 as libc::c_int);
     } else if strcasecmp(ext, b"mkv\0" as *const u8 as *const libc::c_char) == 0 {
@@ -4340,29 +4098,20 @@ unsafe extern "C" fn select_input(
     mut info: *mut video_info_t,
     mut opt: *mut cli_input_opt_t,
 ) -> libc::c_int {
-    let mut b_auto: libc::c_int = (strcasecmp(
-        demuxer,
-        b"auto\0" as *const u8 as *const libc::c_char,
-    ) == 0) as libc::c_int;
+    let mut b_auto: libc::c_int =
+        (strcasecmp(demuxer, b"auto\0" as *const u8 as *const libc::c_char) == 0) as libc::c_int;
     let mut ext: *const libc::c_char = if b_auto != 0 {
         get_filename_extension(filename) as *const libc::c_char
     } else {
         b"\0" as *const u8 as *const libc::c_char
     };
-    let mut b_regular: libc::c_int = strcmp(
-        filename,
-        b"-\0" as *const u8 as *const libc::c_char,
-    );
+    let mut b_regular: libc::c_int = strcmp(filename, b"-\0" as *const u8 as *const libc::c_char);
     if b_regular == 0 && b_auto != 0 {
         ext = b"raw\0" as *const u8 as *const libc::c_char;
     }
-    b_regular = (b_regular != 0 && x264_is_regular_file_path(filename) != 0)
-        as libc::c_int;
+    b_regular = (b_regular != 0 && x264_is_regular_file_path(filename) != 0) as libc::c_int;
     if b_regular != 0 {
-        let mut f: *mut FILE = fopen(
-            filename,
-            b"r\0" as *const u8 as *const libc::c_char,
-        );
+        let mut f: *mut FILE = fopen(filename, b"r\0" as *const u8 as *const libc::c_char);
         if !f.is_null() {
             b_regular = x264_is_regular_file(f);
             fclose(f);
@@ -4376,8 +4125,7 @@ unsafe extern "C" fn select_input(
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
             0 as libc::c_int,
-            b"not compiled with AVS input support\n\0" as *const u8
-                as *const libc::c_char,
+            b"not compiled with AVS input support\n\0" as *const u8 as *const libc::c_char,
         );
         return -(1 as libc::c_int);
     } else if strcasecmp(module, b"y4m\0" as *const u8 as *const libc::c_char) == 0 {
@@ -4388,8 +4136,9 @@ unsafe extern "C" fn select_input(
         cli_input = raw_input;
     } else {
         if b_auto != 0
-            && (raw_input.open_file)
-                .expect("non-null function pointer")(filename, p_handle, info, opt) == 0
+            && (raw_input.open_file).expect("non-null function pointer")(
+                filename, p_handle, info, opt,
+            ) == 0
         {
             module = b"raw\0" as *const u8 as *const libc::c_char;
             b_auto = 0 as libc::c_int;
@@ -4452,16 +4201,12 @@ unsafe extern "C" fn init_vid_filters(
     }
     let mut p: *mut libc::c_char = sequence;
     while !p.is_null() && *p as libc::c_int != 0 {
-        let mut tok_len: libc::c_int = strcspn(
-            p,
-            b"/\0" as *const u8 as *const libc::c_char,
-        ) as libc::c_int;
+        let mut tok_len: libc::c_int =
+            strcspn(p, b"/\0" as *const u8 as *const libc::c_char) as libc::c_int;
         let mut p_len: libc::c_int = strlen(p) as libc::c_int;
         *p.offset(tok_len as isize) = 0 as libc::c_int as libc::c_char;
-        let mut name_len: libc::c_int = strcspn(
-            p,
-            b":\0" as *const u8 as *const libc::c_char,
-        ) as libc::c_int;
+        let mut name_len: libc::c_int =
+            strcspn(p, b":\0" as *const u8 as *const libc::c_char) as libc::c_int;
         *p.offset(name_len as isize) = 0 as libc::c_int as libc::c_char;
         name_len += (name_len != tok_len) as libc::c_int;
         if x264_init_vid_filter(
@@ -4475,14 +4220,13 @@ unsafe extern "C" fn init_vid_filters(
         {
             return -(1 as libc::c_int);
         }
-        p = p
-            .offset(
-                (if (tok_len + 1 as libc::c_int) < p_len {
-                    tok_len + 1 as libc::c_int
-                } else {
-                    p_len
-                }) as isize,
-            );
+        p = p.offset(
+            (if (tok_len + 1 as libc::c_int) < p_len {
+                tok_len + 1 as libc::c_int
+            } else {
+                p_len
+            }) as isize,
+        );
     }
     if (*param).i_width == 0 && (*param).i_height == 0 {
         (*param).i_height = (*info).height;
@@ -4821,7 +4565,7 @@ unsafe extern "C" fn parse(
         if c == OPT_TUNE as libc::c_int {
             tune = optarg;
         } else if c == '?' as i32 {
-            return -(1 as libc::c_int)
+            return -(1 as libc::c_int);
         }
     }
     if !preset.is_null()
@@ -4884,8 +4628,7 @@ unsafe extern "C" fn parse(
                 exit(0 as libc::c_int);
             }
             256 => {
-                (*param)
-                    .i_frame_total = if atoi(optarg) > 0 as libc::c_int {
+                (*param).i_frame_total = if atoi(optarg) > 0 as libc::c_int {
                     atoi(optarg)
                 } else {
                     0 as libc::c_int
@@ -4893,8 +4636,7 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             257 => {
-                (*opt)
-                    .i_seek = if atoi(optarg) > 0 as libc::c_int {
+                (*opt).i_seek = if atoi(optarg) > 0 as libc::c_int {
                     atoi(optarg)
                 } else {
                     0 as libc::c_int
@@ -4918,9 +4660,7 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             270 => {
-                if parse_enum_name(optarg, x264_demuxer_names.as_ptr(), &mut demuxer)
-                    != 0
-                {
+                if parse_enum_name(optarg, x264_demuxer_names.as_ptr(), &mut demuxer) != 0 {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
@@ -4936,14 +4676,12 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             258 => {
-                (*opt)
-                    .qpfile = fopen(optarg, b"rb\0" as *const u8 as *const libc::c_char);
+                (*opt).qpfile = fopen(optarg, b"rb\0" as *const u8 as *const libc::c_char);
                 if ((*opt).qpfile).is_null() {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"can't open qpfile `%s'\n\0" as *const u8
-                            as *const libc::c_char,
+                        b"can't open qpfile `%s'\n\0" as *const u8 as *const libc::c_char,
                         optarg,
                     );
                     return -(1 as libc::c_int);
@@ -4952,8 +4690,8 @@ unsafe extern "C" fn parse(
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"qpfile incompatible with non-regular file `%s'\n\0"
-                            as *const u8 as *const libc::c_char,
+                        b"qpfile incompatible with non-regular file `%s'\n\0" as *const u8
+                            as *const libc::c_char,
                         optarg,
                     );
                     fclose((*opt).qpfile);
@@ -4976,11 +4714,7 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             277 => {
-                if parse_enum_value(
-                    optarg,
-                    x264_log_level_names.as_ptr(),
-                    &mut cli_log_level,
-                ) == 0
+                if parse_enum_value(optarg, x264_log_level_names.as_ptr(), &mut cli_log_level) == 0
                 {
                     cli_log_level += -(1 as libc::c_int);
                 } else {
@@ -5022,11 +4756,7 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             274 => {
-                (*opt)
-                    .tcfile_out = fopen(
-                    optarg,
-                    b"wb\0" as *const u8 as *const libc::c_char,
-                );
+                (*opt).tcfile_out = fopen(optarg, b"wb\0" as *const u8 as *const libc::c_char);
                 if ((*opt).tcfile_out).is_null() {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
@@ -5043,11 +4773,8 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             276 => {
-                if parse_enum_value(
-                    optarg,
-                    x264_pulldown_names.as_ptr(),
-                    &mut (*opt).i_pulldown,
-                ) != 0
+                if parse_enum_value(optarg, x264_pulldown_names.as_ptr(), &mut (*opt).i_pulldown)
+                    != 0
                 {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
@@ -5088,17 +4815,11 @@ unsafe extern "C" fn parse(
                 current_block = 11702799181856929651;
             }
             285 => {
-                if parse_enum_value(
-                    optarg,
-                    x264_output_csp_names.as_ptr(),
-                    &mut output_csp,
-                ) != 0
-                {
+                if parse_enum_value(optarg, x264_output_csp_names.as_ptr(), &mut output_csp) != 0 {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"Unknown output csp `%s'\n\0" as *const u8
-                            as *const libc::c_char,
+                        b"Unknown output csp `%s'\n\0" as *const u8 as *const libc::c_char,
                         optarg,
                     );
                     return -(1 as libc::c_int);
@@ -5117,8 +4838,7 @@ unsafe extern "C" fn parse(
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"Unknown input range `%s'\n\0" as *const u8
-                            as *const libc::c_char,
+                        b"Unknown input range `%s'\n\0" as *const u8 as *const libc::c_char,
                         optarg,
                     );
                     return -(1 as libc::c_int);
@@ -5165,16 +4885,14 @@ unsafe extern "C" fn parse(
                     return -(1 as libc::c_int);
                 }
             }
-            b_error
-                |= x264_param_parse(
-                    param,
-                    long_options[long_options_index as usize].name,
-                    optarg,
-                );
+            b_error |= x264_param_parse(
+                param,
+                long_options[long_options_index as usize].name,
+                optarg,
+            );
         }
         if b_error != 0 {
-            let mut name: *const libc::c_char = if long_options_index > 0 as libc::c_int
-            {
+            let mut name: *const libc::c_char = if long_options_index > 0 as libc::c_int {
                 long_options[long_options_index as usize].name
             } else {
                 *argv.offset((optind - 2 as libc::c_int) as isize) as *const libc::c_char
@@ -5212,10 +4930,11 @@ unsafe extern "C" fn parse(
     if select_output(muxer, output_filename, param) != 0 {
         return -(1 as libc::c_int);
     }
-    if (cli_output.open_file)
-        .expect(
-            "non-null function pointer",
-        )(output_filename, &mut (*opt).hout, &mut output_opt) != 0
+    if (cli_output.open_file).expect("non-null function pointer")(
+        output_filename,
+        &mut (*opt).hout,
+        &mut output_opt,
+    ) != 0
     {
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
@@ -5229,7 +4948,6 @@ unsafe extern "C" fn parse(
     optind += 1;
     input_filename = *argv.offset(fresh0 as isize);
     let mut info: video_info_t = {
-        
         video_info_t {
             csp: 0 as libc::c_int,
             fps_num: 0,
@@ -5254,9 +4972,7 @@ unsafe extern "C" fn parse(
     info.fps_den = (*param).i_fps_den;
     info.fullrange = (input_opt.input_range == RANGE_PC as libc::c_int) as libc::c_int;
     info.interlaced = (*param).b_interlaced;
-    if (*param).vui.i_sar_width > 0 as libc::c_int
-        && (*param).vui.i_sar_height > 0 as libc::c_int
-    {
+    if (*param).vui.i_sar_width > 0 as libc::c_int && (*param).vui.i_sar_height > 0 as libc::c_int {
         info.sar_width = (*param).vui.i_sar_width as uint32_t;
         info.sar_height = (*param).vui.i_sar_height as uint32_t;
     }
@@ -5277,10 +4993,12 @@ unsafe extern "C" fn parse(
         return -(1 as libc::c_int);
     }
     if ((*opt).hin).is_null()
-        && (cli_input.open_file)
-            .expect(
-                "non-null function pointer",
-            )(input_filename, &mut (*opt).hin, &mut info, &mut input_opt) != 0
+        && (cli_input.open_file).expect("non-null function pointer")(
+            input_filename,
+            &mut (*opt).hin,
+            &mut info,
+            &mut input_opt,
+        ) != 0
     {
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
@@ -5298,15 +5016,25 @@ unsafe extern "C" fn parse(
         b"%dx%d%c %u:%u @ %u/%u fps (%cfr)\n\0" as *const u8 as *const libc::c_char,
         info.width,
         info.height,
-        if info.interlaced != 0 { 'i' as i32 } else { 'p' as i32 },
+        if info.interlaced != 0 {
+            'i' as i32
+        } else {
+            'p' as i32
+        },
         info.sar_width,
         info.sar_height,
         info.fps_num,
         info.fps_den,
-        if info.vfr != 0 { 'v' as i32 } else { 'c' as i32 },
+        if info.vfr != 0 {
+            'v' as i32
+        } else {
+            'c' as i32
+        },
     );
-    if info.width <= 0 as libc::c_int || info.height <= 0 as libc::c_int
-        || info.width > 16384 as libc::c_int || info.height > 16384 as libc::c_int
+    if info.width <= 0 as libc::c_int
+        || info.height <= 0 as libc::c_int
+        || info.width > 16384 as libc::c_int
+        || info.height > 16384 as libc::c_int
     {
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
@@ -5322,15 +5050,16 @@ unsafe extern "C" fn parse(
             x264_cli_log(
                 b"x264\0" as *const u8 as *const libc::c_char,
                 0 as libc::c_int,
-                b"--fps + --tcfile-in is incompatible.\n\0" as *const u8
-                    as *const libc::c_char,
+                b"--fps + --tcfile-in is incompatible.\n\0" as *const u8 as *const libc::c_char,
             );
             return -(1 as libc::c_int);
         }
-        if (timecode_input.open_file)
-            .expect(
-                "non-null function pointer",
-            )(tcfile_name, &mut (*opt).hin, &mut info, &mut input_opt) != 0
+        if (timecode_input.open_file).expect("non-null function pointer")(
+            tcfile_name,
+            &mut (*opt).hin,
+            &mut info,
+            &mut input_opt,
+        ) != 0
         {
             x264_cli_log(
                 b"x264\0" as *const u8 as *const libc::c_char,
@@ -5344,8 +5073,7 @@ unsafe extern "C" fn parse(
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
             0 as libc::c_int,
-            b"--timebase is incompatible with cfr input\n\0" as *const u8
-                as *const libc::c_char,
+            b"--timebase is incompatible with cfr input\n\0" as *const u8 as *const libc::c_char,
         );
         return -(1 as libc::c_int);
     }
@@ -5355,15 +5083,14 @@ unsafe extern "C" fn parse(
     } else {
         thread_input = std::ptr::null::<cli_input_t>();
     }
-    if !thread_input.is_null() && info.thread_safe != 0
-        && (b_thread_input != 0 || (*param).i_threads > 1 as libc::c_int
+    if !thread_input.is_null()
+        && info.thread_safe != 0
+        && (b_thread_input != 0
+            || (*param).i_threads > 1 as libc::c_int
             || (*param).i_threads == 0 as libc::c_int
                 && x264_cpu_num_processors() > 1 as libc::c_int)
     {
-        if ((*thread_input).open_file)
-            .expect(
-                "non-null function pointer",
-            )(
+        if ((*thread_input).open_file).expect("non-null function pointer")(
             std::ptr::null_mut::<libc::c_char>(),
             &mut (*opt).hin,
             &mut info,
@@ -5372,16 +5099,13 @@ unsafe extern "C" fn parse(
         {
             fprintf(
                 stderr,
-                b"x264 [error]: threaded input failed\n\0" as *const u8
-                    as *const libc::c_char,
+                b"x264 [error]: threaded input failed\n\0" as *const u8 as *const libc::c_char,
             );
             return -(1 as libc::c_int);
         }
         cli_input = *thread_input;
     }
-    if (*param).vui.i_sar_width > 0 as libc::c_int
-        && (*param).vui.i_sar_height > 0 as libc::c_int
-    {
+    if (*param).vui.i_sar_width > 0 as libc::c_int && (*param).vui.i_sar_height > 0 as libc::c_int {
         info.sar_width = (*param).vui.i_sar_width as uint32_t;
         info.sar_height = (*param).vui.i_sar_height as uint32_t;
     }
@@ -5406,8 +5130,7 @@ unsafe extern "C" fn parse(
             x264_cli_log(
                 b"x264\0" as *const u8 as *const libc::c_char,
                 0 as libc::c_int,
-                b"invalid argument: timebase = %s\n\0" as *const u8
-                    as *const libc::c_char,
+                b"invalid argument: timebase = %s\n\0" as *const u8 as *const libc::c_char,
                 input_opt.timebase,
             );
             return -(1 as libc::c_int);
@@ -5431,11 +5154,9 @@ unsafe extern "C" fn parse(
             );
             return -(1 as libc::c_int);
         }
-        (*opt)
-            .timebase_convert_multiplier = i_user_timebase_den as libc::c_double
+        (*opt).timebase_convert_multiplier = i_user_timebase_den as libc::c_double
             / info.timebase_den as libc::c_double
-            * (info.timebase_num as libc::c_double
-                / i_user_timebase_num as libc::c_double);
+            * (info.timebase_num as libc::c_double / i_user_timebase_num as libc::c_double);
         info.timebase_num = i_user_timebase_num as uint32_t;
         info.timebase_den = i_user_timebase_den as uint32_t;
         info.vfr = 1 as libc::c_int;
@@ -5447,8 +5168,7 @@ unsafe extern "C" fn parse(
     if input_opt.input_range != RANGE_AUTO as libc::c_int {
         info.fullrange = input_opt.input_range;
     }
-    if init_vid_filters(vid_filters, &mut (*opt).hin, &mut info, param, output_csp) != 0
-    {
+    if init_vid_filters(vid_filters, &mut (*opt).hin, &mut info, param, output_csp) != 0 {
         return -(1 as libc::c_int);
     }
     (*param).b_vfr_input = info.vfr;
@@ -5458,8 +5178,7 @@ unsafe extern "C" fn parse(
     (*param).i_timebase_den = info.timebase_den;
     (*param).vui.i_sar_width = info.sar_width as libc::c_int;
     (*param).vui.i_sar_height = info.sar_height as libc::c_int;
-    info
-        .num_frames = if info.num_frames - (*opt).i_seek > 0 as libc::c_int {
+    info.num_frames = if info.num_frames - (*opt).i_seek > 0 as libc::c_int {
         info.num_frames - (*opt).i_seek
     } else {
         0 as libc::c_int
@@ -5553,7 +5272,8 @@ unsafe extern "C" fn parse_qpfile(
         (*pic).i_type = 0 as libc::c_int;
         (*pic).i_qpplus1 = 0 as libc::c_int;
         if num > i_frame || ret == -(1 as libc::c_int) {
-            if ret == -(1 as libc::c_int) || file_pos < 0 as libc::c_int as int64_t
+            if ret == -(1 as libc::c_int)
+                || file_pos < 0 as libc::c_int as int64_t
                 || fseeko((*opt).qpfile, file_pos, 0 as libc::c_int) != 0
             {
                 if ret != -(1 as libc::c_int) {
@@ -5586,16 +5306,14 @@ unsafe extern "C" fn parse_qpfile(
             } else {
                 ret = 0 as libc::c_int;
             }
-            if ret < 2 as libc::c_int || qp < -(1 as libc::c_int)
-                || qp
-                    > 51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int
-                        + 18 as libc::c_int
+            if ret < 2 as libc::c_int
+                || qp < -(1 as libc::c_int)
+                || qp > 51 as libc::c_int + 6 as libc::c_int * 2 as libc::c_int + 18 as libc::c_int
             {
                 x264_cli_log(
                     b"x264\0" as *const u8 as *const libc::c_char,
                     0 as libc::c_int,
-                    b"can't parse qpfile for frame %d\n\0" as *const u8
-                        as *const libc::c_char,
+                    b"can't parse qpfile for frame %d\n\0" as *const u8 as *const libc::c_char,
                     i_frame,
                 );
                 fclose((*opt).qpfile);
@@ -5663,10 +5381,7 @@ unsafe extern "C" fn encode_frame(
         return -(1 as libc::c_int);
     }
     if i_frame_size != 0 {
-        i_frame_size = (cli_output.write_frame)
-            .expect(
-                "non-null function pointer",
-            )(
+        i_frame_size = (cli_output.write_frame).expect("non-null function pointer")(
             hout,
             (*nal.offset(0 as libc::c_int as isize)).p_payload,
             i_frame_size,
@@ -5699,22 +5414,23 @@ unsafe extern "C" fn print_status(
     let mut bitrate: libc::c_double = 0.;
     if last_ts != 0 {
         bitrate = i_file as libc::c_double * 8 as libc::c_int as libc::c_double
-            / (last_ts as libc::c_double * 1000 as libc::c_int as libc::c_double
+            / (last_ts as libc::c_double
+                * 1000 as libc::c_int as libc::c_double
                 * (*param).i_timebase_num as libc::c_double
                 / (*param).i_timebase_den as libc::c_double);
     } else {
         bitrate = i_file as libc::c_double * 8 as libc::c_int as libc::c_double
-            / (1000 as libc::c_int as libc::c_double
-                * (*param).i_fps_den as libc::c_double
+            / (1000 as libc::c_int as libc::c_double * (*param).i_fps_den as libc::c_double
                 / (*param).i_fps_num as libc::c_double);
     }
     if i_frame_total != 0 {
         let mut eta: libc::c_int = (i_elapsed * (i_frame_total - i_frame) as int64_t
-            / (i_frame as int64_t * 1000000 as libc::c_int as int64_t)) as libc::c_int;
+            / (i_frame as int64_t * 1000000 as libc::c_int as int64_t))
+            as libc::c_int;
         sprintf(
             buf.as_mut_ptr(),
-            b"x264 [%.1f%%] %d/%d frames, %.2f fps, %.2f kb/s, eta %d:%02d:%02d\0"
-                as *const u8 as *const libc::c_char,
+            b"x264 [%.1f%%] %d/%d frames, %.2f fps, %.2f kb/s, eta %d:%02d:%02d\0" as *const u8
+                as *const libc::c_char,
             100.0f64 * i_frame as libc::c_double / i_frame_total as libc::c_double,
             i_frame,
             i_frame_total,
@@ -5741,10 +5457,7 @@ unsafe extern "C" fn print_status(
     fflush(stderr);
     i_time
 }
-unsafe extern "C" fn convert_cli_to_lib_pic(
-    mut lib: *mut x264_picture_t,
-    mut cli: *mut cli_pic_t,
-) {
+unsafe extern "C" fn convert_cli_to_lib_pic(mut lib: *mut x264_picture_t, mut cli: *mut cli_pic_t) {
     memcpy(
         ((*lib).img.i_stride).as_mut_ptr() as *mut libc::c_void,
         ((*cli).img.stride).as_mut_ptr() as *const libc::c_void,
@@ -5759,10 +5472,7 @@ unsafe extern "C" fn convert_cli_to_lib_pic(
     (*lib).img.i_csp = (*cli).img.csp;
     (*lib).i_pts = (*cli).pts;
 }
-unsafe extern "C" fn encode(
-    mut param: *mut x264_param_t,
-    mut opt: *mut cli_opt_t,
-) -> libc::c_int {
+unsafe extern "C" fn encode(mut param: *mut x264_param_t, mut opt: *mut cli_opt_t) -> libc::c_int {
     let mut current_block: u64;
     let mut h: *mut x264_t = std::ptr::null_mut::<x264_t>();
     let mut pic: x264_picture_t = x264_picture_t {
@@ -5837,12 +5547,11 @@ unsafe extern "C" fn encode(
     if (*opt).i_pulldown != 0 && (*param).b_vfr_input == 0 {
         (*param).b_pulldown = 1 as libc::c_int;
         (*param).b_pic_struct = 1 as libc::c_int;
-        pulldown = &*pulldown_values.as_ptr().offset((*opt).i_pulldown as isize)
-            as *const cli_pulldown_t;
+        pulldown =
+            &*pulldown_values.as_ptr().offset((*opt).i_pulldown as isize) as *const cli_pulldown_t;
         (*param).i_timebase_num = (*param).i_fps_den;
         if fmod(
-            ((*param).i_fps_num as libc::c_float * (*pulldown).fps_factor)
-                as libc::c_double,
+            ((*param).i_fps_num as libc::c_float * (*pulldown).fps_factor) as libc::c_double,
             1 as libc::c_int as libc::c_double,
         ) != 0.
         {
@@ -5855,9 +5564,8 @@ unsafe extern "C" fn encode(
             retval = -(1 as libc::c_int);
             current_block = 13915633153210047135;
         } else {
-            (*param)
-                .i_timebase_den = ((*param).i_fps_num as libc::c_float
-                * (*pulldown).fps_factor) as uint32_t;
+            (*param).i_timebase_den =
+                ((*param).i_fps_num as libc::c_float * (*pulldown).fps_factor) as uint32_t;
             current_block = 7149356873433890176;
         }
     } else {
@@ -5874,14 +5582,11 @@ unsafe extern "C" fn encode(
             retval = -(1 as libc::c_int);
         } else {
             x264_encoder_parameters(h, param);
-            if (cli_output.set_param)
-                .expect("non-null function pointer")((*opt).hout, param) != 0
-            {
+            if (cli_output.set_param).expect("non-null function pointer")((*opt).hout, param) != 0 {
                 x264_cli_log(
                     b"x264\0" as *const u8 as *const libc::c_char,
                     0 as libc::c_int,
-                    b"can't set outfile param\n\0" as *const u8
-                        as *const libc::c_char,
+                    b"can't set outfile param\n\0" as *const u8 as *const libc::c_char,
                 );
                 retval = -(1 as libc::c_int);
             } else {
@@ -5890,21 +5595,16 @@ unsafe extern "C" fn encode(
                     * (*param).i_fps_den as int64_t
                     / (*param).i_timebase_num as int64_t
                     / (*param).i_fps_num as int64_t;
-                if ticks_per_frame < 1 as libc::c_int as int64_t
-                    && (*param).b_vfr_input == 0
-                {
+                if ticks_per_frame < 1 as libc::c_int as int64_t && (*param).b_vfr_input == 0 {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"ticks_per_frame invalid: %ld\n\0" as *const u8
-                            as *const libc::c_char,
+                        b"ticks_per_frame invalid: %ld\n\0" as *const u8 as *const libc::c_char,
                         ticks_per_frame,
                     );
                     retval = -(1 as libc::c_int);
                 } else {
-                    ticks_per_frame = if ticks_per_frame
-                        > 1 as libc::c_int as int64_t
-                    {
+                    ticks_per_frame = if ticks_per_frame > 1 as libc::c_int as int64_t {
                         ticks_per_frame
                     } else {
                         1 as libc::c_int as int64_t
@@ -5912,9 +5612,7 @@ unsafe extern "C" fn encode(
                     if (*param).b_repeat_headers == 0 {
                         let mut headers: *mut x264_nal_t = std::ptr::null_mut::<x264_nal_t>();
                         let mut i_nal: libc::c_int = 0;
-                        if x264_encoder_headers(h, &mut headers, &mut i_nal)
-                            < 0 as libc::c_int
-                        {
+                        if x264_encoder_headers(h, &mut headers, &mut i_nal) < 0 as libc::c_int {
                             x264_cli_log(
                                 b"x264\0" as *const u8 as *const libc::c_char,
                                 0 as libc::c_int,
@@ -5924,9 +5622,10 @@ unsafe extern "C" fn encode(
                             retval = -(1 as libc::c_int);
                             current_block = 13915633153210047135;
                         } else {
-                            i_file = (cli_output.write_headers)
-                                .expect("non-null function pointer")((*opt).hout, headers)
-                                as int64_t;
+                            i_file = (cli_output.write_headers).expect("non-null function pointer")(
+                                (*opt).hout,
+                                headers,
+                            ) as int64_t;
                             if i_file < 0 as libc::c_int as int64_t {
                                 x264_cli_log(
                                     b"x264\0" as *const u8 as *const libc::c_char,
@@ -5949,18 +5648,17 @@ unsafe extern "C" fn encode(
                             if !((*opt).tcfile_out).is_null() {
                                 fprintf(
                                     (*opt).tcfile_out,
-                                    b"# timecode format v2\n\0" as *const u8
-                                        as *const libc::c_char,
+                                    b"# timecode format v2\n\0" as *const u8 as *const libc::c_char,
                                 );
                             }
                             while b_ctrl_c == 0
-                                && (i_frame < (*param).i_frame_total
-                                    || (*param).i_frame_total == 0)
+                                && (i_frame < (*param).i_frame_total || (*param).i_frame_total == 0)
                             {
-                                if (filter.get_frame)
-                                    .expect(
-                                        "non-null function pointer",
-                                    )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
+                                if (filter.get_frame).expect("non-null function pointer")(
+                                    (*opt).hin,
+                                    &mut cli_pic,
+                                    i_frame + (*opt).i_seek,
+                                ) != 0
                                 {
                                     break;
                                 }
@@ -5970,18 +5668,18 @@ unsafe extern "C" fn encode(
                                     pic.i_pts = i_frame as int64_t;
                                 }
                                 if (*opt).i_pulldown != 0 && (*param).b_vfr_input == 0 {
-                                    pic
-                                        .i_pic_struct = (*pulldown)
-                                        .pattern[(i_frame % (*pulldown).mod_0) as usize]
+                                    pic.i_pic_struct = (*pulldown).pattern
+                                        [(i_frame % (*pulldown).mod_0) as usize]
                                         as libc::c_int;
                                     pic.i_pts = (pulldown_pts + 0.5f64) as int64_t;
-                                    pulldown_pts
-                                        += pulldown_frame_duration[pic.i_pic_struct as usize]
-                                            as libc::c_double;
+                                    pulldown_pts += pulldown_frame_duration
+                                        [pic.i_pic_struct as usize]
+                                        as libc::c_double;
                                 } else if (*opt).timebase_convert_multiplier != 0. {
-                                    pic
-                                        .i_pts = (pic.i_pts as libc::c_double
-                                        * (*opt).timebase_convert_multiplier + 0.5f64) as int64_t;
+                                    pic.i_pts = (pic.i_pts as libc::c_double
+                                        * (*opt).timebase_convert_multiplier
+                                        + 0.5f64)
+                                        as int64_t;
                                 }
                                 if pic.i_pts <= largest_pts {
                                     if cli_log_level >= 3 as libc::c_int
@@ -6016,19 +5714,16 @@ unsafe extern "C" fn encode(
                                         b"%.6f\n\0" as *const u8 as *const libc::c_char,
                                         pic.i_pts as libc::c_double
                                             * ((*param).i_timebase_num as libc::c_double
-                                                / (*param).i_timebase_den as libc::c_double) * 1e3f64,
+                                                / (*param).i_timebase_den as libc::c_double)
+                                            * 1e3f64,
                                     );
                                 }
                                 if !((*opt).qpfile).is_null() {
                                     parse_qpfile(opt, &mut pic, i_frame + (*opt).i_seek);
                                 }
                                 prev_dts = last_dts;
-                                i_frame_size = encode_frame(
-                                    h,
-                                    (*opt).hout,
-                                    &mut pic,
-                                    &mut last_dts,
-                                );
+                                i_frame_size =
+                                    encode_frame(h, (*opt).hout, &mut pic, &mut last_dts);
                                 if i_frame_size < 0 as libc::c_int {
                                     ::core::ptr::write_volatile(
                                         &mut b_ctrl_c as *mut libc::c_int,
@@ -6044,10 +5739,11 @@ unsafe extern "C" fn encode(
                                         first_dts = prev_dts;
                                     }
                                 }
-                                if (filter.release_frame)
-                                    .expect(
-                                        "non-null function pointer",
-                                    )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
+                                if (filter.release_frame).expect("non-null function pointer")(
+                                    (*opt).hin,
+                                    &mut cli_pic,
+                                    i_frame + (*opt).i_seek,
+                                ) != 0
                                 {
                                     break;
                                 }
@@ -6059,7 +5755,8 @@ unsafe extern "C" fn encode(
                                         (*param).i_frame_total,
                                         i_file,
                                         param,
-                                        2 as libc::c_int as int64_t * last_dts - prev_dts
+                                        2 as libc::c_int as int64_t * last_dts
+                                            - prev_dts
                                             - first_dts,
                                     );
                                 }
@@ -6097,7 +5794,8 @@ unsafe extern "C" fn encode(
                                         (*param).i_frame_total,
                                         i_file,
                                         param,
-                                        2 as libc::c_int as int64_t * last_dts - prev_dts
+                                        2 as libc::c_int as int64_t * last_dts
+                                            - prev_dts
                                             - first_dts,
                                     );
                                 }
@@ -6112,21 +5810,21 @@ unsafe extern "C" fn encode(
         x264_cli_log(
             b"x264\0" as *const u8 as *const libc::c_char,
             1 as libc::c_int,
-            b"%d suppressed nonmonotonic pts warnings\n\0" as *const u8
-                as *const libc::c_char,
+            b"%d suppressed nonmonotonic pts warnings\n\0" as *const u8 as *const libc::c_char,
             pts_warning_cnt - 3 as libc::c_int,
         );
     }
     if i_frame_output == 1 as libc::c_int {
-        duration = (*param).i_fps_den as libc::c_double
-            / (*param).i_fps_num as libc::c_double;
+        duration = (*param).i_fps_den as libc::c_double / (*param).i_fps_num as libc::c_double;
     } else if b_ctrl_c != 0 {
         duration = (2 as libc::c_int as int64_t * last_dts - prev_dts - first_dts)
-            as libc::c_double * (*param).i_timebase_num as libc::c_double
+            as libc::c_double
+            * (*param).i_timebase_num as libc::c_double
             / (*param).i_timebase_den as libc::c_double;
     } else {
         duration = (2 as libc::c_int as int64_t * largest_pts - second_largest_pts)
-            as libc::c_double * (*param).i_timebase_num as libc::c_double
+            as libc::c_double
+            * (*param).i_timebase_num as libc::c_double
             / (*param).i_timebase_den as libc::c_double;
     }
     i_end = x264_mdate();
@@ -6144,16 +5842,16 @@ unsafe extern "C" fn encode(
     if b_ctrl_c != 0 {
         fprintf(
             stderr,
-            b"aborted at input frame %d, output frame %d\n\0" as *const u8
-                as *const libc::c_char,
+            b"aborted at input frame %d, output frame %d\n\0" as *const u8 as *const libc::c_char,
             (*opt).i_seek + i_frame,
             i_frame_output,
         );
     }
-    (cli_output.close_file)
-        .expect(
-            "non-null function pointer",
-        )((*opt).hout, largest_pts, second_largest_pts);
+    (cli_output.close_file).expect("non-null function pointer")(
+        (*opt).hout,
+        largest_pts,
+        second_largest_pts,
+    );
     (*opt).hout = std::ptr::null_mut::<libc::c_void>();
     if i_frame_output > 0 as libc::c_int {
         let mut fps: libc::c_double = i_frame_output as libc::c_double
@@ -6161,8 +5859,7 @@ unsafe extern "C" fn encode(
             / (i_end - i_start) as libc::c_double;
         fprintf(
             stderr,
-            b"encoded %d frames, %.2f fps, %.2f kb/s\n\0" as *const u8
-                as *const libc::c_char,
+            b"encoded %d frames, %.2f fps, %.2f kb/s\n\0" as *const u8 as *const libc::c_char,
             i_frame_output,
             fps,
             i_file as libc::c_double * 8 as libc::c_int as libc::c_double
@@ -6172,7 +5869,7 @@ unsafe extern "C" fn encode(
     retval
 }
 pub fn main() {
-    let mut args: Vec::<*mut libc::c_char> = Vec::new();
+    let mut args: Vec<*mut libc::c_char> = Vec::new();
     for arg in ::std::env::args() {
         args.push(
             (::std::ffi::CString::new(arg))
@@ -6182,11 +5879,9 @@ pub fn main() {
     }
     args.push(::core::ptr::null_mut());
     unsafe {
-        ::std::process::exit(
-            main_0(
-                (args.len() - 1) as libc::c_int,
-                args.as_mut_ptr() as *mut *mut libc::c_char,
-            ) as i32,
-        )
+        ::std::process::exit(main_0(
+            (args.len() - 1) as libc::c_int,
+            args.as_mut_ptr() as *mut *mut libc::c_char,
+        ) as i32)
     }
 }

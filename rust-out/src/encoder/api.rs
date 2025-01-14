@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(extern_types)]
 extern "C" {
     pub type x264_t;
@@ -112,7 +120,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -154,10 +162,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -270,23 +277,14 @@ pub struct C2RustUnnamed_4 {
 #[repr(C)]
 pub struct x264_api_t {
     pub x264: *mut x264_t,
-    pub nal_encode: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut uint8_t, *mut x264_nal_t) -> (),
+    pub nal_encode: Option<unsafe extern "C" fn(*mut x264_t, *mut uint8_t, *mut x264_nal_t) -> ()>,
+    pub encoder_reconfig:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> libc::c_int>,
+    pub encoder_parameters: Option<unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> ()>,
+    pub encoder_headers: Option<
+        unsafe extern "C" fn(*mut x264_t, *mut *mut x264_nal_t, *mut libc::c_int) -> libc::c_int,
     >,
-    pub encoder_reconfig: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> libc::c_int,
-    >,
-    pub encoder_parameters: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> (),
-    >,
-    pub encoder_headers: Option::<
-        unsafe extern "C" fn(
-            *mut x264_t,
-            *mut *mut x264_nal_t,
-            *mut libc::c_int,
-        ) -> libc::c_int,
-    >,
-    pub encoder_encode: Option::<
+    pub encoder_encode: Option<
         unsafe extern "C" fn(
             *mut x264_t,
             *mut *mut x264_nal_t,
@@ -295,17 +293,12 @@ pub struct x264_api_t {
             *mut x264_picture_t,
         ) -> libc::c_int,
     >,
-    pub encoder_close: Option::<unsafe extern "C" fn(*mut x264_t) -> ()>,
-    pub encoder_delayed_frames: Option::<
-        unsafe extern "C" fn(*mut x264_t) -> libc::c_int,
-    >,
-    pub encoder_maximum_delayed_frames: Option::<
-        unsafe extern "C" fn(*mut x264_t) -> libc::c_int,
-    >,
-    pub encoder_intra_refresh: Option::<unsafe extern "C" fn(*mut x264_t) -> ()>,
-    pub encoder_invalidate_reference: Option::<
-        unsafe extern "C" fn(*mut x264_t, int64_t) -> libc::c_int,
-    >,
+    pub encoder_close: Option<unsafe extern "C" fn(*mut x264_t) -> ()>,
+    pub encoder_delayed_frames: Option<unsafe extern "C" fn(*mut x264_t) -> libc::c_int>,
+    pub encoder_maximum_delayed_frames: Option<unsafe extern "C" fn(*mut x264_t) -> libc::c_int>,
+    pub encoder_intra_refresh: Option<unsafe extern "C" fn(*mut x264_t) -> ()>,
+    pub encoder_invalidate_reference:
+        Option<unsafe extern "C" fn(*mut x264_t, int64_t) -> libc::c_int>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -328,7 +321,7 @@ pub struct x264_picture_t {
 pub struct x264_sei_t {
     pub num_payloads: libc::c_int,
     pub payloads: *mut x264_sei_payload_t,
-    pub sei_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub sei_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -349,9 +342,9 @@ pub struct x264_hrd_t {
 #[repr(C)]
 pub struct x264_image_properties_t {
     pub quant_offsets: *mut libc::c_float,
-    pub quant_offsets_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub quant_offsets_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub f_ssim: libc::c_double,
     pub f_psnr_avg: libc::c_double,
     pub f_psnr: [libc::c_double; 3],
@@ -368,9 +361,7 @@ pub struct x264_image_t {
 #[no_mangle]
 pub static mut x264_chroma_format: libc::c_int = 0 as libc::c_int;
 #[no_mangle]
-pub unsafe extern "C" fn x264_encoder_open_164(
-    mut param: *mut x264_param_t,
-) -> *mut x264_t {
+pub unsafe extern "C" fn x264_encoder_open_164(mut param: *mut x264_param_t) -> *mut x264_t {
     let mut api: *mut x264_api_t = calloc(
         1 as libc::c_int as libc::c_ulong,
         ::core::mem::size_of::<x264_api_t>() as libc::c_ulong,
@@ -379,23 +370,18 @@ pub unsafe extern "C" fn x264_encoder_open_164(
         return std::ptr::null_mut::<x264_t>();
     }
     if (*param).i_bitdepth == 8 as libc::c_int {
-        (*api)
-            .nal_encode = Some(
+        (*api).nal_encode = Some(
             x264_8_nal_encode
                 as unsafe extern "C" fn(*mut x264_t, *mut uint8_t, *mut x264_nal_t) -> (),
         );
-        (*api)
-            .encoder_reconfig = Some(
+        (*api).encoder_reconfig = Some(
             x264_8_encoder_reconfig
                 as unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> libc::c_int,
         );
-        (*api)
-            .encoder_parameters = Some(
-            x264_8_encoder_parameters
-                as unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> (),
+        (*api).encoder_parameters = Some(
+            x264_8_encoder_parameters as unsafe extern "C" fn(*mut x264_t, *mut x264_param_t) -> (),
         );
-        (*api)
-            .encoder_headers = Some(
+        (*api).encoder_headers = Some(
             x264_8_encoder_headers
                 as unsafe extern "C" fn(
                     *mut x264_t,
@@ -403,8 +389,7 @@ pub unsafe extern "C" fn x264_encoder_open_164(
                     *mut libc::c_int,
                 ) -> libc::c_int,
         );
-        (*api)
-            .encoder_encode = Some(
+        (*api).encoder_encode = Some(
             x264_8_encoder_encode
                 as unsafe extern "C" fn(
                     *mut x264_t,
@@ -414,26 +399,17 @@ pub unsafe extern "C" fn x264_encoder_open_164(
                     *mut x264_picture_t,
                 ) -> libc::c_int,
         );
-        (*api)
-            .encoder_close = Some(
-            x264_8_encoder_close as unsafe extern "C" fn(*mut x264_t) -> (),
-        );
-        (*api)
-            .encoder_delayed_frames = Some(
-            x264_8_encoder_delayed_frames
-                as unsafe extern "C" fn(*mut x264_t) -> libc::c_int,
-        );
-        (*api)
-            .encoder_maximum_delayed_frames = Some(
+        (*api).encoder_close =
+            Some(x264_8_encoder_close as unsafe extern "C" fn(*mut x264_t) -> ());
+        (*api).encoder_delayed_frames =
+            Some(x264_8_encoder_delayed_frames as unsafe extern "C" fn(*mut x264_t) -> libc::c_int);
+        (*api).encoder_maximum_delayed_frames = Some(
             x264_8_encoder_maximum_delayed_frames
                 as unsafe extern "C" fn(*mut x264_t) -> libc::c_int,
         );
-        (*api)
-            .encoder_intra_refresh = Some(
-            x264_8_encoder_intra_refresh as unsafe extern "C" fn(*mut x264_t) -> (),
-        );
-        (*api)
-            .encoder_invalidate_reference = Some(
+        (*api).encoder_intra_refresh =
+            Some(x264_8_encoder_intra_refresh as unsafe extern "C" fn(*mut x264_t) -> ());
+        (*api).encoder_invalidate_reference = Some(
             x264_8_encoder_invalidate_reference
                 as unsafe extern "C" fn(*mut x264_t, int64_t) -> libc::c_int,
         );
@@ -441,8 +417,7 @@ pub unsafe extern "C" fn x264_encoder_open_164(
     } else {
         x264_log_internal(
             0 as libc::c_int,
-            b"not compiled with %d bit depth support\n\0" as *const u8
-                as *const libc::c_char,
+            b"not compiled with %d bit depth support\n\0" as *const u8 as *const libc::c_char,
             (*param).i_bitdepth,
         );
     }
@@ -473,14 +448,10 @@ pub unsafe extern "C" fn x264_encoder_reconfig(
     mut param: *mut x264_param_t,
 ) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_reconfig)
-        .expect("non-null function pointer")((*api).x264, param)
+    ((*api).encoder_reconfig).expect("non-null function pointer")((*api).x264, param)
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_encoder_parameters(
-    mut h: *mut x264_t,
-    mut param: *mut x264_param_t,
-) {
+pub unsafe extern "C" fn x264_encoder_parameters(mut h: *mut x264_t, mut param: *mut x264_param_t) {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
     ((*api).encoder_parameters).expect("non-null function pointer")((*api).x264, param);
 }
@@ -491,8 +462,7 @@ pub unsafe extern "C" fn x264_encoder_headers(
     mut pi_nal: *mut libc::c_int,
 ) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_headers)
-        .expect("non-null function pointer")((*api).x264, pp_nal, pi_nal)
+    ((*api).encoder_headers).expect("non-null function pointer")((*api).x264, pp_nal, pi_nal)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_encoder_encode(
@@ -503,24 +473,23 @@ pub unsafe extern "C" fn x264_encoder_encode(
     mut pic_out: *mut x264_picture_t,
 ) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_encode)
-        .expect(
-            "non-null function pointer",
-        )((*api).x264, pp_nal, pi_nal, pic_in, pic_out)
+    ((*api).encoder_encode).expect("non-null function pointer")(
+        (*api).x264,
+        pp_nal,
+        pi_nal,
+        pic_in,
+        pic_out,
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_encoder_delayed_frames(mut h: *mut x264_t) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_delayed_frames)
-        .expect("non-null function pointer")((*api).x264)
+    ((*api).encoder_delayed_frames).expect("non-null function pointer")((*api).x264)
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_encoder_maximum_delayed_frames(
-    mut h: *mut x264_t,
-) -> libc::c_int {
+pub unsafe extern "C" fn x264_encoder_maximum_delayed_frames(mut h: *mut x264_t) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_maximum_delayed_frames)
-        .expect("non-null function pointer")((*api).x264)
+    ((*api).encoder_maximum_delayed_frames).expect("non-null function pointer")((*api).x264)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_encoder_intra_refresh(mut h: *mut x264_t) {
@@ -533,6 +502,5 @@ pub unsafe extern "C" fn x264_encoder_invalidate_reference(
     mut pts: int64_t,
 ) -> libc::c_int {
     let mut api: *mut x264_api_t = h as *mut x264_api_t;
-    ((*api).encoder_invalidate_reference)
-        .expect("non-null function pointer")((*api).x264, pts)
+    ((*api).encoder_invalidate_reference).expect("non-null function pointer")((*api).x264, pts)
 }

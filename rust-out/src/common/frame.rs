@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 #![feature(core_intrinsics, extern_types, label_break_value)]
 extern "C" {
     pub type _cl_mem;
@@ -26,20 +34,10 @@ extern "C" {
     ) -> libc::c_int;
     fn pthread_cond_destroy(__cond: *mut pthread_cond_t) -> libc::c_int;
     fn pthread_cond_broadcast(__cond: *mut pthread_cond_t) -> libc::c_int;
-    fn pthread_cond_wait(
-        __cond: *mut pthread_cond_t,
-        __mutex: *mut pthread_mutex_t,
-    ) -> libc::c_int;
-    fn memcpy(
-        _: *mut libc::c_void,
-        _: *const libc::c_void,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
-    fn memset(
-        _: *mut libc::c_void,
-        _: libc::c_int,
-        _: libc::c_ulong,
-    ) -> *mut libc::c_void;
+    fn pthread_cond_wait(__cond: *mut pthread_cond_t, __mutex: *mut pthread_mutex_t)
+        -> libc::c_int;
+    fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
+    fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
     fn __assert_fail(
         __assertion: *const libc::c_char,
         __file: *const libc::c_char,
@@ -49,12 +47,7 @@ extern "C" {
     fn x264_malloc(_: int64_t) -> *mut libc::c_void;
     fn x264_free(_: *mut libc::c_void);
     fn x264_8_opencl_frame_delete(frame: *mut x264_frame);
-    fn x264_8_log(
-        h: *mut x264_t,
-        i_level: libc::c_int,
-        psz_fmt: *const libc::c_char,
-        _: ...
-    );
+    fn x264_8_log(h: *mut x264_t, i_level: libc::c_int, psz_fmt: *const libc::c_char, _: ...);
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -343,18 +336,15 @@ pub struct x264_opencl_function_t {
     pub clReleaseProgram: clReleaseProgram_func,
     pub clSetKernelArg: clSetKernelArg_func,
 }
-pub type clSetKernelArg_func = Option::<
-    unsafe extern "C" fn(cl_kernel, cl_uint, size_t, *const libc::c_void) -> cl_int,
->;
+pub type clSetKernelArg_func =
+    Option<unsafe extern "C" fn(cl_kernel, cl_uint, size_t, *const libc::c_void) -> cl_int>;
 pub type cl_uint = uint32_t;
-pub type clReleaseProgram_func = Option::<unsafe extern "C" fn(cl_program) -> cl_int>;
-pub type clReleaseMemObject_func = Option::<unsafe extern "C" fn(cl_mem) -> cl_int>;
-pub type clReleaseKernel_func = Option::<unsafe extern "C" fn(cl_kernel) -> cl_int>;
-pub type clReleaseContext_func = Option::<unsafe extern "C" fn(cl_context) -> cl_int>;
-pub type clReleaseCommandQueue_func = Option::<
-    unsafe extern "C" fn(cl_command_queue) -> cl_int,
->;
-pub type clGetSupportedImageFormats_func = Option::<
+pub type clReleaseProgram_func = Option<unsafe extern "C" fn(cl_program) -> cl_int>;
+pub type clReleaseMemObject_func = Option<unsafe extern "C" fn(cl_mem) -> cl_int>;
+pub type clReleaseKernel_func = Option<unsafe extern "C" fn(cl_kernel) -> cl_int>;
+pub type clReleaseContext_func = Option<unsafe extern "C" fn(cl_context) -> cl_int>;
+pub type clReleaseCommandQueue_func = Option<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
+pub type clGetSupportedImageFormats_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -377,7 +367,7 @@ pub type cl_mem_object_type = cl_uint;
 pub type cl_mem_flags = cl_bitfield;
 pub type cl_bitfield = cl_ulong;
 pub type cl_ulong = uint64_t;
-pub type clGetProgramInfo_func = Option::<
+pub type clGetProgramInfo_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_program_info,
@@ -387,7 +377,7 @@ pub type clGetProgramInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_program_info = cl_uint;
-pub type clGetProgramBuildInfo_func = Option::<
+pub type clGetProgramBuildInfo_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_device_id,
@@ -398,11 +388,10 @@ pub type clGetProgramBuildInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_program_build_info = cl_uint;
-pub type clGetPlatformIDs_func = Option::<
-    unsafe extern "C" fn(cl_uint, *mut cl_platform_id, *mut cl_uint) -> cl_int,
->;
+pub type clGetPlatformIDs_func =
+    Option<unsafe extern "C" fn(cl_uint, *mut cl_platform_id, *mut cl_uint) -> cl_int>;
 pub type cl_platform_id = *mut _cl_platform_id;
-pub type clGetKernelWorkGroupInfo_func = Option::<
+pub type clGetKernelWorkGroupInfo_func = Option<
     unsafe extern "C" fn(
         cl_kernel,
         cl_device_id,
@@ -413,7 +402,7 @@ pub type clGetKernelWorkGroupInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_kernel_work_group_info = cl_uint;
-pub type clGetDeviceInfo_func = Option::<
+pub type clGetDeviceInfo_func = Option<
     unsafe extern "C" fn(
         cl_device_id,
         cl_device_info,
@@ -423,7 +412,7 @@ pub type clGetDeviceInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_device_info = cl_uint;
-pub type clGetDeviceIDs_func = Option::<
+pub type clGetDeviceIDs_func = Option<
     unsafe extern "C" fn(
         cl_platform_id,
         cl_device_type,
@@ -433,7 +422,7 @@ pub type clGetDeviceIDs_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_device_type = cl_bitfield;
-pub type clGetCommandQueueInfo_func = Option::<
+pub type clGetCommandQueueInfo_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_command_queue_info,
@@ -443,8 +432,8 @@ pub type clGetCommandQueueInfo_func = Option::<
     ) -> cl_int,
 >;
 pub type cl_command_queue_info = cl_uint;
-pub type clFinish_func = Option::<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
-pub type clEnqueueWriteBuffer_func = Option::<
+pub type clFinish_func = Option<unsafe extern "C" fn(cl_command_queue) -> cl_int>;
+pub type clEnqueueWriteBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -459,7 +448,7 @@ pub type clEnqueueWriteBuffer_func = Option::<
 >;
 pub type cl_event = *mut _cl_event;
 pub type cl_bool = cl_uint;
-pub type clEnqueueReadBuffer_func = Option::<
+pub type clEnqueueReadBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -472,7 +461,7 @@ pub type clEnqueueReadBuffer_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clEnqueueNDRangeKernel_func = Option::<
+pub type clEnqueueNDRangeKernel_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_kernel,
@@ -485,7 +474,7 @@ pub type clEnqueueNDRangeKernel_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clEnqueueMapBuffer_func = Option::<
+pub type clEnqueueMapBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -500,7 +489,7 @@ pub type clEnqueueMapBuffer_func = Option::<
     ) -> *mut libc::c_void,
 >;
 pub type cl_map_flags = cl_bitfield;
-pub type clEnqueueCopyBuffer_func = Option::<
+pub type clEnqueueCopyBuffer_func = Option<
     unsafe extern "C" fn(
         cl_command_queue,
         cl_mem,
@@ -513,7 +502,7 @@ pub type clEnqueueCopyBuffer_func = Option::<
         *mut cl_event,
     ) -> cl_int,
 >;
-pub type clCreateProgramWithSource_func = Option::<
+pub type clCreateProgramWithSource_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_uint,
@@ -522,7 +511,7 @@ pub type clCreateProgramWithSource_func = Option::<
         *mut cl_int,
     ) -> cl_program,
 >;
-pub type clCreateProgramWithBinary_func = Option::<
+pub type clCreateProgramWithBinary_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_uint,
@@ -533,10 +522,9 @@ pub type clCreateProgramWithBinary_func = Option::<
         *mut cl_int,
     ) -> cl_program,
 >;
-pub type clCreateKernel_func = Option::<
-    unsafe extern "C" fn(cl_program, *const libc::c_char, *mut cl_int) -> cl_kernel,
->;
-pub type clCreateImage2D_func = Option::<
+pub type clCreateKernel_func =
+    Option<unsafe extern "C" fn(cl_program, *const libc::c_char, *mut cl_int) -> cl_kernel>;
+pub type clCreateImage2D_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -548,12 +536,12 @@ pub type clCreateImage2D_func = Option::<
         *mut cl_int,
     ) -> cl_mem,
 >;
-pub type clCreateContext_func = Option::<
+pub type clCreateContext_func = Option<
     unsafe extern "C" fn(
         *const cl_context_properties,
         cl_uint,
         *const cl_device_id,
-        Option::<
+        Option<
             unsafe extern "C" fn(
                 *const libc::c_char,
                 *const libc::c_void,
@@ -566,7 +554,7 @@ pub type clCreateContext_func = Option::<
     ) -> cl_context,
 >;
 pub type cl_context_properties = intptr_t;
-pub type clCreateCommandQueue_func = Option::<
+pub type clCreateCommandQueue_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_device_id,
@@ -575,7 +563,7 @@ pub type clCreateCommandQueue_func = Option::<
     ) -> cl_command_queue,
 >;
 pub type cl_command_queue_properties = cl_bitfield;
-pub type clCreateBuffer_func = Option::<
+pub type clCreateBuffer_func = Option<
     unsafe extern "C" fn(
         cl_context,
         cl_mem_flags,
@@ -584,13 +572,13 @@ pub type clCreateBuffer_func = Option::<
         *mut cl_int,
     ) -> cl_mem,
 >;
-pub type clBuildProgram_func = Option::<
+pub type clBuildProgram_func = Option<
     unsafe extern "C" fn(
         cl_program,
         cl_uint,
         *const cl_device_id,
         *const libc::c_char,
-        Option::<unsafe extern "C" fn(cl_program, *mut libc::c_void) -> ()>,
+        Option<unsafe extern "C" fn(cl_program, *mut libc::c_void) -> ()>,
         *mut libc::c_void,
     ) -> cl_int,
 >;
@@ -724,7 +712,7 @@ pub struct x264_frame {
     pub extra_sei: x264_sei_t,
     pub opaque: *mut libc::c_void,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub opencl: x264_frame_opencl_t,
 }
 #[derive(Copy, Clone)]
@@ -745,7 +733,7 @@ pub struct x264_frame_opencl_t {
 pub struct x264_sei_t {
     pub num_payloads: libc::c_int,
     pub payloads: *mut x264_sei_payload_t,
-    pub sei_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub sei_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -773,7 +761,7 @@ pub struct x264_weight_t {
     pub i_offset: int32_t,
     pub weightfn: *mut weight_fn_t,
 }
-pub type weight_fn_t = Option::<
+pub type weight_fn_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         intptr_t,
@@ -832,7 +820,7 @@ pub struct x264_param_t {
     pub cqm_8py: [uint8_t; 64],
     pub cqm_8ic: [uint8_t; 64],
     pub cqm_8pc: [uint8_t; 64],
-    pub pf_log: Option::<
+    pub pf_log: Option<
         unsafe extern "C" fn(
             *mut libc::c_void,
             libc::c_int,
@@ -874,10 +862,9 @@ pub struct x264_param_t {
     pub i_slice_min_mbs: libc::c_int,
     pub i_slice_count: libc::c_int,
     pub i_slice_count_max: libc::c_int,
-    pub param_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
-    pub nalu_process: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> (),
-    >,
+    pub param_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub nalu_process:
+        Option<unsafe extern "C" fn(*mut x264_t, *mut x264_nal_t, *mut libc::c_void) -> ()>,
     pub opaque: *mut libc::c_void,
 }
 #[derive(Copy, Clone)]
@@ -1011,33 +998,14 @@ pub struct C2RustUnnamed_6 {
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_bitstream_function_t {
-    pub nal_escape: Option::<
-        unsafe extern "C" fn(*mut uint8_t, *mut uint8_t, *mut uint8_t) -> *mut uint8_t,
-    >,
-    pub cabac_block_residual_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
-    pub cabac_block_residual_rd_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
-    pub cabac_block_residual_8x8_rd_internal: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            libc::c_int,
-            intptr_t,
-            *mut x264_cabac_t,
-        ) -> (),
-    >,
+    pub nal_escape:
+        Option<unsafe extern "C" fn(*mut uint8_t, *mut uint8_t, *mut uint8_t) -> *mut uint8_t>,
+    pub cabac_block_residual_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
+    pub cabac_block_residual_rd_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
+    pub cabac_block_residual_8x8_rd_internal:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, intptr_t, *mut x264_cabac_t) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1073,7 +1041,7 @@ pub struct x264_deblock_function_t {
     pub deblock_chroma_intra_mbaff: x264_deblock_intra_t,
     pub deblock_chroma_420_intra_mbaff: x264_deblock_intra_t,
     pub deblock_chroma_422_intra_mbaff: x264_deblock_intra_t,
-    pub deblock_strength: Option::<
+    pub deblock_strength: Option<
         unsafe extern "C" fn(
             *mut uint8_t,
             *mut [int8_t; 40],
@@ -1084,50 +1052,31 @@ pub struct x264_deblock_function_t {
         ) -> (),
     >,
 }
-pub type x264_deblock_intra_t = Option::<
-    unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int) -> (),
->;
-pub type x264_deblock_inter_t = Option::<
-    unsafe extern "C" fn(
-        *mut pixel,
-        intptr_t,
-        libc::c_int,
-        libc::c_int,
-        *mut int8_t,
-    ) -> (),
->;
+pub type x264_deblock_intra_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int) -> ()>;
+pub type x264_deblock_inter_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int, libc::c_int, *mut int8_t) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_quant_function_t {
-    pub quant_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int,
+    pub quant_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int>,
+    pub quant_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int>,
+    pub quant_4x4x4: Option<
+        unsafe extern "C" fn(*mut [dctcoef; 16], *mut udctcoef, *mut udctcoef) -> libc::c_int,
     >,
-    pub quant_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut udctcoef, *mut udctcoef) -> libc::c_int,
-    >,
-    pub quant_4x4x4: Option::<
-        unsafe extern "C" fn(
-            *mut [dctcoef; 16],
-            *mut udctcoef,
-            *mut udctcoef,
-        ) -> libc::c_int,
-    >,
-    pub quant_4x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int,
-    >,
-    pub quant_2x2_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int,
-    >,
-    pub dequant_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 64], libc::c_int) -> (),
-    >,
-    pub dequant_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub dequant_4x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub idct_dequant_2x4_dc: Option::<
+    pub quant_4x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int>,
+    pub quant_2x2_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int, libc::c_int) -> libc::c_int>,
+    pub dequant_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 64], libc::c_int) -> ()>,
+    pub dequant_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub dequant_4x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub idct_dequant_2x4_dc: Option<
         unsafe extern "C" fn(
             *mut dctcoef,
             *mut [dctcoef; 16],
@@ -1135,39 +1084,27 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> (),
     >,
-    pub idct_dequant_2x4_dconly: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> (),
-    >,
-    pub optimize_chroma_2x2_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int,
-    >,
-    pub optimize_chroma_2x4_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int,
-    >,
-    pub denoise_dct: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            *mut uint32_t,
-            *mut udctcoef,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub decimate_score15: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub decimate_score16: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub decimate_score64: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_last: [Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>; 14],
-    pub coeff_last4: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_last8: Option::<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
-    pub coeff_level_run: [Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >; 13],
-    pub coeff_level_run4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >,
-    pub coeff_level_run8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int,
-    >,
-    pub trellis_cabac_4x4: Option::<
+    pub idct_dequant_2x4_dconly:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut [libc::c_int; 16], libc::c_int) -> ()>,
+    pub optimize_chroma_2x2_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int>,
+    pub optimize_chroma_2x4_dc:
+        Option<unsafe extern "C" fn(*mut dctcoef, libc::c_int) -> libc::c_int>,
+    pub denoise_dct:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut uint32_t, *mut udctcoef, libc::c_int) -> ()>,
+    pub decimate_score15: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub decimate_score16: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub decimate_score64: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_last: [Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>; 14],
+    pub coeff_last4: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_last8: Option<unsafe extern "C" fn(*mut dctcoef) -> libc::c_int>,
+    pub coeff_level_run:
+        [Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>; 13],
+    pub coeff_level_run4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>,
+    pub coeff_level_run8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut x264_run_level_t) -> libc::c_int>,
+    pub trellis_cabac_4x4: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1183,7 +1120,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_8x8: Option::<
+    pub trellis_cabac_8x8: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1199,25 +1136,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_4x4_psy: Option::<
-        unsafe extern "C" fn(
-            *const libc::c_int,
-            *const uint8_t,
-            libc::c_int,
-            libc::c_int,
-            *mut dctcoef,
-            *mut dctcoef,
-            *mut dctcoef,
-            *mut uint8_t,
-            *mut uint8_t,
-            uint64_t,
-            uint16_t,
-            libc::c_int,
-            *mut dctcoef,
-            libc::c_int,
-        ) -> libc::c_int,
-    >,
-    pub trellis_cabac_8x8_psy: Option::<
+    pub trellis_cabac_4x4_psy: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1235,7 +1154,25 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_dc: Option::<
+    pub trellis_cabac_8x8_psy: Option<
+        unsafe extern "C" fn(
+            *const libc::c_int,
+            *const uint8_t,
+            libc::c_int,
+            libc::c_int,
+            *mut dctcoef,
+            *mut dctcoef,
+            *mut dctcoef,
+            *mut uint8_t,
+            *mut uint8_t,
+            uint64_t,
+            uint16_t,
+            libc::c_int,
+            *mut dctcoef,
+            libc::c_int,
+        ) -> libc::c_int,
+    >,
+    pub trellis_cabac_dc: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1251,7 +1188,7 @@ pub struct x264_quant_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub trellis_cabac_chroma_422_dc: Option::<
+    pub trellis_cabac_chroma_422_dc: Option<
         unsafe extern "C" fn(
             *const libc::c_int,
             *const uint8_t,
@@ -1278,71 +1215,45 @@ pub type udctcoef = uint16_t;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_zigzag_function_t {
-    pub scan_8x8: Option::<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
-    pub scan_4x4: Option::<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
-    pub sub_8x8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int,
+    pub scan_8x8: Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
+    pub scan_4x4: Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef) -> ()>,
+    pub sub_8x8:
+        Option<unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int>,
+    pub sub_4x4:
+        Option<unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int>,
+    pub sub_4x4ac: Option<
+        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel, *mut dctcoef) -> libc::c_int,
     >,
-    pub sub_4x4: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *const pixel, *mut pixel) -> libc::c_int,
-    >,
-    pub sub_4x4ac: Option::<
-        unsafe extern "C" fn(
-            *mut dctcoef,
-            *const pixel,
-            *mut pixel,
-            *mut dctcoef,
-        ) -> libc::c_int,
-    >,
-    pub interleave_8x8_cavlc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut dctcoef, *mut uint8_t) -> (),
-    >,
+    pub interleave_8x8_cavlc:
+        Option<unsafe extern "C" fn(*mut dctcoef, *mut dctcoef, *mut uint8_t) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_dct_function_t {
-    pub sub4x4_dct: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add4x4_idct: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x8_dct: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> (),
-    >,
-    pub sub8x8_dct_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add8x8_idct: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> (),
-    >,
-    pub add8x8_idct_dc: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x16_dct_dc: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub sub16x16_dct: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> (),
-    >,
-    pub add16x16_idct: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> (),
-    >,
-    pub add16x16_idct_dc: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub8x8_dct8: Option::<
-        unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> (),
-    >,
-    pub add8x8_idct8: Option::<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
-    pub sub16x16_dct8: Option::<
-        unsafe extern "C" fn(*mut [dctcoef; 64], *mut pixel, *mut pixel) -> (),
-    >,
-    pub add16x16_idct8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 64]) -> (),
-    >,
-    pub dct4x4dc: Option::<unsafe extern "C" fn(*mut dctcoef) -> ()>,
-    pub idct4x4dc: Option::<unsafe extern "C" fn(*mut dctcoef) -> ()>,
-    pub dct2x4dc: Option::<unsafe extern "C" fn(*mut dctcoef, *mut [dctcoef; 16]) -> ()>,
+    pub sub4x4_dct: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add4x4_idct: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x8_dct: Option<unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> ()>,
+    pub sub8x8_dct_dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add8x8_idct: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> ()>,
+    pub add8x8_idct_dc: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x16_dct_dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub sub16x16_dct:
+        Option<unsafe extern "C" fn(*mut [dctcoef; 16], *mut pixel, *mut pixel) -> ()>,
+    pub add16x16_idct: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 16]) -> ()>,
+    pub add16x16_idct_dc: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub8x8_dct8: Option<unsafe extern "C" fn(*mut dctcoef, *mut pixel, *mut pixel) -> ()>,
+    pub add8x8_idct8: Option<unsafe extern "C" fn(*mut pixel, *mut dctcoef) -> ()>,
+    pub sub16x16_dct8:
+        Option<unsafe extern "C" fn(*mut [dctcoef; 64], *mut pixel, *mut pixel) -> ()>,
+    pub add16x16_idct8: Option<unsafe extern "C" fn(*mut pixel, *mut [dctcoef; 64]) -> ()>,
+    pub dct4x4dc: Option<unsafe extern "C" fn(*mut dctcoef) -> ()>,
+    pub idct4x4dc: Option<unsafe extern "C" fn(*mut dctcoef) -> ()>,
+    pub dct2x4dc: Option<unsafe extern "C" fn(*mut dctcoef, *mut [dctcoef; 16]) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct x264_mc_functions_t {
-    pub mc_luma: Option::<
+    pub mc_luma: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1355,7 +1266,7 @@ pub struct x264_mc_functions_t {
             *const x264_weight_t,
         ) -> (),
     >,
-    pub get_ref: Option::<
+    pub get_ref: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut intptr_t,
@@ -1368,7 +1279,7 @@ pub struct x264_mc_functions_t {
             *const x264_weight_t,
         ) -> *mut pixel,
     >,
-    pub mc_chroma: Option::<
+    pub mc_chroma: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1381,7 +1292,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub avg: [Option::<
+    pub avg: [Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1392,40 +1303,19 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >; 12],
-    pub copy: [Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub copy: [Option<
+        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> (),
     >; 7],
-    pub copy_16x16_unaligned: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub copy_16x16_unaligned:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub store_interleave_chroma: Option<
+        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, *mut pixel, libc::c_int) -> (),
     >,
-    pub store_interleave_chroma: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            *mut pixel,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub load_deinterleave_chroma_fenc: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub load_deinterleave_chroma_fdec: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub plane_copy: Option::<
+    pub load_deinterleave_chroma_fenc:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub load_deinterleave_chroma_fdec:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub plane_copy: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1435,7 +1325,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_swap: Option::<
+    pub plane_copy_swap: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1445,7 +1335,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_interleave: Option::<
+    pub plane_copy_interleave: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1457,7 +1347,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave: Option::<
+    pub plane_copy_deinterleave: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1469,7 +1359,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_yuyv: Option::<
+    pub plane_copy_deinterleave_yuyv: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1481,7 +1371,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_rgb: Option::<
+    pub plane_copy_deinterleave_rgb: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1496,7 +1386,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub plane_copy_deinterleave_v210: Option::<
+    pub plane_copy_deinterleave_v210: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1508,7 +1398,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub hpel_filter: Option::<
+    pub hpel_filter: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1520,64 +1410,24 @@ pub struct x264_mc_functions_t {
             *mut int16_t,
         ) -> (),
     >,
-    pub prefetch_fenc: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
+    pub prefetch_fenc:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_400:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_420:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_fenc_422:
+        Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub prefetch_ref: Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> ()>,
+    pub memcpy_aligned: Option<
+        unsafe extern "C" fn(*mut libc::c_void, *const libc::c_void, size_t) -> *mut libc::c_void,
     >,
-    pub prefetch_fenc_400: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_fenc_420: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_fenc_422: Option::<
-        unsafe extern "C" fn(
-            *mut pixel,
-            intptr_t,
-            *mut pixel,
-            intptr_t,
-            libc::c_int,
-        ) -> (),
-    >,
-    pub prefetch_ref: Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> (),
-    >,
-    pub memcpy_aligned: Option::<
-        unsafe extern "C" fn(
-            *mut libc::c_void,
-            *const libc::c_void,
-            size_t,
-        ) -> *mut libc::c_void,
-    >,
-    pub memzero_aligned: Option::<unsafe extern "C" fn(*mut libc::c_void, size_t) -> ()>,
-    pub integral_init4h: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> (),
-    >,
-    pub integral_init8h: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> (),
-    >,
-    pub integral_init4v: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut uint16_t, intptr_t) -> (),
-    >,
-    pub integral_init8v: Option::<unsafe extern "C" fn(*mut uint16_t, intptr_t) -> ()>,
-    pub frame_init_lowres_core: Option::<
+    pub memzero_aligned: Option<unsafe extern "C" fn(*mut libc::c_void, size_t) -> ()>,
+    pub integral_init4h: Option<unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> ()>,
+    pub integral_init8h: Option<unsafe extern "C" fn(*mut uint16_t, *mut pixel, intptr_t) -> ()>,
+    pub integral_init4v: Option<unsafe extern "C" fn(*mut uint16_t, *mut uint16_t, intptr_t) -> ()>,
+    pub integral_init8v: Option<unsafe extern "C" fn(*mut uint16_t, intptr_t) -> ()>,
+    pub frame_init_lowres_core: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1593,10 +1443,8 @@ pub struct x264_mc_functions_t {
     pub weight: *mut weight_fn_t,
     pub offsetadd: *mut weight_fn_t,
     pub offsetsub: *mut weight_fn_t,
-    pub weight_cache: Option::<
-        unsafe extern "C" fn(*mut x264_t, *mut x264_weight_t) -> (),
-    >,
-    pub mbtree_propagate_cost: Option::<
+    pub weight_cache: Option<unsafe extern "C" fn(*mut x264_t, *mut x264_weight_t) -> ()>,
+    pub mbtree_propagate_cost: Option<
         unsafe extern "C" fn(
             *mut int16_t,
             *mut uint16_t,
@@ -1607,7 +1455,7 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub mbtree_propagate_list: Option::<
+    pub mbtree_propagate_list: Option<
         unsafe extern "C" fn(
             *mut x264_t,
             *mut uint16_t,
@@ -1620,12 +1468,10 @@ pub struct x264_mc_functions_t {
             libc::c_int,
         ) -> (),
     >,
-    pub mbtree_fix8_pack: Option::<
-        unsafe extern "C" fn(*mut uint16_t, *mut libc::c_float, libc::c_int) -> (),
-    >,
-    pub mbtree_fix8_unpack: Option::<
-        unsafe extern "C" fn(*mut libc::c_float, *mut uint16_t, libc::c_int) -> (),
-    >,
+    pub mbtree_fix8_pack:
+        Option<unsafe extern "C" fn(*mut uint16_t, *mut libc::c_float, libc::c_int) -> ()>,
+    pub mbtree_fix8_unpack:
+        Option<unsafe extern "C" fn(*mut libc::c_float, *mut uint16_t, libc::c_int) -> ()>,
 }
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -1641,10 +1487,8 @@ pub struct x264_pixel_function_t {
     pub fpelcmp_x3: [x264_pixel_cmp_x3_t; 7],
     pub fpelcmp_x4: [x264_pixel_cmp_x4_t; 7],
     pub sad_aligned: [x264_pixel_cmp_t; 8],
-    pub vsad: Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> libc::c_int,
-    >,
-    pub asd8: Option::<
+    pub vsad: Option<unsafe extern "C" fn(*mut pixel, intptr_t, libc::c_int) -> libc::c_int>,
+    pub asd8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1653,17 +1497,13 @@ pub struct x264_pixel_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >,
-    pub sa8d_satd: [Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> uint64_t,
-    >; 1],
-    pub var: [Option::<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
-    pub var2: [Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> libc::c_int,
-    >; 4],
-    pub hadamard_ac: [Option::<
-        unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t,
-    >; 4],
-    pub ssd_nv12_core: Option::<
+    pub sa8d_satd:
+        [Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> uint64_t>; 1],
+    pub var: [Option<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
+    pub var2:
+        [Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> libc::c_int>; 4],
+    pub hadamard_ac: [Option<unsafe extern "C" fn(*mut pixel, intptr_t) -> uint64_t>; 4],
+    pub ssd_nv12_core: Option<
         unsafe extern "C" fn(
             *mut pixel,
             intptr_t,
@@ -1675,7 +1515,7 @@ pub struct x264_pixel_function_t {
             *mut uint64_t,
         ) -> (),
     >,
-    pub ssim_4x4x2_core: Option::<
+    pub ssim_4x4x2_core: Option<
         unsafe extern "C" fn(
             *const pixel,
             intptr_t,
@@ -1684,7 +1524,7 @@ pub struct x264_pixel_function_t {
             *mut [libc::c_int; 4],
         ) -> (),
     >,
-    pub ssim_end4: Option::<
+    pub ssim_end4: Option<
         unsafe extern "C" fn(
             *mut [libc::c_int; 4],
             *mut [libc::c_int; 4],
@@ -1695,7 +1535,7 @@ pub struct x264_pixel_function_t {
     pub sad_x4: [x264_pixel_cmp_x4_t; 7],
     pub satd_x3: [x264_pixel_cmp_x3_t; 7],
     pub satd_x4: [x264_pixel_cmp_x4_t; 7],
-    pub ads: [Option::<
+    pub ads: [Option<
         unsafe extern "C" fn(
             *mut libc::c_int,
             *mut uint16_t,
@@ -1706,70 +1546,49 @@ pub struct x264_pixel_function_t {
             libc::c_int,
         ) -> libc::c_int,
     >; 7],
-    pub intra_mbcmp_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_16x16: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_chroma: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x16c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_satd_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x8c: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sa8d_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_sad_x3_8x8: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> (),
-    >,
-    pub intra_mbcmp_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_satd_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_sad_x9_4x4: Option::<
-        unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int,
-    >,
-    pub intra_mbcmp_x9_8x8: Option::<
+    pub intra_mbcmp_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_16x16:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_chroma:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x16c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_satd_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x8c:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sa8d_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_sad_x3_8x8:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut libc::c_int) -> ()>,
+    pub intra_mbcmp_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_satd_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_sad_x9_4x4:
+        Option<unsafe extern "C" fn(*mut pixel, *mut pixel, *mut uint16_t) -> libc::c_int>,
+    pub intra_mbcmp_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1778,7 +1597,7 @@ pub struct x264_pixel_function_t {
             *mut uint16_t,
         ) -> libc::c_int,
     >,
-    pub intra_sa8d_x9_8x8: Option::<
+    pub intra_sa8d_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1787,7 +1606,7 @@ pub struct x264_pixel_function_t {
             *mut uint16_t,
         ) -> libc::c_int,
     >,
-    pub intra_sad_x9_8x8: Option::<
+    pub intra_sad_x9_8x8: Option<
         unsafe extern "C" fn(
             *mut pixel,
             *mut pixel,
@@ -1797,7 +1616,7 @@ pub struct x264_pixel_function_t {
         ) -> libc::c_int,
     >,
 }
-pub type x264_pixel_cmp_x4_t = Option::<
+pub type x264_pixel_cmp_x4_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         *mut pixel,
@@ -1808,7 +1627,7 @@ pub type x264_pixel_cmp_x4_t = Option::<
         *mut libc::c_int,
     ) -> (),
 >;
-pub type x264_pixel_cmp_x3_t = Option::<
+pub type x264_pixel_cmp_x3_t = Option<
     unsafe extern "C" fn(
         *mut pixel,
         *mut pixel,
@@ -1818,16 +1637,12 @@ pub type x264_pixel_cmp_x3_t = Option::<
         *mut libc::c_int,
     ) -> (),
 >;
-pub type x264_pixel_cmp_t = Option::<
-    unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> libc::c_int,
->;
-pub type x264_predict_8x8_filter_t = Option::<
-    unsafe extern "C" fn(*mut pixel, *mut pixel, libc::c_int, libc::c_int) -> (),
->;
-pub type x264_predict_t = Option::<unsafe extern "C" fn(*mut pixel) -> ()>;
-pub type x264_predict8x8_t = Option::<
-    unsafe extern "C" fn(*mut pixel, *mut pixel) -> (),
->;
+pub type x264_pixel_cmp_t =
+    Option<unsafe extern "C" fn(*mut pixel, intptr_t, *mut pixel, intptr_t) -> libc::c_int>;
+pub type x264_predict_8x8_filter_t =
+    Option<unsafe extern "C" fn(*mut pixel, *mut pixel, libc::c_int, libc::c_int) -> ()>;
+pub type x264_predict_t = Option<unsafe extern "C" fn(*mut pixel) -> ()>;
+pub type x264_predict8x8_t = Option<unsafe extern "C" fn(*mut pixel, *mut pixel) -> ()>;
 #[derive(Copy, Clone)]
 #[repr(C)]
 pub struct C2RustUnnamed_7 {
@@ -2284,9 +2099,9 @@ pub struct x264_image_t {
 #[repr(C)]
 pub struct x264_image_properties_t {
     pub quant_offsets: *mut libc::c_float,
-    pub quant_offsets_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub quant_offsets_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub mb_info: *mut uint8_t,
-    pub mb_info_free: Option::<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
+    pub mb_info_free: Option<unsafe extern "C" fn(*mut libc::c_void) -> ()>,
     pub f_ssim: libc::c_double,
     pub f_psnr_avg: libc::c_double,
     pub f_psnr: [libc::c_double; 3],
@@ -2358,12 +2173,11 @@ unsafe extern "C" fn align_plane_size(
     mut disalign: libc::c_int,
 ) -> libc::c_int {
     if x & (disalign - 1 as libc::c_int) == 0 {
-        x
-            += (if 128 as libc::c_int > 64 as libc::c_int {
-                128 as libc::c_int
-            } else {
-                64 as libc::c_int
-            }) / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
+        x += (if 128 as libc::c_int > 64 as libc::c_int {
+            128 as libc::c_int
+        } else {
+            64 as libc::c_int
+        }) / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
     }
     x
 }
@@ -2383,10 +2197,7 @@ unsafe extern "C" fn frame_internal_csp(mut external_csp: libc::c_int) -> libc::
     }
     0 as libc::c_int
 }
-unsafe extern "C" fn frame_new(
-    mut h: *mut x264_t,
-    mut b_fdec: libc::c_int,
-) -> *mut x264_frame_t {
+unsafe extern "C" fn frame_new(mut h: *mut x264_t, mut b_fdec: libc::c_int) -> *mut x264_frame_t {
     let mut prealloc_idx: libc::c_int = 0;
     let mut prealloc_size: int64_t = 0;
     let mut preallocs: [*mut *mut uint8_t; 1024] = [std::ptr::null_mut::<*mut uint8_t>(); 1024];
@@ -2399,27 +2210,23 @@ unsafe extern "C" fn frame_new(
     let mut i_lines: libc::c_int = 0;
     let mut luma_plane_count: libc::c_int = 0;
     let mut i_padv: libc::c_int = (32 as libc::c_int) << (*h).param.b_interlaced;
-    let mut align: libc::c_int = 64 as libc::c_int
-        / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
+    let mut align: libc::c_int =
+        64 as libc::c_int / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
     if (*h).param.cpu & ((1 as libc::c_uint) << 18 as libc::c_int) != 0
         || (*h).param.cpu & ((1 as libc::c_uint) << 16 as libc::c_int) != 0
     {
-        align = 64 as libc::c_int
-            / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
+        align = 64 as libc::c_int / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
     } else if (*h).param.cpu & ((1 as libc::c_uint) << 17 as libc::c_int) != 0
         || (*h).param.cpu & ((1 as libc::c_uint) << 9 as libc::c_int) != 0
     {
-        align = 32 as libc::c_int
-            / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
+        align = 32 as libc::c_int / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
     } else {
-        align = 16 as libc::c_int
-            / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
+        align = 16 as libc::c_int / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
     }
     let mut disalign: libc::c_int = ((1 as libc::c_int) << 10 as libc::c_int)
         / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int;
-    frame = x264_malloc(
-        ::core::mem::size_of::<x264_frame_t>() as libc::c_ulong as int64_t,
-    ) as *mut x264_frame_t;
+    frame = x264_malloc(::core::mem::size_of::<x264_frame_t>() as libc::c_ulong as int64_t)
+        as *mut x264_frame_t;
     if !frame.is_null() {
         memset(
             frame as *mut libc::c_void,
@@ -2451,10 +2258,8 @@ unsafe extern "C" fn frame_new(
             let mut i: libc::c_int = 0 as libc::c_int;
             while i < 2 as libc::c_int {
                 (*frame).i_width[i as usize] = i_width >> i;
-                (*frame)
-                    .i_lines[i
-                    as usize] = i_lines
-                    >> (i != 0 && i_csp == 0x4 as libc::c_int) as libc::c_int;
+                (*frame).i_lines[i as usize] =
+                    i_lines >> (i != 0 && i_csp == 0x4 as libc::c_int) as libc::c_int;
                 (*frame).i_stride[i as usize] = i_stride;
                 i += 1;
                 i;
@@ -2486,25 +2291,20 @@ unsafe extern "C" fn frame_new(
             3641503318819273726 => {}
             _ => {
                 (*frame).i_csp = i_csp;
-                (*frame)
-                    .i_width_lowres = (*frame).i_width[0 as libc::c_int as usize]
-                    / 2 as libc::c_int;
-                (*frame)
-                    .i_lines_lowres = (*frame).i_lines[0 as libc::c_int as usize]
-                    / 2 as libc::c_int;
-                (*frame)
-                    .i_stride_lowres = align_stride(
+                (*frame).i_width_lowres =
+                    (*frame).i_width[0 as libc::c_int as usize] / 2 as libc::c_int;
+                (*frame).i_lines_lowres =
+                    (*frame).i_lines[0 as libc::c_int as usize] / 2 as libc::c_int;
+                (*frame).i_stride_lowres = align_stride(
                     (*frame).i_width_lowres
                         + ((if 32 as libc::c_int
                             > 64 as libc::c_int
-                                / ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                    as libc::c_int
+                                / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
                         {
                             32 as libc::c_int
                         } else {
                             64 as libc::c_int
-                                / ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                    as libc::c_int
+                                / ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
                         }) + 32 as libc::c_int),
                     align,
                     disalign << 1 as libc::c_int,
@@ -2513,26 +2313,21 @@ unsafe extern "C" fn frame_new(
                 while i_1 < (*h).param.i_bframe + 2 as libc::c_int {
                     let mut j: libc::c_int = 0 as libc::c_int;
                     while j < (*h).param.i_bframe + 2 as libc::c_int {
-                        (*frame)
-                            .i_row_satds[i_1
-                            as usize][j
-                            as usize] = prealloc_size as *mut libc::c_void
-                            as *mut libc::c_int;
+                        (*frame).i_row_satds[i_1 as usize][j as usize] =
+                            prealloc_size as *mut libc::c_void as *mut libc::c_int;
                         let fresh0 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh0
-                            as usize] = &mut *(*((*frame).i_row_satds)
-                            .as_mut_ptr()
-                            .offset(i_1 as isize))
-                            .as_mut_ptr()
-                            .offset(j as isize) as *mut *mut libc::c_int
-                            as *mut *mut uint8_t;
-                        prealloc_size
-                            += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh0 as usize] =
+                            &mut *(*((*frame).i_row_satds).as_mut_ptr().offset(i_1 as isize))
+                                .as_mut_ptr()
+                                .offset(j as isize)
+                                as *mut *mut libc::c_int
+                                as *mut *mut uint8_t;
+                        prealloc_size += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                         j += 1;
                         j;
                     }
@@ -2557,43 +2352,41 @@ unsafe extern "C" fn frame_new(
                 (*frame).i_coded_fields_lookahead = (*frame).i_cpb_delay_lookahead;
                 (*frame).orig = frame;
                 if i_csp == 0x4 as libc::c_int || i_csp == 0x8 as libc::c_int {
-                    let mut chroma_padv: libc::c_int = i_padv
-                        >> (i_csp == 0x4 as libc::c_int) as libc::c_int;
-                    let mut chroma_plane_size: libc::c_int = (*frame)
-                        .i_stride[1 as libc::c_int as usize]
+                    let mut chroma_padv: libc::c_int =
+                        i_padv >> (i_csp == 0x4 as libc::c_int) as libc::c_int;
+                    let mut chroma_plane_size: libc::c_int = (*frame).i_stride
+                        [1 as libc::c_int as usize]
                         * ((*frame).i_lines[1 as libc::c_int as usize]
                             + 2 as libc::c_int * chroma_padv);
-                    (*frame)
-                        .buffer[1 as libc::c_int
-                        as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
+                    (*frame).buffer[1 as libc::c_int as usize] =
+                        prealloc_size as *mut libc::c_void as *mut pixel;
                     let fresh1 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh1
-                        as usize] = &mut *((*frame).buffer)
+                    preallocs[fresh1 as usize] = &mut *((*frame).buffer)
                         .as_mut_ptr()
-                        .offset(1 as libc::c_int as isize) as *mut *mut pixel
+                        .offset(1 as libc::c_int as isize)
+                        as *mut *mut pixel
                         as *mut *mut uint8_t;
-                    prealloc_size
-                        += ((chroma_plane_size
-                            * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                as libc::c_int) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    prealloc_size += ((chroma_plane_size
+                        * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     if (*h).param.b_interlaced != 0 {
-                        (*frame)
-                            .buffer_fld[1 as libc::c_int
-                            as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
+                        (*frame).buffer_fld[1 as libc::c_int as usize] =
+                            prealloc_size as *mut libc::c_void as *mut pixel;
                         let fresh2 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh2
-                            as usize] = &mut *((*frame).buffer_fld)
+                        preallocs[fresh2 as usize] = &mut *((*frame).buffer_fld)
                             .as_mut_ptr()
-                            .offset(1 as libc::c_int as isize) as *mut *mut pixel
+                            .offset(1 as libc::c_int as isize)
+                            as *mut *mut pixel
                             as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((chroma_plane_size
-                                * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                    as libc::c_int) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        prealloc_size += ((chroma_plane_size
+                            * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     }
                 }
                 let mut p: libc::c_int = 0 as libc::c_int;
@@ -2606,35 +2399,30 @@ unsafe extern "C" fn frame_new(
                     if (*h).param.analyse.i_subpel_refine != 0 && b_fdec != 0 {
                         luma_plane_size *= 4 as libc::c_int as int64_t;
                     }
-                    (*frame)
-                        .buffer[p
-                        as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
+                    (*frame).buffer[p as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
                     let fresh3 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh3
-                        as usize] = &mut *((*frame).buffer)
-                        .as_mut_ptr()
-                        .offset(p as isize) as *mut *mut pixel as *mut *mut uint8_t;
-                    prealloc_size
-                        += (luma_plane_size
-                            * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                as libc::c_int as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    preallocs[fresh3 as usize] =
+                        &mut *((*frame).buffer).as_mut_ptr().offset(p as isize) as *mut *mut pixel
+                            as *mut *mut uint8_t;
+                    prealloc_size += (luma_plane_size
+                        * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
+                            as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     if (*h).param.b_interlaced != 0 {
-                        (*frame)
-                            .buffer_fld[p
-                            as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
+                        (*frame).buffer_fld[p as usize] =
+                            prealloc_size as *mut libc::c_void as *mut pixel;
                         let fresh4 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh4
-                            as usize] = &mut *((*frame).buffer_fld)
-                            .as_mut_ptr()
-                            .offset(p as isize) as *mut *mut pixel as *mut *mut uint8_t;
-                        prealloc_size
-                            += (luma_plane_size
-                                * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                    as libc::c_int as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh4 as usize] =
+                            &mut *((*frame).buffer_fld).as_mut_ptr().offset(p as isize)
+                                as *mut *mut pixel as *mut *mut uint8_t;
+                        prealloc_size += (luma_plane_size
+                            * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
+                                as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     }
                     p += 1;
                     p;
@@ -2644,317 +2432,263 @@ unsafe extern "C" fn frame_new(
                     (*frame).mb_type = prealloc_size as *mut libc::c_void as *mut int8_t;
                     let fresh5 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh5
-                        as usize] = &mut (*frame).mb_type as *mut *mut int8_t
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += ((i_mb_count as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<int8_t>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .mb_partition = prealloc_size as *mut libc::c_void
-                        as *mut uint8_t;
+                    preallocs[fresh5 as usize] =
+                        &mut (*frame).mb_type as *mut *mut int8_t as *mut *mut uint8_t;
+                    prealloc_size += ((i_mb_count as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<int8_t>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).mb_partition = prealloc_size as *mut libc::c_void as *mut uint8_t;
                     let fresh6 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh6
-                        as usize] = &mut (*frame).mb_partition as *mut *mut uint8_t;
-                    prealloc_size
-                        += ((i_mb_count as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<uint8_t>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .mv[0 as libc::c_int
-                        as usize] = prealloc_size as *mut libc::c_void
-                        as *mut [int16_t; 2];
+                    preallocs[fresh6 as usize] = &mut (*frame).mb_partition as *mut *mut uint8_t;
+                    prealloc_size += ((i_mb_count as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<uint8_t>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).mv[0 as libc::c_int as usize] =
+                        prealloc_size as *mut libc::c_void as *mut [int16_t; 2];
                     let fresh7 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh7
-                        as usize] = &mut *((*frame).mv)
-                        .as_mut_ptr()
-                        .offset(0 as libc::c_int as isize) as *mut *mut [int16_t; 2]
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((2 as libc::c_int * 16 as libc::c_int * i_mb_count)
-                            as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<int16_t>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .mv16x16 = prealloc_size as *mut libc::c_void
-                        as *mut [int16_t; 2];
+                    preallocs[fresh7 as usize] =
+                        &mut *((*frame).mv).as_mut_ptr().offset(0 as libc::c_int as isize)
+                            as *mut *mut [int16_t; 2] as *mut *mut uint8_t;
+                    prealloc_size += (((2 as libc::c_int * 16 as libc::c_int * i_mb_count)
+                        as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).mv16x16 = prealloc_size as *mut libc::c_void as *mut [int16_t; 2];
                     let fresh8 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh8
-                        as usize] = &mut (*frame).mv16x16 as *mut *mut [int16_t; 2]
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((2 as libc::c_int * (i_mb_count + 1 as libc::c_int))
-                            as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<int16_t>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .ref_0[0 as libc::c_int
-                        as usize] = prealloc_size as *mut libc::c_void as *mut int8_t;
+                    preallocs[fresh8 as usize] =
+                        &mut (*frame).mv16x16 as *mut *mut [int16_t; 2] as *mut *mut uint8_t;
+                    prealloc_size += (((2 as libc::c_int * (i_mb_count + 1 as libc::c_int))
+                        as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).ref_0[0 as libc::c_int as usize] =
+                        prealloc_size as *mut libc::c_void as *mut int8_t;
                     let fresh9 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh9
-                        as usize] = &mut *((*frame).ref_0)
+                    preallocs[fresh9 as usize] = &mut *((*frame).ref_0)
                         .as_mut_ptr()
-                        .offset(0 as libc::c_int as isize) as *mut *mut int8_t
+                        .offset(0 as libc::c_int as isize)
+                        as *mut *mut int8_t
                         as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((4 as libc::c_int * i_mb_count) as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<int8_t>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    prealloc_size += (((4 as libc::c_int * i_mb_count) as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<int8_t>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     if (*h).param.i_bframe != 0 {
-                        (*frame)
-                            .mv[1 as libc::c_int
-                            as usize] = prealloc_size as *mut libc::c_void
-                            as *mut [int16_t; 2];
+                        (*frame).mv[1 as libc::c_int as usize] =
+                            prealloc_size as *mut libc::c_void as *mut [int16_t; 2];
                         let fresh10 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh10
-                            as usize] = &mut *((*frame).mv)
-                            .as_mut_ptr()
-                            .offset(1 as libc::c_int as isize) as *mut *mut [int16_t; 2]
-                            as *mut *mut uint8_t;
-                        prealloc_size
-                            += (((2 as libc::c_int * 16 as libc::c_int * i_mb_count)
-                                as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<int16_t>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                        (*frame)
-                            .ref_0[1 as libc::c_int
-                            as usize] = prealloc_size as *mut libc::c_void
-                            as *mut int8_t;
+                        preallocs[fresh10 as usize] =
+                            &mut *((*frame).mv).as_mut_ptr().offset(1 as libc::c_int as isize)
+                                as *mut *mut [int16_t; 2]
+                                as *mut *mut uint8_t;
+                        prealloc_size += (((2 as libc::c_int * 16 as libc::c_int * i_mb_count)
+                            as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        (*frame).ref_0[1 as libc::c_int as usize] =
+                            prealloc_size as *mut libc::c_void as *mut int8_t;
                         let fresh11 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh11
-                            as usize] = &mut *((*frame).ref_0)
+                        preallocs[fresh11 as usize] = &mut *((*frame).ref_0)
                             .as_mut_ptr()
-                            .offset(1 as libc::c_int as isize) as *mut *mut int8_t
+                            .offset(1 as libc::c_int as isize)
+                            as *mut *mut int8_t
                             as *mut *mut uint8_t;
-                        prealloc_size
-                            += (((4 as libc::c_int * i_mb_count) as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<int8_t>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        prealloc_size += (((4 as libc::c_int * i_mb_count) as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<int8_t>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     } else {
-                        (*frame).mv[1 as libc::c_int as usize] = std::ptr::null_mut::<[int16_t; 2]>();
+                        (*frame).mv[1 as libc::c_int as usize] =
+                            std::ptr::null_mut::<[int16_t; 2]>();
                         (*frame).ref_0[1 as libc::c_int as usize] = std::ptr::null_mut::<int8_t>();
                     }
-                    (*frame)
-                        .i_row_bits = prealloc_size as *mut libc::c_void
-                        as *mut libc::c_int;
+                    (*frame).i_row_bits = prealloc_size as *mut libc::c_void as *mut libc::c_int;
                     let fresh12 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh12
-                        as usize] = &mut (*frame).i_row_bits as *mut *mut libc::c_int
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .f_row_qp = prealloc_size as *mut libc::c_void
-                        as *mut libc::c_float;
+                    preallocs[fresh12 as usize] =
+                        &mut (*frame).i_row_bits as *mut *mut libc::c_int as *mut *mut uint8_t;
+                    prealloc_size += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).f_row_qp = prealloc_size as *mut libc::c_void as *mut libc::c_float;
                     let fresh13 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh13
-                        as usize] = &mut (*frame).f_row_qp as *mut *mut libc::c_float
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<libc::c_float>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                    (*frame)
-                        .f_row_qscale = prealloc_size as *mut libc::c_void
-                        as *mut libc::c_float;
+                    preallocs[fresh13 as usize] =
+                        &mut (*frame).f_row_qp as *mut *mut libc::c_float as *mut *mut uint8_t;
+                    prealloc_size += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<libc::c_float>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    (*frame).f_row_qscale =
+                        prealloc_size as *mut libc::c_void as *mut libc::c_float;
                     let fresh14 = prealloc_idx;
                     prealloc_idx += 1;
-                    preallocs[fresh14
-                        as usize] = &mut (*frame).f_row_qscale as *mut *mut libc::c_float
-                        as *mut *mut uint8_t;
-                    prealloc_size
-                        += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
-                            .wrapping_mul(
-                                ::core::mem::size_of::<libc::c_float>() as libc::c_ulong,
-                            ) as int64_t
-                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                    preallocs[fresh14 as usize] =
+                        &mut (*frame).f_row_qscale as *mut *mut libc::c_float as *mut *mut uint8_t;
+                    prealloc_size += (((i_lines / 16 as libc::c_int) as libc::c_ulong)
+                        .wrapping_mul(::core::mem::size_of::<libc::c_float>() as libc::c_ulong)
+                        as int64_t
+                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     if (*h).param.analyse.i_me_method >= 3 as libc::c_int {
-                        (*frame)
-                            .buffer[3 as libc::c_int
-                            as usize] = prealloc_size as *mut libc::c_void as *mut pixel;
+                        (*frame).buffer[3 as libc::c_int as usize] =
+                            prealloc_size as *mut libc::c_void as *mut pixel;
                         let fresh15 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh15
-                            as usize] = &mut *((*frame).buffer)
+                        preallocs[fresh15 as usize] = &mut *((*frame).buffer)
                             .as_mut_ptr()
-                            .offset(3 as libc::c_int as isize) as *mut *mut pixel
+                            .offset(3 as libc::c_int as isize)
+                            as *mut *mut pixel
                             as *mut *mut uint8_t;
-                        prealloc_size
-                            += (((((*frame).i_stride[0 as libc::c_int as usize]
-                                * ((*frame).i_lines[0 as libc::c_int as usize]
-                                    + 2 as libc::c_int * i_padv)) as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                ) << (*h).frames.b_have_sub8x8_esa) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        prealloc_size += (((((*frame).i_stride[0 as libc::c_int as usize]
+                            * ((*frame).i_lines[0 as libc::c_int as usize]
+                                + 2 as libc::c_int * i_padv))
+                            as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<uint16_t>() as libc::c_ulong)
+                            << (*h).frames.b_have_sub8x8_esa)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     }
                     if (*h).param.b_interlaced != 0 {
-                        (*frame)
-                            .field = prealloc_size as *mut libc::c_void as *mut uint8_t;
+                        (*frame).field = prealloc_size as *mut libc::c_void as *mut uint8_t;
                         let fresh16 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh16
-                            as usize] = &mut (*frame).field as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<uint8_t>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh16 as usize] = &mut (*frame).field as *mut *mut uint8_t;
+                        prealloc_size += ((i_mb_count as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<uint8_t>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     }
                     if (*h).param.analyse.b_mb_info != 0 {
-                        (*frame)
-                            .effective_qp = prealloc_size as *mut libc::c_void
-                            as *mut uint8_t;
+                        (*frame).effective_qp = prealloc_size as *mut libc::c_void as *mut uint8_t;
                         let fresh17 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh17
-                            as usize] = &mut (*frame).effective_qp as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<uint8_t>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh17 as usize] =
+                            &mut (*frame).effective_qp as *mut *mut uint8_t;
+                        prealloc_size += ((i_mb_count as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<uint8_t>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                     }
                 } else {
                     if (*h).frames.b_have_lowres != 0 {
                         let mut luma_plane_size_0: int64_t = align_plane_size(
                             (*frame).i_stride_lowres
-                                * ((*frame).i_lines[0 as libc::c_int as usize]
-                                    / 2 as libc::c_int + 2 as libc::c_int * 32 as libc::c_int),
+                                * ((*frame).i_lines[0 as libc::c_int as usize] / 2 as libc::c_int
+                                    + 2 as libc::c_int * 32 as libc::c_int),
                             disalign,
                         ) as int64_t;
-                        (*frame)
-                            .buffer_lowres = prealloc_size as *mut libc::c_void
-                            as *mut pixel;
+                        (*frame).buffer_lowres = prealloc_size as *mut libc::c_void as *mut pixel;
                         let fresh18 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh18
-                            as usize] = &mut (*frame).buffer_lowres as *mut *mut pixel
-                            as *mut *mut uint8_t;
-                        prealloc_size
-                            += (4 as libc::c_int as int64_t * luma_plane_size_0
-                                * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                                    as libc::c_int as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh18 as usize] =
+                            &mut (*frame).buffer_lowres as *mut *mut pixel as *mut *mut uint8_t;
+                        prealloc_size += (4 as libc::c_int as int64_t
+                            * luma_plane_size_0
+                            * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
+                                as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                         let mut j_0: libc::c_int = 0 as libc::c_int;
                         while j_0 <= ((*h).param.i_bframe != 0) as libc::c_int {
                             let mut i_2: libc::c_int = 0 as libc::c_int;
                             while i_2 <= (*h).param.i_bframe {
-                                (*frame)
-                                    .lowres_mvs[j_0
-                                    as usize][i_2
-                                    as usize] = prealloc_size as *mut libc::c_void
-                                    as *mut [int16_t; 2];
+                                (*frame).lowres_mvs[j_0 as usize][i_2 as usize] =
+                                    prealloc_size as *mut libc::c_void as *mut [int16_t; 2];
                                 let fresh19 = prealloc_idx;
                                 prealloc_idx += 1;
-                                preallocs[fresh19
-                                    as usize] = &mut *(*((*frame).lowres_mvs)
+                                preallocs[fresh19 as usize] = &mut *(*((*frame).lowres_mvs)
                                     .as_mut_ptr()
                                     .offset(j_0 as isize))
-                                    .as_mut_ptr()
-                                    .offset(i_2 as isize) as *mut *mut [int16_t; 2]
+                                .as_mut_ptr()
+                                .offset(i_2 as isize)
+                                    as *mut *mut [int16_t; 2]
                                     as *mut *mut uint8_t;
-                                prealloc_size
-                                    += (((2 as libc::c_int * i_mb_count) as libc::c_ulong)
+                                prealloc_size +=
+                                    (((2 as libc::c_int * i_mb_count) as libc::c_ulong)
                                         .wrapping_mul(
-                                            ::core::mem::size_of::<int16_t>() as libc::c_ulong,
+                                            ::core::mem::size_of::<int16_t>() as libc::c_ulong
                                         ) as int64_t
-                                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                                (*frame)
-                                    .lowres_mv_costs[j_0
-                                    as usize][i_2
-                                    as usize] = prealloc_size as *mut libc::c_void
-                                    as *mut libc::c_int;
+                                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                                        & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                                (*frame).lowres_mv_costs[j_0 as usize][i_2 as usize] =
+                                    prealloc_size as *mut libc::c_void as *mut libc::c_int;
                                 let fresh20 = prealloc_idx;
                                 prealloc_idx += 1;
-                                preallocs[fresh20
-                                    as usize] = &mut *(*((*frame).lowres_mv_costs)
+                                preallocs[fresh20 as usize] = &mut *(*((*frame).lowres_mv_costs)
                                     .as_mut_ptr()
                                     .offset(j_0 as isize))
-                                    .as_mut_ptr()
-                                    .offset(i_2 as isize) as *mut *mut libc::c_int
+                                .as_mut_ptr()
+                                .offset(i_2 as isize)
+                                    as *mut *mut libc::c_int
                                     as *mut *mut uint8_t;
-                                prealloc_size
-                                    += ((i_mb_count as libc::c_ulong)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
-                                        ) as int64_t
-                                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                                prealloc_size += ((i_mb_count as libc::c_ulong).wrapping_mul(
+                                    ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
+                                ) as int64_t
+                                    + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                                    & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                                 i_2 += 1;
                                 i_2;
                             }
                             j_0 += 1;
                             j_0;
                         }
-                        (*frame)
-                            .i_propagate_cost = prealloc_size as *mut libc::c_void
-                            as *mut uint16_t;
+                        (*frame).i_propagate_cost =
+                            prealloc_size as *mut libc::c_void as *mut uint16_t;
                         let fresh21 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh21
-                            as usize] = &mut (*frame).i_propagate_cost
-                            as *mut *mut uint16_t as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh21 as usize] = &mut (*frame).i_propagate_cost
+                            as *mut *mut uint16_t
+                            as *mut *mut uint8_t;
+                        prealloc_size += ((i_mb_count as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<uint16_t>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                         let mut j_1: libc::c_int = 0 as libc::c_int;
                         while j_1 <= (*h).param.i_bframe + 1 as libc::c_int {
                             let mut i_3: libc::c_int = 0 as libc::c_int;
                             while i_3 <= (*h).param.i_bframe + 1 as libc::c_int {
-                                (*frame)
-                                    .lowres_costs[j_1
-                                    as usize][i_3
-                                    as usize] = prealloc_size as *mut libc::c_void
-                                    as *mut uint16_t;
+                                (*frame).lowres_costs[j_1 as usize][i_3 as usize] =
+                                    prealloc_size as *mut libc::c_void as *mut uint16_t;
                                 let fresh22 = prealloc_idx;
                                 prealloc_idx += 1;
-                                preallocs[fresh22
-                                    as usize] = &mut *(*((*frame).lowres_costs)
+                                preallocs[fresh22 as usize] = &mut *(*((*frame).lowres_costs)
                                     .as_mut_ptr()
                                     .offset(j_1 as isize))
-                                    .as_mut_ptr()
-                                    .offset(i_3 as isize) as *mut *mut uint16_t
+                                .as_mut_ptr()
+                                .offset(i_3 as isize)
+                                    as *mut *mut uint16_t
                                     as *mut *mut uint8_t;
-                                prealloc_size
-                                    += ((i_mb_count as libc::c_ulong)
-                                        .wrapping_mul(
-                                            ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                        ) as int64_t
-                                        + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                                prealloc_size += ((i_mb_count as libc::c_ulong).wrapping_mul(
+                                    ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
+                                ) as int64_t
+                                    + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                                    & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                                 i_3 += 1;
                                 i_3;
                             }
@@ -2963,49 +2697,43 @@ unsafe extern "C" fn frame_new(
                         }
                     }
                     if (*h).param.rc.i_aq_mode != 0 {
-                        (*frame)
-                            .f_qp_offset = prealloc_size as *mut libc::c_void
-                            as *mut libc::c_float;
+                        (*frame).f_qp_offset =
+                            prealloc_size as *mut libc::c_void as *mut libc::c_float;
                         let fresh23 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh23
-                            as usize] = &mut (*frame).f_qp_offset
-                            as *mut *mut libc::c_float as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<libc::c_float>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
-                        (*frame)
-                            .f_qp_offset_aq = prealloc_size as *mut libc::c_void
-                            as *mut libc::c_float;
+                        preallocs[fresh23 as usize] = &mut (*frame).f_qp_offset
+                            as *mut *mut libc::c_float
+                            as *mut *mut uint8_t;
+                        prealloc_size += ((i_mb_count as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<libc::c_float>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        (*frame).f_qp_offset_aq =
+                            prealloc_size as *mut libc::c_void as *mut libc::c_float;
                         let fresh24 = prealloc_idx;
                         prealloc_idx += 1;
-                        preallocs[fresh24
-                            as usize] = &mut (*frame).f_qp_offset_aq
-                            as *mut *mut libc::c_float as *mut *mut uint8_t;
-                        prealloc_size
-                            += ((i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<libc::c_float>() as libc::c_ulong,
-                                ) as int64_t
-                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                        preallocs[fresh24 as usize] = &mut (*frame).f_qp_offset_aq
+                            as *mut *mut libc::c_float
+                            as *mut *mut uint8_t;
+                        prealloc_size += ((i_mb_count as libc::c_ulong)
+                            .wrapping_mul(::core::mem::size_of::<libc::c_float>() as libc::c_ulong)
+                            as int64_t
+                            + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                            & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                         if (*h).frames.b_have_lowres != 0 {
-                            (*frame)
-                                .i_inv_qscale_factor = prealloc_size as *mut libc::c_void
-                                as *mut uint16_t;
+                            (*frame).i_inv_qscale_factor =
+                                prealloc_size as *mut libc::c_void as *mut uint16_t;
                             let fresh25 = prealloc_idx;
                             prealloc_idx += 1;
-                            preallocs[fresh25
-                                as usize] = &mut (*frame).i_inv_qscale_factor
-                                as *mut *mut uint16_t as *mut *mut uint8_t;
-                            prealloc_size
-                                += ((i_mb_count as libc::c_ulong)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                    ) as int64_t
-                                    + (64 as libc::c_int - 1 as libc::c_int) as int64_t) & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
+                            preallocs[fresh25 as usize] = &mut (*frame).i_inv_qscale_factor
+                                as *mut *mut uint16_t
+                                as *mut *mut uint8_t;
+                            prealloc_size += ((i_mb_count as libc::c_ulong)
+                                .wrapping_mul(::core::mem::size_of::<uint16_t>() as libc::c_ulong)
+                                as int64_t
+                                + (64 as libc::c_int - 1 as libc::c_int) as int64_t)
+                                & !(64 as libc::c_int - 1 as libc::c_int) as int64_t;
                         }
                     }
                     if (*h).frames.b_have_lowres != 0 {
@@ -3020,19 +2748,19 @@ unsafe extern "C" fn frame_new(
                         if fresh26 == 0 {
                             break;
                         }
-                        *preallocs[prealloc_idx
-                            as usize] = (*preallocs[prealloc_idx as usize] as intptr_t
-                            + (*frame).base as intptr_t) as *mut uint8_t;
+                        *preallocs[prealloc_idx as usize] = (*preallocs[prealloc_idx as usize]
+                            as intptr_t
+                            + (*frame).base as intptr_t)
+                            as *mut uint8_t;
                     }
                     if i_csp == 0x4 as libc::c_int || i_csp == 0x8 as libc::c_int {
-                        let mut chroma_padv_0: libc::c_int = i_padv
-                            >> (i_csp == 0x4 as libc::c_int) as libc::c_int;
-                        (*frame)
-                            .plane[1 as libc::c_int
-                            as usize] = ((*frame).buffer[1 as libc::c_int as usize])
+                        let mut chroma_padv_0: libc::c_int =
+                            i_padv >> (i_csp == 0x4 as libc::c_int) as libc::c_int;
+                        (*frame).plane[1 as libc::c_int as usize] = ((*frame).buffer
+                            [1 as libc::c_int as usize])
                             .offset(
-                                ((*frame).i_stride[1 as libc::c_int as usize]
-                                    * chroma_padv_0) as isize,
+                                ((*frame).i_stride[1 as libc::c_int as usize] * chroma_padv_0)
+                                    as isize,
                             )
                             .offset(
                                 (if 32 as libc::c_int
@@ -3048,12 +2776,11 @@ unsafe extern "C" fn frame_new(
                                 }) as isize,
                             );
                         if (*h).param.b_interlaced != 0 {
-                            (*frame)
-                                .plane_fld[1 as libc::c_int
-                                as usize] = ((*frame).buffer_fld[1 as libc::c_int as usize])
+                            (*frame).plane_fld[1 as libc::c_int as usize] = ((*frame).buffer_fld
+                                [1 as libc::c_int as usize])
                                 .offset(
-                                    ((*frame).i_stride[1 as libc::c_int as usize]
-                                        * chroma_padv_0) as isize,
+                                    ((*frame).i_stride[1 as libc::c_int as usize] * chroma_padv_0)
+                                        as isize,
                                 )
                                 .offset(
                                     (if 32 as libc::c_int
@@ -3074,17 +2801,14 @@ unsafe extern "C" fn frame_new(
                     while p_0 < luma_plane_count {
                         let mut luma_plane_size_1: int64_t = align_plane_size(
                             (*frame).i_stride[p_0 as usize]
-                                * ((*frame).i_lines[p_0 as usize]
-                                    + 2 as libc::c_int * i_padv),
+                                * ((*frame).i_lines[p_0 as usize] + 2 as libc::c_int * i_padv),
                             disalign,
                         ) as int64_t;
                         if (*h).param.analyse.i_subpel_refine != 0 && b_fdec != 0 {
                             let mut i_4: libc::c_int = 0 as libc::c_int;
                             while i_4 < 4 as libc::c_int {
-                                (*frame)
-                                    .filtered[p_0
-                                    as usize][i_4
-                                    as usize] = ((*frame).buffer[p_0 as usize])
+                                (*frame).filtered[p_0 as usize][i_4 as usize] = ((*frame).buffer
+                                    [p_0 as usize])
                                     .offset((i_4 as int64_t * luma_plane_size_1) as isize)
                                     .offset(((*frame).i_stride[p_0 as usize] * i_padv) as isize)
                                     .offset(
@@ -3101,22 +2825,22 @@ unsafe extern "C" fn frame_new(
                                         }) as isize,
                                     );
                                 if (*h).param.b_interlaced != 0 {
-                                    (*frame)
-                                        .filtered_fld[p_0
-                                        as usize][i_4
-                                        as usize] = ((*frame).buffer_fld[p_0 as usize])
+                                    (*frame).filtered_fld[p_0 as usize][i_4 as usize] = ((*frame)
+                                        .buffer_fld[p_0 as usize])
                                         .offset((i_4 as int64_t * luma_plane_size_1) as isize)
                                         .offset(((*frame).i_stride[p_0 as usize] * i_padv) as isize)
                                         .offset(
                                             (if 32 as libc::c_int
                                                 > 64 as libc::c_int
-                                                    / ::core::mem::size_of::<pixel>() as libc::c_ulong
+                                                    / ::core::mem::size_of::<pixel>()
+                                                        as libc::c_ulong
                                                         as libc::c_int
                                             {
                                                 32 as libc::c_int
                                             } else {
                                                 64 as libc::c_int
-                                                    / ::core::mem::size_of::<pixel>() as libc::c_ulong
+                                                    / ::core::mem::size_of::<pixel>()
+                                                        as libc::c_ulong
                                                         as libc::c_int
                                             }) as isize,
                                         );
@@ -3124,18 +2848,12 @@ unsafe extern "C" fn frame_new(
                                 i_4 += 1;
                                 i_4;
                             }
-                            (*frame)
-                                .plane[p_0
-                                as usize] = (*frame)
-                                .filtered[p_0 as usize][0 as libc::c_int as usize];
-                            (*frame)
-                                .plane_fld[p_0
-                                as usize] = (*frame)
-                                .filtered_fld[p_0 as usize][0 as libc::c_int as usize];
+                            (*frame).plane[p_0 as usize] =
+                                (*frame).filtered[p_0 as usize][0 as libc::c_int as usize];
+                            (*frame).plane_fld[p_0 as usize] =
+                                (*frame).filtered_fld[p_0 as usize][0 as libc::c_int as usize];
                         } else {
-                            (*frame)
-                                .plane[p_0
-                                as usize] = ((*frame).buffer[p_0 as usize])
+                            (*frame).plane[p_0 as usize] = ((*frame).buffer[p_0 as usize])
                                 .offset(((*frame).i_stride[p_0 as usize] * i_padv) as isize)
                                 .offset(
                                     (if 32 as libc::c_int
@@ -3150,14 +2868,11 @@ unsafe extern "C" fn frame_new(
                                                 as libc::c_int
                                     }) as isize,
                                 );
-                            (*frame)
-                                .filtered[p_0
-                                as usize][0 as libc::c_int
-                                as usize] = (*frame).plane[p_0 as usize];
+                            (*frame).filtered[p_0 as usize][0 as libc::c_int as usize] =
+                                (*frame).plane[p_0 as usize];
                             if (*h).param.b_interlaced != 0 {
-                                (*frame)
-                                    .plane_fld[p_0
-                                    as usize] = ((*frame).buffer_fld[p_0 as usize])
+                                (*frame).plane_fld[p_0 as usize] = ((*frame).buffer_fld
+                                    [p_0 as usize])
                                     .offset(((*frame).i_stride[p_0 as usize] * i_padv) as isize)
                                     .offset(
                                         (if 32 as libc::c_int
@@ -3172,24 +2887,21 @@ unsafe extern "C" fn frame_new(
                                                     as libc::c_int
                                         }) as isize,
                                     );
-                                (*frame)
-                                    .filtered_fld[p_0
-                                    as usize][0 as libc::c_int
-                                    as usize] = (*frame).plane_fld[p_0 as usize];
+                                (*frame).filtered_fld[p_0 as usize][0 as libc::c_int as usize] =
+                                    (*frame).plane_fld[p_0 as usize];
                             }
                         }
                         p_0 += 1;
                         p_0;
                     }
                     if b_fdec != 0 {
-                        (*((*((*frame).mv16x16).offset(0 as libc::c_int as isize))
-                            .as_mut_ptr() as *mut x264_union32_t))
+                        (*((*((*frame).mv16x16).offset(0 as libc::c_int as isize)).as_mut_ptr()
+                            as *mut x264_union32_t))
                             .i = 0 as libc::c_int as uint32_t;
                         (*frame).mv16x16 = ((*frame).mv16x16).offset(1);
                         (*frame).mv16x16;
                         if (*h).param.analyse.i_me_method >= 3 as libc::c_int {
-                            (*frame)
-                                .integral = ((*frame).buffer[3 as libc::c_int as usize]
+                            (*frame).integral = ((*frame).buffer[3 as libc::c_int as usize]
                                 as *mut uint16_t)
                                 .offset(
                                     ((*frame).i_stride[0 as libc::c_int as usize] * i_padv)
@@ -3212,18 +2924,14 @@ unsafe extern "C" fn frame_new(
                     } else if (*h).frames.b_have_lowres != 0 {
                         let mut luma_plane_size_2: int64_t = align_plane_size(
                             (*frame).i_stride_lowres
-                                * ((*frame).i_lines[0 as libc::c_int as usize]
-                                    / 2 as libc::c_int + 2 as libc::c_int * 32 as libc::c_int),
+                                * ((*frame).i_lines[0 as libc::c_int as usize] / 2 as libc::c_int
+                                    + 2 as libc::c_int * 32 as libc::c_int),
                             disalign,
                         ) as int64_t;
                         let mut i_5: libc::c_int = 0 as libc::c_int;
                         while i_5 < 4 as libc::c_int {
-                            (*frame)
-                                .lowres[i_5
-                                as usize] = ((*frame).buffer_lowres)
-                                .offset(
-                                    ((*frame).i_stride_lowres * 32 as libc::c_int) as isize,
-                                )
+                            (*frame).lowres[i_5 as usize] = ((*frame).buffer_lowres)
+                                .offset(((*frame).i_stride_lowres * 32 as libc::c_int) as isize)
                                 .offset(
                                     (if 32 as libc::c_int
                                         > 64 as libc::c_int
@@ -3251,7 +2959,7 @@ unsafe extern "C" fn frame_new(
                                     0 as libc::c_int,
                                     ((2 as libc::c_int * i_mb_count) as libc::c_ulong)
                                         .wrapping_mul(
-                                            ::core::mem::size_of::<int16_t>() as libc::c_ulong,
+                                            ::core::mem::size_of::<int16_t>() as libc::c_ulong
                                         ),
                                 );
                                 i_6 += 1;
@@ -3260,36 +2968,38 @@ unsafe extern "C" fn frame_new(
                             j_2 += 1;
                             j_2;
                         }
-                        (*frame)
-                            .i_intra_cost = (*frame)
-                            .lowres_costs[0 as libc::c_int
-                            as usize][0 as libc::c_int as usize];
+                        (*frame).i_intra_cost = (*frame).lowres_costs[0 as libc::c_int as usize]
+                            [0 as libc::c_int as usize];
                         memset(
                             (*frame).i_intra_cost as *mut libc::c_void,
                             -(1 as libc::c_int),
-                            (i_mb_count as libc::c_ulong)
-                                .wrapping_mul(
-                                    ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                ),
+                            (i_mb_count as libc::c_ulong).wrapping_mul(::core::mem::size_of::<
+                                uint16_t,
+                            >(
+                            )
+                                as libc::c_ulong),
                         );
                         if (*h).param.rc.i_aq_mode != 0 {
                             memset(
                                 (*frame).i_inv_qscale_factor as *mut libc::c_void,
                                 0 as libc::c_int,
-                                (i_mb_count as libc::c_ulong)
-                                    .wrapping_mul(
-                                        ::core::mem::size_of::<uint16_t>() as libc::c_ulong,
-                                    ),
+                                (i_mb_count as libc::c_ulong).wrapping_mul(::core::mem::size_of::<
+                                    uint16_t,
+                                >(
+                                )
+                                    as libc::c_ulong),
                             );
                         }
                     }
                     if pthread_mutex_init(
                         &mut (*frame).mutex,
                         std::ptr::null::<pthread_mutexattr_t>(),
-                    ) == 0 && pthread_cond_init(
+                    ) == 0
+                        && pthread_cond_init(
                             &mut (*frame).cv,
                             std::ptr::null::<pthread_condattr_t>(),
-                        ) == 0 {
+                        ) == 0
+                    {
                         (*frame).opencl.ocl = (*h).opencl.ocl;
                         return frame;
                     }
@@ -3306,34 +3016,28 @@ pub unsafe extern "C" fn x264_8_frame_delete(mut frame: *mut x264_frame_t) {
         x264_free((*frame).base as *mut libc::c_void);
         if !((*frame).param).is_null() && ((*(*frame).param).param_free).is_some() {
             x264_param_cleanup((*frame).param);
-            ((*(*frame).param).param_free)
-                .expect(
-                    "non-null function pointer",
-                )((*frame).param as *mut libc::c_void);
+            ((*(*frame).param).param_free).expect("non-null function pointer")(
+                (*frame).param as *mut libc::c_void,
+            );
         }
         if ((*frame).mb_info_free).is_some() {
-            ((*frame).mb_info_free)
-                .expect(
-                    "non-null function pointer",
-                )((*frame).mb_info as *mut libc::c_void);
+            ((*frame).mb_info_free).expect("non-null function pointer")(
+                (*frame).mb_info as *mut libc::c_void,
+            );
         }
         if ((*frame).extra_sei.sei_free).is_some() {
             let mut i: libc::c_int = 0 as libc::c_int;
             while i < (*frame).extra_sei.num_payloads {
-                ((*frame).extra_sei.sei_free)
-                    .expect(
-                        "non-null function pointer",
-                    )(
+                ((*frame).extra_sei.sei_free).expect("non-null function pointer")(
                     (*((*frame).extra_sei.payloads).offset(i as isize)).payload
                         as *mut libc::c_void,
                 );
                 i += 1;
                 i;
             }
-            ((*frame).extra_sei.sei_free)
-                .expect(
-                    "non-null function pointer",
-                )((*frame).extra_sei.payloads as *mut libc::c_void);
+            ((*frame).extra_sei.sei_free).expect("non-null function pointer")(
+                (*frame).extra_sei.payloads as *mut libc::c_void,
+            );
         }
         pthread_mutex_destroy(&mut (*frame).mutex);
         pthread_cond_destroy(&mut (*frame).cv);
@@ -3408,8 +3112,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
         x264_8_log(
             h,
             1 as libc::c_int,
-            b"forced frame type (%d) at %d is unknown\n\0" as *const u8
-                as *const libc::c_char,
+            b"forced frame type (%d) at %d is unknown\n\0" as *const u8 as *const libc::c_char,
             (*src).i_type,
             (*h).frames.i_input,
         );
@@ -3425,14 +3128,12 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
     (*dst).i_pic_struct = (*src).i_pic_struct;
     (*dst).extra_sei = (*src).extra_sei;
     (*dst).opaque = (*src).opaque;
-    (*dst)
-        .mb_info = if (*h).param.analyse.b_mb_info != 0 {
+    (*dst).mb_info = if (*h).param.analyse.b_mb_info != 0 {
         (*src).prop.mb_info
     } else {
         std::ptr::null_mut::<uint8_t>()
     };
-    (*dst)
-        .mb_info_free = if (*h).param.analyse.b_mb_info != 0 {
+    (*dst).mb_info_free = if (*h).param.analyse.b_mb_info != 0 {
         (*src).prop.mb_info_free
     } else {
         None
@@ -3441,10 +3142,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
     let mut stride: [libc::c_int; 3] = [0; 3];
     if i_csp == 0x9 as libc::c_int || i_csp == 0xa as libc::c_int {
         let mut p: libc::c_int = (i_csp == 0xa as libc::c_int) as libc::c_int;
-        ((*h).mc.plane_copy_deinterleave_yuyv)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.plane_copy_deinterleave_yuyv).expect("non-null function pointer")(
             (*dst).plane[p as usize],
             (*dst).i_stride[p as usize] as intptr_t,
             (*dst).plane[(p ^ 1 as libc::c_int) as usize],
@@ -3457,13 +3155,9 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
             (*h).param.i_height,
         );
     } else if i_csp == 0xb as libc::c_int {
-        stride[0 as libc::c_int
-            as usize] = (*src).img.i_stride[0 as libc::c_int as usize];
+        stride[0 as libc::c_int as usize] = (*src).img.i_stride[0 as libc::c_int as usize];
         pix[0 as libc::c_int as usize] = (*src).img.plane[0 as libc::c_int as usize];
-        ((*h).mc.plane_copy_deinterleave_v210)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.plane_copy_deinterleave_v210).expect("non-null function pointer")(
             (*dst).plane[0 as libc::c_int as usize],
             (*dst).i_stride[0 as libc::c_int as usize] as intptr_t,
             (*dst).plane[1 as libc::c_int as usize],
@@ -3476,23 +3170,17 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
             (*h).param.i_height,
         );
     } else if i_csp >= 0xe as libc::c_int {
-        stride[0 as libc::c_int
-            as usize] = (*src).img.i_stride[0 as libc::c_int as usize];
+        stride[0 as libc::c_int as usize] = (*src).img.i_stride[0 as libc::c_int as usize];
         pix[0 as libc::c_int as usize] = (*src).img.plane[0 as libc::c_int as usize];
         if (*src).img.i_csp & 0x1000 as libc::c_int != 0 {
-            pix[0 as libc::c_int
-                as usize] = (pix[0 as libc::c_int as usize])
-                .offset(
-                    (((*h).param.i_height - 1 as libc::c_int)
-                        * stride[0 as libc::c_int as usize]) as isize,
-                );
+            pix[0 as libc::c_int as usize] = (pix[0 as libc::c_int as usize]).offset(
+                (((*h).param.i_height - 1 as libc::c_int) * stride[0 as libc::c_int as usize])
+                    as isize,
+            );
             stride[0 as libc::c_int as usize] = -stride[0 as libc::c_int as usize];
         }
         let mut b: libc::c_int = (i_csp == 0x10 as libc::c_int) as libc::c_int;
-        ((*h).mc.plane_copy_deinterleave_rgb)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.plane_copy_deinterleave_rgb).expect("non-null function pointer")(
             (*dst).plane[(1 as libc::c_int + b) as usize],
             (*dst).i_stride[(1 as libc::c_int + b) as usize] as intptr_t,
             (*dst).plane[0 as libc::c_int as usize],
@@ -3525,10 +3213,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
         {
             return -(1 as libc::c_int);
         }
-        ((*h).mc.plane_copy)
-            .expect(
-                "non-null function pointer",
-            )(
+        ((*h).mc.plane_copy).expect("non-null function pointer")(
             (*dst).plane[0 as libc::c_int as usize],
             (*dst).i_stride[0 as libc::c_int as usize] as intptr_t,
             pix[0 as libc::c_int as usize] as *mut pixel,
@@ -3551,10 +3236,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
             {
                 return -(1 as libc::c_int);
             }
-            ((*h).mc.plane_copy)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.plane_copy).expect("non-null function pointer")(
                 (*dst).plane[1 as libc::c_int as usize],
                 (*dst).i_stride[1 as libc::c_int as usize] as intptr_t,
                 pix[1 as libc::c_int as usize] as *mut pixel,
@@ -3577,10 +3259,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
             {
                 return -(1 as libc::c_int);
             }
-            ((*h).mc.plane_copy_swap)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.plane_copy_swap).expect("non-null function pointer")(
                 (*dst).plane[1 as libc::c_int as usize],
                 (*dst).i_stride[1 as libc::c_int as usize] as intptr_t,
                 pix[1 as libc::c_int as usize] as *mut pixel,
@@ -3590,17 +3269,23 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
                 (*h).param.i_width >> 1 as libc::c_int,
                 (*h).param.i_height >> v_shift,
             );
-        } else if i_csp == 0x2 as libc::c_int || i_csp == 0x6 as libc::c_int
-            || i_csp == 0x3 as libc::c_int || i_csp == 0x7 as libc::c_int
+        } else if i_csp == 0x2 as libc::c_int
+            || i_csp == 0x6 as libc::c_int
+            || i_csp == 0x3 as libc::c_int
+            || i_csp == 0x7 as libc::c_int
         {
-            let mut uv_swap: libc::c_int = (i_csp == 0x3 as libc::c_int
-                || i_csp == 0x7 as libc::c_int) as libc::c_int;
+            let mut uv_swap: libc::c_int =
+                (i_csp == 0x3 as libc::c_int || i_csp == 0x7 as libc::c_int) as libc::c_int;
             if get_plane_ptr(
                 h,
                 src,
                 &mut *pix.as_mut_ptr().offset(1 as libc::c_int as isize),
                 &mut *stride.as_mut_ptr().offset(1 as libc::c_int as isize),
-                if uv_swap != 0 { 2 as libc::c_int } else { 1 as libc::c_int },
+                if uv_swap != 0 {
+                    2 as libc::c_int
+                } else {
+                    1 as libc::c_int
+                },
                 1 as libc::c_int,
                 v_shift,
             ) < 0 as libc::c_int
@@ -3612,17 +3297,18 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
                 src,
                 &mut *pix.as_mut_ptr().offset(2 as libc::c_int as isize),
                 &mut *stride.as_mut_ptr().offset(2 as libc::c_int as isize),
-                if uv_swap != 0 { 1 as libc::c_int } else { 2 as libc::c_int },
+                if uv_swap != 0 {
+                    1 as libc::c_int
+                } else {
+                    2 as libc::c_int
+                },
                 1 as libc::c_int,
                 v_shift,
             ) < 0 as libc::c_int
             {
                 return -(1 as libc::c_int);
             }
-            ((*h).mc.plane_copy_interleave)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.plane_copy_interleave).expect("non-null function pointer")(
                 (*dst).plane[1 as libc::c_int as usize],
                 (*dst).i_stride[1 as libc::c_int as usize] as intptr_t,
                 pix[1 as libc::c_int as usize] as *mut pixel,
@@ -3669,10 +3355,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
             {
                 return -(1 as libc::c_int);
             }
-            ((*h).mc.plane_copy)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.plane_copy).expect("non-null function pointer")(
                 (*dst).plane[1 as libc::c_int as usize],
                 (*dst).i_stride[1 as libc::c_int as usize] as intptr_t,
                 pix[1 as libc::c_int as usize] as *mut pixel,
@@ -3682,10 +3365,7 @@ pub unsafe extern "C" fn x264_8_frame_copy_picture(
                 (*h).param.i_width,
                 (*h).param.i_height,
             );
-            ((*h).mc.plane_copy)
-                .expect(
-                    "non-null function pointer",
-                )(
+            ((*h).mc.plane_copy).expect("non-null function pointer")(
                 (*dst).plane[2 as libc::c_int as usize],
                 (*dst).i_stride[2 as libc::c_int as usize] as intptr_t,
                 pix[2 as libc::c_int as usize] as *mut pixel,
@@ -3722,14 +3402,11 @@ unsafe extern "C" fn pixel_memset(
     len *= size;
     if dstp as intptr_t as libc::c_ulong
         & (::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong)
-            .wrapping_sub(1 as libc::c_int as libc::c_ulong) != 0
+            .wrapping_sub(1 as libc::c_int as libc::c_ulong)
+        != 0
     {
-        if size <= 2 as libc::c_int
-            && dstp as intptr_t & 3 as libc::c_int as intptr_t != 0
-        {
-            if size == 1 as libc::c_int
-                && dstp as intptr_t & 1 as libc::c_int as intptr_t != 0
-            {
+        if size <= 2 as libc::c_int && dstp as intptr_t & 3 as libc::c_int as intptr_t != 0 {
+            if size == 1 as libc::c_int && dstp as intptr_t & 1 as libc::c_int as intptr_t != 0 {
                 let fresh27 = i;
                 i += 1;
                 *dstp.offset(fresh27 as isize) = v1 as uint8_t;
@@ -3750,8 +3427,7 @@ unsafe extern "C" fn pixel_memset(
     if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
         == 8 as libc::c_int as libc::c_ulong
     {
-        let mut v8: uint64_t = (v4 as uint64_t)
-            .wrapping_add((v4 as uint64_t) << 32 as libc::c_int);
+        let mut v8: uint64_t = (v4 as uint64_t).wrapping_add((v4 as uint64_t) << 32 as libc::c_int);
         while i < len - 7 as libc::c_int {
             (*(dstp.offset(i as isize) as *mut x264_union64_t)).i = v8;
             i += 8 as libc::c_int;
@@ -3787,14 +3463,14 @@ unsafe extern "C" fn plane_expand_border(
     while y < i_height {
         pixel_memset(
             pix.offset(-i_padh as isize).offset((y * i_stride) as isize),
-            pix.offset(0 as libc::c_int as isize).offset((y * i_stride) as isize),
+            pix.offset(0 as libc::c_int as isize)
+                .offset((y * i_stride) as isize),
             i_padh >> b_chroma,
             (::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int) << b_chroma,
         );
         pixel_memset(
             pix.offset(i_width as isize).offset((y * i_stride) as isize),
-            pix
-                .offset((i_width - 1 as libc::c_int - b_chroma) as isize)
+            pix.offset((i_width - 1 as libc::c_int - b_chroma) as isize)
                 .offset((y * i_stride) as isize),
             i_padh >> b_chroma,
             (::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int) << b_chroma,
@@ -3806,12 +3482,10 @@ unsafe extern "C" fn plane_expand_border(
         let mut y_0: libc::c_int = 0 as libc::c_int;
         while y_0 < i_padv {
             memcpy(
-                pix
-                    .offset(-i_padh as isize)
+                pix.offset(-i_padh as isize)
                     .offset(((-y_0 - 1 as libc::c_int) * i_stride) as isize)
                     as *mut libc::c_void,
-                pix
-                    .offset(-i_padh as isize)
+                pix.offset(-i_padh as isize)
                     .offset((0 as libc::c_int * i_stride) as isize)
                     as *const libc::c_void,
                 ((i_width + 2 as libc::c_int * i_padh)
@@ -3826,11 +3500,10 @@ unsafe extern "C" fn plane_expand_border(
         let mut y_1: libc::c_int = 0 as libc::c_int;
         while y_1 < i_padv {
             memcpy(
-                pix
-                    .offset(-i_padh as isize)
-                    .offset(((i_height + y_1) * i_stride) as isize) as *mut libc::c_void,
-                pix
-                    .offset(-i_padh as isize)
+                pix.offset(-i_padh as isize)
+                    .offset(((i_height + y_1) * i_stride) as isize)
+                    as *mut libc::c_void,
+                pix.offset(-i_padh as isize)
                     .offset(((i_height - 1 as libc::c_int) * i_stride) as isize)
                     as *const libc::c_void,
                 ((i_width + 2 as libc::c_int * i_padh)
@@ -3849,21 +3522,18 @@ pub unsafe extern "C" fn x264_8_frame_expand_border(
     mut mb_y: libc::c_int,
 ) {
     let mut pad_top: libc::c_int = (mb_y == 0 as libc::c_int) as libc::c_int;
-    let mut pad_bot: libc::c_int = (mb_y
-        == (*h).mb.i_mb_height - ((1 as libc::c_int) << (*h).sh.b_mbaff)) as libc::c_int;
+    let mut pad_bot: libc::c_int =
+        (mb_y == (*h).mb.i_mb_height - ((1 as libc::c_int) << (*h).sh.b_mbaff)) as libc::c_int;
     let mut b_start: libc::c_int = (mb_y == (*h).i_threadslice_start) as libc::c_int;
-    let mut b_end: libc::c_int = (mb_y
-        == (*h).i_threadslice_end - ((1 as libc::c_int) << (*h).sh.b_mbaff))
-        as libc::c_int;
+    let mut b_end: libc::c_int =
+        (mb_y == (*h).i_threadslice_end - ((1 as libc::c_int) << (*h).sh.b_mbaff)) as libc::c_int;
     if mb_y & (*h).sh.b_mbaff != 0 {
         return;
     }
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*frame).i_plane {
-        let mut h_shift: libc::c_int = (i != 0 && (*h).mb.chroma_h_shift != 0)
-            as libc::c_int;
-        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0)
-            as libc::c_int;
+        let mut h_shift: libc::c_int = (i != 0 && (*h).mb.chroma_h_shift != 0) as libc::c_int;
+        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0) as libc::c_int;
         let mut stride: libc::c_int = (*frame).i_stride[i as usize];
         let mut width: libc::c_int = 16 as libc::c_int * (*h).mb.i_mb_width;
         let mut height: libc::c_int = (if pad_bot != 0 {
@@ -3877,11 +3547,10 @@ pub unsafe extern "C" fn x264_8_frame_expand_border(
             height += 4 as libc::c_int >> (v_shift + (*h).sh.b_mbaff);
         }
         let mut pix: *mut pixel = std::ptr::null_mut::<pixel>();
-        let mut starty: libc::c_int = 16 as libc::c_int * mb_y
-            - 4 as libc::c_int * (b_start == 0) as libc::c_int;
+        let mut starty: libc::c_int =
+            16 as libc::c_int * mb_y - 4 as libc::c_int * (b_start == 0) as libc::c_int;
         if (*h).sh.b_mbaff != 0 {
-            pix = ((*frame).plane_fld[i as usize])
-                .offset(((starty * stride) >> v_shift) as isize);
+            pix = ((*frame).plane_fld[i as usize]).offset(((starty * stride) >> v_shift) as isize);
             plane_expand_border(
                 pix,
                 stride * 2 as libc::c_int,
@@ -3912,32 +3581,14 @@ pub unsafe extern "C" fn x264_8_frame_expand_border(
             if b_end != 0 && b_start == 0 {
                 height += 4 as libc::c_int >> v_shift;
             }
-            pix = ((*frame).plane[i as usize])
-                .offset(((starty * stride) >> v_shift) as isize);
+            pix = ((*frame).plane[i as usize]).offset(((starty * stride) >> v_shift) as isize);
             plane_expand_border(
-                pix,
-                stride,
-                width,
-                height,
-                padh,
-                padv,
-                pad_top,
-                pad_bot,
-                h_shift,
+                pix, stride, width, height, padh, padv, pad_top, pad_bot, h_shift,
             );
         } else {
-            pix = ((*frame).plane[i as usize])
-                .offset(((starty * stride) >> v_shift) as isize);
+            pix = ((*frame).plane[i as usize]).offset(((starty * stride) >> v_shift) as isize);
             plane_expand_border(
-                pix,
-                stride,
-                width,
-                height,
-                padh,
-                padv,
-                pad_top,
-                pad_bot,
-                h_shift,
+                pix, stride, width, height, padh, padv, pad_top, pad_bot, h_shift,
             );
         }
         i += 1;
@@ -3952,11 +3603,9 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_filtered(
     mut b_end: libc::c_int,
 ) {
     let mut b_start: libc::c_int = (mb_y == 0) as libc::c_int;
-    let mut width: libc::c_int = 16 as libc::c_int * (*h).mb.i_mb_width
-        + 8 as libc::c_int;
+    let mut width: libc::c_int = 16 as libc::c_int * (*h).mb.i_mb_width + 8 as libc::c_int;
     let mut height: libc::c_int = if b_end != 0 {
-        ((16 as libc::c_int * ((*h).mb.i_mb_height - mb_y)) >> (*h).sh.b_mbaff)
-            + 16 as libc::c_int
+        ((16 as libc::c_int * ((*h).mb.i_mb_height - mb_y)) >> (*h).sh.b_mbaff) + 16 as libc::c_int
     } else {
         16 as libc::c_int
     };
@@ -3964,8 +3613,7 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_filtered(
     let mut padv: libc::c_int = 32 as libc::c_int - 8 as libc::c_int;
     let mut p: libc::c_int = 0 as libc::c_int;
     while p
-        < (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int
-        {
+        < (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
             3 as libc::c_int
         } else {
             1 as libc::c_int
@@ -3977,10 +3625,7 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_filtered(
             let mut pix: *mut pixel = std::ptr::null_mut::<pixel>();
             if (*h).sh.b_mbaff != 0 {
                 pix = ((*frame).filtered_fld[p as usize][i as usize])
-                    .offset(
-                        ((16 as libc::c_int * mb_y - 16 as libc::c_int) * stride)
-                            as isize,
-                    )
+                    .offset(((16 as libc::c_int * mb_y - 16 as libc::c_int) * stride) as isize)
                     .offset(-(4 as libc::c_int as isize));
                 plane_expand_border(
                     pix,
@@ -4006,9 +3651,7 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_filtered(
                 );
             }
             pix = ((*frame).filtered[p as usize][i as usize])
-                .offset(
-                    ((16 as libc::c_int * mb_y - 8 as libc::c_int) * stride) as isize,
-                )
+                .offset(((16 as libc::c_int * mb_y - 8 as libc::c_int) * stride) as isize)
                 .offset(-(4 as libc::c_int as isize));
             plane_expand_border(
                 pix,
@@ -4029,9 +3672,7 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_filtered(
     }
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_frame_expand_border_lowres(
-    mut frame: *mut x264_frame_t,
-) {
+pub unsafe extern "C" fn x264_8_frame_expand_border_lowres(mut frame: *mut x264_frame_t) {
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < 4 as libc::c_int {
         plane_expand_border(
@@ -4076,32 +3717,27 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_mod16(
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*frame).i_plane {
         let mut i_width: libc::c_int = (*h).param.i_width;
-        let mut h_shift: libc::c_int = (i != 0 && (*h).mb.chroma_h_shift != 0)
-            as libc::c_int;
-        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0)
-            as libc::c_int;
+        let mut h_shift: libc::c_int = (i != 0 && (*h).mb.chroma_h_shift != 0) as libc::c_int;
+        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0) as libc::c_int;
         let mut i_height: libc::c_int = (*h).param.i_height >> v_shift;
-        let mut i_padx: libc::c_int = (*h).mb.i_mb_width * 16 as libc::c_int
-            - (*h).param.i_width;
-        let mut i_pady: libc::c_int = ((*h).mb.i_mb_height * 16 as libc::c_int
-            - (*h).param.i_height) >> v_shift;
+        let mut i_padx: libc::c_int = (*h).mb.i_mb_width * 16 as libc::c_int - (*h).param.i_width;
+        let mut i_pady: libc::c_int =
+            ((*h).mb.i_mb_height * 16 as libc::c_int - (*h).param.i_height) >> v_shift;
         if i_padx != 0 {
             let mut y: libc::c_int = 0 as libc::c_int;
             while y < i_height {
                 pixel_memset(
-                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize))
-                        .offset(
-                            (y * *((*frame).i_stride).as_mut_ptr().offset(i as isize)
-                                + i_width) as isize,
-                        ),
-                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize))
-                        .offset(
-                            (y * *((*frame).i_stride).as_mut_ptr().offset(i as isize)
-                                + i_width - 1 as libc::c_int - h_shift) as isize,
-                        ),
+                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize)).offset(
+                        (y * *((*frame).i_stride).as_mut_ptr().offset(i as isize) + i_width)
+                            as isize,
+                    ),
+                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize)).offset(
+                        (y * *((*frame).i_stride).as_mut_ptr().offset(i as isize) + i_width
+                            - 1 as libc::c_int
+                            - h_shift) as isize,
+                    ),
                     i_padx >> h_shift,
-                    (::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int)
-                        << h_shift,
+                    (::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int) << h_shift,
                 );
                 y += 1;
                 y;
@@ -4111,21 +3747,17 @@ pub unsafe extern "C" fn x264_8_frame_expand_border_mod16(
             let mut y_0: libc::c_int = i_height;
             while y_0 < i_height + i_pady {
                 memcpy(
-                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize))
-                        .offset(
-                            (y_0 * *((*frame).i_stride).as_mut_ptr().offset(i as isize))
-                                as isize,
-                        ) as *mut pixel as *mut libc::c_void,
-                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize))
-                        .offset(
-                            ((i_height - (!y_0 & (*h).param.b_interlaced)
-                                - 1 as libc::c_int)
-                                * *((*frame).i_stride).as_mut_ptr().offset(i as isize))
-                                as isize,
-                        ) as *mut pixel as *const libc::c_void,
+                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize)).offset(
+                        (y_0 * *((*frame).i_stride).as_mut_ptr().offset(i as isize)) as isize,
+                    ) as *mut pixel as *mut libc::c_void,
+                    &mut *(*((*frame).plane).as_mut_ptr().offset(i as isize)).offset(
+                        ((i_height - (!y_0 & (*h).param.b_interlaced) - 1 as libc::c_int)
+                            * *((*frame).i_stride).as_mut_ptr().offset(i as isize))
+                            as isize,
+                    ) as *mut pixel as *const libc::c_void,
                     ((i_width + i_padx)
-                        * ::core::mem::size_of::<pixel>() as libc::c_ulong
-                            as libc::c_int) as libc::c_ulong,
+                        * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int)
+                        as libc::c_ulong,
                 );
                 y_0 += 1;
                 y_0;
@@ -4143,20 +3775,18 @@ pub unsafe extern "C" fn x264_8_expand_border_mbpair(
 ) {
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*(*h).fenc).i_plane {
-        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0)
-            as libc::c_int;
+        let mut v_shift: libc::c_int = (i != 0 && (*h).mb.chroma_v_shift != 0) as libc::c_int;
         let mut stride: libc::c_int = (*(*h).fenc).i_stride[i as usize];
         let mut height: libc::c_int = (*h).param.i_height >> v_shift;
-        let mut pady: libc::c_int = ((*h).mb.i_mb_height * 16 as libc::c_int
-            - (*h).param.i_height) >> v_shift;
-        let mut fenc: *mut pixel = ((*(*h).fenc).plane[i as usize])
-            .offset((16 as libc::c_int * mb_x) as isize);
+        let mut pady: libc::c_int =
+            ((*h).mb.i_mb_height * 16 as libc::c_int - (*h).param.i_height) >> v_shift;
+        let mut fenc: *mut pixel =
+            ((*(*h).fenc).plane[i as usize]).offset((16 as libc::c_int * mb_x) as isize);
         let mut y: libc::c_int = height;
         while y < height + pady {
             memcpy(
                 fenc.offset((y * stride) as isize) as *mut libc::c_void,
-                fenc.offset(((height - 1 as libc::c_int) * stride) as isize)
-                    as *const libc::c_void,
+                fenc.offset(((height - 1 as libc::c_int) * stride) as isize) as *const libc::c_void,
                 (16 as libc::c_int
                     * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int)
                     as libc::c_ulong,
@@ -4208,10 +3838,7 @@ pub unsafe extern "C" fn x264_8_threadslice_cond_broadcast(
     pthread_mutex_unlock(&mut (*h).mutex);
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_threadslice_cond_wait(
-    mut h: *mut x264_t,
-    mut pass: libc::c_int,
-) {
+pub unsafe extern "C" fn x264_8_threadslice_cond_wait(mut h: *mut x264_t, mut pass: libc::c_int) {
     pthread_mutex_lock(&mut (*h).mutex);
     while (*h).i_threadslice_pass < pass {
         pthread_cond_wait(&mut (*h).cv, &mut (*h).mutex);
@@ -4256,34 +3883,32 @@ pub unsafe extern "C" fn x264_8_frame_push(
     *fresh29 = frame;
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_frame_pop(
-    mut list: *mut *mut x264_frame_t,
-) -> *mut x264_frame_t {
+pub unsafe extern "C" fn x264_8_frame_pop(mut list: *mut *mut x264_frame_t) -> *mut x264_frame_t {
     let mut frame: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
     let mut i: libc::c_int = 0 as libc::c_int;
-    if !(*list.offset(0 as libc::c_int as isize)).is_null() {} else {
+    if !(*list.offset(0 as libc::c_int as isize)).is_null() {
+    } else {
         __assert_fail(
             b"list[0]\0" as *const u8 as *const libc::c_char,
             b"common/frame.c\0" as *const u8 as *const libc::c_char,
             746 as libc::c_int as libc::c_uint,
-            (*::core::mem::transmute::<
-                &[u8; 48],
-                &[libc::c_char; 48],
-            >(b"x264_frame_t *x264_8_frame_pop(x264_frame_t **)\0"))
-                .as_ptr(),
+            (*::core::mem::transmute::<&[u8; 48], &[libc::c_char; 48]>(
+                b"x264_frame_t *x264_8_frame_pop(x264_frame_t **)\0",
+            ))
+            .as_ptr(),
         );
     }
     'c_27229: {
-        if !(*list.offset(0 as libc::c_int as isize)).is_null() {} else {
+        if !(*list.offset(0 as libc::c_int as isize)).is_null() {
+        } else {
             __assert_fail(
                 b"list[0]\0" as *const u8 as *const libc::c_char,
                 b"common/frame.c\0" as *const u8 as *const libc::c_char,
                 746 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 48],
-                    &[libc::c_char; 48],
-                >(b"x264_frame_t *x264_8_frame_pop(x264_frame_t **)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 48], &[libc::c_char; 48]>(
+                    b"x264_frame_t *x264_8_frame_pop(x264_frame_t **)\0",
+                ))
+                .as_ptr(),
             );
         }
     };
@@ -4319,9 +3944,7 @@ pub unsafe extern "C" fn x264_8_frame_unshift(
     *fresh33 = frame;
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_frame_shift(
-    mut list: *mut *mut x264_frame_t,
-) -> *mut x264_frame_t {
+pub unsafe extern "C" fn x264_8_frame_shift(mut list: *mut *mut x264_frame_t) -> *mut x264_frame_t {
     let mut frame: *mut x264_frame_t = *list.offset(0 as libc::c_int as isize);
     let mut i: libc::c_int = 0;
     i = 0 as libc::c_int;
@@ -4331,29 +3954,29 @@ pub unsafe extern "C" fn x264_8_frame_shift(
         i += 1;
         i;
     }
-    if !frame.is_null() {} else {
+    if !frame.is_null() {
+    } else {
         __assert_fail(
             b"frame\0" as *const u8 as *const libc::c_char,
             b"common/frame.c\0" as *const u8 as *const libc::c_char,
             768 as libc::c_int as libc::c_uint,
-            (*::core::mem::transmute::<
-                &[u8; 50],
-                &[libc::c_char; 50],
-            >(b"x264_frame_t *x264_8_frame_shift(x264_frame_t **)\0"))
-                .as_ptr(),
+            (*::core::mem::transmute::<&[u8; 50], &[libc::c_char; 50]>(
+                b"x264_frame_t *x264_8_frame_shift(x264_frame_t **)\0",
+            ))
+            .as_ptr(),
         );
     }
     'c_27330: {
-        if !frame.is_null() {} else {
+        if !frame.is_null() {
+        } else {
             __assert_fail(
                 b"frame\0" as *const u8 as *const libc::c_char,
                 b"common/frame.c\0" as *const u8 as *const libc::c_char,
                 768 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 50],
-                    &[libc::c_char; 50],
-                >(b"x264_frame_t *x264_8_frame_shift(x264_frame_t **)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 50], &[libc::c_char; 50]>(
+                    b"x264_frame_t *x264_8_frame_shift(x264_frame_t **)\0",
+                ))
+                .as_ptr(),
             );
         }
     };
@@ -4364,29 +3987,29 @@ pub unsafe extern "C" fn x264_8_frame_push_unused(
     mut h: *mut x264_t,
     mut frame: *mut x264_frame_t,
 ) {
-    if (*frame).i_reference_count > 0 as libc::c_int {} else {
+    if (*frame).i_reference_count > 0 as libc::c_int {
+    } else {
         __assert_fail(
             b"frame->i_reference_count > 0\0" as *const u8 as *const libc::c_char,
             b"common/frame.c\0" as *const u8 as *const libc::c_char,
             774 as libc::c_int as libc::c_uint,
-            (*::core::mem::transmute::<
-                &[u8; 56],
-                &[libc::c_char; 56],
-            >(b"void x264_8_frame_push_unused(x264_t *, x264_frame_t *)\0"))
-                .as_ptr(),
+            (*::core::mem::transmute::<&[u8; 56], &[libc::c_char; 56]>(
+                b"void x264_8_frame_push_unused(x264_t *, x264_frame_t *)\0",
+            ))
+            .as_ptr(),
         );
     }
     'c_27427: {
-        if (*frame).i_reference_count > 0 as libc::c_int {} else {
+        if (*frame).i_reference_count > 0 as libc::c_int {
+        } else {
             __assert_fail(
                 b"frame->i_reference_count > 0\0" as *const u8 as *const libc::c_char,
                 b"common/frame.c\0" as *const u8 as *const libc::c_char,
                 774 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 56],
-                    &[libc::c_char; 56],
-                >(b"void x264_8_frame_push_unused(x264_t *, x264_frame_t *)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 56], &[libc::c_char; 56]>(
+                    b"void x264_8_frame_push_unused(x264_t *, x264_frame_t *)\0",
+                ))
+                .as_ptr(),
             );
         }
     };
@@ -4402,9 +4025,7 @@ pub unsafe extern "C" fn x264_8_frame_pop_unused(
     mut b_fdec: libc::c_int,
 ) -> *mut x264_frame_t {
     let mut frame: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
-    if !(*((*h).frames.unused[b_fdec as usize]).offset(0 as libc::c_int as isize))
-        .is_null()
-    {
+    if !(*((*h).frames.unused[b_fdec as usize]).offset(0 as libc::c_int as isize)).is_null() {
         frame = x264_8_frame_pop((*h).frames.unused[b_fdec as usize]);
     } else {
         frame = frame_new(h, b_fdec);
@@ -4418,8 +4039,7 @@ pub unsafe extern "C" fn x264_8_frame_pop_unused(
     (*frame).b_scenecut = 1 as libc::c_int;
     (*frame).b_keyframe = 0 as libc::c_int;
     (*frame).b_corrupt = 0 as libc::c_int;
-    (*frame)
-        .i_slice_count = if (*h).param.b_sliced_threads != 0 {
+    (*frame).i_slice_count = if (*h).param.b_sliced_threads != 0 {
         (*h).param.i_threads
     } else {
         1 as libc::c_int
@@ -4441,29 +4061,29 @@ pub unsafe extern "C" fn x264_8_frame_push_blank_unused(
     mut h: *mut x264_t,
     mut frame: *mut x264_frame_t,
 ) {
-    if (*frame).i_reference_count > 0 as libc::c_int {} else {
+    if (*frame).i_reference_count > 0 as libc::c_int {
+    } else {
         __assert_fail(
             b"frame->i_reference_count > 0\0" as *const u8 as *const libc::c_char,
             b"common/frame.c\0" as *const u8 as *const libc::c_char,
             805 as libc::c_int as libc::c_uint,
-            (*::core::mem::transmute::<
-                &[u8; 62],
-                &[libc::c_char; 62],
-            >(b"void x264_8_frame_push_blank_unused(x264_t *, x264_frame_t *)\0"))
-                .as_ptr(),
+            (*::core::mem::transmute::<&[u8; 62], &[libc::c_char; 62]>(
+                b"void x264_8_frame_push_blank_unused(x264_t *, x264_frame_t *)\0",
+            ))
+            .as_ptr(),
         );
     }
     'c_27497: {
-        if (*frame).i_reference_count > 0 as libc::c_int {} else {
+        if (*frame).i_reference_count > 0 as libc::c_int {
+        } else {
             __assert_fail(
                 b"frame->i_reference_count > 0\0" as *const u8 as *const libc::c_char,
                 b"common/frame.c\0" as *const u8 as *const libc::c_char,
                 805 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<
-                    &[u8; 62],
-                    &[libc::c_char; 62],
-                >(b"void x264_8_frame_push_blank_unused(x264_t *, x264_frame_t *)\0"))
-                    .as_ptr(),
+                (*::core::mem::transmute::<&[u8; 62], &[libc::c_char; 62]>(
+                    b"void x264_8_frame_push_blank_unused(x264_t *, x264_frame_t *)\0",
+                ))
+                .as_ptr(),
             );
         }
     };
@@ -4474,16 +4094,13 @@ pub unsafe extern "C" fn x264_8_frame_push_blank_unused(
     }
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_frame_pop_blank_unused(
-    mut h: *mut x264_t,
-) -> *mut x264_frame_t {
+pub unsafe extern "C" fn x264_8_frame_pop_blank_unused(mut h: *mut x264_t) -> *mut x264_frame_t {
     let mut frame: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
     if !(*((*h).frames.blank_unused).offset(0 as libc::c_int as isize)).is_null() {
         frame = x264_8_frame_pop((*h).frames.blank_unused);
     } else {
-        frame = x264_malloc(
-            ::core::mem::size_of::<x264_frame_t>() as libc::c_ulong as int64_t,
-        ) as *mut x264_frame_t;
+        frame = x264_malloc(::core::mem::size_of::<x264_frame_t>() as libc::c_ulong as int64_t)
+            as *mut x264_frame_t;
     }
     if frame.is_null() {
         return std::ptr::null_mut::<x264_frame_t>();
@@ -4508,29 +4125,33 @@ pub unsafe extern "C" fn x264_8_weight_scale_plane(
         x = 0 as libc::c_int;
         while x < i_width - 8 as libc::c_int {
             (*((*w).weightfn).offset((16 as libc::c_int >> 2 as libc::c_int) as isize))
-                .expect(
-                    "non-null function pointer",
-                )(
+                .expect("non-null function pointer")(
                 dst.offset(x as isize),
                 i_dst_stride,
                 src.offset(x as isize),
                 i_src_stride,
                 w,
-                if i_height < 16 as libc::c_int { i_height } else { 16 as libc::c_int },
+                if i_height < 16 as libc::c_int {
+                    i_height
+                } else {
+                    16 as libc::c_int
+                },
             );
             x += 16 as libc::c_int;
         }
         if x < i_width {
             (*((*w).weightfn).offset((8 as libc::c_int >> 2 as libc::c_int) as isize))
-                .expect(
-                    "non-null function pointer",
-                )(
+                .expect("non-null function pointer")(
                 dst.offset(x as isize),
                 i_dst_stride,
                 src.offset(x as isize),
                 i_src_stride,
                 w,
-                if i_height < 16 as libc::c_int { i_height } else { 16 as libc::c_int },
+                if i_height < 16 as libc::c_int {
+                    i_height
+                } else {
+                    16 as libc::c_int
+                },
             );
         }
         i_height -= 16 as libc::c_int;
@@ -4561,8 +4182,7 @@ pub unsafe extern "C" fn x264_8_sync_frame_list_init(
     }
     (*slist).i_max_size = max_size;
     (*slist).i_size = 0 as libc::c_int;
-    (*slist)
-        .list = x264_malloc(
+    (*slist).list = x264_malloc(
         ((max_size + 1 as libc::c_int) as libc::c_ulong)
             .wrapping_mul(::core::mem::size_of::<*mut x264_frame_t>() as libc::c_ulong)
             as int64_t,
@@ -4574,15 +4194,17 @@ pub unsafe extern "C" fn x264_8_sync_frame_list_init(
             (*slist).list as *mut libc::c_void,
             0 as libc::c_int,
             ((max_size + 1 as libc::c_int) as libc::c_ulong)
-                .wrapping_mul(
-                    ::core::mem::size_of::<*mut x264_frame_t>() as libc::c_ulong,
-                ),
+                .wrapping_mul(::core::mem::size_of::<*mut x264_frame_t>() as libc::c_ulong),
         );
         if pthread_mutex_init(&mut (*slist).mutex, std::ptr::null::<pthread_mutexattr_t>()) != 0
-            || pthread_cond_init(&mut (*slist).cv_fill, std::ptr::null::<pthread_condattr_t>())
-                != 0
-            || pthread_cond_init(&mut (*slist).cv_empty, std::ptr::null::<pthread_condattr_t>())
-                != 0
+            || pthread_cond_init(
+                &mut (*slist).cv_fill,
+                std::ptr::null::<pthread_condattr_t>(),
+            ) != 0
+            || pthread_cond_init(
+                &mut (*slist).cv_empty,
+                std::ptr::null::<pthread_condattr_t>(),
+            ) != 0
         {
             return -(1 as libc::c_int);
         }
@@ -4590,9 +4212,7 @@ pub unsafe extern "C" fn x264_8_sync_frame_list_init(
     }
 }
 #[no_mangle]
-pub unsafe extern "C" fn x264_8_sync_frame_list_delete(
-    mut slist: *mut x264_sync_frame_list_t,
-) {
+pub unsafe extern "C" fn x264_8_sync_frame_list_delete(mut slist: *mut x264_sync_frame_list_t) {
     pthread_mutex_destroy(&mut (*slist).mutex);
     pthread_cond_destroy(&mut (*slist).cv_fill);
     pthread_cond_destroy(&mut (*slist).cv_empty);

@@ -1,4 +1,12 @@
-#![allow(dead_code, mutable_transmutes, non_camel_case_types, non_snake_case, non_upper_case_globals, unused_assignments, unused_mut)]
+#![allow(
+    dead_code,
+    mutable_transmutes,
+    non_camel_case_types,
+    non_snake_case,
+    non_upper_case_globals,
+    unused_assignments,
+    unused_mut
+)]
 pub type __int8_t = libc::c_schar;
 pub type __uint8_t = libc::c_uchar;
 pub type __uint16_t = libc::c_ushort;
@@ -35,7 +43,6 @@ pub struct vlc_t {
 #[no_mangle]
 pub static mut x264_levels: [x264_level_t; 21] = [
     {
-        
         x264_level_t {
             level_idc: 10 as libc::c_int as uint8_t,
             mbps: 1485 as libc::c_int,
@@ -53,7 +60,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 9 as libc::c_int as uint8_t,
             mbps: 1485 as libc::c_int,
@@ -71,7 +77,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 11 as libc::c_int as uint8_t,
             mbps: 3000 as libc::c_int,
@@ -89,7 +94,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 12 as libc::c_int as uint8_t,
             mbps: 6000 as libc::c_int,
@@ -107,7 +111,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 13 as libc::c_int as uint8_t,
             mbps: 11880 as libc::c_int,
@@ -125,7 +128,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 20 as libc::c_int as uint8_t,
             mbps: 11880 as libc::c_int,
@@ -143,7 +145,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 21 as libc::c_int as uint8_t,
             mbps: 19800 as libc::c_int,
@@ -161,7 +162,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 22 as libc::c_int as uint8_t,
             mbps: 20250 as libc::c_int,
@@ -179,7 +179,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 30 as libc::c_int as uint8_t,
             mbps: 40500 as libc::c_int,
@@ -197,7 +196,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 31 as libc::c_int as uint8_t,
             mbps: 108000 as libc::c_int,
@@ -215,7 +213,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 32 as libc::c_int as uint8_t,
             mbps: 216000 as libc::c_int,
@@ -233,7 +230,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 40 as libc::c_int as uint8_t,
             mbps: 245760 as libc::c_int,
@@ -251,7 +247,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 41 as libc::c_int as uint8_t,
             mbps: 245760 as libc::c_int,
@@ -269,7 +264,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 42 as libc::c_int as uint8_t,
             mbps: 522240 as libc::c_int,
@@ -287,7 +281,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 50 as libc::c_int as uint8_t,
             mbps: 589824 as libc::c_int,
@@ -305,7 +298,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 51 as libc::c_int as uint8_t,
             mbps: 983040 as libc::c_int,
@@ -323,7 +315,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 52 as libc::c_int as uint8_t,
             mbps: 2073600 as libc::c_int,
@@ -341,7 +332,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 60 as libc::c_int as uint8_t,
             mbps: 4177920 as libc::c_int,
@@ -359,7 +349,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 61 as libc::c_int as uint8_t,
             mbps: 8355840 as libc::c_int,
@@ -377,7 +366,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 62 as libc::c_int as uint8_t,
             mbps: 16711680 as libc::c_int,
@@ -395,7 +383,6 @@ pub static mut x264_levels: [x264_level_t; 21] = [
         }
     },
     {
-        
         x264_level_t {
             level_idc: 0 as libc::c_int as uint8_t,
             mbps: 0,
@@ -6603,262 +6590,262 @@ pub static mut x264_cabac_renorm_shift: [uint8_t; 64] = [
 ];
 #[no_mangle]
 pub static mut x264_cabac_entropy: [uint16_t; 128] = [
-    (0.0273f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.7370f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0288f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.6618f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0303f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.5866f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0320f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.5114f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0337f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.4362f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0355f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.3610f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0375f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.2859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0395f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.2106f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0416f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.1354f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0439f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (5.0602f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0463f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.9851f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0488f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.9099f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0515f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.8347f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0543f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.7595f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0572f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.6843f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0604f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.6091f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.5339f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0671f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.4588f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0708f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.3836f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0747f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.3083f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0788f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.2332f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0832f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.1580f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0878f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.0828f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0926f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (4.0076f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.0977f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.9324f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1032f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.8572f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1089f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.7820f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1149f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.7068f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1214f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.6316f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1282f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.5565f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1353f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.4813f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1429f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.4061f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1510f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.3309f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1596f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.2557f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1686f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.1805f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1782f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.1053f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1884f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (3.0301f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.1992f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.9549f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2107f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.8797f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2229f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.8046f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2358f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.7294f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2496f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.6542f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2642f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.5790f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2798f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.5038f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.2964f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.4286f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.3142f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.3534f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.3331f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.2782f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.3532f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.2030f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.3748f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.1278f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.3979f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (2.0527f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.4226f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.9775f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.4491f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.9023f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.4776f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.8271f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.5082f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.7519f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.5412f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.6767f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.5768f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.6015f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.6152f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.5263f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.6568f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.4511f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.7020f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.3759f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.7513f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.3008f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.8050f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.2256f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.8638f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.1504f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (0.9285f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.0752f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
-    (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
-        as libc::c_int as uint16_t,
+    (0.0273f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.7370f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0288f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.6618f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0303f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.5866f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0320f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.5114f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0337f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.4362f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0355f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.3610f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0375f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.2859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0395f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.2106f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0416f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.1354f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0439f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (5.0602f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0463f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.9851f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0488f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.9099f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0515f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.8347f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0543f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.7595f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0572f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.6843f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0604f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.6091f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.5339f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0671f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.4588f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0708f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.3836f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0747f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.3083f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0788f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.2332f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0832f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.1580f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0878f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.0828f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0926f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (4.0076f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.0977f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.9324f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1032f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.8572f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1089f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.7820f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1149f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.7068f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1214f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.6316f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1282f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.5565f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1353f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.4813f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1429f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.4061f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1510f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.3309f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1596f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.2557f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1686f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.1805f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1782f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.1053f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1884f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (3.0301f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.1992f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.9549f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2107f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.8797f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2229f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.8046f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2358f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.7294f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2496f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.6542f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2642f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.5790f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2798f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.5038f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.2964f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.4286f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.3142f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.3534f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.3331f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.2782f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.3532f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.2030f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.3748f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.1278f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.3979f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (2.0527f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.4226f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.9775f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.4491f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.9023f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.4776f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.8271f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.5082f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.7519f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.5412f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.6767f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.5768f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.6015f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.6152f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.5263f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.6568f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.4511f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.7020f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.3759f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.7513f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.3008f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.8050f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.2256f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.8638f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.1504f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (0.9285f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.0752f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
+    (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64) as libc::c_int
+        as uint16_t,
 ];
 #[no_mangle]
 pub static mut x264_significant_coeff_flag_offset_8x8: [[uint8_t; 64]; 2] = [
@@ -7188,42 +7175,36 @@ pub static mut x264_count_cat_m1: [uint8_t; 14] = [
 #[no_mangle]
 pub static mut x264_coeff0_token: [vlc_t; 6] = [
     {
-        
         vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 1 as libc::c_int as uint8_t,
         }
     },
     {
-        
         vlc_t {
             i_bits: 0x3 as libc::c_int as uint8_t,
             i_size: 2 as libc::c_int as uint8_t,
         }
     },
     {
-        
         vlc_t {
             i_bits: 0xf as libc::c_int as uint8_t,
             i_size: 4 as libc::c_int as uint8_t,
         }
     },
     {
-        
         vlc_t {
             i_bits: 0x3 as libc::c_int as uint8_t,
             i_size: 6 as libc::c_int as uint8_t,
         }
     },
     {
-        
         vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 2 as libc::c_int as uint8_t,
         }
     },
     {
-        
         vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 1 as libc::c_int as uint8_t,
@@ -7235,70 +7216,70 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
@@ -7307,28 +7288,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -7337,28 +7314,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
@@ -7367,28 +7340,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
@@ -7397,28 +7366,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
@@ -7427,28 +7392,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
@@ -7457,28 +7418,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
@@ -7487,28 +7444,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
@@ -7517,28 +7470,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
@@ -7547,28 +7496,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
@@ -7577,28 +7522,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
@@ -7607,28 +7548,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
@@ -7637,28 +7574,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
@@ -7667,28 +7600,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
@@ -7699,70 +7628,70 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -7771,28 +7700,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -7801,28 +7726,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
@@ -7831,28 +7752,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -7861,28 +7778,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -7891,28 +7804,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
@@ -7921,28 +7830,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
@@ -7951,28 +7856,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
@@ -7981,28 +7882,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
@@ -8011,28 +7908,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
@@ -8041,28 +7934,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
@@ -8071,28 +7960,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
@@ -8101,28 +7986,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
@@ -8131,28 +8012,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
@@ -8163,70 +8040,70 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -8235,28 +8112,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -8265,28 +8138,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -8295,28 +8164,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -8325,28 +8190,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
@@ -8355,28 +8216,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
@@ -8385,28 +8242,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8415,28 +8268,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
@@ -8445,28 +8294,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
@@ -8475,28 +8320,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
@@ -8505,28 +8346,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
@@ -8535,28 +8372,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
@@ -8565,28 +8398,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
@@ -8595,28 +8424,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
@@ -8627,70 +8452,70 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8699,28 +8524,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8729,28 +8550,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x10 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x11 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x12 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x13 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8759,28 +8576,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x14 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x15 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x16 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x17 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8789,28 +8602,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x18 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x19 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8819,28 +8628,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x1c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8849,28 +8654,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x20 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x21 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x22 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x23 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8879,28 +8680,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x24 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x25 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x26 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x27 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8909,28 +8706,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x28 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x29 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8939,28 +8732,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x2c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8969,28 +8758,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x30 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x31 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x32 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x33 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -8999,28 +8784,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x34 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x35 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x36 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x37 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -9029,28 +8810,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x38 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x39 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -9059,28 +8836,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x3c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -9091,70 +8864,70 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 1 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -9163,114 +8936,146 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
         ],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
     ],
     [
         [
             {
-                
                 vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
                 }
             },
-            vlc_t { i_bits: 0, i_size: 0 },
+            vlc_t {
+                i_bits: 0,
+                i_size: 0,
+            },
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
@@ -9279,28 +9084,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
@@ -9309,28 +9110,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
@@ -9339,28 +9136,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
@@ -9369,28 +9162,24 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
@@ -9399,154 +9188,158 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
         ],
         [
             {
-                
                 vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
                 }
             },
             {
-                
                 vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
                 }
             },
         ],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
-        [vlc_t { i_bits: 0, i_size: 0 }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
+        [vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        }; 4],
     ],
 ];
 #[no_mangle]
 pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
@@ -9555,997 +9348,1189 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
 ];
 #[no_mangle]
 pub static mut x264_total_zeros_2x2_dc: [[vlc_t; 4]; 3] = [
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
@@ -10554,101 +10539,97 @@ pub static mut x264_total_zeros_2x2_dc: [[vlc_t; 4]; 3] = [
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
 ];
 #[no_mangle]
 pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
@@ -10657,606 +10638,810 @@ pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
 ];
 #[no_mangle]
 pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
     [
         {
-            
             vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 10 as libc::c_int as uint8_t,
             }
         },
         {
-            
             vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 11 as libc::c_int as uint8_t,
             }
         },
-        vlc_t { i_bits: 0, i_size: 0 },
+        vlc_t {
+            i_bits: 0,
+            i_size: 0,
+        },
     ],
 ];
 #[no_mangle]
@@ -12289,3080 +12474,3080 @@ pub static mut x264_zero: [uint8_t; 1024] = [
 unsafe extern "C" fn run_static_initializers() {
     x264_dct8_weight_tab = [
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.0000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.8859f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.6000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.9415f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.2651f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.1910f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
     ];
     x264_dct4_weight_tab = [
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.76777f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.11803f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.70711f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
     ];
     x264_dct4_weight2_tab = [
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (3.125f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.25f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.5f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
     ];
     x264_dct8_weight2_tab = [
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 0 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 0 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 4 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 4 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 2 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 2 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 3 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 3 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 5 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 5 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,
         (if 1 as libc::c_int == 0 as libc::c_int {
-            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.00000f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 1 as libc::c_int {
-            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.78487f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 2 as libc::c_int {
-            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (2.56132f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 3 as libc::c_int {
-            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (0.88637f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 4 as libc::c_int {
-            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.60040f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else if 1 as libc::c_int == 5 as libc::c_int {
-            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double
-                + 0.5f64) as libc::c_int
+            (1.41850f64 * ((1 as libc::c_int) << 8 as libc::c_int) as libc::c_double + 0.5f64)
+                as libc::c_int
         } else {
             0 as libc::c_int
         }) as uint32_t,

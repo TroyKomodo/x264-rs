@@ -2427,7 +2427,7 @@ unsafe extern "C" fn x264_ctz_4bit(mut x: uint32_t) -> libc::c_int {
         1 as libc::c_int as uint8_t,
         0 as libc::c_int as uint8_t,
     ];
-    return lut[x as usize] as libc::c_int;
+    lut[x as usize] as libc::c_int
 }
 static mut x264_scan8: [uint8_t; 51] = [
     (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int) as uint8_t,
@@ -2488,7 +2488,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 static mut x264_pred_i4x4_neighbors: [uint8_t; 12] = [
     MB_TOP as libc::c_int as uint8_t,
@@ -2710,7 +2710,7 @@ unsafe extern "C" fn x264_quant_4x4(
         );
     }
     if (*h).mb.b_trellis != 0 {
-        return x264_8_quant_4x4_trellis(
+        x264_8_quant_4x4_trellis(
             h,
             dct,
             i_quant_cat,
@@ -2721,7 +2721,7 @@ unsafe extern "C" fn x264_quant_4x4(
             idx + p * 16 as libc::c_int,
         )
     } else {
-        return ((*h).quantf.quant_4x4)
+        ((*h).quantf.quant_4x4)
             .expect(
                 "non-null function pointer",
             )(
@@ -2730,7 +2730,7 @@ unsafe extern "C" fn x264_quant_4x4(
             (*((*h).quant4_bias[i_quant_cat as usize]).offset(i_qp as isize))
                 .as_mut_ptr(),
         )
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_quant_8x8(
@@ -2771,7 +2771,7 @@ unsafe extern "C" fn x264_quant_8x8(
         );
     }
     if (*h).mb.b_trellis != 0 {
-        return x264_8_quant_8x8_trellis(
+        x264_8_quant_8x8_trellis(
             h,
             dct,
             i_quant_cat,
@@ -2782,7 +2782,7 @@ unsafe extern "C" fn x264_quant_8x8(
             idx + p * 4 as libc::c_int,
         )
     } else {
-        return ((*h).quantf.quant_8x8)
+        ((*h).quantf.quant_8x8)
             .expect(
                 "non-null function pointer",
             )(
@@ -2791,7 +2791,7 @@ unsafe extern "C" fn x264_quant_8x8(
             (*((*h).quant8_bias[i_quant_cat as usize]).offset(i_qp as isize))
                 .as_mut_ptr(),
         )
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_mb_encode_i4x4(
@@ -3080,24 +3080,23 @@ unsafe extern "C" fn idct_dequant_2x2_dc(
     let mut d3: libc::c_int = *dct.offset(2 as libc::c_int as isize) as libc::c_int
         - *dct.offset(3 as libc::c_int as isize) as libc::c_int;
     let mut dmf: libc::c_int = (*dequant_mf
-        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize]
-        << i_qp / 6 as libc::c_int;
+        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize] << (i_qp / 6 as libc::c_int);
     (*dct4x4
         .offset(
             0 as libc::c_int as isize,
-        ))[0 as libc::c_int as usize] = ((d0 + d1) * dmf >> 5 as libc::c_int) as dctcoef;
+        ))[0 as libc::c_int as usize] = (((d0 + d1) * dmf) >> 5 as libc::c_int) as dctcoef;
     (*dct4x4
         .offset(
             1 as libc::c_int as isize,
-        ))[0 as libc::c_int as usize] = ((d0 - d1) * dmf >> 5 as libc::c_int) as dctcoef;
+        ))[0 as libc::c_int as usize] = (((d0 - d1) * dmf) >> 5 as libc::c_int) as dctcoef;
     (*dct4x4
         .offset(
             2 as libc::c_int as isize,
-        ))[0 as libc::c_int as usize] = ((d2 + d3) * dmf >> 5 as libc::c_int) as dctcoef;
+        ))[0 as libc::c_int as usize] = (((d2 + d3) * dmf) >> 5 as libc::c_int) as dctcoef;
     (*dct4x4
         .offset(
             3 as libc::c_int as isize,
-        ))[0 as libc::c_int as usize] = ((d2 - d3) * dmf >> 5 as libc::c_int) as dctcoef;
+        ))[0 as libc::c_int as usize] = (((d2 - d3) * dmf) >> 5 as libc::c_int) as dctcoef;
 }
 #[inline]
 unsafe extern "C" fn idct_dequant_2x2_dconly(
@@ -3114,24 +3113,23 @@ unsafe extern "C" fn idct_dequant_2x2_dconly(
     let mut d3: libc::c_int = *dct.offset(2 as libc::c_int as isize) as libc::c_int
         - *dct.offset(3 as libc::c_int as isize) as libc::c_int;
     let mut dmf: libc::c_int = (*dequant_mf
-        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize]
-        << i_qp / 6 as libc::c_int;
+        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize] << (i_qp / 6 as libc::c_int);
     *dct
         .offset(
             0 as libc::c_int as isize,
-        ) = ((d0 + d1) * dmf >> 5 as libc::c_int) as dctcoef;
+        ) = (((d0 + d1) * dmf) >> 5 as libc::c_int) as dctcoef;
     *dct
         .offset(
             1 as libc::c_int as isize,
-        ) = ((d0 - d1) * dmf >> 5 as libc::c_int) as dctcoef;
+        ) = (((d0 - d1) * dmf) >> 5 as libc::c_int) as dctcoef;
     *dct
         .offset(
             2 as libc::c_int as isize,
-        ) = ((d2 + d3) * dmf >> 5 as libc::c_int) as dctcoef;
+        ) = (((d2 + d3) * dmf) >> 5 as libc::c_int) as dctcoef;
     *dct
         .offset(
             3 as libc::c_int as isize,
-        ) = ((d2 - d3) * dmf >> 5 as libc::c_int) as dctcoef;
+        ) = (((d2 - d3) * dmf) >> 5 as libc::c_int) as dctcoef;
 }
 #[inline]
 unsafe extern "C" fn dct2x2dc(mut d: *mut dctcoef, mut dct4x4: *mut [dctcoef; 16]) {
@@ -3208,7 +3206,7 @@ unsafe extern "C" fn array_non_zero(
                 ) as libc::c_int as libc::c_int;
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mb_encode_i16x16(
     mut h: *mut x264_t,
@@ -3549,18 +3547,17 @@ unsafe extern "C" fn mb_optimize_chroma_dc(
     mut chroma422: libc::c_int,
 ) -> libc::c_int {
     let mut dmf: libc::c_int = (*dequant_mf
-        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize]
-        << i_qp / 6 as libc::c_int;
+        .offset((i_qp % 6 as libc::c_int) as isize))[0 as libc::c_int as usize] << (i_qp / 6 as libc::c_int);
     if dmf > 32 as libc::c_int * 64 as libc::c_int {
         return 1 as libc::c_int;
     }
     if chroma422 != 0 {
-        return ((*h).quantf.optimize_chroma_2x4_dc)
+        ((*h).quantf.optimize_chroma_2x4_dc)
             .expect("non-null function pointer")(dct_dc, dmf)
     } else {
-        return ((*h).quantf.optimize_chroma_2x2_dc)
+        ((*h).quantf.optimize_chroma_2x2_dc)
             .expect("non-null function pointer")(dct_dc, dmf)
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn mb_encode_chroma_internal(
@@ -3577,7 +3574,7 @@ unsafe extern "C" fn mb_encode_chroma_internal(
         .dequant4_mf[(CQM_4IC as libc::c_int + b_inter) as usize];
     let mut dct_dc: [dctcoef; 8] = [0; 8];
     (*h).mb.i_cbp_chroma = 0 as libc::c_int;
-    let ref mut fresh0 = *((*h).nr_count).offset(2 as libc::c_int as isize);
+    let fresh0 = &mut (*((*h).nr_count).offset(2 as libc::c_int as isize));
     *fresh0 = (*fresh0)
         .wrapping_add(((*h).mb.b_noise_reduction * 4 as libc::c_int) as uint32_t);
     (*(&mut *((*h).mb.cache.non_zero_count)
@@ -3631,9 +3628,9 @@ unsafe extern "C" fn mb_encode_chroma_internal(
             }) && (*h).mb.b_noise_reduction == 0
     {
         let mut thresh: libc::c_int = if chroma422 != 0 {
-            x264_lambda2_tab[i_qp as usize] + 16 as libc::c_int >> 5 as libc::c_int
+            (x264_lambda2_tab[i_qp as usize] + 16 as libc::c_int) >> 5 as libc::c_int
         } else {
-            x264_lambda2_tab[i_qp as usize] + 32 as libc::c_int >> 6 as libc::c_int
+            (x264_lambda2_tab[i_qp as usize] + 32 as libc::c_int) >> 6 as libc::c_int
         };
         let mut ssd: [libc::c_int; 2] = [0; 2];
         let mut chromapix: libc::c_int = if chroma422 != 0 {
@@ -3719,59 +3716,56 @@ unsafe extern "C" fn mb_encode_chroma_internal(
                             i;
                         }
                     }
-                    if nz_dc != 0 {
-                        if !(mb_optimize_chroma_dc(
+                    if nz_dc != 0 && mb_optimize_chroma_dc(
                             h,
                             dct_dc.as_mut_ptr(),
                             dequant_mf,
                             i_qp + 3 as libc::c_int * chroma422,
                             chroma422,
-                        ) == 0)
-                        {
-                            (*h)
-                                .mb
-                                .cache
-                                .non_zero_count[x264_scan8[(49 as libc::c_int + ch)
-                                as usize] as usize] = 1 as libc::c_int as uint8_t;
-                            if chroma422 != 0 {
-                                zigzag_scan_2x4_dc(
-                                    ((*h).dct.chroma_dc[ch as usize]).as_mut_ptr(),
-                                    dct_dc.as_mut_ptr(),
-                                );
-                                ((*h).quantf.idct_dequant_2x4_dconly)
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(dct_dc.as_mut_ptr(), dequant_mf, i_qp + 3 as libc::c_int);
-                            } else {
-                                zigzag_scan_2x2_dc(
-                                    ((*h).dct.chroma_dc[ch as usize]).as_mut_ptr(),
-                                    dct_dc.as_mut_ptr(),
-                                );
-                                idct_dequant_2x2_dconly(
-                                    dct_dc.as_mut_ptr(),
-                                    dequant_mf,
-                                    i_qp,
-                                );
-                            }
-                            let mut i_0: libc::c_int = 0 as libc::c_int;
-                            while i_0 <= chroma422 {
-                                ((*h).dctf.add8x8_idct_dc)
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    p_dst
-                                        .offset(
-                                            (8 as libc::c_int * i_0 * 32 as libc::c_int) as isize,
-                                        ),
-                                    &mut *dct_dc
-                                        .as_mut_ptr()
-                                        .offset((4 as libc::c_int * i_0) as isize),
-                                );
-                                i_0 += 1;
-                                i_0;
-                            }
-                            (*h).mb.i_cbp_chroma = 1 as libc::c_int;
+                        ) != 0 {
+                        (*h)
+                            .mb
+                            .cache
+                            .non_zero_count[x264_scan8[(49 as libc::c_int + ch)
+                            as usize] as usize] = 1 as libc::c_int as uint8_t;
+                        if chroma422 != 0 {
+                            zigzag_scan_2x4_dc(
+                                ((*h).dct.chroma_dc[ch as usize]).as_mut_ptr(),
+                                dct_dc.as_mut_ptr(),
+                            );
+                            ((*h).quantf.idct_dequant_2x4_dconly)
+                                .expect(
+                                    "non-null function pointer",
+                                )(dct_dc.as_mut_ptr(), dequant_mf, i_qp + 3 as libc::c_int);
+                        } else {
+                            zigzag_scan_2x2_dc(
+                                ((*h).dct.chroma_dc[ch as usize]).as_mut_ptr(),
+                                dct_dc.as_mut_ptr(),
+                            );
+                            idct_dequant_2x2_dconly(
+                                dct_dc.as_mut_ptr(),
+                                dequant_mf,
+                                i_qp,
+                            );
                         }
+                        let mut i_0: libc::c_int = 0 as libc::c_int;
+                        while i_0 <= chroma422 {
+                            ((*h).dctf.add8x8_idct_dc)
+                                .expect(
+                                    "non-null function pointer",
+                                )(
+                                p_dst
+                                    .offset(
+                                        (8 as libc::c_int * i_0 * 32 as libc::c_int) as isize,
+                                    ),
+                                &mut *dct_dc
+                                    .as_mut_ptr()
+                                    .offset((4 as libc::c_int * i_0) as isize),
+                            );
+                            i_0 += 1;
+                            i_0;
+                        }
+                        (*h).mb.i_cbp_chroma = 1 as libc::c_int;
                     }
                 }
                 ch += 1;
@@ -4111,7 +4105,7 @@ unsafe extern "C" fn mb_encode_chroma_internal(
                         ) as *mut uint8_t as *mut x264_union16_t))
                         .i = 0 as libc::c_int as uint16_t;
                 }
-                if !(nz_dc == 0) {
+                if nz_dc != 0 {
                     if mb_optimize_chroma_dc(
                         h,
                         dct_dc.as_mut_ptr(),
@@ -4748,7 +4742,7 @@ unsafe extern "C" fn macroblock_encode_internal(
                             as usize][4 as libc::c_int as usize],
                         (*h).mb.pic.i_stride[1 as libc::c_int as usize] as intptr_t,
                         mvx,
-                        2 as libc::c_int * mvy >> v_shift,
+                        (2 as libc::c_int * mvy) >> v_shift,
                         8 as libc::c_int,
                         height_0,
                     );
@@ -4907,7 +4901,7 @@ unsafe extern "C" fn macroblock_encode_internal(
                     i,
                     i_qp,
                     i_mode,
-                    0 as *mut pixel,
+                    std::ptr::null_mut::<pixel>(),
                     1 as libc::c_int,
                 );
                 i += 1;
@@ -5141,11 +5135,11 @@ unsafe extern "C" fn macroblock_encode_internal(
                     (*h).mb.pic.p_fenc[p_7 as usize],
                     (*h).mb.pic.p_fdec[p_7 as usize],
                 );
-                let ref mut fresh1 = *((*h).nr_count)
+                let fresh1 = &mut (*((*h).nr_count)
                     .offset(
                         (1 as libc::c_int + (p_7 != 0) as libc::c_int * 2 as libc::c_int)
                             as isize,
-                    );
+                    ));
                 *fresh1 = (*fresh1)
                     .wrapping_add(
                         ((*h).mb.b_noise_reduction * 4 as libc::c_int) as uint32_t,
@@ -5308,11 +5302,11 @@ unsafe extern "C" fn macroblock_encode_internal(
                     (*h).mb.pic.p_fdec[p_8 as usize],
                 );
                 if (*h).mb.b_noise_reduction != 0 {
-                    let ref mut fresh2 = *((*h).nr_count)
+                    let fresh2 = &mut (*((*h).nr_count)
                         .offset(
                             (0 as libc::c_int
                                 + (p_8 != 0) as libc::c_int * 2 as libc::c_int) as isize,
-                        );
+                        ));
                     *fresh2 = (*fresh2).wrapping_add(16 as libc::c_int as uint32_t);
                     let mut idx_1: libc::c_int = 0 as libc::c_int;
                     while idx_1 < 16 as libc::c_int {
@@ -5613,25 +5607,22 @@ unsafe extern "C" fn macroblock_encode_internal(
     } else {
         (*h).mb.i_cbp_chroma = 0 as libc::c_int;
     }
-    let mut cbp: libc::c_int = (*h).mb.i_cbp_chroma << 4 as libc::c_int
-        | (*h).mb.i_cbp_luma;
+    let mut cbp: libc::c_int = ((*h).mb.i_cbp_chroma << 4 as libc::c_int) | (*h).mb.i_cbp_luma;
     if (*h).param.b_cabac != 0 {
         cbp
-            |= ((*h)
+            |= (((*h)
                 .mb
                 .cache
                 .non_zero_count[x264_scan8[48 as libc::c_int as usize] as usize]
-                as libc::c_int) << 8 as libc::c_int
-                | ((*h)
+                as libc::c_int) << 8 as libc::c_int) | (((*h)
                     .mb
                     .cache
                     .non_zero_count[x264_scan8[(49 as libc::c_int + 0 as libc::c_int)
-                    as usize] as usize] as libc::c_int) << 9 as libc::c_int
-                | ((*h)
+                    as usize] as usize] as libc::c_int) << 9 as libc::c_int) | (((*h)
                     .mb
                     .cache
                     .non_zero_count[x264_scan8[(49 as libc::c_int + 1 as libc::c_int)
-                    as usize] as usize] as libc::c_int) << 10 as libc::c_int;
+                    as usize] as usize] as libc::c_int) << 10 as libc::c_int);
     }
     *((*h).mb.cbp).offset((*h).mb.i_mb_xy as isize) = cbp as int16_t;
     if b_force_no_skip == 0 {
@@ -5814,9 +5805,9 @@ unsafe extern "C" fn macroblock_probe_skip_internal(
         let mut chroma422: libc::c_int = (chroma == CHROMA_422 as libc::c_int)
             as libc::c_int;
         let mut thresh: libc::c_int = if chroma422 != 0 {
-            x264_lambda2_tab[i_qp as usize] + 16 as libc::c_int >> 5 as libc::c_int
+            (x264_lambda2_tab[i_qp as usize] + 16 as libc::c_int) >> 5 as libc::c_int
         } else {
-            x264_lambda2_tab[i_qp as usize] + 32 as libc::c_int >> 6 as libc::c_int
+            (x264_lambda2_tab[i_qp as usize] + 32 as libc::c_int) >> 6 as libc::c_int
         };
         let mut ssd: libc::c_int = 0;
         let mut dct_dc: [dctcoef; 8] = [0; 8];
@@ -5909,7 +5900,7 @@ unsafe extern "C" fn macroblock_probe_skip_internal(
                 p_src,
                 16 as libc::c_int as intptr_t,
             );
-            if !(ssd < thresh) {
+            if ssd >= thresh {
                 if (*h).mb.b_noise_reduction != 0 {
                     let mut i: libc::c_int = 0 as libc::c_int;
                     while i <= chroma422 {
@@ -5995,7 +5986,7 @@ unsafe extern "C" fn macroblock_probe_skip_internal(
                     i_0 += 1;
                     i_0;
                 }
-                if !(ssd < thresh * 4 as libc::c_int) {
+                if ssd >= thresh * 4 as libc::c_int {
                     if (*h).mb.b_noise_reduction == 0 {
                         let mut i_1: libc::c_int = 0 as libc::c_int;
                         while i_1 <= chroma422 {
@@ -6091,7 +6082,7 @@ unsafe extern "C" fn macroblock_probe_skip_internal(
         }
     }
     (*h).mb.b_skip_mc = 1 as libc::c_int;
-    return 1 as libc::c_int;
+    1 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_macroblock_probe_skip(
@@ -6099,7 +6090,7 @@ pub unsafe extern "C" fn x264_8_macroblock_probe_skip(
     mut b_bidir: libc::c_int,
 ) -> libc::c_int {
     if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_420 as libc::c_int {
-        return macroblock_probe_skip_internal(
+        macroblock_probe_skip_internal(
             h,
             b_bidir,
             1 as libc::c_int,
@@ -6128,7 +6119,7 @@ pub unsafe extern "C" fn x264_8_macroblock_probe_skip(
             1 as libc::c_int,
             CHROMA_400 as libc::c_int,
         )
-    };
+    }
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_noise_reduction_update(mut h: *mut x264_t) {
@@ -6804,7 +6795,7 @@ unsafe extern "C" fn macroblock_encode_p8x8_internal(
                         );
                     }
                     let mut offset_0: libc::c_int = if chroma422 != 0 {
-                        (5 as libc::c_int * i8 & 0x9 as libc::c_int)
+                        ((5 as libc::c_int * i8) & 0x9 as libc::c_int)
                             + 2 as libc::c_int * i4x4_2
                     } else {
                         i8

@@ -172,7 +172,7 @@ unsafe extern "C" fn open_file(
         return -(1 as libc::c_int);
     }
     *p_handle = h as hnd_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn read_frame_thread_int(mut i: *mut thread_input_arg_t) {
     (*i)
@@ -191,9 +191,7 @@ unsafe extern "C" fn read_frame(
         ret |= (*(*h).next_args).status;
     }
     if (*h).next_frame == i_frame {
-        let mut t: cli_pic_t = *p_pic;
-        *p_pic = (*h).pic;
-        (*h).pic = t;
+        core::ptr::swap(p_pic, &mut (*h).pic);
     } else {
         if (*h).next_frame >= 0 as libc::c_int {
             (thread_8_input.release_frame)
@@ -228,7 +226,7 @@ unsafe extern "C" fn read_frame(
     } else {
         (*h).next_frame = -(1 as libc::c_int);
     }
-    return ret;
+    ret
 }
 unsafe extern "C" fn release_frame(
     mut pic: *mut cli_pic_t,
@@ -239,7 +237,7 @@ unsafe extern "C" fn release_frame(
         return ((*h).input.release_frame)
             .expect("non-null function pointer")(pic, (*h).p_handle);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn picture_alloc(
     mut pic: *mut cli_pic_t,
@@ -249,8 +247,8 @@ unsafe extern "C" fn picture_alloc(
     mut height: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut thread_hnd_t = handle as *mut thread_hnd_t;
-    return ((*h).input.picture_alloc)
-        .expect("non-null function pointer")(pic, (*h).p_handle, csp, width, height);
+    ((*h).input.picture_alloc)
+        .expect("non-null function pointer")(pic, (*h).p_handle, csp, width, height)
 }
 unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
     let mut h: *mut thread_hnd_t = handle as *mut thread_hnd_t;
@@ -264,12 +262,13 @@ unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
     ((*h).input.close_file).expect("non-null function pointer")((*h).p_handle);
     free((*h).next_args as *mut libc::c_void);
     free(h as *mut libc::c_void);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub static mut thread_8_input: cli_input_t = unsafe {
     {
-        let mut init = cli_input_t {
+        
+        cli_input_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -305,7 +304,6 @@ pub static mut thread_8_input: cli_input_t = unsafe {
                 picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> (),
             ),
             close_file: Some(close_file as unsafe extern "C" fn(hnd_t) -> libc::c_int),
-        };
-        init
+        }
     }
 };

@@ -35,7 +35,8 @@ pub struct vlc_t {
 #[no_mangle]
 pub static mut x264_levels: [x264_level_t; 21] = [
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 10 as libc::c_int as uint8_t,
             mbps: 1485 as libc::c_int,
             frame_size: 99 as libc::c_int,
@@ -49,11 +50,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 9 as libc::c_int as uint8_t,
             mbps: 1485 as libc::c_int,
             frame_size: 99 as libc::c_int,
@@ -67,11 +68,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 11 as libc::c_int as uint8_t,
             mbps: 3000 as libc::c_int,
             frame_size: 396 as libc::c_int,
@@ -85,11 +86,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 12 as libc::c_int as uint8_t,
             mbps: 6000 as libc::c_int,
             frame_size: 396 as libc::c_int,
@@ -103,11 +104,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 13 as libc::c_int as uint8_t,
             mbps: 11880 as libc::c_int,
             frame_size: 396 as libc::c_int,
@@ -121,11 +122,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 20 as libc::c_int as uint8_t,
             mbps: 11880 as libc::c_int,
             frame_size: 396 as libc::c_int,
@@ -139,11 +140,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 21 as libc::c_int as uint8_t,
             mbps: 19800 as libc::c_int,
             frame_size: 792 as libc::c_int,
@@ -157,11 +158,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 22 as libc::c_int as uint8_t,
             mbps: 20250 as libc::c_int,
             frame_size: 1620 as libc::c_int,
@@ -175,11 +176,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 0 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 30 as libc::c_int as uint8_t,
             mbps: 40500 as libc::c_int,
             frame_size: 1620 as libc::c_int,
@@ -193,11 +194,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 31 as libc::c_int as uint8_t,
             mbps: 108000 as libc::c_int,
             frame_size: 3600 as libc::c_int,
@@ -211,11 +212,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 32 as libc::c_int as uint8_t,
             mbps: 216000 as libc::c_int,
             frame_size: 5120 as libc::c_int,
@@ -229,11 +230,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 40 as libc::c_int as uint8_t,
             mbps: 245760 as libc::c_int,
             frame_size: 8192 as libc::c_int,
@@ -247,11 +248,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 41 as libc::c_int as uint8_t,
             mbps: 245760 as libc::c_int,
             frame_size: 8192 as libc::c_int,
@@ -265,11 +266,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 0 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 42 as libc::c_int as uint8_t,
             mbps: 522240 as libc::c_int,
             frame_size: 8704 as libc::c_int,
@@ -283,11 +284,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 50 as libc::c_int as uint8_t,
             mbps: 589824 as libc::c_int,
             frame_size: 22080 as libc::c_int,
@@ -301,11 +302,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 51 as libc::c_int as uint8_t,
             mbps: 983040 as libc::c_int,
             frame_size: 36864 as libc::c_int,
@@ -319,11 +320,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 52 as libc::c_int as uint8_t,
             mbps: 2073600 as libc::c_int,
             frame_size: 36864 as libc::c_int,
@@ -337,11 +338,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 60 as libc::c_int as uint8_t,
             mbps: 4177920 as libc::c_int,
             frame_size: 139264 as libc::c_int,
@@ -355,11 +356,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 61 as libc::c_int as uint8_t,
             mbps: 8355840 as libc::c_int,
             frame_size: 139264 as libc::c_int,
@@ -373,11 +374,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 62 as libc::c_int as uint8_t,
             mbps: 16711680 as libc::c_int,
             frame_size: 139264 as libc::c_int,
@@ -391,11 +392,11 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 1 as libc::c_int as uint8_t,
             direct8x8: 1 as libc::c_int as uint8_t,
             frame_only: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_level_t {
+        
+        x264_level_t {
             level_idc: 0 as libc::c_int as uint8_t,
             mbps: 0,
             frame_size: 0,
@@ -409,8 +410,7 @@ pub static mut x264_levels: [x264_level_t; 21] = [
             bipred8x8: 0,
             direct8x8: 0,
             frame_only: 0,
-        };
-        init
+        }
     },
 ];
 #[no_mangle]
@@ -7188,46 +7188,46 @@ pub static mut x264_count_cat_m1: [uint8_t; 14] = [
 #[no_mangle]
 pub static mut x264_coeff0_token: [vlc_t; 6] = [
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0x3 as libc::c_int as uint8_t,
             i_size: 2 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0xf as libc::c_int as uint8_t,
             i_size: 4 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0x3 as libc::c_int as uint8_t,
             i_size: 6 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 2 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = vlc_t {
+        
+        vlc_t {
             i_bits: 0x1 as libc::c_int as uint8_t,
             i_size: 1 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
 ];
 #[no_mangle]
@@ -7235,1960 +7235,1960 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 15 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 16 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
     ],
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 14 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
     ],
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 4 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
     ],
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x10 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x11 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x12 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x13 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x14 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x15 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x16 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x17 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x18 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x19 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x20 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x21 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x22 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x23 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x24 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x25 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x26 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x27 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x28 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x29 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x30 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x31 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x32 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x33 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x34 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x35 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x36 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x37 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x38 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x39 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3a as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3b as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3c as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3d as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3e as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3f as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
     ],
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 1 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x3 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x2 as libc::c_int as uint8_t,
                     i_size: 8 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [vlc_t { i_bits: 0, i_size: 0 }; 4],
@@ -9207,224 +9207,224 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
     [
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xf as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 2 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xe as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xd as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 3 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             vlc_t { i_bits: 0, i_size: 0 },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xc as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xb as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 5 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0xa as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x1 as libc::c_int as uint8_t,
                     i_size: 6 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 9 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x9 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x8 as libc::c_int as uint8_t,
                     i_size: 7 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x6 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 10 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x7 as libc::c_int as uint8_t,
                     i_size: 13 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x5 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 12 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
             {
-                let mut init = vlc_t {
+                
+                vlc_t {
                     i_bits: 0x4 as libc::c_int as uint8_t,
                     i_size: 11 as libc::c_int as uint8_t,
-                };
-                init
+                }
             },
         ],
         [vlc_t { i_bits: 0, i_size: 0 }; 4],
@@ -9441,419 +9441,419 @@ pub static mut x264_coeff_token: [[[vlc_t; 4]; 16]; 6] = [
 pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -9861,88 +9861,88 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -9951,81 +9951,81 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10035,74 +10035,74 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10113,67 +10113,67 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10185,60 +10185,60 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10251,53 +10251,53 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10311,46 +10311,46 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10365,39 +10365,39 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10413,32 +10413,32 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10455,25 +10455,25 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10491,18 +10491,18 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10524,72 +10524,72 @@ pub static mut x264_total_zeros: [[vlc_t; 16]; 15] = [
 pub static mut x264_total_zeros_2x2_dc: [[vlc_t; 4]; 3] = [
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10599,195 +10599,195 @@ pub static mut x264_total_zeros_2x2_dc: [[vlc_t; 4]; 3] = [
 pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10795,32 +10795,32 @@ pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10829,25 +10829,25 @@ pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10857,18 +10857,18 @@ pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10882,18 +10882,18 @@ pub static mut x264_total_zeros_2x4_dc: [[vlc_t; 8]; 7] = [
 pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10912,25 +10912,25 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 1 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10948,32 +10948,32 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -10990,39 +10990,39 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -11038,46 +11038,46 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -11092,53 +11092,53 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 2 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
         vlc_t { i_bits: 0, i_size: 0 },
@@ -11152,109 +11152,109 @@ pub static mut x264_run_before_init: [[vlc_t; 16]; 7] = [
     ],
     [
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x7 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x6 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x5 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x4 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x3 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x2 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 3 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 4 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 5 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 6 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 7 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 8 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 9 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 10 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         {
-            let mut init = vlc_t {
+            
+            vlc_t {
                 i_bits: 0x1 as libc::c_int as uint8_t,
                 i_size: 11 as libc::c_int as uint8_t,
-            };
-            init
+            }
         },
         vlc_t { i_bits: 0, i_size: 0 },
     ],

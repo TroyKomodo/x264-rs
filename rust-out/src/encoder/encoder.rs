@@ -2938,13 +2938,13 @@ unsafe extern "C" fn bs_init(
 }
 #[inline]
 unsafe extern "C" fn bs_pos(mut s: *mut bs_t) -> libc::c_int {
-    return ((8 as libc::c_int as libc::c_long
+    ((8 as libc::c_int as libc::c_long
         * ((*s).p).offset_from((*s).p_start) as libc::c_long) as libc::c_ulong)
         .wrapping_add(
             (::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong)
                 .wrapping_mul(8 as libc::c_int as libc::c_ulong),
         )
-        .wrapping_sub((*s).i_left as libc::c_ulong) as libc::c_int;
+        .wrapping_sub((*s).i_left as libc::c_ulong) as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn bs_flush(mut s: *mut bs_t) {
@@ -2986,7 +2986,7 @@ unsafe extern "C" fn bs_write(
     if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
         == 8 as libc::c_int as libc::c_ulong
     {
-        (*s).cur_bits = (*s).cur_bits << i_count | i_bits as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << i_count) | i_bits as uintptr_t;
         (*s).i_left -= i_count;
         if (*s).i_left <= 32 as libc::c_int {
             (*((*s).p as *mut x264_union32_t))
@@ -2995,11 +2995,11 @@ unsafe extern "C" fn bs_write(
             (*s).p = ((*s).p).offset(4 as libc::c_int as isize);
         }
     } else if i_count < (*s).i_left {
-        (*s).cur_bits = (*s).cur_bits << i_count | i_bits as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << i_count) | i_bits as uintptr_t;
         (*s).i_left -= i_count;
     } else {
         i_count -= (*s).i_left;
-        (*s).cur_bits = (*s).cur_bits << (*s).i_left | (i_bits >> i_count) as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << (*s).i_left) | (i_bits >> i_count) as uintptr_t;
         (*((*s).p as *mut x264_union32_t)).i = endian_fix((*s).cur_bits) as uint32_t;
         (*s).p = ((*s).p).offset(4 as libc::c_int as isize);
         (*s).cur_bits = i_bits as uintptr_t;
@@ -3332,18 +3332,18 @@ unsafe extern "C" fn bs_rbsp_trailing(mut s: *mut bs_t) {
 #[inline(always)]
 unsafe extern "C" fn bs_size_ue_big(mut val: libc::c_uint) -> libc::c_int {
     if val < 255 as libc::c_int as libc::c_uint {
-        return x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint)
+        x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint)
             as usize] as libc::c_int
     } else {
-        return x264_ue_size_tab[(val.wrapping_add(1 as libc::c_int as libc::c_uint)
+        x264_ue_size_tab[(val.wrapping_add(1 as libc::c_int as libc::c_uint)
             >> 8 as libc::c_int) as usize] as libc::c_int + 16 as libc::c_int
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_cabac_pos(mut cb: *mut x264_cabac_t) -> libc::c_int {
-    return ((((*cb).p).offset_from((*cb).p_start) as libc::c_long
+    ((((*cb).p).offset_from((*cb).p_start) as libc::c_long
         + (*cb).i_bytes_outstanding as libc::c_long) * 8 as libc::c_int as libc::c_long
-        + (*cb).i_queue as libc::c_long) as libc::c_int;
+        + (*cb).i_queue as libc::c_long) as libc::c_int
 }
 static mut x264_mb_chroma_pred_mode_fix: [uint8_t; 7] = [
     I_PRED_CHROMA_DC as libc::c_int as uint8_t,
@@ -3430,30 +3430,30 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix32(mut x: uint32_t) -> uint32_t {
-    return (x << 24 as libc::c_int)
-        .wrapping_add(x << 8 as libc::c_int & 0xff0000 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 8 as libc::c_int & 0xff00 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 24 as libc::c_int);
+    (x << 24 as libc::c_int)
+        .wrapping_add((x << 8 as libc::c_int) & 0xff0000 as libc::c_int as uint32_t)
+        .wrapping_add((x >> 8 as libc::c_int) & 0xff00 as libc::c_int as uint32_t)
+        .wrapping_add(x >> 24 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix64(mut x: uint64_t) -> uint64_t {
-    return (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
-        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int);
+    (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
+        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix(mut x: uintptr_t) -> uintptr_t {
-    return if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
+    if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
         == 8 as libc::c_int as libc::c_ulong
     {
         endian_fix64(x)
     } else {
         endian_fix32(x as uint32_t) as uint64_t
-    };
+    }
 }
 static mut slice_type_to_char: [libc::c_char; 3] = [
     'P' as i32 as libc::c_char,
@@ -3519,7 +3519,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_clip3f(
@@ -3527,7 +3527,7 @@ unsafe extern "C" fn x264_clip3f(
     mut f_min: libc::c_double,
     mut f_max: libc::c_double,
 ) -> libc::c_double {
-    return if v < f_min { f_min } else if v > f_max { f_max } else { v };
+    if v < f_min { f_min } else if v > f_max { f_max } else { v }
 }
 static mut x264_mb_type_list_table: [[[uint8_t; 2]; 2]; 19] = [
     [
@@ -3797,14 +3797,14 @@ unsafe extern "C" fn calc_psnr(
     if mse <= 0.0000000001f64 {
         return 100 as libc::c_int as libc::c_double;
     }
-    return -10.0f64 * log10(mse);
+    -10.0f64 * log10(mse)
 }
 unsafe extern "C" fn calc_ssim_db(mut ssim: libc::c_double) -> libc::c_double {
     let mut inv_ssim: libc::c_double = 1 as libc::c_int as libc::c_double - ssim;
     if inv_ssim <= 0.0000000001f64 {
         return 100 as libc::c_int as libc::c_double;
     }
-    return -10.0f64 * log10(inv_ssim);
+    -10.0f64 * log10(inv_ssim)
 }
 unsafe extern "C" fn threadpool_wait_all(mut h: *mut x264_t) -> libc::c_int {
     let mut i: libc::c_int = 0 as libc::c_int;
@@ -3822,7 +3822,7 @@ unsafe extern "C" fn threadpool_wait_all(mut h: *mut x264_t) -> libc::c_int {
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn frame_dump(mut h: *mut x264_t) {
     let mut f: *mut FILE = fopen(
@@ -3839,9 +3839,8 @@ unsafe extern "C" fn frame_dump(mut h: *mut x264_t) {
         * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
         + 2 as libc::c_int
             * (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                (*h).param.i_height * (*h).param.i_width
-                    * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int
-                    >> (*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift
+                ((*h).param.i_height * (*h).param.i_width
+                    * ::core::mem::size_of::<pixel>() as libc::c_ulong as libc::c_int) >> ((*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift)
             } else {
                 0 as libc::c_int
             });
@@ -4011,9 +4010,8 @@ unsafe extern "C" fn slice_header_init(
                     .idc = (diff > 0 as libc::c_int) as libc::c_int;
                 (*sh)
                     .ref_pic_list_order[list as usize][i as usize]
-                    .arg = abs(diff) - 1 as libc::c_int
-                    & ((1 as libc::c_int) << (*sps).i_log2_max_frame_num)
-                        - 1 as libc::c_int;
+                    .arg = (abs(diff) - 1 as libc::c_int) & (((1 as libc::c_int) << (*sps).i_log2_max_frame_num)
+                        - 1 as libc::c_int);
                 pred_frame_num = (*(*h).fref[list as usize][i as usize]).i_frame_num;
                 i += 1;
                 i;
@@ -4094,9 +4092,9 @@ unsafe extern "C" fn slice_header_write(
         };
         bs_write_ue_big(
             s,
-            (2 as libc::c_int * first_x
+            ((2 as libc::c_int * first_x
                 + (*(*sh).sps).i_mb_width * (first_y & !(1 as libc::c_int))
-                + (first_y & 1 as libc::c_int) >> 1 as libc::c_int) as libc::c_uint,
+                + (first_y & 1 as libc::c_int)) >> 1 as libc::c_int) as libc::c_uint,
         );
     } else {
         bs_write_ue_big(s, (*sh).i_first_mb as libc::c_uint);
@@ -4106,9 +4104,8 @@ unsafe extern "C" fn slice_header_write(
     bs_write(
         s,
         (*(*sh).sps).i_log2_max_frame_num,
-        ((*sh).i_frame_num
-            & ((1 as libc::c_int) << (*(*sh).sps).i_log2_max_frame_num)
-                - 1 as libc::c_int) as uint32_t,
+        ((*sh).i_frame_num & (((1 as libc::c_int) << (*(*sh).sps).i_log2_max_frame_num)
+                - 1 as libc::c_int)) as uint32_t,
     );
     if (*(*sh).sps).b_frame_mbs_only == 0 {
         bs_write1(s, (*sh).b_field_pic as uint32_t);
@@ -4123,9 +4120,8 @@ unsafe extern "C" fn slice_header_write(
         bs_write(
             s,
             (*(*sh).sps).i_log2_max_poc_lsb,
-            ((*sh).i_poc
-                & ((1 as libc::c_int) << (*(*sh).sps).i_log2_max_poc_lsb)
-                    - 1 as libc::c_int) as uint32_t,
+            ((*sh).i_poc & (((1 as libc::c_int) << (*(*sh).sps).i_log2_max_poc_lsb)
+                    - 1 as libc::c_int)) as uint32_t,
         );
         if (*(*sh).pps).b_pic_order != 0 && (*sh).b_field_pic == 0 {
             bs_write_se(s, (*sh).i_delta_poc_bottom);
@@ -4268,10 +4264,7 @@ unsafe extern "C" fn slice_header_write(
             i_1 += 1;
             i_1;
         }
-    } else {
-        (*(*sh).pps).b_weighted_bipred == 1 as libc::c_int
-            && (*sh).i_type == SLICE_TYPE_B as libc::c_int;
-    }
+    } else if (*(*sh).pps).b_weighted_bipred == 1 as libc::c_int { (*sh).i_type == SLICE_TYPE_B as libc::c_int; }
     if i_nal_ref_idc != 0 as libc::c_int {
         if (*sh).i_idr_pic_id >= 0 as libc::c_int {
             bs_write1(s, 0 as libc::c_int as uint32_t);
@@ -4353,7 +4346,7 @@ unsafe extern "C" fn bitstream_check_buffer_internal(
         (*h).cabac.p_end = buf.offset(buf_size as isize);
         let mut i: libc::c_int = 0 as libc::c_int;
         while i <= i_nal {
-            let ref mut fresh0 = (*((*h).out.nal).offset(i as isize)).p_payload;
+            let fresh0 = &mut (*((*h).out.nal).offset(i as isize)).p_payload;
             *fresh0 = (*fresh0).offset(delta as isize);
             i += 1;
             i;
@@ -4362,29 +4355,29 @@ unsafe extern "C" fn bitstream_check_buffer_internal(
         (*h).out.p_bitstream = buf;
         (*h).out.i_bitstream = buf_size;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn bitstream_check_buffer(mut h: *mut x264_t) -> libc::c_int {
     let mut max_row_size: libc::c_int = ((2500 as libc::c_int) << (*h).sh.b_mbaff)
         * (*h).mb.i_mb_width;
-    return bitstream_check_buffer_internal(
+    bitstream_check_buffer_internal(
         h,
         max_row_size,
         (*h).param.b_cabac,
         (*h).out.i_nal,
-    );
+    )
 }
 unsafe extern "C" fn bitstream_check_buffer_filler(
     mut h: *mut x264_t,
     mut filler: libc::c_int,
 ) -> libc::c_int {
     filler += 32 as libc::c_int;
-    return bitstream_check_buffer_internal(
+    bitstream_check_buffer_internal(
         h,
         filler,
         0 as libc::c_int,
         -(1 as libc::c_int),
-    );
+    )
 }
 unsafe extern "C" fn validate_parameters(
     mut h: *mut x264_t,
@@ -4542,16 +4535,14 @@ unsafe extern "C" fn validate_parameters(
     } else {
         ((*h).param.i_height + 15 as libc::c_int) / 16 as libc::c_int / 4 as libc::c_int
     };
-    if (*h).param.i_threads > 1 as libc::c_int {
-        if (*h).param.b_sliced_threads != 0 {
-            (*h)
-                .param
-                .i_threads = if (*h).param.i_threads < max_sliced_threads {
-                (*h).param.i_threads
-            } else {
-                max_sliced_threads
-            };
-        }
+    if (*h).param.i_threads > 1 as libc::c_int && (*h).param.b_sliced_threads != 0 {
+        (*h)
+            .param
+            .i_threads = if (*h).param.i_threads < max_sliced_threads {
+            (*h).param.i_threads
+        } else {
+            max_sliced_threads
+        };
     }
     (*h)
         .param
@@ -4829,7 +4820,8 @@ unsafe extern "C" fn validate_parameters(
                 [
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4837,11 +4829,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4849,11 +4841,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4861,11 +4853,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4873,11 +4865,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4885,8 +4877,7 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         C2RustUnnamed_21 {
                             fps_num: 0,
@@ -4909,7 +4900,8 @@ unsafe extern "C" fn validate_parameters(
                     ],
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -4917,11 +4909,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -4929,11 +4921,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4941,11 +4933,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4953,11 +4945,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4965,11 +4957,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4977,11 +4969,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -4989,15 +4981,15 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci50_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci50_p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                     ],
                 ],
                 [
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5005,11 +4997,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5017,11 +5009,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5029,11 +5021,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5041,11 +5033,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5053,8 +5045,7 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         C2RustUnnamed_21 {
                             fps_num: 0,
@@ -5077,7 +5068,8 @@ unsafe extern "C" fn validate_parameters(
                     ],
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -5085,11 +5077,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -5097,11 +5089,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5109,11 +5101,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5121,11 +5113,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5133,11 +5125,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5145,11 +5137,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5157,15 +5149,15 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                     ],
                 ],
                 [
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5173,11 +5165,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5185,8 +5177,7 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_720p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_720p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         C2RustUnnamed_21 {
                             fps_num: 0,
@@ -5236,7 +5227,8 @@ unsafe extern "C" fn validate_parameters(
                     ],
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -5244,11 +5236,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 1 as libc::c_int as uint8_t,
@@ -5256,11 +5248,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080i_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5268,11 +5260,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5280,11 +5272,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5292,11 +5284,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5304,11 +5296,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5316,15 +5308,15 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_jvt4i.as_ptr(),
                                 cqm_4ic: x264_cqm_avci100_1080_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci100_1080p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                     ],
                 ],
                 [
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5332,11 +5324,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5344,11 +5336,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5356,11 +5348,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5368,11 +5360,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5380,8 +5372,7 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         C2RustUnnamed_21 {
                             fps_num: 0,
@@ -5415,7 +5406,8 @@ unsafe extern "C" fn validate_parameters(
                 [
                     [
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 60000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5423,11 +5415,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 50 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5435,11 +5427,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 30000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5447,11 +5439,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 25 as libc::c_int as uint16_t,
                                 fps_den: 1 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5459,11 +5451,11 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         {
-                            let mut init = C2RustUnnamed_21 {
+                            
+                            C2RustUnnamed_21 {
                                 fps_num: 24000 as libc::c_int as uint16_t,
                                 fps_den: 1001 as libc::c_int as uint16_t,
                                 interlaced: 0 as libc::c_int as uint8_t,
@@ -5471,8 +5463,7 @@ unsafe extern "C" fn validate_parameters(
                                 cqm_4iy: x264_cqm_avci300_2160p_4iy.as_ptr(),
                                 cqm_4ic: x264_cqm_avci300_2160p_4ic.as_ptr(),
                                 cqm_8iy: x264_cqm_avci300_2160p_8iy.as_ptr(),
-                            };
-                            init
+                            }
                         },
                         C2RustUnnamed_21 {
                             fps_num: 0,
@@ -5793,7 +5784,7 @@ unsafe extern "C" fn validate_parameters(
     {
         (*h).mb.b_lossless = 1 as libc::c_int;
         (*h).param.i_cqm_preset = 0 as libc::c_int;
-        (*h).param.psz_cqm_file = 0 as *mut libc::c_char;
+        (*h).param.psz_cqm_file = std::ptr::null_mut::<libc::c_char>();
         (*h).param.rc.i_rc_method = 0 as libc::c_int;
         (*h).param.rc.f_ip_factor = 1 as libc::c_int as libc::c_float;
         (*h).param.rc.f_pb_factor = 1 as libc::c_int as libc::c_float;
@@ -5846,9 +5837,7 @@ unsafe extern "C" fn validate_parameters(
             .i_qp_max = x264_clip3(
             ((if qp_p > (if qp_i > qp_b { qp_i } else { qp_b }) {
                 qp_p
-            } else {
-                (if qp_i > qp_b { qp_i } else { qp_b })
-            }) as libc::c_double + 0.999f64) as libc::c_int,
+            } else if qp_i > qp_b { qp_i } else { qp_b }) as libc::c_double + 0.999f64) as libc::c_int,
             0 as libc::c_int,
             51 as libc::c_int + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
                 + 18 as libc::c_int,
@@ -6446,7 +6435,7 @@ unsafe extern "C" fn validate_parameters(
     }
     if b_open != 0 && ((*h).param.analyse.b_psnr != 0 || (*h).param.analyse.b_ssim != 0)
     {
-        let mut s: *mut libc::c_char = 0 as *mut libc::c_char;
+        let mut s: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
         if (*h).param.analyse.b_psy != 0 {
             s = (if (*h).param.analyse.b_psnr != 0 {
                 b"psnr\0" as *const u8 as *const libc::c_char
@@ -6917,7 +6906,7 @@ unsafe extern "C" fn validate_parameters(
     (*h).param.rc.b_stat_read = ((*h).param.rc.b_stat_read != 0) as libc::c_int;
     (*h).param.rc.b_mb_tree = ((*h).param.rc.b_mb_tree != 0) as libc::c_int;
     (*h).param.rc.b_filler = ((*h).param.rc.b_filler != 0) as libc::c_int;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mbcmp_init(mut h: *mut x264_t) {
     let mut satd: libc::c_int = ((*h).mb.b_lossless == 0
@@ -7119,8 +7108,8 @@ unsafe extern "C" fn set_aspect_ratio(
         while i_w > 65535 as libc::c_int as uint32_t
             || i_h > 65535 as libc::c_int as uint32_t
         {
-            i_w = i_w / 2 as libc::c_int as uint32_t;
-            i_h = i_h / 2 as libc::c_int as uint32_t;
+            i_w /= 2 as libc::c_int as uint32_t;
+            i_h /= 2 as libc::c_int as uint32_t;
         }
         x264_reduce_fraction(&mut i_w, &mut i_h);
         if i_w != old_w || i_h != old_h || initial != 0 {
@@ -7154,7 +7143,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
     mut api: *mut libc::c_void,
 ) -> *mut x264_t {
     let mut temp: libc::c_int = 0;
-    let mut profile: *const libc::c_char = 0 as *const libc::c_char;
+    let mut profile: *const libc::c_char = std::ptr::null::<libc::c_char>();
     let mut level: [libc::c_char; 16] = [0; 16];
     static mut subsampling: [*const libc::c_char; 4] = [
         b"4:0:0\0" as *const u8 as *const libc::c_char,
@@ -7163,9 +7152,9 @@ pub unsafe extern "C" fn x264_8_encoder_open(
         b"4:4:4\0" as *const u8 as *const libc::c_char,
     ];
     let mut current_block: u64;
-    let mut h: *mut x264_t = 0 as *mut x264_t;
+    let mut h: *mut x264_t = std::ptr::null_mut::<x264_t>();
     let mut buf: [libc::c_char; 1000] = [0; 1000];
-    let mut p: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut p: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut i_slicetype_length: libc::c_int = 0;
     h = x264_malloc(::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t)
         as *mut x264_t;
@@ -7180,7 +7169,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
             param as *const libc::c_void,
             ::core::mem::size_of::<x264_param_t>() as libc::c_ulong,
         );
-        (*h).param.opaque = 0 as *mut libc::c_void;
+        (*h).param.opaque = std::ptr::null_mut::<libc::c_void>();
         (*h).param.param_free = None;
         if !((*h).param.psz_cqm_file).is_null() {
             (*h)
@@ -7301,8 +7290,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
                                                                 )(param as *mut libc::c_void);
                                                         }
                                                         (*h).api = api;
-                                                        if !(validate_parameters(h, 1 as libc::c_int)
-                                                            < 0 as libc::c_int)
+                                                        if validate_parameters(h, 1 as libc::c_int) >= 0 as libc::c_int
                                                         {
                                                             if !((*h).param.psz_cqm_file).is_null() {
                                                                 if x264_8_cqm_parse_file(h, (*h).param.psz_cqm_file)
@@ -7376,7 +7364,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
                                                                             .offset(
                                                                                 (*((*h).pps).as_mut_ptr()).i_chroma_qp_index_offset as isize,
                                                                             );
-                                                                        if !(x264_8_cqm_init(h) < 0 as libc::c_int) {
+                                                                        if x264_8_cqm_init(h) >= 0 as libc::c_int {
                                                                             (*h).mb.i_mb_width = (*((*h).sps).as_mut_ptr()).i_mb_width;
                                                                             (*h)
                                                                                 .mb
@@ -7676,79 +7664,55 @@ pub unsafe extern "C" fn x264_8_encoder_open(
                                                                                                             (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                             b"SSE\0" as *const u8 as *const libc::c_char,
                                                                                                         ) == 0
-                                                                                                            && (*h).param.cpu & (1 as libc::c_uint) << 3 as libc::c_int
-                                                                                                                != 0)
-                                                                                                        {
-                                                                                                            if !(strcmp(
+                                                                                                            && (*h).param.cpu & ((1 as libc::c_uint) << 3 as libc::c_int)
+                                                                                                                != 0) && !(strcmp(
                                                                                                                 (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                 b"SSE2\0" as *const u8 as *const libc::c_char,
                                                                                                             ) == 0
                                                                                                                 && (*h).param.cpu
-                                                                                                                    & ((1 as libc::c_uint) << 20 as libc::c_int
-                                                                                                                        | (1 as libc::c_uint) << 19 as libc::c_int) != 0)
-                                                                                                            {
-                                                                                                                if !(strcmp(
+                                                                                                                    & (((1 as libc::c_uint) << 20 as libc::c_int) | ((1 as libc::c_uint) << 19 as libc::c_int)) != 0) && !(strcmp(
                                                                                                                     (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                     b"SSE3\0" as *const u8 as *const libc::c_char,
                                                                                                                 ) == 0
-                                                                                                                    && ((*h).param.cpu & (1 as libc::c_uint) << 6 as libc::c_int
+                                                                                                                    && ((*h).param.cpu & ((1 as libc::c_uint) << 6 as libc::c_int)
                                                                                                                         != 0
-                                                                                                                        || (*h).param.cpu & (1 as libc::c_uint) << 18 as libc::c_int
-                                                                                                                            == 0))
-                                                                                                                {
-                                                                                                                    if !(strcmp(
+                                                                                                                        || (*h).param.cpu & ((1 as libc::c_uint) << 18 as libc::c_int)
+                                                                                                                            == 0)) && !(strcmp(
                                                                                                                         (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                         b"SSE4.1\0" as *const u8 as *const libc::c_char,
                                                                                                                     ) == 0
-                                                                                                                        && (*h).param.cpu & (1 as libc::c_uint) << 8 as libc::c_int
-                                                                                                                            != 0)
-                                                                                                                    {
-                                                                                                                        if !(strcmp(
+                                                                                                                        && (*h).param.cpu & ((1 as libc::c_uint) << 8 as libc::c_int)
+                                                                                                                            != 0) && !(strcmp(
                                                                                                                             (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                             b"LZCNT\0" as *const u8 as *const libc::c_char,
                                                                                                                         ) == 0
-                                                                                                                            && (*h).param.cpu & (1 as libc::c_uint) << 13 as libc::c_int
-                                                                                                                                != 0)
-                                                                                                                        {
-                                                                                                                            if !(strcmp(
+                                                                                                                            && (*h).param.cpu & ((1 as libc::c_uint) << 13 as libc::c_int)
+                                                                                                                                != 0) && !(strcmp(
                                                                                                                                 (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                                 b"BMI1\0" as *const u8 as *const libc::c_char,
                                                                                                                             ) == 0
-                                                                                                                                && (*h).param.cpu & (1 as libc::c_uint) << 14 as libc::c_int
-                                                                                                                                    != 0)
-                                                                                                                            {
-                                                                                                                                if !(strcmp(
+                                                                                                                                && (*h).param.cpu & ((1 as libc::c_uint) << 14 as libc::c_int)
+                                                                                                                                    != 0) && !(strcmp(
                                                                                                                                     (*x264_cpu_names.as_ptr().offset(i as isize)).name,
                                                                                                                                     b"FMA4\0" as *const u8 as *const libc::c_char,
                                                                                                                                 ) == 0
-                                                                                                                                    && (*h).param.cpu & (1 as libc::c_uint) << 12 as libc::c_int
-                                                                                                                                        != 0)
-                                                                                                                                {
-                                                                                                                                    if (*h).param.cpu
+                                                                                                                                    && (*h).param.cpu & ((1 as libc::c_uint) << 12 as libc::c_int)
+                                                                                                                                        != 0) && (*h).param.cpu
                                                                                                                                         & (*x264_cpu_names.as_ptr().offset(i as isize)).flags
-                                                                                                                                        == (*x264_cpu_names.as_ptr().offset(i as isize)).flags
-                                                                                                                                        && (i == 0
+                                                                                                                                        == (*x264_cpu_names.as_ptr().offset(i as isize)).flags && (i == 0
                                                                                                                                             || (*x264_cpu_names.as_ptr().offset(i as isize)).flags
                                                                                                                                                 != (*x264_cpu_names
                                                                                                                                                     .as_ptr()
                                                                                                                                                     .offset((i - 1 as libc::c_int) as isize))
-                                                                                                                                                    .flags)
-                                                                                                                                    {
-                                                                                                                                        p = p
-                                                                                                                                            .offset(
-                                                                                                                                                sprintf(
-                                                                                                                                                    p,
-                                                                                                                                                    b" %s\0" as *const u8 as *const libc::c_char,
-                                                                                                                                                    (*x264_cpu_names.as_ptr().offset(i as isize)).name,
-                                                                                                                                                ) as isize,
-                                                                                                                                            );
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    }
-                                                                                                                }
-                                                                                                            }
+                                                                                                                                                    .flags) {
+                                                                                                            p = p
+                                                                                                                .offset(
+                                                                                                                    sprintf(
+                                                                                                                        p,
+                                                                                                                        b" %s\0" as *const u8 as *const libc::c_char,
+                                                                                                                        (*x264_cpu_names.as_ptr().offset(i as isize)).name,
+                                                                                                                    ) as isize,
+                                                                                                                );
                                                                                                         }
                                                                                                         i += 1;
                                                                                                         i;
@@ -7766,7 +7730,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
                                                                                                         b"%s\n\0" as *const u8 as *const libc::c_char,
                                                                                                         buf.as_mut_ptr(),
                                                                                                     );
-                                                                                                    if !(x264_8_analyse_init_costs(h) != 0) {
+                                                                                                    if x264_8_analyse_init_costs(h) == 0 {
                                                                                                         temp = 392 as libc::c_int;
                                                                                                         if (temp as libc::c_uint).leading_zeros() as i32
                                                                                                             != 23 as libc::c_int
@@ -7823,316 +7787,309 @@ pub unsafe extern "C" fn x264_8_encoder_open(
                                                                                                                     .reconfig_h = x264_malloc(
                                                                                                                     ::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t,
                                                                                                                 ) as *mut x264_t;
-                                                                                                                if !((*h).reconfig_h).is_null() {
-                                                                                                                    if !((*h).param.i_threads > 1 as libc::c_int
+                                                                                                                if !((*h).reconfig_h).is_null() && !((*h).param.i_threads > 1 as libc::c_int
                                                                                                                         && x264_8_threadpool_init(
                                                                                                                             &mut (*h).threadpool,
                                                                                                                             (*h).param.i_threads,
-                                                                                                                        ) != 0)
-                                                                                                                    {
-                                                                                                                        if !((*h).param.i_lookahead_threads > 1 as libc::c_int
+                                                                                                                        ) != 0) && !((*h).param.i_lookahead_threads > 1 as libc::c_int
                                                                                                                             && x264_8_threadpool_init(
                                                                                                                                 &mut (*h).lookaheadpool,
                                                                                                                                 (*h).param.i_lookahead_threads,
-                                                                                                                            ) != 0)
+                                                                                                                            ) != 0) {
+                                                                                                                    if (*h).param.b_opencl != 0 {
+                                                                                                                        (*h).opencl.ocl = x264_8_opencl_load_library();
+                                                                                                                        if ((*h).opencl.ocl).is_null() {
+                                                                                                                            x264_8_log(
+                                                                                                                                h,
+                                                                                                                                1 as libc::c_int,
+                                                                                                                                b"failed to load OpenCL\n\0" as *const u8
+                                                                                                                                    as *const libc::c_char,
+                                                                                                                            );
+                                                                                                                            (*h).param.b_opencl = 0 as libc::c_int;
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                    (*h).thread[0 as libc::c_int as usize] = h;
+                                                                                                                    let mut i_0: libc::c_int = 1 as libc::c_int;
+                                                                                                                    loop {
+                                                                                                                        if i_0 >= (*h).param.i_threads
+                                                                                                                                + ((*h).param.i_sync_lookahead != 0) as libc::c_int
                                                                                                                         {
-                                                                                                                            if (*h).param.b_opencl != 0 {
-                                                                                                                                (*h).opencl.ocl = x264_8_opencl_load_library();
-                                                                                                                                if ((*h).opencl.ocl).is_null() {
-                                                                                                                                    x264_8_log(
-                                                                                                                                        h,
-                                                                                                                                        1 as libc::c_int,
-                                                                                                                                        b"failed to load OpenCL\n\0" as *const u8
-                                                                                                                                            as *const libc::c_char,
-                                                                                                                                    );
-                                                                                                                                    (*h).param.b_opencl = 0 as libc::c_int;
+                                                                                                                            current_block = 5832582820025303349;
+                                                                                                                            break;
+                                                                                                                        }
+                                                                                                                        (*h)
+                                                                                                                            .thread[i_0
+                                                                                                                            as usize] = x264_malloc(
+                                                                                                                            ::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t,
+                                                                                                                        ) as *mut x264_t;
+                                                                                                                        if ((*h).thread[i_0 as usize]).is_null() {
+                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                            break;
+                                                                                                                        }
+                                                                                                                        i_0 += 1;
+                                                                                                                        i_0;
+                                                                                                                    }
+                                                                                                                    match current_block {
+                                                                                                                        9907147643316583553 => {}
+                                                                                                                        _ => {
+                                                                                                                            if (*h).param.i_lookahead_threads > 1 as libc::c_int {
+                                                                                                                                let mut i_1: libc::c_int = 0 as libc::c_int;
+                                                                                                                                loop {
+                                                                                                                                    if i_1 >= (*h).param.i_lookahead_threads {
+                                                                                                                                        current_block = 15514437232607373049;
+                                                                                                                                        break;
+                                                                                                                                    }
+                                                                                                                                    (*h)
+                                                                                                                                        .lookahead_thread[i_1
+                                                                                                                                        as usize] = x264_malloc(
+                                                                                                                                        ::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t,
+                                                                                                                                    ) as *mut x264_t;
+                                                                                                                                    if ((*h).lookahead_thread[i_1 as usize]).is_null() {
+                                                                                                                                        current_block = 9907147643316583553;
+                                                                                                                                        break;
+                                                                                                                                    }
+                                                                                                                                    *(*h).lookahead_thread[i_1 as usize] = *h;
+                                                                                                                                    i_1 += 1;
+                                                                                                                                    i_1;
                                                                                                                                 }
-                                                                                                                            }
-                                                                                                                            (*h).thread[0 as libc::c_int as usize] = h;
-                                                                                                                            let mut i_0: libc::c_int = 1 as libc::c_int;
-                                                                                                                            loop {
-                                                                                                                                if !(i_0
-                                                                                                                                    < (*h).param.i_threads
-                                                                                                                                        + ((*h).param.i_sync_lookahead != 0) as libc::c_int)
-                                                                                                                                {
-                                                                                                                                    current_block = 5832582820025303349;
-                                                                                                                                    break;
-                                                                                                                                }
-                                                                                                                                (*h)
-                                                                                                                                    .thread[i_0
-                                                                                                                                    as usize] = x264_malloc(
-                                                                                                                                    ::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t,
-                                                                                                                                ) as *mut x264_t;
-                                                                                                                                if ((*h).thread[i_0 as usize]).is_null() {
-                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                    break;
-                                                                                                                                }
-                                                                                                                                i_0 += 1;
-                                                                                                                                i_0;
+                                                                                                                            } else {
+                                                                                                                                current_block = 15514437232607373049;
                                                                                                                             }
                                                                                                                             match current_block {
                                                                                                                                 9907147643316583553 => {}
                                                                                                                                 _ => {
-                                                                                                                                    if (*h).param.i_lookahead_threads > 1 as libc::c_int {
-                                                                                                                                        let mut i_1: libc::c_int = 0 as libc::c_int;
-                                                                                                                                        loop {
-                                                                                                                                            if !(i_1 < (*h).param.i_lookahead_threads) {
-                                                                                                                                                current_block = 15514437232607373049;
-                                                                                                                                                break;
-                                                                                                                                            }
-                                                                                                                                            (*h)
-                                                                                                                                                .lookahead_thread[i_1
-                                                                                                                                                as usize] = x264_malloc(
-                                                                                                                                                ::core::mem::size_of::<x264_t>() as libc::c_ulong as int64_t,
-                                                                                                                                            ) as *mut x264_t;
-                                                                                                                                            if ((*h).lookahead_thread[i_1 as usize]).is_null() {
+                                                                                                                                    *(*h).reconfig_h = *h;
+                                                                                                                                    let mut i_2: libc::c_int = 0 as libc::c_int;
+                                                                                                                                    loop {
+                                                                                                                                        if i_2 >= (*h).param.i_threads {
+                                                                                                                                            current_block = 10996290961880923853;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        let mut init_nal_count: libc::c_int = (*h)
+                                                                                                                                            .param
+                                                                                                                                            .i_slice_count + 3 as libc::c_int;
+                                                                                                                                        let mut allocate_threadlocal_data: libc::c_int = ((*h)
+                                                                                                                                            .param
+                                                                                                                                            .b_sliced_threads == 0 || i_2 == 0) as libc::c_int;
+                                                                                                                                        if i_2 > 0 as libc::c_int {
+                                                                                                                                            *(*h).thread[i_2 as usize] = *h;
+                                                                                                                                        }
+                                                                                                                                        if pthread_mutex_init(
+                                                                                                                                            &mut (**((*h).thread).as_mut_ptr().offset(i_2 as isize))
+                                                                                                                                                .mutex,
+                                                                                                                                            std::ptr::null::<pthread_mutexattr_t>(),
+                                                                                                                                        ) != 0
+                                                                                                                                        {
+                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        if pthread_cond_init(
+                                                                                                                                            &mut (**((*h).thread).as_mut_ptr().offset(i_2 as isize)).cv,
+                                                                                                                                            std::ptr::null::<pthread_condattr_t>(),
+                                                                                                                                        ) != 0
+                                                                                                                                        {
+                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        if allocate_threadlocal_data != 0 {
+                                                                                                                                            (*(*h).thread[i_2 as usize])
+                                                                                                                                                .fdec = x264_8_frame_pop_unused(h, 1 as libc::c_int);
+                                                                                                                                            if ((*(*h).thread[i_2 as usize]).fdec).is_null() {
                                                                                                                                                 current_block = 9907147643316583553;
                                                                                                                                                 break;
                                                                                                                                             }
-                                                                                                                                            *(*h).lookahead_thread[i_1 as usize] = *h;
-                                                                                                                                            i_1 += 1;
-                                                                                                                                            i_1;
+                                                                                                                                        } else {
+                                                                                                                                            (*(*h).thread[i_2 as usize])
+                                                                                                                                                .fdec = (*(*h).thread[0 as libc::c_int as usize]).fdec;
                                                                                                                                         }
-                                                                                                                                    } else {
-                                                                                                                                        current_block = 15514437232607373049;
+                                                                                                                                        (*(*h).thread[i_2 as usize])
+                                                                                                                                            .out
+                                                                                                                                            .p_bitstream = x264_malloc((*h).out.i_bitstream as int64_t)
+                                                                                                                                            as *mut uint8_t;
+                                                                                                                                        if ((*(*h).thread[i_2 as usize]).out.p_bitstream).is_null()
+                                                                                                                                        {
+                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        (*(*h).thread[i_2 as usize])
+                                                                                                                                            .out
+                                                                                                                                            .nal = x264_malloc(
+                                                                                                                                            (init_nal_count as libc::c_ulong)
+                                                                                                                                                .wrapping_mul(
+                                                                                                                                                    ::core::mem::size_of::<x264_nal_t>() as libc::c_ulong,
+                                                                                                                                                ) as int64_t,
+                                                                                                                                        ) as *mut x264_nal_t;
+                                                                                                                                        if ((*(*h).thread[i_2 as usize]).out.nal).is_null() {
+                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        (*(*h).thread[i_2 as usize])
+                                                                                                                                            .out
+                                                                                                                                            .i_nals_allocated = init_nal_count;
+                                                                                                                                        if allocate_threadlocal_data != 0
+                                                                                                                                            && x264_8_macroblock_cache_allocate(
+                                                                                                                                                (*h).thread[i_2 as usize],
+                                                                                                                                            ) < 0 as libc::c_int
+                                                                                                                                        {
+                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                            break;
+                                                                                                                                        }
+                                                                                                                                        i_2 += 1;
+                                                                                                                                        i_2;
                                                                                                                                     }
                                                                                                                                     match current_block {
                                                                                                                                         9907147643316583553 => {}
                                                                                                                                         _ => {
-                                                                                                                                            *(*h).reconfig_h = *h;
-                                                                                                                                            let mut i_2: libc::c_int = 0 as libc::c_int;
-                                                                                                                                            loop {
-                                                                                                                                                if !(i_2 < (*h).param.i_threads) {
-                                                                                                                                                    current_block = 10996290961880923853;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                let mut init_nal_count: libc::c_int = (*h)
-                                                                                                                                                    .param
-                                                                                                                                                    .i_slice_count + 3 as libc::c_int;
-                                                                                                                                                let mut allocate_threadlocal_data: libc::c_int = ((*h)
-                                                                                                                                                    .param
-                                                                                                                                                    .b_sliced_threads == 0 || i_2 == 0) as libc::c_int;
-                                                                                                                                                if i_2 > 0 as libc::c_int {
-                                                                                                                                                    *(*h).thread[i_2 as usize] = *h;
-                                                                                                                                                }
-                                                                                                                                                if pthread_mutex_init(
-                                                                                                                                                    &mut (**((*h).thread).as_mut_ptr().offset(i_2 as isize))
-                                                                                                                                                        .mutex,
-                                                                                                                                                    0 as *const pthread_mutexattr_t,
-                                                                                                                                                ) != 0
-                                                                                                                                                {
-                                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                if pthread_cond_init(
-                                                                                                                                                    &mut (**((*h).thread).as_mut_ptr().offset(i_2 as isize)).cv,
-                                                                                                                                                    0 as *const pthread_condattr_t,
-                                                                                                                                                ) != 0
-                                                                                                                                                {
-                                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                if allocate_threadlocal_data != 0 {
-                                                                                                                                                    (*(*h).thread[i_2 as usize])
-                                                                                                                                                        .fdec = x264_8_frame_pop_unused(h, 1 as libc::c_int);
-                                                                                                                                                    if ((*(*h).thread[i_2 as usize]).fdec).is_null() {
+                                                                                                                                            if (*h).param.b_opencl != 0
+                                                                                                                                                && x264_8_opencl_lookahead_init(h) < 0 as libc::c_int
+                                                                                                                                            {
+                                                                                                                                                (*h).param.b_opencl = 0 as libc::c_int;
+                                                                                                                                            }
+                                                                                                                                            if x264_8_lookahead_init(h, i_slicetype_length) == 0 {
+                                                                                                                                                let mut i_3: libc::c_int = 0 as libc::c_int;
+                                                                                                                                                loop {
+                                                                                                                                                    if i_3 >= (*h).param.i_threads {
+                                                                                                                                                        current_block = 857031028540284188;
+                                                                                                                                                        break;
+                                                                                                                                                    }
+                                                                                                                                                    if x264_8_macroblock_thread_allocate(
+                                                                                                                                                        (*h).thread[i_3 as usize],
+                                                                                                                                                        0 as libc::c_int,
+                                                                                                                                                    ) < 0 as libc::c_int
+                                                                                                                                                    {
                                                                                                                                                         current_block = 9907147643316583553;
                                                                                                                                                         break;
                                                                                                                                                     }
-                                                                                                                                                } else {
-                                                                                                                                                    (*(*h).thread[i_2 as usize])
-                                                                                                                                                        .fdec = (*(*h).thread[0 as libc::c_int as usize]).fdec;
+                                                                                                                                                    i_3 += 1;
+                                                                                                                                                    i_3;
                                                                                                                                                 }
-                                                                                                                                                (*(*h).thread[i_2 as usize])
-                                                                                                                                                    .out
-                                                                                                                                                    .p_bitstream = x264_malloc((*h).out.i_bitstream as int64_t)
-                                                                                                                                                    as *mut uint8_t;
-                                                                                                                                                if ((*(*h).thread[i_2 as usize]).out.p_bitstream).is_null()
-                                                                                                                                                {
-                                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                (*(*h).thread[i_2 as usize])
-                                                                                                                                                    .out
-                                                                                                                                                    .nal = x264_malloc(
-                                                                                                                                                    (init_nal_count as libc::c_ulong)
-                                                                                                                                                        .wrapping_mul(
-                                                                                                                                                            ::core::mem::size_of::<x264_nal_t>() as libc::c_ulong,
-                                                                                                                                                        ) as int64_t,
-                                                                                                                                                ) as *mut x264_nal_t;
-                                                                                                                                                if ((*(*h).thread[i_2 as usize]).out.nal).is_null() {
-                                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                (*(*h).thread[i_2 as usize])
-                                                                                                                                                    .out
-                                                                                                                                                    .i_nals_allocated = init_nal_count;
-                                                                                                                                                if allocate_threadlocal_data != 0
-                                                                                                                                                    && x264_8_macroblock_cache_allocate(
-                                                                                                                                                        (*h).thread[i_2 as usize],
-                                                                                                                                                    ) < 0 as libc::c_int
-                                                                                                                                                {
-                                                                                                                                                    current_block = 9907147643316583553;
-                                                                                                                                                    break;
-                                                                                                                                                }
-                                                                                                                                                i_2 += 1;
-                                                                                                                                                i_2;
-                                                                                                                                            }
-                                                                                                                                            match current_block {
-                                                                                                                                                9907147643316583553 => {}
-                                                                                                                                                _ => {
-                                                                                                                                                    if (*h).param.b_opencl != 0
-                                                                                                                                                        && x264_8_opencl_lookahead_init(h) < 0 as libc::c_int
-                                                                                                                                                    {
-                                                                                                                                                        (*h).param.b_opencl = 0 as libc::c_int;
-                                                                                                                                                    }
-                                                                                                                                                    if !(x264_8_lookahead_init(h, i_slicetype_length) != 0) {
-                                                                                                                                                        let mut i_3: libc::c_int = 0 as libc::c_int;
-                                                                                                                                                        loop {
-                                                                                                                                                            if !(i_3 < (*h).param.i_threads) {
-                                                                                                                                                                current_block = 857031028540284188;
-                                                                                                                                                                break;
+                                                                                                                                                match current_block {
+                                                                                                                                                    9907147643316583553 => {}
+                                                                                                                                                    _ => {
+                                                                                                                                                        if x264_8_ratecontrol_new(h) >= 0 as libc::c_int {
+                                                                                                                                                            if (*h).param.i_nal_hrd != 0 {
+                                                                                                                                                                x264_8_log(
+                                                                                                                                                                    h,
+                                                                                                                                                                    3 as libc::c_int,
+                                                                                                                                                                    b"HRD bitrate: %i bits/sec\n\0" as *const u8
+                                                                                                                                                                        as *const libc::c_char,
+                                                                                                                                                                    (*((*h).sps).as_mut_ptr()).vui.hrd.i_bit_rate_unscaled,
+                                                                                                                                                                );
+                                                                                                                                                                x264_8_log(
+                                                                                                                                                                    h,
+                                                                                                                                                                    3 as libc::c_int,
+                                                                                                                                                                    b"CPB size: %i bits\n\0" as *const u8
+                                                                                                                                                                        as *const libc::c_char,
+                                                                                                                                                                    (*((*h).sps).as_mut_ptr()).vui.hrd.i_cpb_size_unscaled,
+                                                                                                                                                                );
                                                                                                                                                             }
-                                                                                                                                                            if x264_8_macroblock_thread_allocate(
-                                                                                                                                                                (*h).thread[i_3 as usize],
-                                                                                                                                                                0 as libc::c_int,
-                                                                                                                                                            ) < 0 as libc::c_int
-                                                                                                                                                            {
-                                                                                                                                                                current_block = 9907147643316583553;
-                                                                                                                                                                break;
+                                                                                                                                                            if !((*h).param.psz_dump_yuv).is_null() {
+                                                                                                                                                                let mut f: *mut FILE = fopen(
+                                                                                                                                                                    (*h).param.psz_dump_yuv,
+                                                                                                                                                                    b"w\0" as *const u8 as *const libc::c_char,
+                                                                                                                                                                );
+                                                                                                                                                                if f.is_null() {
+                                                                                                                                                                    x264_8_log(
+                                                                                                                                                                        h,
+                                                                                                                                                                        0 as libc::c_int,
+                                                                                                                                                                        b"dump_yuv: can't write to %s\n\0" as *const u8
+                                                                                                                                                                            as *const libc::c_char,
+                                                                                                                                                                        (*h).param.psz_dump_yuv,
+                                                                                                                                                                    );
+                                                                                                                                                                    current_block = 9907147643316583553;
+                                                                                                                                                                } else if x264_is_regular_file(f) == 0 {
+                                                                                                                                                                    x264_8_log(
+                                                                                                                                                                        h,
+                                                                                                                                                                        0 as libc::c_int,
+                                                                                                                                                                        b"dump_yuv: incompatible with non-regular file %s\n\0"
+                                                                                                                                                                            as *const u8 as *const libc::c_char,
+                                                                                                                                                                        (*h).param.psz_dump_yuv,
+                                                                                                                                                                    );
+                                                                                                                                                                    fclose(f);
+                                                                                                                                                                    current_block = 9907147643316583553;
+                                                                                                                                                                } else {
+                                                                                                                                                                    fclose(f);
+                                                                                                                                                                    current_block = 14244298717249035578;
+                                                                                                                                                                }
+                                                                                                                                                            } else {
+                                                                                                                                                                current_block = 14244298717249035578;
                                                                                                                                                             }
-                                                                                                                                                            i_3 += 1;
-                                                                                                                                                            i_3;
-                                                                                                                                                        }
-                                                                                                                                                        match current_block {
-                                                                                                                                                            9907147643316583553 => {}
-                                                                                                                                                            _ => {
-                                                                                                                                                                if !(x264_8_ratecontrol_new(h) < 0 as libc::c_int) {
-                                                                                                                                                                    if (*h).param.i_nal_hrd != 0 {
-                                                                                                                                                                        x264_8_log(
-                                                                                                                                                                            h,
-                                                                                                                                                                            3 as libc::c_int,
-                                                                                                                                                                            b"HRD bitrate: %i bits/sec\n\0" as *const u8
-                                                                                                                                                                                as *const libc::c_char,
-                                                                                                                                                                            (*((*h).sps).as_mut_ptr()).vui.hrd.i_bit_rate_unscaled,
-                                                                                                                                                                        );
-                                                                                                                                                                        x264_8_log(
-                                                                                                                                                                            h,
-                                                                                                                                                                            3 as libc::c_int,
-                                                                                                                                                                            b"CPB size: %i bits\n\0" as *const u8
-                                                                                                                                                                                as *const libc::c_char,
-                                                                                                                                                                            (*((*h).sps).as_mut_ptr()).vui.hrd.i_cpb_size_unscaled,
-                                                                                                                                                                        );
-                                                                                                                                                                    }
-                                                                                                                                                                    if !((*h).param.psz_dump_yuv).is_null() {
-                                                                                                                                                                        let mut f: *mut FILE = fopen(
-                                                                                                                                                                            (*h).param.psz_dump_yuv,
-                                                                                                                                                                            b"w\0" as *const u8 as *const libc::c_char,
-                                                                                                                                                                        );
-                                                                                                                                                                        if f.is_null() {
-                                                                                                                                                                            x264_8_log(
-                                                                                                                                                                                h,
-                                                                                                                                                                                0 as libc::c_int,
-                                                                                                                                                                                b"dump_yuv: can't write to %s\n\0" as *const u8
-                                                                                                                                                                                    as *const libc::c_char,
-                                                                                                                                                                                (*h).param.psz_dump_yuv,
-                                                                                                                                                                            );
-                                                                                                                                                                            current_block = 9907147643316583553;
-                                                                                                                                                                        } else if x264_is_regular_file(f) == 0 {
-                                                                                                                                                                            x264_8_log(
-                                                                                                                                                                                h,
-                                                                                                                                                                                0 as libc::c_int,
-                                                                                                                                                                                b"dump_yuv: incompatible with non-regular file %s\n\0"
-                                                                                                                                                                                    as *const u8 as *const libc::c_char,
-                                                                                                                                                                                (*h).param.psz_dump_yuv,
-                                                                                                                                                                            );
-                                                                                                                                                                            fclose(f);
-                                                                                                                                                                            current_block = 9907147643316583553;
+                                                                                                                                                            match current_block {
+                                                                                                                                                                9907147643316583553 => {}
+                                                                                                                                                                _ => {
+                                                                                                                                                                    profile = if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        == PROFILE_BASELINE as libc::c_int
+                                                                                                                                                                    {
+                                                                                                                                                                        b"Constrained Baseline\0" as *const u8
+                                                                                                                                                                            as *const libc::c_char
+                                                                                                                                                                    } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        == PROFILE_MAIN as libc::c_int
+                                                                                                                                                                    {
+                                                                                                                                                                        b"Main\0" as *const u8 as *const libc::c_char
+                                                                                                                                                                    } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        == PROFILE_HIGH as libc::c_int
+                                                                                                                                                                    {
+                                                                                                                                                                        b"High\0" as *const u8 as *const libc::c_char
+                                                                                                                                                                    } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        == PROFILE_HIGH10 as libc::c_int
+                                                                                                                                                                    {
+                                                                                                                                                                        if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0 {
+                                                                                                                                                                            b"High 10 Intra\0" as *const u8 as *const libc::c_char
                                                                                                                                                                         } else {
-                                                                                                                                                                            fclose(f);
-                                                                                                                                                                            current_block = 14244298717249035578;
+                                                                                                                                                                            b"High 10\0" as *const u8 as *const libc::c_char
                                                                                                                                                                         }
+                                                                                                                                                                    } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        == PROFILE_HIGH422 as libc::c_int
+                                                                                                                                                                    {
+                                                                                                                                                                        if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0 {
+                                                                                                                                                                            b"High 4:2:2 Intra\0" as *const u8 as *const libc::c_char
+                                                                                                                                                                        } else {
+                                                                                                                                                                            b"High 4:2:2\0" as *const u8 as *const libc::c_char
+                                                                                                                                                                        }
+                                                                                                                                                                    } else if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0
+                                                                                                                                                                    {
+                                                                                                                                                                        b"High 4:4:4 Intra\0" as *const u8 as *const libc::c_char
                                                                                                                                                                     } else {
-                                                                                                                                                                        current_block = 14244298717249035578;
-                                                                                                                                                                    }
-                                                                                                                                                                    match current_block {
-                                                                                                                                                                        9907147643316583553 => {}
-                                                                                                                                                                        _ => {
-                                                                                                                                                                            profile = if (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                        b"High 4:4:4 Predictive\0" as *const u8
+                                                                                                                                                                            as *const libc::c_char
+                                                                                                                                                                    };
+                                                                                                                                                                    level = [0; 16];
+                                                                                                                                                                    if (*((*h).sps).as_mut_ptr()).i_level_idc
+                                                                                                                                                                        == 9 as libc::c_int
+                                                                                                                                                                        || (*((*h).sps).as_mut_ptr()).i_level_idc
+                                                                                                                                                                            == 11 as libc::c_int
+                                                                                                                                                                            && (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0
+                                                                                                                                                                            && ((*((*h).sps).as_mut_ptr()).i_profile_idc
                                                                                                                                                                                 == PROFILE_BASELINE as libc::c_int
-                                                                                                                                                                            {
-                                                                                                                                                                                b"Constrained Baseline\0" as *const u8
-                                                                                                                                                                                    as *const libc::c_char
-                                                                                                                                                                            } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                == PROFILE_MAIN as libc::c_int
-                                                                                                                                                                            {
-                                                                                                                                                                                b"Main\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                            } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                == PROFILE_HIGH as libc::c_int
-                                                                                                                                                                            {
-                                                                                                                                                                                b"High\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                            } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                == PROFILE_HIGH10 as libc::c_int
-                                                                                                                                                                            {
-                                                                                                                                                                                if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0 {
-                                                                                                                                                                                    b"High 10 Intra\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    b"High 10\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                                }
-                                                                                                                                                                            } else if (*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                == PROFILE_HIGH422 as libc::c_int
-                                                                                                                                                                            {
-                                                                                                                                                                                if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0 {
-                                                                                                                                                                                    b"High 4:2:2 Intra\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    b"High 4:2:2\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                                }
-                                                                                                                                                                            } else if (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0
-                                                                                                                                                                            {
-                                                                                                                                                                                b"High 4:4:4 Intra\0" as *const u8 as *const libc::c_char
-                                                                                                                                                                            } else {
-                                                                                                                                                                                b"High 4:4:4 Predictive\0" as *const u8
-                                                                                                                                                                                    as *const libc::c_char
-                                                                                                                                                                            };
-                                                                                                                                                                            level = [0; 16];
-                                                                                                                                                                            if (*((*h).sps).as_mut_ptr()).i_level_idc
-                                                                                                                                                                                == 9 as libc::c_int
-                                                                                                                                                                                || (*((*h).sps).as_mut_ptr()).i_level_idc
-                                                                                                                                                                                    == 11 as libc::c_int
-                                                                                                                                                                                    && (*((*h).sps).as_mut_ptr()).b_constraint_set3 != 0
-                                                                                                                                                                                    && ((*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                        == PROFILE_BASELINE as libc::c_int
-                                                                                                                                                                                        || (*((*h).sps).as_mut_ptr()).i_profile_idc
-                                                                                                                                                                                            == PROFILE_MAIN as libc::c_int)
-                                                                                                                                                                            {
-                                                                                                                                                                                strcpy(
-                                                                                                                                                                                    level.as_mut_ptr(),
-                                                                                                                                                                                    b"1b\0" as *const u8 as *const libc::c_char,
-                                                                                                                                                                                );
-                                                                                                                                                                            } else {
-                                                                                                                                                                                snprintf(
-                                                                                                                                                                                    level.as_mut_ptr(),
-                                                                                                                                                                                    ::core::mem::size_of::<[libc::c_char; 16]>()
-                                                                                                                                                                                        as libc::c_ulong,
-                                                                                                                                                                                    b"%d.%d\0" as *const u8 as *const libc::c_char,
-                                                                                                                                                                                    (*((*h).sps).as_mut_ptr()).i_level_idc / 10 as libc::c_int,
-                                                                                                                                                                                    (*((*h).sps).as_mut_ptr()).i_level_idc % 10 as libc::c_int,
-                                                                                                                                                                                );
-                                                                                                                                                                            }
-                                                                                                                                                                            x264_8_log(
-                                                                                                                                                                                h,
-                                                                                                                                                                                2 as libc::c_int,
-                                                                                                                                                                                b"profile %s, level %s, %s, %d-bit\n\0" as *const u8
-                                                                                                                                                                                    as *const libc::c_char,
-                                                                                                                                                                                profile,
-                                                                                                                                                                                level.as_mut_ptr(),
-                                                                                                                                                                                subsampling[(*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                                                                                                                                                                                    as usize],
-                                                                                                                                                                                8 as libc::c_int,
-                                                                                                                                                                            );
-                                                                                                                                                                            return h;
-                                                                                                                                                                        }
+                                                                                                                                                                                || (*((*h).sps).as_mut_ptr()).i_profile_idc
+                                                                                                                                                                                    == PROFILE_MAIN as libc::c_int)
+                                                                                                                                                                    {
+                                                                                                                                                                        strcpy(
+                                                                                                                                                                            level.as_mut_ptr(),
+                                                                                                                                                                            b"1b\0" as *const u8 as *const libc::c_char,
+                                                                                                                                                                        );
+                                                                                                                                                                    } else {
+                                                                                                                                                                        snprintf(
+                                                                                                                                                                            level.as_mut_ptr(),
+                                                                                                                                                                            ::core::mem::size_of::<[libc::c_char; 16]>()
+                                                                                                                                                                                as libc::c_ulong,
+                                                                                                                                                                            b"%d.%d\0" as *const u8 as *const libc::c_char,
+                                                                                                                                                                            (*((*h).sps).as_mut_ptr()).i_level_idc / 10 as libc::c_int,
+                                                                                                                                                                            (*((*h).sps).as_mut_ptr()).i_level_idc % 10 as libc::c_int,
+                                                                                                                                                                        );
                                                                                                                                                                     }
+                                                                                                                                                                    x264_8_log(
+                                                                                                                                                                        h,
+                                                                                                                                                                        2 as libc::c_int,
+                                                                                                                                                                        b"profile %s, level %s, %s, %d-bit\n\0" as *const u8
+                                                                                                                                                                            as *const libc::c_char,
+                                                                                                                                                                        profile,
+                                                                                                                                                                        level.as_mut_ptr(),
+                                                                                                                                                                        subsampling[(*((*h).sps).as_mut_ptr()).i_chroma_format_idc
+                                                                                                                                                                            as usize],
+                                                                                                                                                                        8 as libc::c_int,
+                                                                                                                                                                    );
+                                                                                                                                                                    return h;
                                                                                                                                                                 }
                                                                                                                                                             }
                                                                                                                                                         }
@@ -8174,7 +8131,7 @@ pub unsafe extern "C" fn x264_8_encoder_open(
         }
     }
     x264_free(h as *mut libc::c_void);
-    return 0 as *mut x264_t;
+    std::ptr::null_mut::<x264_t>()
 }
 unsafe extern "C" fn encoder_try_reconfig(
     mut h: *mut x264_t,
@@ -8261,7 +8218,7 @@ unsafe extern "C" fn encoder_try_reconfig(
             as libc::c_int;
     (*h).param.rc.f_rf_constant = (*param).rc.f_rf_constant;
     (*h).param.rc.f_rf_constant_max = (*param).rc.f_rf_constant_max;
-    return validate_parameters(h, 0 as libc::c_int);
+    validate_parameters(h, 0 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_reconfig_apply(
@@ -8277,7 +8234,7 @@ pub unsafe extern "C" fn x264_8_encoder_reconfig_apply(
     if ret == 0 && rc_reconfig != 0 {
         x264_8_ratecontrol_init_reconfigurable(h, 0 as libc::c_int);
     }
-    return ret;
+    ret
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_reconfig(
@@ -8298,7 +8255,7 @@ pub unsafe extern "C" fn x264_8_encoder_reconfig(
     } else {
         (*(*h).reconfig_h).param = param_save;
     }
-    return ret;
+    ret
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_parameters(
@@ -8311,7 +8268,7 @@ pub unsafe extern "C" fn x264_8_encoder_parameters(
             as *mut x264_param_t as *const libc::c_void,
         ::core::mem::size_of::<x264_param_t>() as libc::c_ulong,
     );
-    (*param).opaque = 0 as *mut libc::c_void;
+    (*param).opaque = std::ptr::null_mut::<libc::c_void>();
 }
 unsafe extern "C" fn nal_start(
     mut h: *mut x264_t,
@@ -8353,7 +8310,7 @@ unsafe extern "C" fn nal_check_buffer(mut h: *mut x264_t) -> libc::c_int {
         (*h).out.nal = new_out;
         (*h).out.i_nals_allocated *= 2 as libc::c_int;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn nal_end(mut h: *mut x264_t) -> libc::c_int {
     let mut nal: *mut x264_nal_t = &mut *((*h).out.nal).offset((*h).out.i_nal as isize)
@@ -8377,7 +8334,7 @@ unsafe extern "C" fn nal_end(mut h: *mut x264_t) -> libc::c_int {
     }
     (*h).out.i_nal += 1;
     (*h).out.i_nal;
-    return nal_check_buffer(h);
+    nal_check_buffer(h)
 }
 unsafe extern "C" fn check_encapsulated_buffer(
     mut h: *mut x264_t,
@@ -8405,7 +8362,7 @@ unsafe extern "C" fn check_encapsulated_buffer(
         let mut delta: intptr_t = buf.offset_from((*h0).nal_buffer) as libc::c_long;
         let mut i: libc::c_int = 0 as libc::c_int;
         while i < start {
-            let ref mut fresh2 = (*((*h).out.nal).offset(i as isize)).p_payload;
+            let fresh2 = &mut (*((*h).out.nal).offset(i as isize)).p_payload;
             *fresh2 = (*fresh2).offset(delta as isize);
             i += 1;
             i;
@@ -8414,7 +8371,7 @@ unsafe extern "C" fn check_encapsulated_buffer(
         (*h0).nal_buffer = buf;
         (*h0).nal_buffer_size = necessary_size as libc::c_int;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn encoder_encapsulate_nals(
     mut h: *mut x264_t,
@@ -8475,8 +8432,8 @@ unsafe extern "C" fn encoder_encapsulate_nals(
         i_3 += 1;
         i_3;
     }
-    return nal_buffer.offset_from(((*h0).nal_buffer).offset(previous_nal_size as isize))
-        as libc::c_long as libc::c_int;
+    nal_buffer.offset_from(((*h0).nal_buffer).offset(previous_nal_size as isize))
+        as libc::c_long as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_headers(
@@ -8515,7 +8472,7 @@ pub unsafe extern "C" fn x264_8_encoder_headers(
     *pi_nal = (*h).out.i_nal;
     *pp_nal = &mut *((*h).out.nal).offset(0 as libc::c_int as isize) as *mut x264_nal_t;
     (*h).out.i_nal = 0 as libc::c_int;
-    return frame_size;
+    frame_size
 }
 #[inline]
 unsafe extern "C" fn reference_check_reorder(mut h: *mut x264_t) {
@@ -8563,7 +8520,7 @@ unsafe extern "C" fn weighted_reference_duplicate(
 ) -> libc::c_int {
     let mut i: libc::c_int = (*h).i_ref[0 as libc::c_int as usize];
     let mut j: libc::c_int = 1 as libc::c_int;
-    let mut newframe: *mut x264_frame_t = 0 as *mut x264_frame_t;
+    let mut newframe: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
     if i <= 1 as libc::c_int {
         return -(1 as libc::c_int);
     }
@@ -8596,14 +8553,14 @@ unsafe extern "C" fn weighted_reference_duplicate(
     (*h)
         .fref[0 as libc::c_int
         as usize][(16 as libc::c_int - 1 as libc::c_int)
-        as usize] = 0 as *mut x264_frame_t;
+        as usize] = std::ptr::null_mut::<x264_frame_t>();
     x264_8_frame_unshift(
         &mut *(*((*h).fref).as_mut_ptr().offset(0 as libc::c_int as isize))
             .as_mut_ptr()
             .offset(j as isize),
         newframe,
     );
-    return j;
+    j
 }
 unsafe extern "C" fn weighted_pred_init(mut h: *mut x264_t) {
     let mut i_ref: libc::c_int = 0 as libc::c_int;
@@ -8623,7 +8580,7 @@ unsafe extern "C" fn weighted_pred_init(mut h: *mut x264_t) {
             (*h)
                 .sh
                 .weight[i_ref_0 as usize][i as usize]
-                .weightfn = 0 as *mut weight_fn_t;
+                .weightfn = std::ptr::null_mut::<weight_fn_t>();
             i += 1;
             i;
         }
@@ -8658,7 +8615,7 @@ unsafe extern "C" fn weighted_pred_init(mut h: *mut x264_t) {
                     (*h)
                         .sh
                         .weight[j as usize][i_0 as usize]
-                        .weightfn = 0 as *mut weight_fn_t;
+                        .weightfn = std::ptr::null_mut::<weight_fn_t>();
                 } else {
                     if weightplane[(i_0 != 0) as libc::c_int as usize] == 0 {
                         weightplane[(i_0 != 0) as libc::c_int
@@ -8733,7 +8690,7 @@ unsafe extern "C" fn weighted_pred_init(mut h: *mut x264_t) {
                     };
                     if i_0 == 0 {
                         let fresh3 = buffer_next;
-                        buffer_next = buffer_next + 1;
+                        buffer_next += 1;
                         (*(*h).fenc)
                             .weighted[j
                             as usize] = ((*h).mb.p_weight_buf[fresh3 as usize])
@@ -8903,15 +8860,15 @@ unsafe extern "C" fn reference_distance(
     mut frame: *mut x264_frame_t,
 ) -> libc::c_int {
     if (*h).param.i_frame_packing == 5 as libc::c_int {
-        return abs(
+        abs(
             ((*(*h).fenc).i_frame & !(1 as libc::c_int))
                 - ((*frame).i_frame & !(1 as libc::c_int)),
         )
             + ((*(*h).fenc).i_frame & 1 as libc::c_int
                 != (*frame).i_frame & 1 as libc::c_int) as libc::c_int
     } else {
-        return abs((*(*h).fenc).i_frame - (*frame).i_frame)
-    };
+        abs((*(*h).fenc).i_frame - (*frame).i_frame)
+    }
 }
 #[inline]
 unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c_int) {
@@ -8931,12 +8888,12 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
     }
     let mut i: libc::c_int = 0 as libc::c_int;
     while !((*h).frames.reference[i as usize]).is_null() {
-        if !((*(*h).frames.reference[i as usize]).b_corrupt != 0) {
+        if (*(*h).frames.reference[i as usize]).b_corrupt == 0 {
             if (*(*h).frames.reference[i as usize]).i_poc < i_poc {
                 let fresh4 = (*h).i_ref[0 as libc::c_int as usize];
                 (*h)
                     .i_ref[0 as libc::c_int
-                    as usize] = (*h).i_ref[0 as libc::c_int as usize] + 1;
+                    as usize] += 1;
                 (*h)
                     .fref[0 as libc::c_int
                     as usize][fresh4 as usize] = (*h).frames.reference[i as usize];
@@ -8944,7 +8901,7 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                 let fresh5 = (*h).i_ref[1 as libc::c_int as usize];
                 (*h)
                     .i_ref[1 as libc::c_int
-                    as usize] = (*h).i_ref[1 as libc::c_int as usize] + 1;
+                    as usize] += 1;
                 (*h)
                     .fref[1 as libc::c_int
                     as usize][fresh5 as usize] = (*h).frames.reference[i as usize];
@@ -8964,17 +8921,10 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                         as usize][(i_0 + 1 as libc::c_int) as usize])
                         .i_frame
                 {
-                    let mut t: *mut x264_frame_t = (*h)
-                        .fref[0 as libc::c_int as usize][i_0 as usize];
                     (*h)
                         .fref[0 as libc::c_int
-                        as usize][i_0
-                        as usize] = (*h)
-                        .fref[0 as libc::c_int
-                        as usize][(i_0 + 1 as libc::c_int) as usize];
-                    (*h)
-                        .fref[0 as libc::c_int
-                        as usize][(i_0 + 1 as libc::c_int) as usize] = t;
+                        as usize].swap(i_0
+                        as usize, (i_0 + 1 as libc::c_int) as usize);
                     b_ok = 0 as libc::c_int;
                     break;
                 } else {
@@ -8982,7 +8932,7 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                     i_0;
                 }
             }
-            if !(b_ok == 0) {
+            if b_ok != 0 {
                 break;
             }
         }
@@ -8998,7 +8948,7 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                 .mmco[(*h).sh.i_mmco_command_count as usize]
                 .i_poc = (*(*h).fref[0 as libc::c_int as usize][i_1 as usize]).i_poc;
             let fresh6 = (*h).sh.i_mmco_command_count;
-            (*h).sh.i_mmco_command_count = (*h).sh.i_mmco_command_count + 1;
+            (*h).sh.i_mmco_command_count += 1;
             (*h).sh.mmco[fresh6 as usize].i_difference_of_pic_nums = diff;
             i_1 -= 1;
             i_1;
@@ -9032,14 +8982,10 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                         (*h).fref[list as usize][(i_2 + 1 as libc::c_int) as usize],
                     )
                 {
-                    let mut t_0: *mut x264_frame_t = (*h)
-                        .fref[list as usize][i_2 as usize];
                     (*h)
                         .fref[list
-                        as usize][i_2
-                        as usize] = (*h)
-                        .fref[list as usize][(i_2 + 1 as libc::c_int) as usize];
-                    (*h).fref[list as usize][(i_2 + 1 as libc::c_int) as usize] = t_0;
+                        as usize].swap(i_2
+                        as usize, (i_2 + 1 as libc::c_int) as usize);
                     b_ok = 0 as libc::c_int;
                     break;
                 } else {
@@ -9047,7 +8993,7 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                     i_2;
                 }
             }
-            if !(b_ok == 0) {
+            if b_ok != 0 {
                 break;
             }
         }
@@ -9106,9 +9052,9 @@ unsafe extern "C" fn reference_build_list(mut h: *mut x264_t, mut i_poc: libc::c
                 i_denom: 0,
                 i_scale: 0,
                 i_offset: 0,
-                weightfn: 0 as *mut weight_fn_t,
+                weightfn: std::ptr::null_mut::<weight_fn_t>(),
             }; 3];
-            w[2 as libc::c_int as usize].weightfn = 0 as *mut weight_fn_t;
+            w[2 as libc::c_int as usize].weightfn = std::ptr::null_mut::<weight_fn_t>();
             w[1 as libc::c_int as usize]
                 .weightfn = w[2 as libc::c_int as usize].weightfn;
             if (*h).param.rc.b_stat_read != 0 {
@@ -9395,8 +9341,7 @@ unsafe extern "C" fn fdec_filter_row(
                 p_0 += 1;
                 p_0;
             }
-            if !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int)
+            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int
             {
                 let mut ssd_u: uint64_t = 0;
                 let mut ssd_v: uint64_t = 0;
@@ -9416,7 +9361,7 @@ unsafe extern "C" fn fdec_filter_row(
                         ),
                     (*(*h).fenc).i_stride[1 as libc::c_int as usize] as intptr_t,
                     (*h).param.i_width >> 1 as libc::c_int,
-                    maxpix_y - minpix_y >> v_shift,
+                    (maxpix_y - minpix_y) >> v_shift,
                     &mut ssd_u,
                     &mut ssd_v,
                 );
@@ -9511,7 +9456,7 @@ unsafe extern "C" fn reference_update(mut h: *mut x264_t) -> libc::c_int {
     if ((*h).fdec).is_null() {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn reference_reset(mut h: *mut x264_t) {
@@ -9560,7 +9505,7 @@ unsafe extern "C" fn reference_hierarchy_reset(mut h: *mut x264_t) {
                 .mmco[(*h).sh.i_mmco_command_count as usize]
                 .i_difference_of_pic_nums = diff;
             let fresh7 = (*h).sh.i_mmco_command_count;
-            (*h).sh.i_mmco_command_count = (*h).sh.i_mmco_command_count + 1;
+            (*h).sh.i_mmco_command_count += 1;
             (*h)
                 .sh
                 .mmco[fresh7 as usize]
@@ -9789,14 +9734,14 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
     let mut orig_last_mb: libc::c_int = (*h).sh.i_last_mb;
     let mut thread_last_mb: libc::c_int = (*h).i_threadslice_end * (*h).mb.i_mb_width
         - 1 as libc::c_int;
-    let mut last_emu_check: *mut uint8_t = 0 as *mut uint8_t;
+    let mut last_emu_check: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     let mut bs_bak: [x264_bs_bak_t; 4] = [x264_bs_bak_t {
         skip: 0,
         cabac_prevbyte: 0,
         bs: bs_s {
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             cur_bits: 0,
             i_left: 0,
             i_bits_encoded: 0,
@@ -9806,9 +9751,9 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -9929,24 +9874,22 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
             }
         }
         if (*h).param.b_interlaced != 0 {
-            if (*h).mb.b_adaptive_mbaff != 0 {
-                if i_mb_y & 1 as libc::c_int == 0 {
-                    (*h).mb.b_interlaced = x264_8_field_vsad(h, i_mb_x, i_mb_y);
-                    memcpy(
-                        &mut (*h).zigzagf as *mut x264_zigzag_function_t
-                            as *mut libc::c_void,
-                        (if (*h).mb.b_interlaced != 0 {
-                            &mut (*h).zigzagf_interlaced as *mut x264_zigzag_function_t
-                        } else {
-                            &mut (*h).zigzagf_progressive as *mut x264_zigzag_function_t
-                        }) as *const libc::c_void,
-                        ::core::mem::size_of::<x264_zigzag_function_t>() as libc::c_ulong,
-                    );
-                    if (*h).mb.b_interlaced == 0
-                        && i_mb_y + 2 as libc::c_int == (*h).mb.i_mb_height
-                    {
-                        x264_8_expand_border_mbpair(h, i_mb_x, i_mb_y);
-                    }
+            if (*h).mb.b_adaptive_mbaff != 0 && i_mb_y & 1 as libc::c_int == 0 {
+                (*h).mb.b_interlaced = x264_8_field_vsad(h, i_mb_x, i_mb_y);
+                memcpy(
+                    &mut (*h).zigzagf as *mut x264_zigzag_function_t
+                        as *mut libc::c_void,
+                    (if (*h).mb.b_interlaced != 0 {
+                        &mut (*h).zigzagf_interlaced as *mut x264_zigzag_function_t
+                    } else {
+                        &mut (*h).zigzagf_progressive as *mut x264_zigzag_function_t
+                    }) as *const libc::c_void,
+                    ::core::mem::size_of::<x264_zigzag_function_t>() as libc::c_ulong,
+                );
+                if (*h).mb.b_interlaced == 0
+                    && i_mb_y + 2 as libc::c_int == (*h).mb.i_mb_height
+                {
+                    x264_8_expand_border_mbpair(h, i_mb_x, i_mb_y);
                 }
             }
             *((*h).mb.field).offset(mb_xy as isize) = (*h).mb.b_interlaced as uint8_t;
@@ -9988,7 +9931,7 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
                     i_skip = 0 as libc::c_int;
                 }
                 x264_8_macroblock_write_cavlc(h);
-                if !((*h).mb.b_overflow != 0) {
+                if (*h).mb.b_overflow == 0 {
                     break;
                 }
                 (*h).mb.i_qp += 1;
@@ -10115,7 +10058,7 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
             );
             (*h).mb.b_reencode_mb = 1 as libc::c_int;
             i_mb_x = 0 as libc::c_int;
-            i_mb_y = i_mb_y - (*h).sh.b_mbaff;
+            i_mb_y -= (*h).sh.b_mbaff;
             (*h).mb.i_mb_prev_xy = i_mb_y * (*h).mb.i_mb_stride - 1 as libc::c_int;
             (*h).sh.i_last_mb = orig_last_mb;
         } else {
@@ -10127,62 +10070,56 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
                 || (*h).mb.i_type == I_PCM as libc::c_int) as libc::c_int;
             let mut b_skip: libc::c_int = ((*h).mb.i_type == P_SKIP as libc::c_int
                 || (*h).mb.i_type == B_SKIP as libc::c_int) as libc::c_int;
-            if (*h).param.i_log_level >= 2 as libc::c_int
-                || (*h).param.rc.b_stat_write != 0
-            {
-                if b_intra == 0 && b_skip == 0
-                    && !((*h).mb.i_type == B_DIRECT as libc::c_int)
-                {
-                    if (*h).mb.i_partition != D_8x8 as libc::c_int {
-                        (*h).stat.frame.i_mb_partition[(*h).mb.i_partition as usize]
-                            += 4 as libc::c_int;
-                    } else {
-                        let mut i: libc::c_int = 0 as libc::c_int;
-                        while i < 4 as libc::c_int {
-                            (*h)
-                                .stat
-                                .frame
-                                .i_mb_partition[(*h).mb.i_sub_partition[i as usize]
-                                as usize] += 1;
-                            (*h)
-                                .stat
-                                .frame
-                                .i_mb_partition[(*h).mb.i_sub_partition[i as usize]
-                                as usize];
-                            i += 1;
-                            i;
-                        }
+            if ((*h).param.i_log_level >= 2 as libc::c_int || (*h).param.rc.b_stat_write != 0) && b_intra == 0 && b_skip == 0 && ((*h).mb.i_type != B_DIRECT as libc::c_int) {
+                if (*h).mb.i_partition != D_8x8 as libc::c_int {
+                    (*h).stat.frame.i_mb_partition[(*h).mb.i_partition as usize]
+                        += 4 as libc::c_int;
+                } else {
+                    let mut i: libc::c_int = 0 as libc::c_int;
+                    while i < 4 as libc::c_int {
+                        (*h)
+                            .stat
+                            .frame
+                            .i_mb_partition[(*h).mb.i_sub_partition[i as usize]
+                            as usize] += 1;
+                        (*h)
+                            .stat
+                            .frame
+                            .i_mb_partition[(*h).mb.i_sub_partition[i as usize]
+                            as usize];
+                        i += 1;
+                        i;
                     }
-                    if (*h).param.i_frame_reference > 1 as libc::c_int {
-                        let mut i_list: libc::c_int = 0 as libc::c_int;
-                        while i_list
-                            <= ((*h).sh.i_type == SLICE_TYPE_B as libc::c_int)
-                                as libc::c_int
-                        {
-                            let mut i_0: libc::c_int = 0 as libc::c_int;
-                            while i_0 < 4 as libc::c_int {
-                                let mut i_ref: libc::c_int = (*h)
-                                    .mb
-                                    .cache
-                                    .ref_0[i_list
-                                    as usize][x264_scan8[(4 as libc::c_int * i_0) as usize]
-                                    as usize] as libc::c_int;
-                                if i_ref >= 0 as libc::c_int {
-                                    (*h)
-                                        .stat
-                                        .frame
-                                        .i_mb_count_ref[i_list as usize][i_ref as usize] += 1;
-                                    (*h)
-                                        .stat
-                                        .frame
-                                        .i_mb_count_ref[i_list as usize][i_ref as usize];
-                                }
-                                i_0 += 1;
-                                i_0;
+                }
+                if (*h).param.i_frame_reference > 1 as libc::c_int {
+                    let mut i_list: libc::c_int = 0 as libc::c_int;
+                    while i_list
+                        <= ((*h).sh.i_type == SLICE_TYPE_B as libc::c_int)
+                            as libc::c_int
+                    {
+                        let mut i_0: libc::c_int = 0 as libc::c_int;
+                        while i_0 < 4 as libc::c_int {
+                            let mut i_ref: libc::c_int = (*h)
+                                .mb
+                                .cache
+                                .ref_0[i_list
+                                as usize][x264_scan8[(4 as libc::c_int * i_0) as usize]
+                                as usize] as libc::c_int;
+                            if i_ref >= 0 as libc::c_int {
+                                (*h)
+                                    .stat
+                                    .frame
+                                    .i_mb_count_ref[i_list as usize][i_ref as usize] += 1;
+                                (*h)
+                                    .stat
+                                    .frame
+                                    .i_mb_count_ref[i_list as usize][i_ref as usize];
                             }
-                            i_list += 1;
-                            i_list;
+                            i_0 += 1;
+                            i_0;
                         }
+                        i_list += 1;
+                        i_list;
                     }
                 }
             }
@@ -10193,7 +10130,7 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
                     {
                         let mut i_1: libc::c_int = 0 as libc::c_int;
                         while i_1 < 4 as libc::c_int {
-                            if (*h).mb.i_cbp_luma & (1 as libc::c_int) << i_1 != 0 {
+                            if (*h).mb.i_cbp_luma & ((1 as libc::c_int) << i_1) != 0 {
                                 let mut p: libc::c_int = 0 as libc::c_int;
                                 while p < 3 as libc::c_int {
                                     let mut s8: libc::c_int = i_1 * 4 as libc::c_int
@@ -10231,8 +10168,8 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
                     } else {
                         let mut cbpsum: libc::c_int = ((*h).mb.i_cbp_luma
                             & 1 as libc::c_int)
-                            + ((*h).mb.i_cbp_luma >> 1 as libc::c_int & 1 as libc::c_int)
-                            + ((*h).mb.i_cbp_luma >> 2 as libc::c_int & 1 as libc::c_int)
+                            + (((*h).mb.i_cbp_luma >> 1 as libc::c_int) & 1 as libc::c_int)
+                            + (((*h).mb.i_cbp_luma >> 2 as libc::c_int) & 1 as libc::c_int)
                             + ((*h).mb.i_cbp_luma >> 3 as libc::c_int);
                         (*h)
                             .stat
@@ -10417,11 +10354,11 @@ unsafe extern "C" fn slice_write(mut h: *mut x264_t) -> intptr_t {
                 .expect(
                     "non-null function pointer",
                 )((*(*h).fdec).mb_info as *mut libc::c_void);
-            (*(*h).fdec).mb_info = 0 as *mut uint8_t;
+            (*(*h).fdec).mb_info = std::ptr::null_mut::<uint8_t>();
             (*(*h).fdec).mb_info_free = None;
         }
     }
-    return 0 as libc::c_int as intptr_t;
+    0 as libc::c_int as intptr_t
 }
 unsafe extern "C" fn thread_sync_context(mut dst: *mut x264_t, mut src: *mut x264_t) {
     if dst == src {
@@ -10478,8 +10415,7 @@ unsafe extern "C" fn slices_write(mut h: *mut x264_t) -> *mut libc::c_void {
     );
     (*h).mb.b_reencode_mb = 0 as libc::c_int;
     loop {
-        if !((*h).sh.i_first_mb + (*h).sh.b_mbaff * (*h).mb.i_mb_stride
-            <= last_thread_mb)
+        if (*h).sh.i_first_mb + (*h).sh.b_mbaff * (*h).mb.i_mb_stride > last_thread_mb
         {
             current_block = 5634871135123216486;
             break;
@@ -10542,14 +10478,14 @@ unsafe extern "C" fn slices_write(mut h: *mut x264_t) -> *mut libc::c_void {
         }
     }
     match current_block {
-        5634871135123216486 => return 0 as *mut libc::c_void,
+        5634871135123216486 => std::ptr::null_mut::<libc::c_void>(),
         _ => {
             if (*h).param.b_sliced_threads != 0 {
                 x264_8_threadslice_cond_broadcast(h, 2 as libc::c_int);
             }
-            return -(1 as libc::c_int) as *mut libc::c_void;
+            -(1 as libc::c_int) as *mut libc::c_void
         }
-    };
+    }
 }
 unsafe extern "C" fn threaded_slices_write(mut h: *mut x264_t) -> libc::c_int {
     let mut round_bias: libc::c_int = if (*h).param.i_avcintra_class != 0 {
@@ -10570,11 +10506,10 @@ unsafe extern "C" fn threaded_slices_write(mut h: *mut x264_t) -> libc::c_int {
         }
         let mut height: libc::c_int = (*h).mb.i_mb_height >> (*h).param.b_interlaced;
         (*t)
-            .i_threadslice_start = (height * i + round_bias) / (*h).param.i_threads
-            << (*h).param.b_interlaced;
+            .i_threadslice_start = ((height * i + round_bias) / (*h).param.i_threads) << (*h).param.b_interlaced;
         (*t)
-            .i_threadslice_end = (height * (i + 1 as libc::c_int) + round_bias)
-            / (*h).param.i_threads << (*h).param.b_interlaced;
+            .i_threadslice_end = ((height * (i + 1 as libc::c_int) + round_bias)
+            / (*h).param.i_threads) << (*h).param.b_interlaced;
         (*t).sh.i_first_mb = (*t).i_threadslice_start * (*h).mb.i_mb_width;
         (*t)
             .sh
@@ -10663,7 +10598,7 @@ unsafe extern "C" fn threaded_slices_write(mut h: *mut x264_t) -> libc::c_int {
         i_3 += 1;
         i_3;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_intra_refresh(mut h: *mut x264_t) {
@@ -10707,7 +10642,7 @@ pub unsafe extern "C" fn x264_8_encoder_invalidate_reference(
             (*(*h).fdec).b_corrupt = 1 as libc::c_int;
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_encode(
@@ -10717,9 +10652,9 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
     mut pic_in: *mut x264_picture_t,
     mut pic_out: *mut x264_picture_t,
 ) -> libc::c_int {
-    let mut thread_current: *mut x264_t = 0 as *mut x264_t;
-    let mut thread_prev: *mut x264_t = 0 as *mut x264_t;
-    let mut thread_oldest: *mut x264_t = 0 as *mut x264_t;
+    let mut thread_current: *mut x264_t = std::ptr::null_mut::<x264_t>();
+    let mut thread_prev: *mut x264_t = std::ptr::null_mut::<x264_t>();
+    let mut thread_oldest: *mut x264_t = std::ptr::null_mut::<x264_t>();
     let mut i_nal_type: libc::c_int = 0;
     let mut i_nal_ref_idc: libc::c_int = 0;
     let mut i_global_qp: libc::c_int = 0;
@@ -10745,7 +10680,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
     }
     (*h).i_cpb_delay_pir_offset = (*h).i_cpb_delay_pir_offset_next;
     *pi_nal = 0 as libc::c_int;
-    *pp_nal = 0 as *mut x264_nal_t;
+    *pp_nal = std::ptr::null_mut::<x264_nal_t>();
     if !pic_in.is_null() {
         if (*(*h).lookahead).b_exit_thread != 0 {
             x264_8_log(
@@ -10769,7 +10704,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
             x264_8_frame_expand_border_mod16(h, fenc);
         }
         let fresh8 = (*h).frames.i_input;
-        (*h).frames.i_input = (*h).frames.i_input + 1;
+        (*h).frames.i_input += 1;
         (*fenc).i_frame = fresh8;
         if (*fenc).i_frame == 0 as libc::c_int {
             (*h).frames.i_first_pts = (*fenc).i_pts;
@@ -10858,10 +10793,8 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
         return encoder_frame_end(thread_oldest, thread_current, pp_nal, pi_nal, pic_out);
     }
     (*h).fenc = x264_8_frame_shift((*h).frames.current);
-    if (*h).param.b_sliced_threads != 0 {
-        if threadpool_wait_all(h) < 0 as libc::c_int {
-            return -(1 as libc::c_int);
-        }
+    if (*h).param.b_sliced_threads != 0 && threadpool_wait_all(h) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
     }
     if (*h).i_frame == 0 as libc::c_int {
         (*h).i_reordered_pts_delay = (*(*h).fenc).i_reordered_pts;
@@ -10878,7 +10811,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
                 .expect(
                     "non-null function pointer",
                 )((*(*h).fenc).param as *mut libc::c_void);
-            (*(*h).fenc).param = 0 as *mut x264_param_t;
+            (*(*h).fenc).param = std::ptr::null_mut::<x264_param_t>();
         }
     }
     x264_8_ratecontrol_zone_init(h);
@@ -10975,7 +10908,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
     (*(*h).fenc).b_kept_as_ref = (*(*h).fdec).b_kept_as_ref;
     (*(*h).fdec).mb_info = (*(*h).fenc).mb_info;
     (*(*h).fdec).mb_info_free = (*(*h).fenc).mb_info_free;
-    (*(*h).fenc).mb_info = 0 as *mut uint8_t;
+    (*(*h).fenc).mb_info = std::ptr::null_mut::<uint8_t>();
     (*(*h).fenc).mb_info_free = None;
     (*(*h).fdec).i_pts = (*(*h).fenc).i_pts;
     if (*h).frames.i_bframe_delay != 0 {
@@ -11195,10 +11128,10 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
                 (*((*(*h).fenc).extra_sei.payloads).offset(i_1 as isize)).payload
                     as *mut libc::c_void,
             );
-            let ref mut fresh9 = (*((*(*h).fenc).extra_sei.payloads)
+            let fresh9 = &mut (*((*(*h).fenc).extra_sei.payloads)
                 .offset(i_1 as isize))
                 .payload;
-            *fresh9 = 0 as *mut uint8_t;
+            *fresh9 = std::ptr::null_mut::<uint8_t>();
         }
         i_1 += 1;
         i_1;
@@ -11208,7 +11141,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
             .expect(
                 "non-null function pointer",
             )((*(*h).fenc).extra_sei.payloads as *mut libc::c_void);
-        (*(*h).fenc).extra_sei.payloads = 0 as *mut x264_sei_payload_t;
+        (*(*h).fenc).extra_sei.payloads = std::ptr::null_mut::<x264_sei_payload_t>();
         (*(*h).fenc).extra_sei.sei_free = None;
     }
     if (*(*h).fenc).b_keyframe != 0 {
@@ -11451,7 +11384,7 @@ pub unsafe extern "C" fn x264_8_encoder_encode(
     } else if slices_write(h) as intptr_t != 0 {
         return -(1 as libc::c_int)
     }
-    return encoder_frame_end(thread_oldest, thread_current, pp_nal, pi_nal, pic_out);
+    encoder_frame_end(thread_oldest, thread_current, pp_nal, pi_nal, pic_out)
 }
 unsafe extern "C" fn encoder_frame_end(
     mut h: *mut x264_t,
@@ -11769,7 +11702,7 @@ unsafe extern "C" fn encoder_frame_end(
         let mut chroma_size: libc::c_int = if (*((*h).sps).as_mut_ptr())
             .i_chroma_format_idc != 0
         {
-            luma_size >> (*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift
+            luma_size >> ((*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift)
         } else {
             0 as libc::c_int
         };
@@ -11870,7 +11803,7 @@ unsafe extern "C" fn encoder_frame_end(
                 h,
                 (*h).fref[0 as libc::c_int as usize][i_9 as usize],
             );
-            (*h).fref[0 as libc::c_int as usize][i_9 as usize] = 0 as *mut x264_frame_t;
+            (*h).fref[0 as libc::c_int as usize][i_9 as usize] = std::ptr::null_mut::<x264_frame_t>();
         }
         i_9 += 1;
         i_9;
@@ -11878,7 +11811,7 @@ unsafe extern "C" fn encoder_frame_end(
     if !((*h).param.psz_dump_yuv).is_null() {
         frame_dump(h);
     }
-    return frame_size;
+    frame_size
 }
 unsafe extern "C" fn print_intra(
     mut i_mb_count: *mut int64_t,
@@ -11918,8 +11851,7 @@ pub unsafe extern "C" fn x264_8_encoder_close(mut h: *mut x264_t) {
     let mut i_yuv_size: int64_t = ((*h).param.i_width * (*h).param.i_height
         + 2 as libc::c_int
             * (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                (*h).param.i_width * (*h).param.i_height
-                    >> (*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift
+                ((*h).param.i_width * (*h).param.i_height) >> ((*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift)
             } else {
                 0 as libc::c_int
             })) as int64_t;
@@ -12087,7 +12019,7 @@ pub unsafe extern "C" fn x264_8_encoder_close(mut h: *mut x264_t) {
     while i_type < 2 as libc::c_int {
         let mut i_3: libc::c_int = 0 as libc::c_int;
         while i_3 < X264_PARTTYPE_MAX as libc::c_int {
-            if !(i_3 == D_DIRECT_8x8 as libc::c_int) {
+            if i_3 != D_DIRECT_8x8 as libc::c_int {
                 i_mb_count_size[i_type
                     as usize][x264_mb_partition_pixel_table[i_3 as usize] as usize]
                     += (*h).stat.i_mb_partition[i_type as usize][i_3 as usize];
@@ -12602,8 +12534,7 @@ pub unsafe extern "C" fn x264_8_encoder_close(mut h: *mut x264_t) {
             i_7;
         }
         if sum_pred_modes[3 as libc::c_int as usize] != 0
-            && !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int)
+            && ((*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int)
         {
             x264_8_log(
                 h,
@@ -12673,7 +12604,7 @@ pub unsafe extern "C" fn x264_8_encoder_close(mut h: *mut x264_t) {
                     i_8 += 1;
                     i_8;
                 }
-                if !(i_max == 0 as libc::c_int) {
+                if i_max != 0 as libc::c_int {
                     let mut i_9: libc::c_int = 0 as libc::c_int;
                     while i_9 <= i_max {
                         p_0 = p_0
@@ -12813,7 +12744,7 @@ pub unsafe extern "C" fn x264_8_encoder_close(mut h: *mut x264_t) {
     }
     let mut i_12: libc::c_int = (*h).param.i_threads - 1 as libc::c_int;
     while i_12 >= 0 as libc::c_int {
-        let mut frame: *mut *mut x264_frame_t = 0 as *mut *mut x264_frame_t;
+        let mut frame: *mut *mut x264_frame_t = std::ptr::null_mut::<*mut x264_frame_t>();
         if (*h).param.b_sliced_threads == 0 || i_12 == 0 as libc::c_int {
             frame = ((*(*h).thread[i_12 as usize]).frames.reference).as_mut_ptr();
             while !(*frame).is_null() {
@@ -12936,11 +12867,11 @@ pub unsafe extern "C" fn x264_8_encoder_delayed_frames(
     pthread_mutex_unlock(&mut (*(*h).lookahead).next.mutex);
     pthread_mutex_unlock(&mut (*(*h).lookahead).ifbuf.mutex);
     pthread_mutex_unlock(&mut (*(*h).lookahead).ofbuf.mutex);
-    return delayed_frames;
+    delayed_frames
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_encoder_maximum_delayed_frames(
     mut h: *mut x264_t,
 ) -> libc::c_int {
-    return (*h).frames.i_delay;
+    (*h).frames.i_delay
 }

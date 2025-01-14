@@ -2267,7 +2267,7 @@ unsafe extern "C" fn x264_pixel_sad_16x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_16x8(
     mut pix1: *mut pixel,
@@ -2293,7 +2293,7 @@ unsafe extern "C" fn x264_pixel_sad_16x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_8x16(
     mut pix1: *mut pixel,
@@ -2319,7 +2319,7 @@ unsafe extern "C" fn x264_pixel_sad_8x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_8x8(
     mut pix1: *mut pixel,
@@ -2345,7 +2345,7 @@ unsafe extern "C" fn x264_pixel_sad_8x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_8x4(
     mut pix1: *mut pixel,
@@ -2371,7 +2371,7 @@ unsafe extern "C" fn x264_pixel_sad_8x4(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_4x16(
     mut pix1: *mut pixel,
@@ -2397,7 +2397,7 @@ unsafe extern "C" fn x264_pixel_sad_4x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_4x8(
     mut pix1: *mut pixel,
@@ -2423,7 +2423,7 @@ unsafe extern "C" fn x264_pixel_sad_4x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_sad_4x4(
     mut pix1: *mut pixel,
@@ -2449,7 +2449,7 @@ unsafe extern "C" fn x264_pixel_sad_4x4(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_16x16(
     mut pix1: *mut pixel,
@@ -2473,7 +2473,7 @@ unsafe extern "C" fn x264_pixel_ssd_16x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_16x8(
     mut pix1: *mut pixel,
@@ -2497,7 +2497,7 @@ unsafe extern "C" fn x264_pixel_ssd_16x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_8x16(
     mut pix1: *mut pixel,
@@ -2521,7 +2521,7 @@ unsafe extern "C" fn x264_pixel_ssd_8x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_8x8(
     mut pix1: *mut pixel,
@@ -2545,7 +2545,7 @@ unsafe extern "C" fn x264_pixel_ssd_8x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_8x4(
     mut pix1: *mut pixel,
@@ -2569,7 +2569,7 @@ unsafe extern "C" fn x264_pixel_ssd_8x4(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_4x16(
     mut pix1: *mut pixel,
@@ -2593,7 +2593,7 @@ unsafe extern "C" fn x264_pixel_ssd_4x16(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_4x8(
     mut pix1: *mut pixel,
@@ -2617,7 +2617,7 @@ unsafe extern "C" fn x264_pixel_ssd_4x8(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 unsafe extern "C" fn x264_pixel_ssd_4x4(
     mut pix1: *mut pixel,
@@ -2641,7 +2641,7 @@ unsafe extern "C" fn x264_pixel_ssd_4x4(
         y += 1;
         y;
     }
-    return i_sum;
+    i_sum
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_pixel_ssd_wxh(
@@ -2760,7 +2760,7 @@ pub unsafe extern "C" fn x264_8_pixel_ssd_wxh(
             y;
         }
     }
-    return i_ssd;
+    i_ssd
 }
 unsafe extern "C" fn pixel_ssd_nv12_core(
     mut pixuv1: *mut pixel,
@@ -2861,7 +2861,7 @@ unsafe extern "C" fn pixel_var_16x16(
         y += 1;
         y;
     }
-    return (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int);
+    (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int)
 }
 unsafe extern "C" fn pixel_var_8x16(
     mut pix: *mut pixel,
@@ -2886,7 +2886,7 @@ unsafe extern "C" fn pixel_var_8x16(
         y += 1;
         y;
     }
-    return (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int);
+    (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int)
 }
 unsafe extern "C" fn pixel_var_8x8(
     mut pix: *mut pixel,
@@ -2911,7 +2911,7 @@ unsafe extern "C" fn pixel_var_8x8(
         y += 1;
         y;
     }
-    return (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int);
+    (sum as uint64_t).wrapping_add((sqr as uint64_t) << 32 as libc::c_int)
 }
 unsafe extern "C" fn pixel_var2_8x16(
     mut fenc: *mut pixel,
@@ -2947,9 +2947,9 @@ unsafe extern "C" fn pixel_var2_8x16(
     }
     *ssd.offset(0 as libc::c_int as isize) = sqr_u;
     *ssd.offset(1 as libc::c_int as isize) = sqr_v;
-    return (sqr_u as int64_t - (sum_u as int64_t * sum_u as int64_t >> 7 as libc::c_int)
-        + sqr_v as int64_t - (sum_v as int64_t * sum_v as int64_t >> 7 as libc::c_int))
-        as libc::c_int;
+    (sqr_u as int64_t - ((sum_u as int64_t * sum_u as int64_t) >> 7 as libc::c_int)
+        + sqr_v as int64_t - ((sum_v as int64_t * sum_v as int64_t) >> 7 as libc::c_int))
+        as libc::c_int
 }
 unsafe extern "C" fn pixel_var2_8x8(
     mut fenc: *mut pixel,
@@ -2985,22 +2985,21 @@ unsafe extern "C" fn pixel_var2_8x8(
     }
     *ssd.offset(0 as libc::c_int as isize) = sqr_u;
     *ssd.offset(1 as libc::c_int as isize) = sqr_v;
-    return (sqr_u as int64_t - (sum_u as int64_t * sum_u as int64_t >> 6 as libc::c_int)
-        + sqr_v as int64_t - (sum_v as int64_t * sum_v as int64_t >> 6 as libc::c_int))
-        as libc::c_int;
+    (sqr_u as int64_t - ((sum_u as int64_t * sum_u as int64_t) >> 6 as libc::c_int)
+        + sqr_v as int64_t - ((sum_v as int64_t * sum_v as int64_t) >> 6 as libc::c_int))
+        as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn abs2(mut a: sum2_t) -> sum2_t {
-    let mut s: sum2_t = (a
+    let mut s: sum2_t = ((a
         >> (8 as libc::c_int as libc::c_ulong)
             .wrapping_mul(::core::mem::size_of::<sum_t>() as libc::c_ulong)
-            .wrapping_sub(1 as libc::c_int as libc::c_ulong)
-        & ((1 as libc::c_int as sum2_t)
+            .wrapping_sub(1 as libc::c_int as libc::c_ulong)) & ((1 as libc::c_int as sum2_t)
             << (8 as libc::c_int as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<sum_t>() as libc::c_ulong))
             .wrapping_add(1 as libc::c_int as sum2_t))
         * -(1 as libc::c_int) as sum_t as sum2_t;
-    return a.wrapping_add(s) ^ s;
+    a.wrapping_add(s) ^ s
 }
 #[inline(never)]
 unsafe extern "C" fn x264_pixel_satd_4x4(
@@ -3080,7 +3079,7 @@ unsafe extern "C" fn x264_pixel_satd_4x4(
         i_0 += 1;
         i_0;
     }
-    return (sum >> 1 as libc::c_int) as libc::c_int;
+    (sum >> 1 as libc::c_int) as libc::c_int
 }
 #[inline(never)]
 unsafe extern "C" fn x264_pixel_satd_8x4(
@@ -3166,12 +3165,12 @@ unsafe extern "C" fn x264_pixel_satd_8x4(
         i_0 += 1;
         i_0;
     }
-    return ((sum as sum_t as sum2_t)
+    ((sum as sum_t as sum2_t)
         .wrapping_add(
             sum
                 >> (8 as libc::c_int as libc::c_ulong)
                     .wrapping_mul(::core::mem::size_of::<sum_t>() as libc::c_ulong),
-        ) >> 1 as libc::c_int) as libc::c_int;
+        ) >> 1 as libc::c_int) as libc::c_int
 }
 unsafe extern "C" fn x264_pixel_satd_16x16(
     mut pix1: *mut pixel,
@@ -3243,7 +3242,7 @@ unsafe extern "C" fn x264_pixel_satd_16x16(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn x264_pixel_satd_16x8(
     mut pix1: *mut pixel,
@@ -3315,7 +3314,7 @@ unsafe extern "C" fn x264_pixel_satd_16x8(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn x264_pixel_satd_8x16(
     mut pix1: *mut pixel,
@@ -3387,7 +3386,7 @@ unsafe extern "C" fn x264_pixel_satd_8x16(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn x264_pixel_satd_8x8(
     mut pix1: *mut pixel,
@@ -3459,7 +3458,7 @@ unsafe extern "C" fn x264_pixel_satd_8x8(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn x264_pixel_satd_4x16(
     mut pix1: *mut pixel,
@@ -3531,7 +3530,7 @@ unsafe extern "C" fn x264_pixel_satd_4x16(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn x264_pixel_satd_4x8(
     mut pix1: *mut pixel,
@@ -3603,7 +3602,7 @@ unsafe extern "C" fn x264_pixel_satd_4x8(
                     i_pix2,
                 );
     }
-    return sum;
+    sum
 }
 #[inline(never)]
 unsafe extern "C" fn sa8d_8x8(
@@ -3738,7 +3737,7 @@ unsafe extern "C" fn sa8d_8x8(
         i_0 += 1;
         i_0;
     }
-    return sum as libc::c_int;
+    sum as libc::c_int
 }
 unsafe extern "C" fn x264_pixel_sa8d_8x8(
     mut pix1: *mut pixel,
@@ -3747,7 +3746,7 @@ unsafe extern "C" fn x264_pixel_sa8d_8x8(
     mut i_pix2: intptr_t,
 ) -> libc::c_int {
     let mut sum: libc::c_int = sa8d_8x8(pix1, i_pix1, pix2, i_pix2);
-    return sum + 2 as libc::c_int >> 2 as libc::c_int;
+    (sum + 2 as libc::c_int) >> 2 as libc::c_int
 }
 unsafe extern "C" fn x264_pixel_sa8d_16x16(
     mut pix1: *mut pixel,
@@ -3778,7 +3777,7 @@ unsafe extern "C" fn x264_pixel_sa8d_16x16(
                 .offset((8 as libc::c_int as intptr_t * i_pix2) as isize),
             i_pix2,
         );
-    return sum + 2 as libc::c_int >> 2 as libc::c_int;
+    (sum + 2 as libc::c_int) >> 2 as libc::c_int
 }
 #[inline(never)]
 unsafe extern "C" fn pixel_hadamard_ac(
@@ -3909,7 +3908,7 @@ unsafe extern "C" fn pixel_hadamard_ac(
                     .wrapping_mul(::core::mem::size_of::<sum_t>() as libc::c_ulong),
         )
         .wrapping_sub(dc);
-    return ((sum8 as uint64_t) << 32 as libc::c_int).wrapping_add(sum4 as uint64_t);
+    ((sum8 as uint64_t) << 32 as libc::c_int).wrapping_add(sum4 as uint64_t)
 }
 unsafe extern "C" fn x264_pixel_hadamard_ac_16x16(
     mut pix: *mut pixel,
@@ -3942,8 +3941,8 @@ unsafe extern "C" fn x264_pixel_hadamard_ac_16x16(
                 ),
             );
     }
-    return ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
-        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t);
+    ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
+        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t)
 }
 unsafe extern "C" fn x264_pixel_hadamard_ac_16x8(
     mut pix: *mut pixel,
@@ -3976,8 +3975,8 @@ unsafe extern "C" fn x264_pixel_hadamard_ac_16x8(
                 ),
             );
     }
-    return ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
-        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t);
+    ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
+        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t)
 }
 unsafe extern "C" fn x264_pixel_hadamard_ac_8x16(
     mut pix: *mut pixel,
@@ -4010,8 +4009,8 @@ unsafe extern "C" fn x264_pixel_hadamard_ac_8x16(
                 ),
             );
     }
-    return ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
-        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t);
+    ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
+        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t)
 }
 unsafe extern "C" fn x264_pixel_hadamard_ac_8x8(
     mut pix: *mut pixel,
@@ -4044,8 +4043,8 @@ unsafe extern "C" fn x264_pixel_hadamard_ac_8x8(
                 ),
             );
     }
-    return ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
-        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t);
+    ((sum >> 34 as libc::c_int) << 32 as libc::c_int)
+        .wrapping_add((sum as uint32_t >> 1 as libc::c_int) as uint64_t)
 }
 unsafe extern "C" fn x264_pixel_sad_x4_16x16(
     mut fenc: *mut pixel,
@@ -5132,10 +5131,10 @@ unsafe extern "C" fn ssim_end1(
     let mut fs12: libc::c_int = s12;
     let mut vars: libc::c_int = fss * 64 as libc::c_int - fs1 * fs1 - fs2 * fs2;
     let mut covar: libc::c_int = fs12 * 64 as libc::c_int - fs1 * fs2;
-    return (2 as libc::c_int * fs1 * fs2 + ssim_c1) as libc::c_float
+    (2 as libc::c_int * fs1 * fs2 + ssim_c1) as libc::c_float
         * (2 as libc::c_int * covar + ssim_c2) as libc::c_float
         / ((fs1 * fs1 + fs2 * fs2 + ssim_c1) as libc::c_float
-            * (vars + ssim_c2) as libc::c_float);
+            * (vars + ssim_c2) as libc::c_float)
 }
 unsafe extern "C" fn ssim_end4(
     mut sum0: *mut [libc::c_int; 4],
@@ -5191,7 +5190,7 @@ unsafe extern "C" fn ssim_end4(
         i += 1;
         i;
     }
-    return ssim;
+    ssim
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_pixel_ssim_wxh(
@@ -5265,7 +5264,7 @@ pub unsafe extern "C" fn x264_8_pixel_ssim_wxh(
         y;
     }
     *cnt = (height - 1 as libc::c_int) * (width - 1 as libc::c_int);
-    return ssim;
+    ssim
 }
 unsafe extern "C" fn pixel_vsad(
     mut src: *mut pixel,
@@ -5289,7 +5288,7 @@ unsafe extern "C" fn pixel_vsad(
         i;
         src = src.offset(stride as isize);
     }
-    return score;
+    score
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_field_vsad(
@@ -5342,7 +5341,7 @@ pub unsafe extern "C" fn x264_8_field_vsad(
                 - *((*h).mb.field).offset((mb_xy - mb_stride) as isize) as libc::c_int
                     * 1024 as libc::c_int;
     }
-    return (score_field < score_frame) as libc::c_int;
+    (score_field < score_frame) as libc::c_int
 }
 unsafe extern "C" fn pixel_asd8(
     mut pix1: *mut pixel,
@@ -5367,7 +5366,7 @@ unsafe extern "C" fn pixel_asd8(
         pix1 = pix1.offset(stride1 as isize);
         pix2 = pix2.offset(stride2 as isize);
     }
-    return abs(sum);
+    abs(sum)
 }
 unsafe extern "C" fn x264_pixel_ads4(
     mut enc_dc: *mut libc::c_int,
@@ -5399,7 +5398,7 @@ unsafe extern "C" fn x264_pixel_ads4(
             ) + *cost_mvx.offset(i as isize) as libc::c_int;
         if ads < thresh {
             let fresh0 = nmv;
-            nmv = nmv + 1;
+            nmv += 1;
             *mvs.offset(fresh0 as isize) = i as int16_t;
         }
         i += 1;
@@ -5407,7 +5406,7 @@ unsafe extern "C" fn x264_pixel_ads4(
         sums = sums.offset(1);
         sums;
     }
-    return nmv;
+    nmv
 }
 unsafe extern "C" fn x264_pixel_ads2(
     mut enc_dc: *mut libc::c_int,
@@ -5431,7 +5430,7 @@ unsafe extern "C" fn x264_pixel_ads2(
             ) + *cost_mvx.offset(i as isize) as libc::c_int;
         if ads < thresh {
             let fresh1 = nmv;
-            nmv = nmv + 1;
+            nmv += 1;
             *mvs.offset(fresh1 as isize) = i as int16_t;
         }
         i += 1;
@@ -5439,7 +5438,7 @@ unsafe extern "C" fn x264_pixel_ads2(
         sums = sums.offset(1);
         sums;
     }
-    return nmv;
+    nmv
 }
 unsafe extern "C" fn x264_pixel_ads1(
     mut enc_dc: *mut libc::c_int,
@@ -5459,7 +5458,7 @@ unsafe extern "C" fn x264_pixel_ads1(
         ) + *cost_mvx.offset(i as isize) as libc::c_int;
         if ads < thresh {
             let fresh2 = nmv;
-            nmv = nmv + 1;
+            nmv += 1;
             *mvs.offset(fresh2 as isize) = i as int16_t;
         }
         i += 1;
@@ -5467,7 +5466,7 @@ unsafe extern "C" fn x264_pixel_ads1(
         sums = sums.offset(1);
         sums;
     }
-    return nmv;
+    nmv
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_pixel_init(

@@ -58,8 +58,8 @@ pub unsafe extern "C" fn x264_cli_plane_copy(
 ) {
     loop {
         let fresh0 = h;
-        h = h - 1;
-        if !(fresh0 != 0) {
+        h -= 1;
+        if fresh0 == 0 {
             break;
         }
         memcpy(dst as *mut libc::c_void, src as *const libc::c_void, w as libc::c_ulong);
@@ -115,5 +115,5 @@ pub unsafe extern "C" fn x264_cli_pic_copy(
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }

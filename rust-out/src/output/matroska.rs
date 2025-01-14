@@ -392,7 +392,7 @@ unsafe extern "C" fn open_file(
     mut p_handle: *mut hnd_t,
     mut opt: *mut cli_output_opt_t,
 ) -> libc::c_int {
-    *p_handle = 0 as *mut libc::c_void;
+    *p_handle = std::ptr::null_mut::<libc::c_void>();
     let mut p_mkv: *mut mkv_hnd_t = calloc(
         1 as libc::c_int as libc::c_ulong,
         ::core::mem::size_of::<mkv_hnd_t>() as libc::c_ulong,
@@ -406,7 +406,7 @@ unsafe extern "C" fn open_file(
         return -(1 as libc::c_int);
     }
     *p_handle = p_mkv as hnd_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 static mut stereo_modes: [uint8_t; 7] = [
     5 as libc::c_int as uint8_t,
@@ -480,7 +480,7 @@ unsafe extern "C" fn set_param(
     (*p_mkv).d_height = dh as libc::c_int;
     (*p_mkv).i_timebase_num = (*p_param).i_timebase_num;
     (*p_mkv).i_timebase_den = (*p_param).i_timebase_den;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn write_headers(
     mut handle: hnd_t,
@@ -498,7 +498,7 @@ unsafe extern "C" fn write_headers(
         .offset(4 as libc::c_int as isize);
     let mut sei: *mut uint8_t = (*p_nal.offset(2 as libc::c_int as isize)).p_payload;
     let mut ret: libc::c_int = 0;
-    let mut avcC: *mut uint8_t = 0 as *mut uint8_t;
+    let mut avcC: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     let mut avcC_len: libc::c_int = 0;
     if (*p_mkv).width == 0 || (*p_mkv).height == 0 || (*p_mkv).d_width == 0
         || (*p_mkv).d_height == 0
@@ -569,7 +569,7 @@ unsafe extern "C" fn write_headers(
     {
         return -(1 as libc::c_int);
     }
-    return sei_size + sps_size + pps_size;
+    sei_size + sps_size + pps_size
 }
 unsafe extern "C" fn write_frame(
     mut handle: hnd_t,
@@ -605,7 +605,7 @@ unsafe extern "C" fn write_frame(
     {
         return -(1 as libc::c_int);
     }
-    return i_size;
+    i_size
 }
 unsafe extern "C" fn close_file(
     mut handle: hnd_t,
@@ -623,12 +623,13 @@ unsafe extern "C" fn close_file(
     };
     ret = mk_close((*p_mkv).w, i_last_delta);
     free(p_mkv as *mut libc::c_void);
-    return ret;
+    ret
 }
 #[no_mangle]
 pub static mut mkv_output: cli_output_t = unsafe {
     {
-        let mut init = cli_output_t {
+        
+        cli_output_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -658,7 +659,6 @@ pub static mut mkv_output: cli_output_t = unsafe {
                 close_file
                     as unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
             ),
-        };
-        init
+        }
     }
 };

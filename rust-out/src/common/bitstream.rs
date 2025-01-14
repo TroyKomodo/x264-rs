@@ -2246,7 +2246,7 @@ unsafe extern "C" fn nal_escape_c(
         dst = dst.offset(1);
         *fresh6 = *fresh5;
     }
-    return dst;
+    dst
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_nal_encode(
@@ -2277,8 +2277,7 @@ pub unsafe extern "C" fn x264_8_nal_encode(
     }
     let fresh11 = dst;
     dst = dst.offset(1);
-    *fresh11 = ((0 as libc::c_int) << 7 as libc::c_int
-        | (*nal).i_ref_idc << 5 as libc::c_int | (*nal).i_type) as uint8_t;
+    *fresh11 = (((0 as libc::c_int) << 7 as libc::c_int) | ((*nal).i_ref_idc << 5 as libc::c_int) | (*nal).i_type) as uint8_t;
     dst = ((*h).bsf.nal_escape).expect("non-null function pointer")(dst, src, end);
     let mut size: libc::c_int = dst.offset_from(orig_dst) as libc::c_long as libc::c_int;
     if (*h).param.i_avcintra_class != 0 {

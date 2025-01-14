@@ -2989,18 +2989,18 @@ static mut x264_ue_size_tab: [uint8_t; 256] = [
 ];
 #[inline(always)]
 unsafe extern "C" fn bs_size_ue(mut val: libc::c_uint) -> libc::c_int {
-    return x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint) as usize]
-        as libc::c_int;
+    x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint) as usize]
+        as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn bs_size_ue_big(mut val: libc::c_uint) -> libc::c_int {
     if val < 255 as libc::c_int as libc::c_uint {
-        return x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint)
+        x264_ue_size_tab[val.wrapping_add(1 as libc::c_int as libc::c_uint)
             as usize] as libc::c_int
     } else {
-        return x264_ue_size_tab[(val.wrapping_add(1 as libc::c_int as libc::c_uint)
+        x264_ue_size_tab[(val.wrapping_add(1 as libc::c_int as libc::c_uint)
             >> 8 as libc::c_int) as usize] as libc::c_int + 16 as libc::c_int
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn bs_size_se(mut val: libc::c_int) -> libc::c_int {
@@ -3009,11 +3009,11 @@ unsafe extern "C" fn bs_size_se(mut val: libc::c_int) -> libc::c_int {
         tmp = val * 2 as libc::c_int;
     }
     if tmp < 256 as libc::c_int {
-        return x264_ue_size_tab[tmp as usize] as libc::c_int
+        x264_ue_size_tab[tmp as usize] as libc::c_int
     } else {
-        return x264_ue_size_tab[(tmp >> 8 as libc::c_int) as usize] as libc::c_int
+        x264_ue_size_tab[(tmp >> 8 as libc::c_int) as usize] as libc::c_int
             + 16 as libc::c_int
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn bs_size_te(
@@ -3021,10 +3021,10 @@ unsafe extern "C" fn bs_size_te(
     mut val: libc::c_int,
 ) -> libc::c_int {
     if x == 1 as libc::c_int {
-        return 1 as libc::c_int
+        1 as libc::c_int
     } else {
-        return x264_ue_size_tab[(val + 1 as libc::c_int) as usize] as libc::c_int
-    };
+        x264_ue_size_tab[(val + 1 as libc::c_int) as usize] as libc::c_int
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_cabac_size_decision(
@@ -3044,7 +3044,7 @@ unsafe extern "C" fn x264_cabac_size_decision2(
 ) -> libc::c_int {
     let mut i_state: libc::c_int = *state as libc::c_int;
     *state = x264_cabac_transition[i_state as usize][b as usize];
-    return x264_cabac_entropy[(i_state as libc::c_long ^ b) as usize] as libc::c_int;
+    x264_cabac_entropy[(i_state as libc::c_long ^ b) as usize] as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn x264_cabac_size_decision_noup(
@@ -3061,7 +3061,7 @@ unsafe extern "C" fn x264_cabac_size_decision_noup2(
     mut state: *mut uint8_t,
     mut b: libc::c_long,
 ) -> libc::c_int {
-    return x264_cabac_entropy[(*state as libc::c_long ^ b) as usize] as libc::c_int;
+    x264_cabac_entropy[(*state as libc::c_long ^ b) as usize] as libc::c_int
 }
 static mut x264_mb_chroma_pred_mode_fix: [uint8_t; 7] = [
     I_PRED_CHROMA_DC as libc::c_int as uint8_t,
@@ -3098,88 +3098,88 @@ static mut x264_mb_pred_mode4x4_fix: [int8_t; 13] = [
 ];
 static mut x264_pixel_size: [C2RustUnnamed_21; 12] = [
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 16 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 16 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 8 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 16 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 4 as libc::c_int as uint8_t,
             h: 2 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 8 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 4 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
     {
-        let mut init = C2RustUnnamed_21 {
+        
+        C2RustUnnamed_21 {
             w: 2 as libc::c_int as uint8_t,
             h: 2 as libc::c_int as uint8_t,
-        };
-        init
+        }
     },
 ];
 #[inline(always)]
@@ -3202,7 +3202,7 @@ unsafe extern "C" fn x264_ctz_4bit(mut x: uint32_t) -> libc::c_int {
         1 as libc::c_int as uint8_t,
         0 as libc::c_int as uint8_t,
     ];
-    return lut[x as usize] as libc::c_int;
+    lut[x as usize] as libc::c_int
 }
 static mut x264_scan8: [uint8_t; 51] = [
     (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int) as uint8_t,
@@ -3263,7 +3263,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_clip3f(
@@ -3271,7 +3271,7 @@ unsafe extern "C" fn x264_clip3f(
     mut f_min: libc::c_double,
     mut f_max: libc::c_double,
 ) -> libc::c_double {
-    return if v < f_min { f_min } else if v > f_max { f_max } else { v };
+    if v < f_min { f_min } else if v > f_max { f_max } else { v }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_exp2fix8(mut x: libc::c_float) -> libc::c_int {
@@ -3282,14 +3282,14 @@ unsafe extern "C" fn x264_exp2fix8(mut x: libc::c_float) -> libc::c_int {
     if i > 1023 as libc::c_int {
         return 0xffff as libc::c_int;
     }
-    return (x264_exp2_lut[(i & 63 as libc::c_int) as usize] as libc::c_int
-        + 256 as libc::c_int) << (i >> 6 as libc::c_int) >> 8 as libc::c_int;
+    (x264_exp2_lut[(i & 63 as libc::c_int) as usize] as libc::c_int
+        + 256 as libc::c_int) << (i >> 6 as libc::c_int) >> 8 as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn x264_log2(mut x: uint32_t) -> libc::c_float {
     let mut lz: libc::c_int = x.leading_zeros() as i32;
-    return x264_log2_lut[(x << lz >> 24 as libc::c_int & 0x7f as libc::c_int as uint32_t)
-        as usize] + x264_log2_lz_lut[lz as usize];
+    x264_log2_lut[((x << lz >> 24 as libc::c_int) & 0x7f as libc::c_int as uint32_t)
+        as usize] + x264_log2_lz_lut[lz as usize]
 }
 #[inline(always)]
 unsafe extern "C" fn x264_median(
@@ -3297,12 +3297,12 @@ unsafe extern "C" fn x264_median(
     mut b: libc::c_int,
     mut c: libc::c_int,
 ) -> libc::c_int {
-    let mut t: libc::c_int = a - b & a - b >> 31 as libc::c_int;
+    let mut t: libc::c_int = (a - b) & ((a - b) >> 31 as libc::c_int);
     a -= t;
     b += t;
-    b -= b - c & b - c >> 31 as libc::c_int;
-    b += a - b & a - b >> 31 as libc::c_int;
-    return b;
+    b -= (b - c) & ((b - c) >> 31 as libc::c_int);
+    b += (a - b) & ((a - b) >> 31 as libc::c_int);
+    b
 }
 #[inline(always)]
 unsafe extern "C" fn x264_median_mv(
@@ -3341,7 +3341,7 @@ unsafe extern "C" fn x264_cabac_mvd_sum(
         + (amvd0 > 32 as libc::c_int) as libc::c_int;
     amvd1 = (amvd1 > 2 as libc::c_int) as libc::c_int
         + (amvd1 > 32 as libc::c_int) as libc::c_int;
-    return (amvd0 + (amvd1 << 8 as libc::c_int)) as uint16_t;
+    (amvd0 + (amvd1 << 8 as libc::c_int)) as uint16_t
 }
 static mut x264_pred_i4x4_neighbors: [uint8_t; 12] = [
     MB_TOP as libc::c_int as uint8_t,
@@ -3780,11 +3780,11 @@ static mut ctx_cat_plane: [[uint8_t; 3]; 6] = [
 ];
 #[inline(always)]
 unsafe extern "C" fn pack16to32(mut a: uint32_t, mut b: uint32_t) -> uint32_t {
-    return a.wrapping_add(b << 16 as libc::c_int);
+    a.wrapping_add(b << 16 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn pack8to16(mut a: uint32_t, mut b: uint32_t) -> uint32_t {
-    return a.wrapping_add(b << 8 as libc::c_int);
+    a.wrapping_add(b << 8 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn x264_mb_predict_intra4x4_mode(
@@ -3812,7 +3812,7 @@ unsafe extern "C" fn x264_mb_predict_intra4x4_mode(
     if m < 0 as libc::c_int {
         return I_PRED_4x4_DC as libc::c_int;
     }
-    return m;
+    m
 }
 #[inline(always)]
 unsafe extern "C" fn x264_mb_predict_non_zero_code(
@@ -3831,9 +3831,9 @@ unsafe extern "C" fn x264_mb_predict_non_zero_code(
         as usize] as libc::c_int;
     let mut i_ret: libc::c_int = za + zb;
     if i_ret < 0x80 as libc::c_int {
-        i_ret = i_ret + 1 as libc::c_int >> 1 as libc::c_int;
+        i_ret = (i_ret + 1 as libc::c_int) >> 1 as libc::c_int;
     }
-    return i_ret & 0x7f as libc::c_int;
+    i_ret & 0x7f as libc::c_int
 }
 static mut x264_transform_allowed: [uint8_t; 19] = [
     0 as libc::c_int as uint8_t,
@@ -3864,9 +3864,9 @@ unsafe extern "C" fn x264_mb_transform_8x8_allowed(mut h: *mut x264_t) -> libc::
     if (*h).mb.i_type != P_8x8 as libc::c_int {
         return x264_transform_allowed[(*h).mb.i_type as usize] as libc::c_int;
     }
-    return ((*(((*h).mb.i_sub_partition).as_mut_ptr() as *mut x264_union32_t)).i
+    ((*(((*h).mb.i_sub_partition).as_mut_ptr() as *mut x264_union32_t)).i
         == (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int) as uint32_t)
-        as libc::c_int;
+        as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn x264_macroblock_cache_rect(
@@ -4019,7 +4019,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                     .i = v8;
                 h -= 2 as libc::c_int;
                 d = d.offset((s * 2 as libc::c_int) as isize);
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }
@@ -4031,7 +4031,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                 (*(d.offset(12 as libc::c_int as isize) as *mut x264_union32_t)).i = v4;
                 d = d.offset(s as isize);
                 h -= 1;
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }
@@ -4238,7 +4238,7 @@ unsafe extern "C" fn cached_hadamard(
         + hadamard_offset[size as usize] as libc::c_int;
     let mut res: uint64_t = (*h).mb.pic.fenc_hadamard_cache[cache_index as usize];
     if res != 0 {
-        return res.wrapping_sub(1 as libc::c_int as uint64_t)
+        res.wrapping_sub(1 as libc::c_int as uint64_t)
     } else {
         let mut fenc: *mut pixel = ((*h).mb.pic.p_fenc[0 as libc::c_int as usize])
             .offset(x as isize)
@@ -4250,8 +4250,8 @@ unsafe extern "C" fn cached_hadamard(
             .pic
             .fenc_hadamard_cache[cache_index
             as usize] = res.wrapping_add(1 as libc::c_int as uint64_t);
-        return res;
-    };
+        res
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn cached_satd(
@@ -4282,7 +4282,7 @@ unsafe extern "C" fn cached_satd(
     let mut res: libc::c_int = (*h).mb.pic.fenc_satd_cache[cache_index as usize]
         as libc::c_int;
     if res != 0 {
-        return res - 1 as libc::c_int
+        res - 1 as libc::c_int
     } else {
         let mut fenc: *mut pixel = ((*h).mb.pic.p_fenc[0 as libc::c_int as usize])
             .offset(x as isize)
@@ -4310,8 +4310,8 @@ unsafe extern "C" fn cached_satd(
             .pic
             .fenc_satd_cache[cache_index
             as usize] = (res + 1 as libc::c_int) as uint32_t;
-        return res;
-    };
+        res
+    }
 }
 #[inline]
 unsafe extern "C" fn ssd_plane(
@@ -4363,20 +4363,19 @@ unsafe extern "C" fn ssd_plane(
                 ) - dc - cached_satd(h, size, x, y),
             );
         }
-        let mut tmp: int64_t = satd as int64_t * (*h).mb.i_psy_rd as int64_t
-            * (*h).mb.i_psy_rd_lambda as int64_t + 128 as libc::c_int as int64_t
-            >> 8 as libc::c_int;
+        let mut tmp: int64_t = (satd as int64_t * (*h).mb.i_psy_rd as int64_t
+            * (*h).mb.i_psy_rd_lambda as int64_t + 128 as libc::c_int as int64_t) >> 8 as libc::c_int;
         satd = (if tmp < ((1 as libc::c_int) << 28 as libc::c_int) as int64_t {
             tmp
         } else {
             ((1 as libc::c_int) << 28 as libc::c_int) as int64_t
         }) as libc::c_int;
     }
-    return ((*h).pixf.ssd[size as usize])
+    ((*h).pixf.ssd[size as usize])
         .expect(
             "non-null function pointer",
         )(fenc, 16 as libc::c_int as intptr_t, fdec, 32 as libc::c_int as intptr_t)
-        + satd;
+        + satd
 }
 #[inline]
 unsafe extern "C" fn ssd_mb(mut h: *mut x264_t) -> libc::c_int {
@@ -4410,7 +4409,7 @@ unsafe extern "C" fn ssd_mb(mut h: *mut x264_t) -> libc::c_int {
                     .wrapping_add(128 as libc::c_int as uint64_t) >> 8 as libc::c_int,
             ) as libc::c_int as libc::c_int;
     }
-    return i_ssd;
+    i_ssd
 }
 unsafe extern "C" fn rd_cost_mb(
     mut h: *mut x264_t,
@@ -4427,16 +4426,16 @@ unsafe extern "C" fn rd_cost_mb(
     i_ssd = ssd_mb(h);
     if (*h).mb.i_type == P_SKIP as libc::c_int || (*h).mb.i_type == B_SKIP as libc::c_int
     {
-        i_bits = 1 as libc::c_int * i_lambda2 + 128 as libc::c_int >> 8 as libc::c_int;
+        i_bits = (1 as libc::c_int * i_lambda2 + 128 as libc::c_int) >> 8 as libc::c_int;
     } else if (*h).param.b_cabac != 0 {
         let mut cabac_tmp: x264_cabac_t = x264_cabac_t {
             i_low: 0,
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4470,11 +4469,11 @@ unsafe extern "C" fn rd_cost_mb(
     }
     (*h).mb.b_transform_8x8 = b_transform_bak;
     (*h).mb.i_type = type_bak;
-    return if i_ssd + i_bits < (1 as libc::c_int) << 28 as libc::c_int {
+    if i_ssd + i_bits < (1 as libc::c_int) << 28 as libc::c_int {
         i_ssd + i_bits
     } else {
         (1 as libc::c_int) << 28 as libc::c_int
-    };
+    }
 }
 unsafe extern "C" fn rd_cost_subpart(
     mut h: *mut x264_t,
@@ -4525,9 +4524,9 @@ unsafe extern "C" fn rd_cost_subpart(
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4555,7 +4554,7 @@ unsafe extern "C" fn rd_cost_subpart(
     } else {
         i_bits = subpartition_size_cavlc(h, i4, i_pixel) as uint64_t;
     }
-    return (i_ssd << 8 as libc::c_int).wrapping_add(i_bits);
+    (i_ssd << 8 as libc::c_int).wrapping_add(i_bits)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_rd_cost_part(
@@ -4614,9 +4613,9 @@ pub unsafe extern "C" fn x264_8_rd_cost_part(
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4645,7 +4644,7 @@ pub unsafe extern "C" fn x264_8_rd_cost_part(
         i_bits = partition_size_cavlc(h, i8, i_pixel) as uint64_t
             * i_lambda2 as uint64_t;
     }
-    return (i_ssd << 8 as libc::c_int).wrapping_add(i_bits);
+    (i_ssd << 8 as libc::c_int).wrapping_add(i_bits)
 }
 unsafe extern "C" fn rd_cost_i8x8(
     mut h: *mut x264_t,
@@ -4715,9 +4714,9 @@ unsafe extern "C" fn rd_cost_i8x8(
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4746,7 +4745,7 @@ unsafe extern "C" fn rd_cost_i8x8(
         i_bits = partition_i8x8_size_cavlc(h, i8, i_mode) as uint64_t
             * i_lambda2 as uint64_t;
     }
-    return (i_ssd << 8 as libc::c_int).wrapping_add(i_bits);
+    (i_ssd << 8 as libc::c_int).wrapping_add(i_bits)
 }
 unsafe extern "C" fn rd_cost_i4x4(
     mut h: *mut x264_t,
@@ -4805,9 +4804,9 @@ unsafe extern "C" fn rd_cost_i4x4(
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4836,7 +4835,7 @@ unsafe extern "C" fn rd_cost_i4x4(
         i_bits = partition_i4x4_size_cavlc(h, i4, i_mode) as uint64_t
             * i_lambda2 as uint64_t;
     }
-    return (i_ssd << 8 as libc::c_int).wrapping_add(i_bits);
+    (i_ssd << 8 as libc::c_int).wrapping_add(i_bits)
 }
 unsafe extern "C" fn rd_cost_chroma(
     mut h: *mut x264_t,
@@ -4866,9 +4865,9 @@ unsafe extern "C" fn rd_cost_chroma(
             i_range: 0,
             i_queue: 0,
             i_bytes_outstanding: 0,
-            p_start: 0 as *mut uint8_t,
-            p: 0 as *mut uint8_t,
-            p_end: 0 as *mut uint8_t,
+            p_start: std::ptr::null_mut::<uint8_t>(),
+            p: std::ptr::null_mut::<uint8_t>(),
+            p_end: std::ptr::null_mut::<uint8_t>(),
             f8_bits_encoded: 0,
             state: [0; 1024],
             padding: [0; 12],
@@ -4896,7 +4895,7 @@ unsafe extern "C" fn rd_cost_chroma(
     } else {
         i_bits = chroma_size_cavlc(h) as uint64_t * i_lambda2 as uint64_t;
     }
-    return (i_ssd << 8 as libc::c_int).wrapping_add(i_bits);
+    (i_ssd << 8 as libc::c_int).wrapping_add(i_bits)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_rdo_init() {
@@ -4969,12 +4968,11 @@ unsafe extern "C" fn trellis_dc_shortcut(
     let mut q: libc::c_int = abs(quant_coef);
     let mut abs_level: libc::c_int = q - 1 as libc::c_int;
     while abs_level <= q {
-        let mut unquant_abs_level: libc::c_int = unquant_mf * abs_level
-            + 128 as libc::c_int >> 8 as libc::c_int;
+        let mut unquant_abs_level: libc::c_int = (unquant_mf * abs_level
+            + 128 as libc::c_int) >> 8 as libc::c_int;
         let mut d: libc::c_int = sign_coef
-            - ((unquant_abs_level ^ sign_coef >> 31 as libc::c_int)
-                - (sign_coef >> 31 as libc::c_int) + 8 as libc::c_int
-                & !(15 as libc::c_int));
+            - (((unquant_abs_level ^ (sign_coef >> 31 as libc::c_int))
+                - (sign_coef >> 31 as libc::c_int) + 8 as libc::c_int) & !(15 as libc::c_int));
         let mut score: uint64_t = (d as int64_t * d as int64_t * coef_weight as int64_t)
             as uint64_t;
         if abs_level != 0 {
@@ -5008,8 +5006,7 @@ unsafe extern "C" fn trellis_dc_shortcut(
             }
             score = score
                 .wrapping_add(
-                    f8_bits as uint64_t * lambda2 as uint64_t
-                        >> 8 as libc::c_int - 4 as libc::c_int,
+                    (f8_bits as uint64_t * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int),
                 );
         }
         if score < bscore {
@@ -5019,7 +5016,7 @@ unsafe extern "C" fn trellis_dc_shortcut(
         abs_level += 1;
         abs_level;
     }
-    return (ret ^ sign_coef >> 31 as libc::c_int) - (sign_coef >> 31 as libc::c_int);
+    (ret ^ (sign_coef >> 31 as libc::c_int)) - (sign_coef >> 31 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn trellis_coef(
@@ -5075,8 +5072,7 @@ unsafe extern "C" fn trellis_coef(
     }
     score = score
         .wrapping_add(
-            f8_bits as uint64_t * lambda2 as uint64_t
-                >> 8 as libc::c_int - 4 as libc::c_int,
+            (f8_bits as uint64_t * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int),
         );
     if score < (*nodes_cur.offset(node_ctx as isize)).score {
         (*nodes_cur.offset(node_ctx as isize)).score = score;
@@ -5122,18 +5118,18 @@ unsafe extern "C" fn trellis_coef(
                 .offset(
                     levels_used as isize,
                 ) = {
-                let mut init = trellis_level_t {
+                
+                trellis_level_t {
                     next: (*nodes_prev.offset(j as isize)).level_idx as uint16_t,
                     abs_level: abs_level as uint16_t,
-                };
-                init
+                }
             };
         }
         (*nodes_cur.offset(node_ctx as isize)).level_idx = levels_used;
         levels_used += 1;
         levels_used;
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coef0_0(
@@ -5175,11 +5171,11 @@ unsafe extern "C" fn trellis_coef0_0(
                 .offset(
                     levels_used as isize,
                 ) = {
-                let mut init = trellis_level_t {
+                
+                trellis_level_t {
                     next: (*nodes_prev.offset(j as isize)).level_idx as uint16_t,
                     abs_level: 0 as libc::c_int as uint16_t,
-                };
-                init
+                }
             };
         }
         (*nodes_cur.offset(j as isize)).level_idx = levels_used;
@@ -5188,7 +5184,7 @@ unsafe extern "C" fn trellis_coef0_0(
         j += 1;
         j;
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coef0_1(
@@ -5226,11 +5222,11 @@ unsafe extern "C" fn trellis_coef0_1(
                     .offset(
                         levels_used as isize,
                     ) = {
-                    let mut init = trellis_level_t {
+                    
+                    trellis_level_t {
                         next: (*nodes_prev.offset(j as isize)).level_idx as uint16_t,
                         abs_level: 0 as libc::c_int as uint16_t,
-                    };
-                    init
+                    }
                 };
             }
             (*nodes_cur.offset(j as isize)).level_idx = levels_used;
@@ -5240,7 +5236,7 @@ unsafe extern "C" fn trellis_coef0_1(
         j += 1;
         j;
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coef1_0(
@@ -5357,7 +5353,7 @@ unsafe extern "C" fn trellis_coef1_0(
     } else if 0 as libc::c_int == 0 {
         return levels_used
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coef1_1(
@@ -5549,7 +5545,7 @@ unsafe extern "C" fn trellis_coef1_1(
     } else if 1 as libc::c_int == 0 {
         return levels_used
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coefn_0(
@@ -5676,7 +5672,7 @@ unsafe extern "C" fn trellis_coefn_0(
     } else if 0 as libc::c_int == 0 {
         return levels_used
     }
-    return levels_used;
+    levels_used
 }
 #[inline(never)]
 unsafe extern "C" fn trellis_coefn_1(
@@ -5878,7 +5874,7 @@ unsafe extern "C" fn trellis_coefn_1(
     } else if 1 as libc::c_int == 0 {
         return levels_used
     }
-    return levels_used;
+    levels_used
 }
 #[inline(always)]
 unsafe extern "C" fn quant_trellis_cabac(
@@ -6066,12 +6062,12 @@ unsafe extern "C" fn quant_trellis_cabac(
     let mut nodes: [[trellis_node_t; 8]; 2] = [
         [
             {
-                let mut init = trellis_node_t {
+                
+                trellis_node_t {
                     score: 0 as libc::c_int as uint64_t,
                     level_idx: 0,
                     cabac_state: [0; 4],
-                };
-                init
+                }
             },
             trellis_node_t {
                 score: 0,
@@ -6119,7 +6115,7 @@ unsafe extern "C" fn quant_trellis_cabac(
         .as_mut_ptr();
     let mut nodes_prev: *mut trellis_node_t = (nodes[1 as libc::c_int as usize])
         .as_mut_ptr();
-    let mut bnode: *mut trellis_node_t = 0 as *mut trellis_node_t;
+    let mut bnode: *mut trellis_node_t = std::ptr::null_mut::<trellis_node_t>();
     let mut j: libc::c_int = 1 as libc::c_int;
     while j < 8 as libc::c_int {
         (*nodes_cur.offset(j as isize)).score = !(0 as libc::c_ulonglong) as uint64_t;
@@ -6153,7 +6149,7 @@ unsafe extern "C" fn quant_trellis_cabac(
         };
     let mut i_0: libc::c_int = last_nnz;
     loop {
-        if !(i_0 >= b_ac) {
+        if i_0 < b_ac {
             current_block = 10369920510435091891;
             break;
         }
@@ -6169,12 +6165,11 @@ unsafe extern "C" fn quant_trellis_cabac(
                 } else {
                     i_0
                 };
-                let mut cost_sig0: uint64_t = x264_cabac_size_decision_noup2(
+                let mut cost_sig0: uint64_t = (x264_cabac_size_decision_noup2(
                     &mut *cabac_state_sig.offset(sigindex as isize),
                     0 as libc::c_int as libc::c_long,
-                ) as uint64_t * lambda2 as uint64_t
-                    >> 8 as libc::c_int - 4 as libc::c_int;
-                let ref mut fresh0 = (*nodes_cur.offset(0 as libc::c_int as isize))
+                ) as uint64_t * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int);
+                let fresh0 = &mut (*nodes_cur.offset(0 as libc::c_int as isize))
                     .score;
                 *fresh0 = (*fresh0).wrapping_sub(cost_sig0);
             }
@@ -6198,12 +6193,12 @@ unsafe extern "C" fn quant_trellis_cabac(
                 } else {
                     level_tree[levels_used
                         as usize] = {
-                        let mut init = trellis_level_t {
+                        
+                        trellis_level_t {
                             next: (*nodes_cur.offset(j_0 as isize)).level_idx
                                 as uint16_t,
                             abs_level: 0 as libc::c_int as uint16_t,
-                        };
-                        init
+                        }
                     };
                 }
                 (*nodes_cur.offset(j_0 as isize)).level_idx = levels_used;
@@ -6218,9 +6213,7 @@ unsafe extern "C" fn quant_trellis_cabac(
             let mut abs_coef: libc::c_int = abs(sign_coef);
             let mut q: libc::c_int = abs(quant_coefs[i_0 as usize] as libc::c_int);
             let mut cost_siglast: [libc::c_int; 3] = [0; 3];
-            let mut t: *mut trellis_node_t = nodes_cur;
-            nodes_cur = nodes_prev;
-            nodes_prev = t;
+            std::mem::swap(&mut nodes_cur, &mut nodes_prev);
             let mut j_1: libc::c_int = 0 as libc::c_int;
             while j_1 < 8 as libc::c_int {
                 (*nodes_cur.offset(j_1 as isize))
@@ -6281,11 +6274,11 @@ unsafe extern "C" fn quant_trellis_cabac(
             let mut k: libc::c_int = 0 as libc::c_int;
             while k < 2 as libc::c_int {
                 let mut abs_level: libc::c_int = q - 1 as libc::c_int + k;
-                let mut unquant_abs_level: libc::c_int = (if dc != 0 {
+                let mut unquant_abs_level: libc::c_int = ((if dc != 0 {
                     *unquant_mf.offset(0 as libc::c_int as isize) << 1 as libc::c_int
                 } else {
                     *unquant_mf.offset(*zigzag.offset(i_0 as isize) as isize)
-                }) * abs_level + 128 as libc::c_int >> 8 as libc::c_int;
+                }) * abs_level + 128 as libc::c_int) >> 8 as libc::c_int;
                 let mut d: libc::c_int = abs_coef - unquant_abs_level;
                 if (*h).mb.i_psy_trellis != 0 && i_0 != 0 && dc == 0 && b_chroma == 0 {
                     let mut orig_coef: libc::c_int = if num_coefs == 64 as libc::c_int {
@@ -6306,7 +6299,7 @@ unsafe extern "C" fn quant_trellis_cabac(
                     let mut predicted_coef: libc::c_int = orig_coef - sign_coef;
                     let mut psy_value: libc::c_int = abs(
                         unquant_abs_level
-                            + ((predicted_coef ^ sign_coef >> 31 as libc::c_int)
+                            + ((predicted_coef ^ (sign_coef >> 31 as libc::c_int))
                                 - (sign_coef >> 31 as libc::c_int)),
                     );
                     let mut psy_weight: libc::c_int = (*coef_weight1
@@ -6328,9 +6321,8 @@ unsafe extern "C" fn quant_trellis_cabac(
                 ssd0[k as usize] = ssd1[k as usize];
                 if i_0 == 0 && dc == 0 && 0 as libc::c_int == 0 {
                     d = sign_coef
-                        - ((unquant_abs_level ^ sign_coef >> 31 as libc::c_int)
-                            - (sign_coef >> 31 as libc::c_int) + 8 as libc::c_int
-                            & !(15 as libc::c_int));
+                        - (((unquant_abs_level ^ (sign_coef >> 31 as libc::c_int))
+                            - (sign_coef >> 31 as libc::c_int) + 8 as libc::c_int) & !(15 as libc::c_int));
                     ssd0[k
                         as usize] = (d as int64_t * d as int64_t
                         * *coef_weight2.offset(*zigzag.offset(i_0 as isize) as isize)
@@ -6344,8 +6336,8 @@ unsafe extern "C" fn quant_trellis_cabac(
                     ssd1[0 as libc::c_int
                         as usize] = (ssd1[0 as libc::c_int as usize])
                         .wrapping_add(
-                            cost_siglast[0 as libc::c_int as usize] as uint64_t
-                                * lambda2 as uint64_t >> 8 as libc::c_int - 4 as libc::c_int,
+                            (cost_siglast[0 as libc::c_int as usize] as uint64_t
+                                * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int),
                         );
                     levels_used = trellis_coef0_0(
                         (ssd0[0 as libc::c_int as usize])
@@ -6437,7 +6429,7 @@ unsafe extern "C" fn quant_trellis_cabac(
             loop {
                 i_0 -= 1;
                 i_0;
-                if !(i_0 >= b_ac) {
+                if i_0 < b_ac {
                     break;
                 }
                 if quant_coefs[i_0 as usize] == 0 {
@@ -6455,12 +6447,11 @@ unsafe extern "C" fn quant_trellis_cabac(
                         } else {
                             i_0
                         };
-                        let mut cost_sig0_0: uint64_t = x264_cabac_size_decision_noup2(
+                        let mut cost_sig0_0: uint64_t = (x264_cabac_size_decision_noup2(
                             &mut *cabac_state_sig.offset(sigindex_1 as isize),
                             0 as libc::c_int as libc::c_long,
-                        ) as uint64_t * lambda2 as uint64_t
-                            >> 8 as libc::c_int - 4 as libc::c_int;
-                        let ref mut fresh1 = (*nodes_cur
+                        ) as uint64_t * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int);
+                        let fresh1 = &mut (*nodes_cur
                             .offset(0 as libc::c_int as isize))
                             .score;
                         *fresh1 = (*fresh1).wrapping_sub(cost_sig0_0);
@@ -6485,12 +6476,12 @@ unsafe extern "C" fn quant_trellis_cabac(
                         } else {
                             level_tree[levels_used
                                 as usize] = {
-                                let mut init = trellis_level_t {
+                                
+                                trellis_level_t {
                                     next: (*nodes_cur.offset(j_3 as isize)).level_idx
                                         as uint16_t,
                                     abs_level: 0 as libc::c_int as uint16_t,
-                                };
-                                init
+                                }
                             };
                         }
                         (*nodes_cur.offset(j_3 as isize)).level_idx = levels_used;
@@ -6507,9 +6498,7 @@ unsafe extern "C" fn quant_trellis_cabac(
                         quant_coefs[i_0 as usize] as libc::c_int,
                     );
                     let mut cost_siglast_0: [libc::c_int; 3] = [0; 3];
-                    let mut t_0: *mut trellis_node_t = nodes_cur;
-                    nodes_cur = nodes_prev;
-                    nodes_prev = t_0;
+                    std::mem::swap(&mut nodes_cur, &mut nodes_prev);
                     let mut j_4: libc::c_int = 1 as libc::c_int;
                     while j_4 < 8 as libc::c_int {
                         (*nodes_cur.offset(j_4 as isize))
@@ -6576,12 +6565,12 @@ unsafe extern "C" fn quant_trellis_cabac(
                     let mut k_0: libc::c_int = 0 as libc::c_int;
                     while k_0 < 2 as libc::c_int {
                         let mut abs_level_0: libc::c_int = q_0 - 1 as libc::c_int + k_0;
-                        let mut unquant_abs_level_0: libc::c_int = (if dc != 0 {
+                        let mut unquant_abs_level_0: libc::c_int = ((if dc != 0 {
                             *unquant_mf.offset(0 as libc::c_int as isize)
                                 << 1 as libc::c_int
                         } else {
                             *unquant_mf.offset(*zigzag.offset(i_0 as isize) as isize)
-                        }) * abs_level_0 + 128 as libc::c_int >> 8 as libc::c_int;
+                        }) * abs_level_0 + 128 as libc::c_int) >> 8 as libc::c_int;
                         let mut d_0: libc::c_int = abs_coef_0 - unquant_abs_level_0;
                         if (*h).mb.i_psy_trellis != 0 && i_0 != 0 && dc == 0
                             && b_chroma == 0
@@ -6607,7 +6596,7 @@ unsafe extern "C" fn quant_trellis_cabac(
                                 - sign_coef_0;
                             let mut psy_value_0: libc::c_int = abs(
                                 unquant_abs_level_0
-                                    + ((predicted_coef_0 ^ sign_coef_0 >> 31 as libc::c_int)
+                                    + ((predicted_coef_0 ^ (sign_coef_0 >> 31 as libc::c_int))
                                         - (sign_coef_0 >> 31 as libc::c_int)),
                             );
                             let mut psy_weight_0: libc::c_int = (*coef_weight1
@@ -6630,9 +6619,8 @@ unsafe extern "C" fn quant_trellis_cabac(
                         ssd0_0[k_0 as usize] = ssd1_0[k_0 as usize];
                         if i_0 == 0 && dc == 0 && 1 as libc::c_int == 0 {
                             d_0 = sign_coef_0
-                                - ((unquant_abs_level_0 ^ sign_coef_0 >> 31 as libc::c_int)
-                                    - (sign_coef_0 >> 31 as libc::c_int) + 8 as libc::c_int
-                                    & !(15 as libc::c_int));
+                                - (((unquant_abs_level_0 ^ (sign_coef_0 >> 31 as libc::c_int))
+                                    - (sign_coef_0 >> 31 as libc::c_int) + 8 as libc::c_int) & !(15 as libc::c_int));
                             ssd0_0[k_0
                                 as usize] = (d_0 as int64_t * d_0 as int64_t
                                 * *coef_weight2
@@ -6647,8 +6635,8 @@ unsafe extern "C" fn quant_trellis_cabac(
                             ssd1_0[0 as libc::c_int
                                 as usize] = (ssd1_0[0 as libc::c_int as usize])
                                 .wrapping_add(
-                                    cost_siglast_0[0 as libc::c_int as usize] as uint64_t
-                                        * lambda2 as uint64_t >> 8 as libc::c_int - 4 as libc::c_int,
+                                    (cost_siglast_0[0 as libc::c_int as usize] as uint64_t
+                                        * lambda2 as uint64_t) >> (8 as libc::c_int - 4 as libc::c_int),
                                 );
                             levels_used = trellis_coef0_1(
                                 (ssd0_0[0 as libc::c_int as usize])
@@ -6787,16 +6775,15 @@ unsafe extern "C" fn quant_trellis_cabac(
         *dct
             .offset(
                 *zigzag.offset(i_0 as isize) as isize,
-            ) = ((level_tree[level as usize].abs_level as libc::c_int
-            ^ *dct.offset(*zigzag.offset(i_0 as isize) as isize) as libc::c_int
-                >> 31 as libc::c_int)
+            ) = ((level_tree[level as usize].abs_level as libc::c_int ^ (*dct.offset(*zigzag.offset(i_0 as isize) as isize) as libc::c_int
+                >> 31 as libc::c_int))
             - (*dct.offset(*zigzag.offset(i_0 as isize) as isize) as libc::c_int
                 >> 31 as libc::c_int)) as dctcoef;
         level = level_tree[level as usize].next as libc::c_int;
         i_0 += 1;
         i_0;
     }
-    return 1 as libc::c_int;
+    1 as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn quant_trellis_cavlc(
@@ -6886,7 +6873,7 @@ unsafe extern "C" fn quant_trellis_cavlc(
         }
         i -= step;
     }
-    if !(i < start) {
+    if i >= start {
         last_nnz = if b_8x8 != 0 { i >> 2 as libc::c_int } else { i };
         coef_mask = 0 as libc::c_int;
         round_mask = 0 as libc::c_int;
@@ -6901,7 +6888,7 @@ unsafe extern "C" fn quant_trellis_cavlc(
             } else {
                 1 as libc::c_int
             };
-            let mut nearest_quant: libc::c_int = f
+            let mut nearest_quant: libc::c_int = (f
                 + abs_coef
                     * (if dc != 0 {
                         *quant_mf.offset(0 as libc::c_int as isize) as libc::c_int
@@ -6909,7 +6896,7 @@ unsafe extern "C" fn quant_trellis_cavlc(
                     } else {
                         *quant_mf.offset(*zigzag.offset(j as isize) as isize)
                             as libc::c_int
-                    }) >> 16 as libc::c_int;
+                    })) >> 16 as libc::c_int;
             quant_coefs[0 as libc::c_int
                 as usize][i as usize] = (sign * nearest_quant) as dctcoef;
             quant_coefs[1 as libc::c_int
@@ -6917,7 +6904,7 @@ unsafe extern "C" fn quant_trellis_cavlc(
                 as usize] = quant_coefs[0 as libc::c_int as usize][i as usize];
             coefs[i as usize] = quant_coefs[1 as libc::c_int as usize][i as usize];
             if nearest_quant != 0 {
-                let mut deadzone_quant: libc::c_int = f / 2 as libc::c_int
+                let mut deadzone_quant: libc::c_int = (f / 2 as libc::c_int
                     + abs_coef
                         * (if dc != 0 {
                             *quant_mf.offset(0 as libc::c_int as isize) as libc::c_int
@@ -6925,19 +6912,17 @@ unsafe extern "C" fn quant_trellis_cavlc(
                         } else {
                             *quant_mf.offset(*zigzag.offset(j as isize) as isize)
                                 as libc::c_int
-                        }) >> 16 as libc::c_int;
-                let mut unquant1: libc::c_int = (if dc != 0 {
+                        })) >> 16 as libc::c_int;
+                let mut unquant1: libc::c_int = ((if dc != 0 {
                     *unquant_mf.offset(0 as libc::c_int as isize) << 1 as libc::c_int
                 } else {
                     *unquant_mf.offset(*zigzag.offset(j as isize) as isize)
-                }) * (nearest_quant - 0 as libc::c_int) + 128 as libc::c_int
-                    >> 8 as libc::c_int;
-                let mut unquant0: libc::c_int = (if dc != 0 {
+                }) * (nearest_quant - 0 as libc::c_int) + 128 as libc::c_int) >> 8 as libc::c_int;
+                let mut unquant0: libc::c_int = ((if dc != 0 {
                     *unquant_mf.offset(0 as libc::c_int as isize) << 1 as libc::c_int
                 } else {
                     *unquant_mf.offset(*zigzag.offset(j as isize) as isize)
-                }) * (nearest_quant - 1 as libc::c_int) + 128 as libc::c_int
-                    >> 8 as libc::c_int;
+                }) * (nearest_quant - 1 as libc::c_int) + 128 as libc::c_int) >> 8 as libc::c_int;
                 let mut d1: libc::c_int = abs_coef - unquant1;
                 let mut d0: libc::c_int = abs_coef - unquant0;
                 delta_distortion[i
@@ -7009,17 +6994,14 @@ unsafe extern "C" fn quant_trellis_cavlc(
             let mut iter_round: libc::c_int = round_mask;
             i = b_ac;
             while i <= last_nnz {
-                if !(delta_distortion[i as usize] == 0) {
-                    let mut cur_round: libc::c_int = round_mask
-                        ^ (1 as libc::c_int) << i;
-                    let mut round_change: libc::c_int = cur_round >> i
-                        & 1 as libc::c_int;
+                if delta_distortion[i as usize] != 0 {
+                    let mut cur_round: libc::c_int = round_mask ^ ((1 as libc::c_int) << i);
+                    let mut round_change: libc::c_int = (cur_round >> i) & 1 as libc::c_int;
                     let mut old_coef: libc::c_int = coefs[i as usize] as libc::c_int;
                     let mut new_coef: libc::c_int = quant_coefs[round_change
                         as usize][i as usize] as libc::c_int;
                     let mut cur_mask: libc::c_int = coef_mask
-                        & !((1 as libc::c_int) << i)
-                        | ((new_coef != 0) as libc::c_int) << i;
+                        & !((1 as libc::c_int) << i) | (((new_coef != 0) as libc::c_int) << i);
                     let mut cur_distortion_delta: int64_t = delta_distortion[i as usize]
                         * (if round_change != 0 {
                             -(1 as libc::c_int)
@@ -7054,14 +7036,14 @@ unsafe extern "C" fn quant_trellis_cavlc(
                 i += 1;
                 i;
             }
-            if !(iter_coef >= 0 as libc::c_int) {
+            if iter_coef < 0 as libc::c_int {
                 break;
             }
             score = iter_score - iter_distortion_delta;
             coef_mask = iter_mask;
             round_mask = iter_round;
             coefs[iter_coef
-                as usize] = quant_coefs[(round_mask >> iter_coef & 1 as libc::c_int)
+                as usize] = quant_coefs[((round_mask >> iter_coef) & 1 as libc::c_int)
                 as usize][iter_coef as usize];
             delta_distortion[iter_coef as usize] = 0 as libc::c_int as int64_t;
         }
@@ -7096,7 +7078,7 @@ unsafe extern "C" fn quant_trellis_cavlc(
             );
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_quant_luma_dc_trellis(
@@ -7127,7 +7109,7 @@ pub unsafe extern "C" fn x264_8_quant_luma_dc_trellis(
             idx,
         );
     }
-    return quant_trellis_cavlc(
+    quant_trellis_cavlc(
         h,
         dct,
         (*((*h).quant4_mf[i_quant_cat as usize]).offset(i_qp as isize)).as_mut_ptr(),
@@ -7141,7 +7123,7 @@ pub unsafe extern "C" fn x264_8_quant_luma_dc_trellis(
         16 as libc::c_int,
         idx,
         0 as libc::c_int,
-    );
+    )
 }
 static mut zigzag_scan2x2: [uint8_t; 4] = [
     0 as libc::c_int as uint8_t,
@@ -7167,7 +7149,7 @@ pub unsafe extern "C" fn x264_8_quant_chroma_dc_trellis(
     mut b_intra: libc::c_int,
     mut idx: libc::c_int,
 ) -> libc::c_int {
-    let mut zigzag: *const uint8_t = 0 as *const uint8_t;
+    let mut zigzag: *const uint8_t = std::ptr::null::<uint8_t>();
     let mut num_coefs: libc::c_int = 0;
     let mut quant_cat: libc::c_int = CQM_4IC as libc::c_int + 1 as libc::c_int - b_intra;
     if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_422 as libc::c_int {
@@ -7195,7 +7177,7 @@ pub unsafe extern "C" fn x264_8_quant_chroma_dc_trellis(
             idx,
         );
     }
-    return quant_trellis_cavlc(
+    quant_trellis_cavlc(
         h,
         dct,
         (*((*h).quant4_mf[quant_cat as usize]).offset(i_qp as isize)).as_mut_ptr(),
@@ -7209,7 +7191,7 @@ pub unsafe extern "C" fn x264_8_quant_chroma_dc_trellis(
         num_coefs,
         idx,
         0 as libc::c_int,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_quant_4x4_trellis(
@@ -7258,7 +7240,7 @@ pub unsafe extern "C" fn x264_8_quant_4x4_trellis(
             idx,
         );
     }
-    return quant_trellis_cavlc(
+    quant_trellis_cavlc(
         h,
         dct,
         (*((*h).quant4_mf[i_quant_cat as usize]).offset(i_qp as isize)).as_mut_ptr(),
@@ -7272,7 +7254,7 @@ pub unsafe extern "C" fn x264_8_quant_4x4_trellis(
         16 as libc::c_int,
         idx,
         0 as libc::c_int,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_quant_8x8_trellis(
@@ -7354,7 +7336,7 @@ pub unsafe extern "C" fn x264_8_quant_8x8_trellis(
                 ) as libc::c_int + 8 as libc::c_int) as isize,
         ) as *mut uint8_t as *mut x264_union16_t))
         .i = (0 as libc::c_int * 0x101 as libc::c_int) as uint16_t;
-    return nzaccum;
+    nzaccum
 }
 #[inline(always)]
 unsafe extern "C" fn x264_quant_4x4(
@@ -7395,7 +7377,7 @@ unsafe extern "C" fn x264_quant_4x4(
         );
     }
     if (*h).mb.b_trellis != 0 {
-        return x264_8_quant_4x4_trellis(
+        x264_8_quant_4x4_trellis(
             h,
             dct,
             i_quant_cat,
@@ -7406,7 +7388,7 @@ unsafe extern "C" fn x264_quant_4x4(
             idx + p * 16 as libc::c_int,
         )
     } else {
-        return ((*h).quantf.quant_4x4)
+        ((*h).quantf.quant_4x4)
             .expect(
                 "non-null function pointer",
             )(
@@ -7415,7 +7397,7 @@ unsafe extern "C" fn x264_quant_4x4(
             (*((*h).quant4_bias[i_quant_cat as usize]).offset(i_qp as isize))
                 .as_mut_ptr(),
         )
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_quant_8x8(
@@ -7456,7 +7438,7 @@ unsafe extern "C" fn x264_quant_8x8(
         );
     }
     if (*h).mb.b_trellis != 0 {
-        return x264_8_quant_8x8_trellis(
+        x264_8_quant_8x8_trellis(
             h,
             dct,
             i_quant_cat,
@@ -7467,7 +7449,7 @@ unsafe extern "C" fn x264_quant_8x8(
             idx + p * 4 as libc::c_int,
         )
     } else {
-        return ((*h).quantf.quant_8x8)
+        ((*h).quantf.quant_8x8)
             .expect(
                 "non-null function pointer",
             )(
@@ -7476,7 +7458,7 @@ unsafe extern "C" fn x264_quant_8x8(
             (*((*h).quant8_bias[i_quant_cat as usize]).offset(i_qp as isize))
                 .as_mut_ptr(),
         )
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_mb_encode_i4x4(
@@ -7807,7 +7789,7 @@ unsafe extern "C" fn cabac_intra4x4_pred_mode(
         x264_cabac_size_decision(
             cb,
             69 as libc::c_int as libc::c_long,
-            (i_mode >> 1 as libc::c_int & 0x1 as libc::c_int) as libc::c_long,
+            ((i_mode >> 1 as libc::c_int) & 0x1 as libc::c_int) as libc::c_long,
         );
         x264_cabac_size_decision(
             cb,
@@ -7864,27 +7846,27 @@ unsafe extern "C" fn cabac_cbp_luma(mut h: *mut x264_t, mut cb: *mut x264_cabac_
     let mut cbp_t: libc::c_int = (*h).mb.cache.i_cbp_top;
     x264_cabac_size_decision(
         cb,
-        (76 as libc::c_int - (cbp_l >> 1 as libc::c_int & 1 as libc::c_int)
-            - (cbp_t >> 1 as libc::c_int & 2 as libc::c_int)) as libc::c_long,
-        (cbp >> 0 as libc::c_int & 1 as libc::c_int) as libc::c_long,
+        (76 as libc::c_int - ((cbp_l >> 1 as libc::c_int) & 1 as libc::c_int)
+            - ((cbp_t >> 1 as libc::c_int) & 2 as libc::c_int)) as libc::c_long,
+        ((cbp >> 0 as libc::c_int) & 1 as libc::c_int) as libc::c_long,
     );
     x264_cabac_size_decision(
         cb,
-        (76 as libc::c_int - (cbp >> 0 as libc::c_int & 1 as libc::c_int)
-            - (cbp_t >> 2 as libc::c_int & 2 as libc::c_int)) as libc::c_long,
-        (cbp >> 1 as libc::c_int & 1 as libc::c_int) as libc::c_long,
+        (76 as libc::c_int - ((cbp >> 0 as libc::c_int) & 1 as libc::c_int)
+            - ((cbp_t >> 2 as libc::c_int) & 2 as libc::c_int)) as libc::c_long,
+        ((cbp >> 1 as libc::c_int) & 1 as libc::c_int) as libc::c_long,
     );
     x264_cabac_size_decision(
         cb,
-        (76 as libc::c_int - (cbp_l >> 3 as libc::c_int & 1 as libc::c_int)
-            - (cbp << 1 as libc::c_int & 2 as libc::c_int)) as libc::c_long,
-        (cbp >> 2 as libc::c_int & 1 as libc::c_int) as libc::c_long,
+        (76 as libc::c_int - ((cbp_l >> 3 as libc::c_int) & 1 as libc::c_int)
+            - ((cbp << 1 as libc::c_int) & 2 as libc::c_int)) as libc::c_long,
+        ((cbp >> 2 as libc::c_int) & 1 as libc::c_int) as libc::c_long,
     );
     x264_cabac_size_decision_noup(
         cb,
-        (76 as libc::c_int - (cbp >> 2 as libc::c_int & 1 as libc::c_int)
-            - (cbp >> 0 as libc::c_int & 2 as libc::c_int)) as libc::c_long,
-        (cbp >> 3 as libc::c_int & 1 as libc::c_int) as libc::c_long,
+        (76 as libc::c_int - ((cbp >> 2 as libc::c_int) & 1 as libc::c_int)
+            - ((cbp >> 0 as libc::c_int) & 2 as libc::c_int)) as libc::c_long,
+        ((cbp >> 3 as libc::c_int) & 1 as libc::c_int) as libc::c_long,
     );
 }
 unsafe extern "C" fn cabac_cbp_chroma(mut h: *mut x264_t, mut cb: *mut x264_cabac_t) {
@@ -7968,7 +7950,7 @@ unsafe extern "C" fn cabac_qp_delta(mut h: *mut x264_t, mut cb: *mut x264_cabac_
             );
             ctx = 2 as libc::c_int + (ctx >> 1 as libc::c_int);
             val -= 1;
-            if !(val != 0) {
+            if val == 0 {
                 break;
             }
         }
@@ -8231,7 +8213,7 @@ unsafe extern "C" fn cabac_mvd_cpn(
                 ) - 3 as libc::c_int) << 8 as libc::c_int;
         }
     }
-    return if i_abs < 66 as libc::c_int { i_abs } else { 66 as libc::c_int };
+    if i_abs < 66 as libc::c_int { i_abs } else { 66 as libc::c_int }
 }
 #[inline(never)]
 unsafe extern "C" fn cabac_mvd(
@@ -8291,7 +8273,7 @@ unsafe extern "C" fn cabac_mvd(
         mdy,
         amvd as libc::c_int >> 8 as libc::c_int,
     );
-    return pack8to16(mdx as uint32_t, mdy as uint32_t) as uint16_t;
+    pack8to16(mdx as uint32_t, mdy as uint32_t) as uint16_t
 }
 #[inline]
 unsafe extern "C" fn cabac_8x8_mvd(
@@ -8970,7 +8952,7 @@ unsafe extern "C" fn cabac_mb_header_b(
             cb,
             (27 as libc::c_int + 5 as libc::c_int - (bits & 1 as libc::c_int))
                 as libc::c_long,
-            (bits >> 1 as libc::c_int & 1 as libc::c_int) as libc::c_long,
+            ((bits >> 1 as libc::c_int) & 1 as libc::c_int) as libc::c_long,
         );
         bits >>= 2 as libc::c_int;
         if bits != 1 as libc::c_int {
@@ -9172,26 +9154,24 @@ unsafe extern "C" fn cabac_cbf_ctxidxinc(
             let mut i_nza: libc::c_int = if (*h).mb.cache.i_cbp_left
                 != -(1 as libc::c_int)
             {
-                (*h).mb.cache.i_cbp_left >> 8 as libc::c_int + i_idx & 1 as libc::c_int
+                ((*h).mb.cache.i_cbp_left >> (8 as libc::c_int + i_idx)) & 1 as libc::c_int
             } else {
                 b_intra
             };
             let mut i_nzb: libc::c_int = if (*h).mb.cache.i_cbp_top
                 != -(1 as libc::c_int)
             {
-                (*h).mb.cache.i_cbp_top >> 8 as libc::c_int + i_idx & 1 as libc::c_int
+                ((*h).mb.cache.i_cbp_top >> (8 as libc::c_int + i_idx)) & 1 as libc::c_int
             } else {
                 b_intra
             };
-            return base_ctx[i_cat as usize] as libc::c_int + 2 as libc::c_int * i_nzb
-                + i_nza;
+            base_ctx[i_cat as usize] as libc::c_int + 2 as libc::c_int * i_nzb
+                + i_nza
         } else {
-            let mut i_nza_0: libc::c_int = (*h).mb.cache.i_cbp_left
-                >> 8 as libc::c_int + i_idx & 1 as libc::c_int;
-            let mut i_nzb_0: libc::c_int = (*h).mb.cache.i_cbp_top
-                >> 8 as libc::c_int + i_idx & 1 as libc::c_int;
-            return base_ctx[i_cat as usize] as libc::c_int + 2 as libc::c_int * i_nzb_0
-                + i_nza_0;
+            let mut i_nza_0: libc::c_int = ((*h).mb.cache.i_cbp_left >> (8 as libc::c_int + i_idx)) & 1 as libc::c_int;
+            let mut i_nzb_0: libc::c_int = ((*h).mb.cache.i_cbp_top >> (8 as libc::c_int + i_idx)) & 1 as libc::c_int;
+            base_ctx[i_cat as usize] as libc::c_int + 2 as libc::c_int * i_nzb_0
+                + i_nza_0
         }
     } else {
         let mut i_nza_1: libc::c_int = (*h)
@@ -9205,16 +9185,16 @@ unsafe extern "C" fn cabac_cbf_ctxidxinc(
             .non_zero_count[(x264_scan8[i_idx as usize] as libc::c_int
             - 8 as libc::c_int) as usize] as libc::c_int;
         if 0 != 0 && b_intra == 0 {
-            return base_ctx[i_cat as usize] as libc::c_int
-                + (2 as libc::c_int * i_nzb_1 + i_nza_1 & 0x7f as libc::c_int)
+            base_ctx[i_cat as usize] as libc::c_int
+                + ((2 as libc::c_int * i_nzb_1 + i_nza_1) & 0x7f as libc::c_int)
         } else {
             i_nza_1 &= 0x7f as libc::c_int + (b_intra << 7 as libc::c_int);
             i_nzb_1 &= 0x7f as libc::c_int + (b_intra << 7 as libc::c_int);
-            return base_ctx[i_cat as usize] as libc::c_int
+            base_ctx[i_cat as usize] as libc::c_int
                 + 2 as libc::c_int * (i_nzb_1 != 0) as libc::c_int
-                + (i_nza_1 != 0) as libc::c_int;
+                + (i_nza_1 != 0) as libc::c_int
         }
-    };
+    }
 }
 static mut coeff_abs_level1_ctx: [uint8_t; 8] = [
     1 as libc::c_int as uint8_t,
@@ -9302,12 +9282,10 @@ unsafe extern "C" fn cabac_block_residual_internal(
     if last
         != (if b_8x8 != 0 {
             63 as libc::c_int
+        } else if chroma422dc != 0 {
+            7 as libc::c_int
         } else {
-            (if chroma422dc != 0 {
-                7 as libc::c_int
-            } else {
-                x264_count_cat_m1[ctx_block_cat as usize] as libc::c_int
-            })
+            x264_count_cat_m1[ctx_block_cat as usize] as libc::c_int
         })
     {
         x264_cabac_size_decision(
@@ -9315,13 +9293,11 @@ unsafe extern "C" fn cabac_block_residual_internal(
             (ctx_sig
                 + (if b_8x8 != 0 {
                     *sig_offset.offset(last as isize) as libc::c_int
+                } else if chroma422dc != 0 {
+                    x264_coeff_flag_offset_chroma_422_dc[last as usize]
+                        as libc::c_int
                 } else {
-                    (if chroma422dc != 0 {
-                        x264_coeff_flag_offset_chroma_422_dc[last as usize]
-                            as libc::c_int
-                    } else {
-                        last
-                    })
+                    last
                 })) as libc::c_long,
             1 as libc::c_int as libc::c_long,
         );
@@ -9330,13 +9306,11 @@ unsafe extern "C" fn cabac_block_residual_internal(
             (ctx_last
                 + (if b_8x8 != 0 {
                     x264_last_coeff_flag_offset_8x8[last as usize] as libc::c_int
+                } else if chroma422dc != 0 {
+                    x264_coeff_flag_offset_chroma_422_dc[last as usize]
+                        as libc::c_int
                 } else {
-                    (if chroma422dc != 0 {
-                        x264_coeff_flag_offset_chroma_422_dc[last as usize]
-                            as libc::c_int
-                    } else {
-                        last
-                    })
+                    last
                 })) as libc::c_long,
             1 as libc::c_int as libc::c_long,
         );
@@ -9392,13 +9366,11 @@ unsafe extern "C" fn cabac_block_residual_internal(
                 (ctx_sig
                     + (if b_8x8 != 0 {
                         *sig_offset.offset(i as isize) as libc::c_int
+                    } else if chroma422dc != 0 {
+                        x264_coeff_flag_offset_chroma_422_dc[i as usize]
+                            as libc::c_int
                     } else {
-                        (if chroma422dc != 0 {
-                            x264_coeff_flag_offset_chroma_422_dc[i as usize]
-                                as libc::c_int
-                        } else {
-                            i
-                        })
+                        i
                     })) as libc::c_long,
                 1 as libc::c_int as libc::c_long,
             );
@@ -9407,13 +9379,11 @@ unsafe extern "C" fn cabac_block_residual_internal(
                 (ctx_last
                     + (if b_8x8 != 0 {
                         x264_last_coeff_flag_offset_8x8[i as usize] as libc::c_int
+                    } else if chroma422dc != 0 {
+                        x264_coeff_flag_offset_chroma_422_dc[i as usize]
+                            as libc::c_int
                     } else {
-                        (if chroma422dc != 0 {
-                            x264_coeff_flag_offset_chroma_422_dc[i as usize]
-                                as libc::c_int
-                        } else {
-                            i
-                        })
+                        i
                     })) as libc::c_long,
                 0 as libc::c_int as libc::c_long,
             );
@@ -9467,13 +9437,11 @@ unsafe extern "C" fn cabac_block_residual_internal(
                 (ctx_sig
                     + (if b_8x8 != 0 {
                         *sig_offset.offset(i as isize) as libc::c_int
+                    } else if chroma422dc != 0 {
+                        x264_coeff_flag_offset_chroma_422_dc[i as usize]
+                            as libc::c_int
                     } else {
-                        (if chroma422dc != 0 {
-                            x264_coeff_flag_offset_chroma_422_dc[i as usize]
-                                as libc::c_int
-                        } else {
-                            i
-                        })
+                        i
                     })) as libc::c_long,
                 0 as libc::c_int as libc::c_long,
             );
@@ -10518,7 +10486,7 @@ unsafe extern "C" fn partition_size_cabac(
     }
     let mut j: libc::c_int = (i_pixel < PIXEL_8x8 as libc::c_int) as libc::c_int;
     while j >= 0 as libc::c_int {
-        if (*h).mb.i_cbp_luma & (1 as libc::c_int) << i8 != 0 {
+        if (*h).mb.i_cbp_luma & ((1 as libc::c_int) << i8) != 0 {
             if (*h).mb.b_transform_8x8 != 0 {
                 if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
                     == CHROMA_444 as libc::c_int
@@ -10624,7 +10592,7 @@ unsafe extern "C" fn partition_size_cabac(
             if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
                 == CHROMA_422 as libc::c_int
             {
-                let mut offset: libc::c_int = 5 as libc::c_int * i8 & 0x9 as libc::c_int;
+                let mut offset: libc::c_int = (5 as libc::c_int * i8) & 0x9 as libc::c_int;
                 let mut ctxidxinc_1: libc::c_int = cabac_cbf_ctxidxinc(
                     h,
                     DCT_CHROMA_AC as libc::c_int,
@@ -10963,7 +10931,7 @@ unsafe extern "C" fn partition_i8x8_size_cabac(
         as libc::c_int;
     cabac_intra4x4_pred_mode(cb, i_pred, i_mode);
     cabac_cbp_luma(h, cb);
-    if (*h).mb.i_cbp_luma & (1 as libc::c_int) << i8 != 0 {
+    if (*h).mb.i_cbp_luma & ((1 as libc::c_int) << i8) != 0 {
         if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
             let mut p: libc::c_int = 0 as libc::c_int;
             while p < 3 as libc::c_int {
@@ -11351,7 +11319,7 @@ unsafe extern "C" fn weight_cost_init_luma(
         }
         return dest;
     }
-    return (*ref_0).lowres[0 as libc::c_int as usize];
+    (*ref_0).lowres[0 as libc::c_int as usize]
 }
 #[inline(never)]
 unsafe extern "C" fn weight_cost_init_chroma(
@@ -11368,7 +11336,7 @@ unsafe extern "C" fn weight_cost_init_chroma(
     let mut i_width: libc::c_int = (*fenc).i_width[1 as libc::c_int as usize];
     let mut v_shift: libc::c_int = (*h).mb.chroma_v_shift;
     let mut cw: libc::c_int = 8 as libc::c_int * (*h).mb.i_mb_width;
-    let mut ch: libc::c_int = 16 as libc::c_int * (*h).mb.i_mb_height >> v_shift;
+    let mut ch: libc::c_int = (16 as libc::c_int * (*h).mb.i_mb_height) >> v_shift;
     let mut height: libc::c_int = 16 as libc::c_int >> v_shift;
     if (*((*fenc).lowres_mvs[0 as libc::c_int as usize][ref0_distance as usize])
         .offset(0 as libc::c_int as isize))[0 as libc::c_int as usize] as libc::c_int
@@ -11407,7 +11375,7 @@ unsafe extern "C" fn weight_cost_init_chroma(
                     src1,
                     i_stride as intptr_t,
                     mvx,
-                    2 as libc::c_int * mvy >> v_shift,
+                    (2 as libc::c_int * mvy) >> v_shift,
                     8 as libc::c_int,
                     height,
                 );
@@ -11507,7 +11475,7 @@ unsafe extern "C" fn weight_cost_init_chroma444(
         }
         return dst;
     }
-    return (*ref_0).plane[p as usize];
+    (*ref_0).plane[p as usize]
 }
 unsafe extern "C" fn weight_slice_header_cost(
     mut h: *mut x264_t,
@@ -11533,11 +11501,11 @@ unsafe extern "C" fn weight_slice_header_cost(
     let mut denom_cost: libc::c_int = bs_size_ue(
         (*w.offset(0 as libc::c_int as isize)).i_denom as libc::c_uint,
     ) * (2 as libc::c_int - b_chroma);
-    return lambda * numslices
+    lambda * numslices
         * (10 as libc::c_int + denom_cost
             + 2 as libc::c_int
                 * (bs_size_se((*w.offset(0 as libc::c_int as isize)).i_scale)
-                    + bs_size_se((*w.offset(0 as libc::c_int as isize)).i_offset)));
+                    + bs_size_se((*w.offset(0 as libc::c_int as isize)).i_offset)))
 }
 #[inline(never)]
 unsafe extern "C" fn weight_cost_luma(
@@ -11641,7 +11609,7 @@ unsafe extern "C" fn weight_cost_luma(
             pixoff = y_0 * i_stride;
         }
     }
-    return cost;
+    cost
 }
 #[inline(never)]
 unsafe extern "C" fn weight_cost_chroma(
@@ -11723,7 +11691,7 @@ unsafe extern "C" fn weight_cost_chroma(
             pixoff = y_0 * i_stride;
         }
     }
-    return cost;
+    cost
 }
 #[inline(never)]
 unsafe extern "C" fn weight_cost_chroma444(
@@ -11803,7 +11771,7 @@ unsafe extern "C" fn weight_cost_chroma444(
             pixoff = y_0 * i_stride;
         }
     }
-    return cost;
+    cost
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_weights_analyse(
@@ -11820,18 +11788,18 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
     (*weights.offset(0 as libc::c_int as isize)).i_scale = 1 as libc::c_int;
     (*weights.offset(0 as libc::c_int as isize)).i_denom = 0 as libc::c_int;
     (*weights.offset(0 as libc::c_int as isize)).i_offset = 0 as libc::c_int;
-    let ref mut fresh2 = (*weights.offset(0 as libc::c_int as isize)).weightfn;
-    *fresh2 = 0 as *mut weight_fn_t;
+    let fresh2 = &mut (*weights.offset(0 as libc::c_int as isize)).weightfn;
+    *fresh2 = std::ptr::null_mut::<weight_fn_t>();
     (*weights.offset(1 as libc::c_int as isize)).i_scale = 1 as libc::c_int;
     (*weights.offset(1 as libc::c_int as isize)).i_denom = 0 as libc::c_int;
     (*weights.offset(1 as libc::c_int as isize)).i_offset = 0 as libc::c_int;
-    let ref mut fresh3 = (*weights.offset(1 as libc::c_int as isize)).weightfn;
-    *fresh3 = 0 as *mut weight_fn_t;
+    let fresh3 = &mut (*weights.offset(1 as libc::c_int as isize)).weightfn;
+    *fresh3 = std::ptr::null_mut::<weight_fn_t>();
     (*weights.offset(2 as libc::c_int as isize)).i_scale = 1 as libc::c_int;
     (*weights.offset(2 as libc::c_int as isize)).i_denom = 0 as libc::c_int;
     (*weights.offset(2 as libc::c_int as isize)).i_offset = 0 as libc::c_int;
-    let ref mut fresh4 = (*weights.offset(2 as libc::c_int as isize)).weightfn;
-    *fresh4 = 0 as *mut weight_fn_t;
+    let fresh4 = &mut (*weights.offset(2 as libc::c_int as isize)).weightfn;
+    *fresh4 = std::ptr::null_mut::<weight_fn_t>();
     let mut chroma_initted: libc::c_int = 0 as libc::c_int;
     let mut guess_scale: [libc::c_float; 3] = [0.; 3];
     let mut fenc_mean: [libc::c_float; 3] = [0.; 3];
@@ -11852,7 +11820,7 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                 / ((*fenc).i_lines[(plane != 0) as libc::c_int as usize]
                     * (*fenc).i_width[(plane != 0) as libc::c_int as usize])
                     as libc::c_float
-                / ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int)
+                / ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int))
                     as libc::c_float;
             ref_mean[plane
                 as usize] = ((*ref_0).i_pixel_sum[plane as usize])
@@ -11860,7 +11828,7 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                 / ((*fenc).i_lines[(plane != 0) as libc::c_int as usize]
                     * (*fenc).i_width[(plane != 0) as libc::c_int as usize])
                     as libc::c_float
-                / ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int)
+                / ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int))
                     as libc::c_float;
         } else {
             guess_scale[plane as usize] = 1 as libc::c_int as libc::c_float;
@@ -11907,8 +11875,8 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
             (*weights.offset(plane_0 as isize)).i_scale = 1 as libc::c_int;
             (*weights.offset(plane_0 as isize)).i_denom = 0 as libc::c_int;
             (*weights.offset(plane_0 as isize)).i_offset = 0 as libc::c_int;
-            let ref mut fresh5 = (*weights.offset(plane_0 as isize)).weightfn;
-            *fresh5 = 0 as *mut weight_fn_t;
+            let fresh5 = &mut (*weights.offset(plane_0 as isize)).weightfn;
+            *fresh5 = std::ptr::null_mut::<weight_fn_t>();
         } else {
             if plane_0 != 0 {
                 (*weights.offset(plane_0 as isize)).i_denom = chroma_denom;
@@ -11923,10 +11891,10 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                     255 as libc::c_int,
                 );
                 if (*weights.offset(plane_0 as isize)).i_scale > 127 as libc::c_int {
-                    let ref mut fresh6 = (*weights.offset(2 as libc::c_int as isize))
+                    let fresh6 = &mut (*weights.offset(2 as libc::c_int as isize))
                         .weightfn;
-                    *fresh6 = 0 as *mut weight_fn_t;
-                    let ref mut fresh7 = (*weights.offset(1 as libc::c_int as isize))
+                    *fresh6 = std::ptr::null_mut::<weight_fn_t>();
+                    let fresh7 = &mut (*weights.offset(1 as libc::c_int as isize))
                         .weightfn;
                     *fresh7 = *fresh6;
                     break;
@@ -11945,15 +11913,15 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
             mindenom = (*weights.offset(plane_0 as isize)).i_denom;
             minscale = (*weights.offset(plane_0 as isize)).i_scale;
             minoff = 0 as libc::c_int;
-            let mut mcbuf: *mut pixel = 0 as *mut pixel;
+            let mut mcbuf: *mut pixel = std::ptr::null_mut::<pixel>();
             if plane_0 == 0 {
                 if (*fenc).b_intra_calculated == 0 {
                     let mut a: x264_mb_analysis_t = x264_mb_analysis_t {
                         i_lambda: 0,
                         i_lambda2: 0,
                         i_qp: 0,
-                        p_cost_mv: 0 as *mut uint16_t,
-                        p_cost_ref: [0 as *mut uint16_t; 2],
+                        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
+                        p_cost_ref: [std::ptr::null_mut::<uint16_t>(); 2],
                         i_mbrd: 0,
                         b_fast_intra: 0,
                         b_force_intra: 0,
@@ -11975,14 +11943,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                         l0: x264_mb_analysis_list_t {
                             me16x16: x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -11991,14 +11959,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             },
                             bi16x16: x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12007,14 +11975,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             },
                             me8x8: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12023,14 +11991,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 4],
                             me4x4: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12039,14 +12007,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 4]; 4],
                             me8x4: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12055,14 +12023,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2]; 4],
                             me4x8: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12071,14 +12039,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2]; 4],
                             me16x8: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12087,14 +12055,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2],
                             me8x16: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12113,14 +12081,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                         l1: x264_mb_analysis_list_t {
                             me16x16: x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12129,14 +12097,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             },
                             bi16x16: x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12145,14 +12113,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             },
                             me8x8: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12161,14 +12129,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 4],
                             me4x4: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12177,14 +12145,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 4]; 4],
                             me8x4: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12193,14 +12161,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2]; 4],
                             me4x8: [[x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12209,14 +12177,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2]; 4],
                             me16x8: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12225,14 +12193,14 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             }; 2],
                             me8x16: [x264_me_t {
                                 i_pixel: 0,
-                                p_cost_mv: 0 as *mut uint16_t,
+                                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                                 i_ref_cost: 0,
                                 i_ref: 0,
-                                weight: 0 as *const x264_weight_t,
-                                p_fref: [0 as *mut pixel; 12],
-                                p_fref_w: 0 as *mut pixel,
-                                p_fenc: [0 as *mut pixel; 3],
-                                integral: 0 as *mut uint16_t,
+                                weight: std::ptr::null::<x264_weight_t>(),
+                                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                                p_fref_w: std::ptr::null_mut::<pixel>(),
+                                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                                integral: std::ptr::null_mut::<uint16_t>(),
                                 i_stride: [0; 3],
                                 mvp: [0; 2],
                                 cost_mv: 0,
@@ -12285,7 +12253,7 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                     ref_0,
                     (*h).mb.p_weight_buf[0 as libc::c_int as usize],
                 );
-                minscore = weight_cost_luma(h, fenc, mcbuf, 0 as *mut x264_weight_t);
+                minscore = weight_cost_luma(h, fenc, mcbuf, std::ptr::null_mut::<x264_weight_t>());
                 origscore = minscore;
             } else if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
                 == CHROMA_444 as libc::c_int
@@ -12301,7 +12269,7 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                     h,
                     fenc,
                     mcbuf,
-                    0 as *mut x264_weight_t,
+                    std::ptr::null_mut::<x264_weight_t>(),
                     plane_0,
                 );
                 origscore = minscore;
@@ -12317,15 +12285,15 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                             * (*fenc).i_lines[1 as libc::c_int as usize]) as isize,
                     );
                 let fresh8 = chroma_initted;
-                chroma_initted = chroma_initted + 1;
+                chroma_initted += 1;
                 if fresh8 == 0 {
                     weight_cost_init_chroma(h, fenc, ref_0, dstu, dstv);
                 }
                 mcbuf = if plane_0 == 1 as libc::c_int { dstu } else { dstv };
-                minscore = weight_cost_chroma(h, fenc, mcbuf, 0 as *mut x264_weight_t);
+                minscore = weight_cost_chroma(h, fenc, mcbuf, std::ptr::null_mut::<x264_weight_t>());
                 origscore = minscore;
             }
-            if !(minscore == 0) {
+            if minscore != 0 {
                 static mut weight_check_distance: [[uint8_t; 2]; 12] = [
                     [0 as libc::c_int as uint8_t, 0 as libc::c_int as uint8_t],
                     [0 as libc::c_int as uint8_t, 0 as libc::c_int as uint8_t],
@@ -12464,8 +12432,8 @@ pub unsafe extern "C" fn x264_8_weights_analyse(
                     (*weights.offset(plane_0 as isize)).i_scale = 1 as libc::c_int;
                     (*weights.offset(plane_0 as isize)).i_denom = 0 as libc::c_int;
                     (*weights.offset(plane_0 as isize)).i_offset = 0 as libc::c_int;
-                    let ref mut fresh10 = (*weights.offset(plane_0 as isize)).weightfn;
-                    *fresh10 = 0 as *mut weight_fn_t;
+                    let fresh10 = &mut (*weights.offset(plane_0 as isize)).weightfn;
+                    *fresh10 = std::ptr::null_mut::<weight_fn_t>();
                 } else {
                     (*weights.offset(plane_0 as isize)).i_scale = minscale;
                     (*weights.offset(plane_0 as isize)).i_denom = mindenom;
@@ -12621,7 +12589,7 @@ unsafe extern "C" fn slicetype_mb_cost(
                 .offset((b - p0 - 1 as libc::c_int) as isize))
                 .offset(i_mb_xy as isize) as *mut [int16_t; 2]
         } else {
-            0 as *mut [int16_t; 2]
+            std::ptr::null_mut::<[int16_t; 2]>()
         },
         if b != p1 {
             &mut *(*(*((*fenc).lowres_mvs)
@@ -12631,7 +12599,7 @@ unsafe extern "C" fn slicetype_mb_cost(
                 .offset((p1 - b - 1 as libc::c_int) as isize))
                 .offset(i_mb_xy as isize) as *mut [int16_t; 2]
         } else {
-            0 as *mut [int16_t; 2]
+            std::ptr::null_mut::<[int16_t; 2]>()
         },
     ];
     let mut fenc_costs: [*mut libc::c_int; 2] = [
@@ -12643,7 +12611,7 @@ unsafe extern "C" fn slicetype_mb_cost(
                 .offset((b - p0 - 1 as libc::c_int) as isize))
                 .offset(i_mb_xy as isize) as *mut libc::c_int
         } else {
-            0 as *mut libc::c_int
+            std::ptr::null_mut::<libc::c_int>()
         },
         if b != p1 {
             &mut *(*(*((*fenc).lowres_mv_costs)
@@ -12653,7 +12621,7 @@ unsafe extern "C" fn slicetype_mb_cost(
                 .offset((p1 - b - 1 as libc::c_int) as isize))
                 .offset(i_mb_xy as isize) as *mut libc::c_int
         } else {
-            0 as *mut libc::c_int
+            std::ptr::null_mut::<libc::c_int>()
         },
     ];
     let mut b_frame_score_mb: libc::c_int = (i_mb_x > 0 as libc::c_int
@@ -12665,14 +12633,14 @@ unsafe extern "C" fn slicetype_mb_cost(
     let mut pix2: *mut pixel = pix1.as_mut_ptr().offset(8 as libc::c_int as isize);
     let mut m: [x264_me_t; 2] = [x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -12694,7 +12662,7 @@ unsafe extern "C" fn slicetype_mb_cost(
         i_stride as intptr_t,
         8 as libc::c_int,
     );
-    if !(p0 == p1) {
+    if p0 != p1 {
         mv_range = 2 as libc::c_int * (*h).param.analyse.i_mv_range;
         (*h)
             .mb
@@ -12865,13 +12833,13 @@ unsafe extern "C" fn slicetype_mb_cost(
                     .as_mut_ptr();
                 dmv[0 as libc::c_int
                     as usize][0 as libc::c_int
-                    as usize] = (*mvr.offset(0 as libc::c_int as isize) as libc::c_int
-                    * dist_scale_factor + 128 as libc::c_int >> 8 as libc::c_int)
+                    as usize] = ((*mvr.offset(0 as libc::c_int as isize) as libc::c_int
+                    * dist_scale_factor + 128 as libc::c_int) >> 8 as libc::c_int)
                     as int16_t;
                 dmv[0 as libc::c_int
                     as usize][1 as libc::c_int
-                    as usize] = (*mvr.offset(1 as libc::c_int as isize) as libc::c_int
-                    * dist_scale_factor + 128 as libc::c_int >> 8 as libc::c_int)
+                    as usize] = ((*mvr.offset(1 as libc::c_int as isize) as libc::c_int
+                    * dist_scale_factor + 128 as libc::c_int) >> 8 as libc::c_int)
                     as int16_t;
                 dmv[1 as libc::c_int
                     as usize][0 as libc::c_int
@@ -12916,7 +12884,7 @@ unsafe extern "C" fn slicetype_mb_cost(
                     (*h).mb.mv_max_spel[1 as libc::c_int as usize],
                 ) as int16_t;
                 if (*h).param.analyse.i_subpel_refine <= 1 as libc::c_int {
-                    let ref mut fresh12 = (*(dmv.as_mut_ptr() as *mut x264_union64_t)).i;
+                    let fresh12 = &mut (*(dmv.as_mut_ptr() as *mut x264_union64_t)).i;
                     *fresh12 = (*fresh12 as libc::c_ulonglong
                         & !(0x1000100010001 as libc::c_ulonglong)) as uint64_t;
                 }
@@ -12977,8 +12945,8 @@ unsafe extern "C" fn slicetype_mb_cost(
             } else {
                 let mut stride1: intptr_t = 16 as libc::c_int as intptr_t;
                 let mut stride2: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src1_0: *mut pixel = 0 as *mut pixel;
-                let mut src2_0: *mut pixel = 0 as *mut pixel;
+                let mut src1_0: *mut pixel = std::ptr::null_mut::<pixel>();
+                let mut src2_0: *mut pixel = std::ptr::null_mut::<pixel>();
                 src1_0 = ((*h).mc.get_ref)
                     .expect(
                         "non-null function pointer",
@@ -13150,25 +13118,22 @@ unsafe extern "C" fn slicetype_mb_cost(
                 } else {
                     current_block_117 = 17958840340921835115;
                 }
-                match current_block_117 {
-                    17958840340921835115 => {
-                        x264_8_me_search_ref(
-                            h,
-                            &mut *m.as_mut_ptr().offset(l as isize),
-                            mvc.as_mut_ptr(),
-                            i_mvc,
-                            0 as *mut libc::c_int,
-                        );
-                        m[l as usize].cost
-                            -= *((*a).p_cost_mv).offset(0 as libc::c_int as isize)
-                                as libc::c_int;
-                        if (*((m[l as usize].mv).as_mut_ptr() as *mut x264_union32_t)).i
-                            != 0
-                        {
-                            m[l as usize].cost += 5 as libc::c_int * (*a).i_lambda;
-                        }
+                if current_block_117 == 17958840340921835115 {
+                    x264_8_me_search_ref(
+                        h,
+                        &mut *m.as_mut_ptr().offset(l as isize),
+                        mvc.as_mut_ptr(),
+                        i_mvc,
+                        std::ptr::null_mut::<libc::c_int>(),
+                    );
+                    m[l as usize].cost
+                        -= *((*a).p_cost_mv).offset(0 as libc::c_int as isize)
+                            as libc::c_int;
+                    if (*((m[l as usize].mv).as_mut_ptr() as *mut x264_union32_t)).i
+                        != 0
+                    {
+                        m[l as usize].cost += 5 as libc::c_int * (*a).i_lambda;
                     }
-                    _ => {}
                 }
                 (*(fenc_mvs[l as usize] as *mut x264_union32_t))
                     .i = (*((m[l as usize].mv).as_mut_ptr() as *mut x264_union32_t)).i;
@@ -13246,8 +13211,8 @@ unsafe extern "C" fn slicetype_mb_cost(
             } else {
                 let mut stride1_0: intptr_t = 16 as libc::c_int as intptr_t;
                 let mut stride2_0: intptr_t = 16 as libc::c_int as intptr_t;
-                let mut src1_2: *mut pixel = 0 as *mut pixel;
-                let mut src2_2: *mut pixel = 0 as *mut pixel;
+                let mut src1_2: *mut pixel = std::ptr::null_mut::<pixel>();
+                let mut src2_2: *mut pixel = std::ptr::null_mut::<pixel>();
                 src1_2 = ((*h).mc.get_ref)
                     .expect(
                         "non-null function pointer",
@@ -13400,14 +13365,14 @@ unsafe extern "C" fn slicetype_mb_cost(
                 i_0;
             }
         }
-        i_icost = (i_icost + intra_penalty >> 8 as libc::c_int - 8 as libc::c_int)
+        i_icost = ((i_icost + intra_penalty) >> (8 as libc::c_int - 8 as libc::c_int))
             + lowres_penalty;
         *((*fenc).i_intra_cost).offset(i_mb_xy as isize) = i_icost as uint16_t;
         let mut i_icost_aq: libc::c_int = i_icost;
         if (*h).param.rc.i_aq_mode != 0 {
-            i_icost_aq = i_icost_aq
+            i_icost_aq = (i_icost_aq
                 * *((*fenc).i_inv_qscale_factor).offset(i_mb_xy as isize) as libc::c_int
-                + 128 as libc::c_int >> 8 as libc::c_int;
+                + 128 as libc::c_int) >> 8 as libc::c_int;
         }
         *output_intra
             .offset(
@@ -13418,7 +13383,7 @@ unsafe extern "C" fn slicetype_mb_cost(
             *output_intra.offset(1 as libc::c_int as isize) += i_icost_aq;
         }
     }
-    i_bcost = (i_bcost >> 8 as libc::c_int - 8 as libc::c_int) + lowres_penalty;
+    i_bcost = (i_bcost >> (8 as libc::c_int - 8 as libc::c_int)) + lowres_penalty;
     if b_bidir == 0 {
         let mut i_icost_0: libc::c_int = *((*fenc).i_intra_cost).offset(i_mb_xy as isize)
             as libc::c_int;
@@ -13434,9 +13399,9 @@ unsafe extern "C" fn slicetype_mb_cost(
     if p0 != p1 {
         let mut i_bcost_aq: libc::c_int = i_bcost;
         if (*h).param.rc.i_aq_mode != 0 {
-            i_bcost_aq = i_bcost_aq
+            i_bcost_aq = (i_bcost_aq
                 * *((*fenc).i_inv_qscale_factor).offset(i_mb_xy as isize) as libc::c_int
-                + 128 as libc::c_int >> 8 as libc::c_int;
+                + 128 as libc::c_int) >> 8 as libc::c_int;
         }
         *output_inter
             .offset(
@@ -13561,13 +13526,13 @@ unsafe extern "C" fn slicetype_frame_cost(
                 ))[0 as libc::c_int as usize] = 0 as libc::c_int as int16_t;
         }
         if p1 != p0 {
-            dist_scale_factor = ((b - p0 << 8 as libc::c_int)
-                + (p1 - p0 >> 1 as libc::c_int)) / (p1 - p0);
+            dist_scale_factor = (((b - p0) << 8 as libc::c_int)
+                + ((p1 - p0) >> 1 as libc::c_int)) / (p1 - p0);
         }
         let mut output_buf_size: libc::c_int = (*h).mb.i_mb_height
             + (4 as libc::c_int + 32 as libc::c_int) * (*h).param.i_lookahead_threads;
-        let mut output_inter: [*mut libc::c_int; 17] = [0 as *mut libc::c_int; 17];
-        let mut output_intra: [*mut libc::c_int; 17] = [0 as *mut libc::c_int; 17];
+        let mut output_inter: [*mut libc::c_int; 17] = [std::ptr::null_mut::<libc::c_int>(); 17];
+        let mut output_intra: [*mut libc::c_int; 17] = [std::ptr::null_mut::<libc::c_int>(); 17];
         output_inter[0 as libc::c_int
             as usize] = (*h).scratch_buffer2 as *mut libc::c_int;
         output_intra[0 as libc::c_int
@@ -13596,7 +13561,7 @@ unsafe extern "C" fn slicetype_frame_cost(
                     p1,
                     1 as libc::c_int,
                     (*a).i_lambda,
-                    0 as *const x264_weight_t,
+                    std::ptr::null::<x264_weight_t>(),
                 );
             }
             if b != p0 {
@@ -13615,17 +13580,17 @@ unsafe extern "C" fn slicetype_frame_cost(
         } else {
             if (*h).param.i_lookahead_threads > 1 as libc::c_int {
                 let mut s: [x264_slicetype_slice_t; 16] = [x264_slicetype_slice_t {
-                    h: 0 as *mut x264_t,
-                    a: 0 as *mut x264_mb_analysis_t,
-                    frames: 0 as *mut *mut x264_frame_t,
+                    h: std::ptr::null_mut::<x264_t>(),
+                    a: std::ptr::null_mut::<x264_mb_analysis_t>(),
+                    frames: std::ptr::null_mut::<*mut x264_frame_t>(),
                     p0: 0,
                     p1: 0,
                     b: 0,
                     dist_scale_factor: 0,
-                    do_search: 0 as *mut libc::c_int,
-                    w: 0 as *const x264_weight_t,
-                    output_inter: 0 as *mut libc::c_int,
-                    output_intra: 0 as *mut libc::c_int,
+                    do_search: std::ptr::null_mut::<libc::c_int>(),
+                    w: std::ptr::null::<x264_weight_t>(),
+                    output_inter: std::ptr::null_mut::<libc::c_int>(),
+                    output_intra: std::ptr::null_mut::<libc::c_int>(),
                 }; 16];
                 let mut i: libc::c_int = 0 as libc::c_int;
                 while i < (*h).param.i_lookahead_threads {
@@ -13635,20 +13600,20 @@ unsafe extern "C" fn slicetype_frame_cost(
                     (*t).mb.b_chroma_me = (*h).mb.b_chroma_me;
                     s[i
                         as usize] = {
-                        let mut init = x264_slicetype_slice_t {
+                        
+                        x264_slicetype_slice_t {
                             h: t,
-                            a: a,
-                            frames: frames,
-                            p0: p0,
-                            p1: p1,
-                            b: b,
-                            dist_scale_factor: dist_scale_factor,
+                            a,
+                            frames,
+                            p0,
+                            p1,
+                            b,
+                            dist_scale_factor,
                             do_search: do_search.as_mut_ptr(),
-                            w: w,
+                            w,
                             output_inter: output_inter[i as usize],
                             output_intra: output_intra[i as usize],
-                        };
-                        init
+                        }
                     };
                     (*t)
                         .i_threadslice_start = ((*h).mb.i_mb_height * i
@@ -13679,8 +13644,8 @@ unsafe extern "C" fn slicetype_frame_cost(
                                 ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
                             ),
                     );
-                    let ref mut fresh13 = *(output_intra[i as usize])
-                        .offset(3 as libc::c_int as isize);
+                    let fresh13 = &mut (*(output_intra[i as usize])
+                        .offset(3 as libc::c_int as isize));
                     *fresh13 = thread_height;
                     *(output_inter[i as usize])
                         .offset(3 as libc::c_int as isize) = *fresh13;
@@ -13747,26 +13712,26 @@ unsafe extern "C" fn slicetype_frame_cost(
                             ::core::mem::size_of::<libc::c_int>() as libc::c_ulong,
                         ),
                 );
-                let ref mut fresh14 = *(output_intra[0 as libc::c_int as usize])
-                    .offset(3 as libc::c_int as isize);
+                let fresh14 = &mut (*(output_intra[0 as libc::c_int as usize])
+                    .offset(3 as libc::c_int as isize));
                 *fresh14 = (*h).mb.i_mb_height;
                 *(output_inter[0 as libc::c_int as usize])
                     .offset(3 as libc::c_int as isize) = *fresh14;
                 let mut s_0: x264_slicetype_slice_t = {
-                    let mut init = x264_slicetype_slice_t {
-                        h: h,
-                        a: a,
-                        frames: frames,
-                        p0: p0,
-                        p1: p1,
-                        b: b,
-                        dist_scale_factor: dist_scale_factor,
+                    
+                    x264_slicetype_slice_t {
+                        h,
+                        a,
+                        frames,
+                        p0,
+                        p1,
+                        b,
+                        dist_scale_factor,
                         do_search: do_search.as_mut_ptr(),
-                        w: w,
+                        w,
                         output_inter: output_inter[0 as libc::c_int as usize],
                         output_intra: output_intra[0 as libc::c_int as usize],
-                    };
-                    init
+                    }
                 };
                 slicetype_slice_cost(&mut s_0);
             }
@@ -13850,7 +13815,7 @@ unsafe extern "C" fn slicetype_frame_cost(
             (*fenc).i_cost_est[(b - p0) as usize][(p1 - b) as usize] = i_score;
         }
     }
-    return i_score;
+    i_score
 }
 unsafe extern "C" fn slicetype_frame_cost_recalculate(
     mut h: *mut x264_t,
@@ -13879,11 +13844,9 @@ unsafe extern "C" fn slicetype_frame_cost_recalculate(
                 + (*h).mb.i_mb_y * (*h).mb.i_mb_stride;
             let mut i_mb_cost: libc::c_int = *((**frames.offset(b as isize))
                 .lowres_costs[(b - p0) as usize][(p1 - b) as usize])
-                .offset(i_mb_xy as isize) as libc::c_int
-                & ((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int;
+                .offset(i_mb_xy as isize) as libc::c_int & (((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int);
             let mut qp_adj: libc::c_float = *qp_offset.offset(i_mb_xy as isize);
-            i_mb_cost = i_mb_cost * x264_exp2fix8(qp_adj) + 128 as libc::c_int
-                >> 8 as libc::c_int;
+            i_mb_cost = (i_mb_cost * x264_exp2fix8(qp_adj) + 128 as libc::c_int) >> 8 as libc::c_int;
             *row_satd.offset((*h).mb.i_mb_y as isize) += i_mb_cost;
             if (*h).mb.i_mb_y > 0 as libc::c_int
                 && (*h).mb.i_mb_y < (*h).mb.i_mb_height - 1 as libc::c_int
@@ -13900,7 +13863,7 @@ unsafe extern "C" fn slicetype_frame_cost_recalculate(
         (*h).mb.i_mb_y -= 1;
         (*h).mb.i_mb_y;
     }
-    return i_score;
+    i_score
 }
 unsafe extern "C" fn macroblock_tree_finish(
     mut h: *mut x264_t,
@@ -13940,14 +13903,14 @@ unsafe extern "C" fn macroblock_tree_finish(
     let mut strength: libc::c_float = 5.0f32 * (1.0f32 - (*h).param.rc.f_qcompress);
     let mut mb_index: libc::c_int = 0 as libc::c_int;
     while mb_index < (*h).mb.i_mb_count {
-        let mut intra_cost: libc::c_int = *((*frame).i_intra_cost)
+        let mut intra_cost: libc::c_int = (*((*frame).i_intra_cost)
             .offset(mb_index as isize) as libc::c_int
             * *((*frame).i_inv_qscale_factor).offset(mb_index as isize) as libc::c_int
-            + 128 as libc::c_int >> 8 as libc::c_int;
+            + 128 as libc::c_int) >> 8 as libc::c_int;
         if intra_cost != 0 {
-            let mut propagate_cost: libc::c_int = *((*frame).i_propagate_cost)
+            let mut propagate_cost: libc::c_int = (*((*frame).i_propagate_cost)
                 .offset(mb_index as isize) as libc::c_int * fps_factor
-                + 128 as libc::c_int >> 8 as libc::c_int;
+                + 128 as libc::c_int) >> 8 as libc::c_int;
             let mut log2_ratio: libc::c_float = x264_log2(
                 (intra_cost + propagate_cost) as uint32_t,
             ) - x264_log2(intra_cost as uint32_t) + weightdelta;
@@ -13974,8 +13937,8 @@ unsafe extern "C" fn macroblock_tree_propagate(
         (**frames.offset(p0 as isize)).i_propagate_cost,
         (**frames.offset(p1 as isize)).i_propagate_cost,
     ];
-    let mut dist_scale_factor: libc::c_int = ((b - p0 << 8 as libc::c_int)
-        + (p1 - p0 >> 1 as libc::c_int)) / (p1 - p0);
+    let mut dist_scale_factor: libc::c_int = (((b - p0) << 8 as libc::c_int)
+        + ((p1 - p0) >> 1 as libc::c_int)) / (p1 - p0);
     let mut i_bipred_weight: libc::c_int = if (*h).param.analyse.b_weighted_bipred != 0 {
         64 as libc::c_int - (dist_scale_factor >> 2 as libc::c_int)
     } else {
@@ -13987,14 +13950,14 @@ unsafe extern "C" fn macroblock_tree_propagate(
                 .lowres_mvs[0 as libc::c_int
                 as usize][(b - p0 - 1 as libc::c_int) as usize]
         } else {
-            0 as *mut [int16_t; 2]
+            std::ptr::null_mut::<[int16_t; 2]>()
         },
         if b != p1 {
             (**frames.offset(b as isize))
                 .lowres_mvs[1 as libc::c_int
                 as usize][(p1 - b - 1 as libc::c_int) as usize]
         } else {
-            0 as *mut [int16_t; 2]
+            std::ptr::null_mut::<[int16_t; 2]>()
         },
     ];
     let mut bipred_weights: [libc::c_int; 2] = [
@@ -14159,9 +14122,9 @@ unsafe extern "C" fn macroblock_tree(
         }
         let mut t: *mut uint16_t = (**frames.offset(last_nonb as isize))
             .i_propagate_cost;
-        let ref mut fresh15 = (**frames.offset(last_nonb as isize)).i_propagate_cost;
+        let fresh15 = &mut (**frames.offset(last_nonb as isize)).i_propagate_cost;
         *fresh15 = (**frames.offset(0 as libc::c_int as isize)).i_propagate_cost;
-        let ref mut fresh16 = (**frames.offset(0 as libc::c_int as isize))
+        let fresh16 = &mut (**frames.offset(0 as libc::c_int as isize))
             .i_propagate_cost;
         *fresh16 = t;
         memset(
@@ -14184,8 +14147,8 @@ unsafe extern "C" fn macroblock_tree(
     }
     loop {
         let fresh17 = i;
-        i = i - 1;
-        if !(fresh17 > idx) {
+        i -= 1;
+        if fresh17 <= idx {
             break;
         }
         cur_nonb = i;
@@ -14284,9 +14247,9 @@ unsafe extern "C" fn macroblock_tree(
         );
         let mut t_0: *mut uint16_t = (**frames.offset(last_nonb as isize))
             .i_propagate_cost;
-        let ref mut fresh18 = (**frames.offset(last_nonb as isize)).i_propagate_cost;
+        let fresh18 = &mut (**frames.offset(last_nonb as isize)).i_propagate_cost;
         *fresh18 = (**frames.offset(0 as libc::c_int as isize)).i_propagate_cost;
-        let ref mut fresh19 = (**frames.offset(0 as libc::c_int as isize))
+        let fresh19 = &mut (**frames.offset(0 as libc::c_int as isize))
             .i_propagate_cost;
         *fresh19 = t_0;
     }
@@ -14328,7 +14291,7 @@ unsafe extern "C" fn vbv_frame_cost(
                 .i_cost_est_aq[(b - p0) as usize][(p1 - b) as usize]
         }
     }
-    return cost;
+    cost
 }
 unsafe extern "C" fn calculate_durations(
     mut h: *mut x264_t,
@@ -14366,7 +14329,7 @@ unsafe extern "C" fn vbv_lookahead(
     let mut last_nonb: libc::c_int = 0 as libc::c_int;
     let mut cur_nonb: libc::c_int = 1 as libc::c_int;
     let mut idx: libc::c_int = 0 as libc::c_int;
-    let mut prev_frame: *mut x264_frame_t = 0 as *mut x264_frame_t;
+    let mut prev_frame: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
     let mut prev_frame_idx: libc::c_int = 0 as libc::c_int;
     while cur_nonb < num_frames
         && ((**frames.offset(cur_nonb as isize)).i_type == 0x5 as libc::c_int
@@ -14563,7 +14526,7 @@ unsafe extern "C" fn slicetype_path_cost(
         loc = next_nonb + 1 as libc::c_int;
         cur_nonb = next_nonb;
     }
-    return cost;
+    cost
 }
 unsafe extern "C" fn slicetype_path(
     mut h: *mut x264_t,
@@ -14608,7 +14571,7 @@ unsafe extern "C" fn slicetype_path(
         let mut i: libc::c_int = 1 as libc::c_int;
         while i <= length {
             let mut i_type: libc::c_int = (**frames.offset(i as isize)).i_type;
-            if !(i_type == 0 as libc::c_int) {
+            if i_type != 0 as libc::c_int {
                 if i_type == 0x5 as libc::c_int || i_type == 0x4 as libc::c_int {
                     possible = (possible != 0
                         && (i < len || i == length
@@ -14730,7 +14693,7 @@ unsafe extern "C" fn scenecut_internal(
             pmb,
         );
     }
-    return res;
+    res
 }
 unsafe extern "C" fn scenecut(
     mut h: *mut x264_t,
@@ -14784,7 +14747,7 @@ unsafe extern "C" fn scenecut(
     if (**frames.offset(p1 as isize)).b_scenecut == 0 {
         return 0 as libc::c_int;
     }
-    return scenecut_internal(h, a, frames, p0, p1, real_scenecut);
+    scenecut_internal(h, a, frames, p0, p1, real_scenecut)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_slicetype_analyse(
@@ -14795,8 +14758,8 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
         i_lambda: 0,
         i_lambda2: 0,
         i_qp: 0,
-        p_cost_mv: 0 as *mut uint16_t,
-        p_cost_ref: [0 as *mut uint16_t; 2],
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
+        p_cost_ref: [std::ptr::null_mut::<uint16_t>(); 2],
         i_mbrd: 0,
         b_fast_intra: 0,
         b_force_intra: 0,
@@ -14818,14 +14781,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
         l0: x264_mb_analysis_list_t {
             me16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14834,14 +14797,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             },
             bi16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14850,14 +14813,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             },
             me8x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14866,14 +14829,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 4],
             me4x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14882,14 +14845,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 4]; 4],
             me8x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14898,14 +14861,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2]; 4],
             me4x8: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14914,14 +14877,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2]; 4],
             me16x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14930,14 +14893,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2],
             me8x16: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14956,14 +14919,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
         l1: x264_mb_analysis_list_t {
             me16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14972,14 +14935,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             },
             bi16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -14988,14 +14951,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             },
             me8x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15004,14 +14967,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 4],
             me4x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15020,14 +14983,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 4]; 4],
             me8x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15036,14 +14999,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2]; 4],
             me4x8: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15052,14 +15015,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2]; 4],
             me16x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15068,14 +15031,14 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
             }; 2],
             me8x16: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -15113,259 +15076,259 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
         b_early_terminate: 0,
     };
     let mut frames: [*mut x264_frame_t; 253] = [
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
-        0 as *mut x264_frame_t,
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
+        std::ptr::null_mut::<x264_frame_t>(),
     ];
     let mut num_frames: libc::c_int = 0;
     let mut orig_num_frames: libc::c_int = 0;
@@ -15596,7 +15559,7 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
                     {
                         (*frames[j_3 as usize]).i_type = 0x3 as libc::c_int;
                     }
-                } else if !((*frames[j_3 as usize]).i_type != 0 as libc::c_int) {
+                } else if (*frames[j_3 as usize]).i_type == 0 as libc::c_int {
                     if (*frames[(j_3 + 1 as libc::c_int) as usize]).i_type
                         == 0x5 as libc::c_int
                         || (*frames[(j_3 + 1 as libc::c_int) as usize]).i_type
@@ -15767,19 +15730,13 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
         while j_7 <= num_frames {
             let mut frm: *mut x264_frame_t = frames[j_7 as usize];
             let mut keyframe_dist: libc::c_int = (*frm).i_frame - last_keyframe;
-            if (*frm).i_forced_type == 0 as libc::c_int
-                || ((*frm).i_forced_type == 0x2 as libc::c_int
+            if ((*frm).i_forced_type == 0 as libc::c_int || ((*frm).i_forced_type == 0x2 as libc::c_int
                     || (*frm).i_forced_type == 0x1 as libc::c_int
-                    || (*frm).i_forced_type == 0x6 as libc::c_int)
-            {
-                if (*h).param.b_open_gop != 0
-                    || !((*frames[(j_7 - 1 as libc::c_int) as usize]).i_forced_type
+                    || (*frm).i_forced_type == 0x6 as libc::c_int)) && ((*h).param.b_open_gop != 0 || !((*frames[(j_7 - 1 as libc::c_int) as usize]).i_forced_type
                         == 0x5 as libc::c_int
                         || (*frames[(j_7 - 1 as libc::c_int) as usize]).i_forced_type
-                            == 0x4 as libc::c_int)
-                {
-                    last_possible = j_7;
-                }
+                            == 0x4 as libc::c_int)) {
+                last_possible = j_7;
             }
             if keyframe_dist >= (*h).param.i_keyint_max {
                 if last_possible != 0 as libc::c_int && last_possible != j_7 {
@@ -15848,8 +15805,8 @@ pub unsafe extern "C" fn x264_8_slicetype_analyse(
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
-    let mut frames: [*mut x264_frame_t; 18] = [0 as *mut x264_frame_t; 18];
-    let mut frm: *mut x264_frame_t = 0 as *mut x264_frame_t;
+    let mut frames: [*mut x264_frame_t; 18] = [std::ptr::null_mut::<x264_frame_t>(); 18];
+    let mut frm: *mut x264_frame_t = std::ptr::null_mut::<x264_frame_t>();
     let mut bframes: libc::c_int = 0;
     let mut brefs: libc::c_int = 0;
     if (*(*h).lookahead).next.i_size == 0 {
@@ -15860,7 +15817,7 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
     while i < (*(*h).lookahead).next.i_size {
         if (*h).param.b_vfr_input != 0 {
             let fresh20 = lookahead_size;
-            lookahead_size = lookahead_size - 1;
+            lookahead_size -= 1;
             if fresh20 > 1 as libc::c_int {
                 (**((*(*h).lookahead).next.list).offset(i as isize))
                     .i_duration = 2 as libc::c_int as int64_t
@@ -16096,8 +16053,8 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
             i_lambda: 0,
             i_lambda2: 0,
             i_qp: 0,
-            p_cost_mv: 0 as *mut uint16_t,
-            p_cost_ref: [0 as *mut uint16_t; 2],
+            p_cost_mv: std::ptr::null_mut::<uint16_t>(),
+            p_cost_ref: [std::ptr::null_mut::<uint16_t>(); 2],
             i_mbrd: 0,
             b_fast_intra: 0,
             b_force_intra: 0,
@@ -16119,14 +16076,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
             l0: x264_mb_analysis_list_t {
                 me16x16: x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16135,14 +16092,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 },
                 bi16x16: x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16151,14 +16108,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 },
                 me8x8: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16167,14 +16124,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 4],
                 me4x4: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16183,14 +16140,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 4]; 4],
                 me8x4: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16199,14 +16156,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2]; 4],
                 me4x8: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16215,14 +16172,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2]; 4],
                 me16x8: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16231,14 +16188,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2],
                 me8x16: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16257,14 +16214,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
             l1: x264_mb_analysis_list_t {
                 me16x16: x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16273,14 +16230,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 },
                 bi16x16: x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16289,14 +16246,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 },
                 me8x8: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16305,14 +16262,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 4],
                 me4x4: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16321,14 +16278,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 4]; 4],
                 me8x4: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16337,14 +16294,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2]; 4],
                 me4x8: [[x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16353,14 +16310,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2]; 4],
                 me16x8: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16369,14 +16326,14 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
                 }; 2],
                 me8x16: [x264_me_t {
                     i_pixel: 0,
-                    p_cost_mv: 0 as *mut uint16_t,
+                    p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                     i_ref_cost: 0,
                     i_ref: 0,
-                    weight: 0 as *const x264_weight_t,
-                    p_fref: [0 as *mut pixel; 12],
-                    p_fref_w: 0 as *mut pixel,
-                    p_fenc: [0 as *mut pixel; 3],
-                    integral: 0 as *mut uint16_t,
+                    weight: std::ptr::null::<x264_weight_t>(),
+                    p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                    p_fref_w: std::ptr::null_mut::<pixel>(),
+                    p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                    integral: std::ptr::null_mut::<uint16_t>(),
                     i_stride: [0; 3],
                     mvp: [0; 2],
                     cost_mv: 0,
@@ -16520,7 +16477,7 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
     let mut i_2: libc::c_int = 0 as libc::c_int;
     while i_2 <= bframes {
         let fresh22 = i_coded;
-        i_coded = i_coded + 1;
+        i_coded += 1;
         (**((*(*h).lookahead).next.list).offset(i_2 as isize)).i_coded = fresh22;
         if i_2 != 0 {
             calculate_durations(
@@ -16540,7 +16497,7 @@ pub unsafe extern "C" fn x264_8_slicetype_decide(mut h: *mut x264_t) {
             calculate_durations(
                 h,
                 *((*(*h).lookahead).next.list).offset(i_2 as isize),
-                0 as *mut x264_frame_t,
+                std::ptr::null_mut::<x264_frame_t>(),
                 &mut (*h).i_cpb_delay,
                 &mut (*h).i_coded_fields,
             );
@@ -16646,20 +16603,18 @@ pub unsafe extern "C" fn x264_8_rc_analyse_slice(mut h: *mut x264_t) -> libc::c_
                 + (*(*h).fdec).i_pir_start_col;
             let mut x: libc::c_int = (*(*h).fdec).i_pir_start_col;
             while x <= (*(*h).fdec).i_pir_end_col {
-                let mut intra_cost: libc::c_int = *((*(*h).fenc).i_intra_cost)
+                let mut intra_cost: libc::c_int = (*((*(*h).fenc).i_intra_cost)
                     .offset(mb_xy as isize) as libc::c_int * ip_factor
-                    + 128 as libc::c_int >> 8 as libc::c_int;
+                    + 128 as libc::c_int) >> 8 as libc::c_int;
                 let mut inter_cost: libc::c_int = *((*(*h).fenc)
                     .lowres_costs[(b - p0) as usize][(p1 - b) as usize])
-                    .offset(mb_xy as isize) as libc::c_int
-                    & ((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int;
+                    .offset(mb_xy as isize) as libc::c_int & (((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int);
                 let mut diff: libc::c_int = intra_cost - inter_cost;
                 if (*h).param.rc.i_aq_mode != 0 {
                     *((*(*h).fdec).i_row_satd).offset(y as isize)
-                        += diff
+                        += (diff
                             * *((**frames.offset(b as isize)).i_inv_qscale_factor)
-                                .offset(mb_xy as isize) as libc::c_int + 128 as libc::c_int
-                            >> 8 as libc::c_int;
+                                .offset(mb_xy as isize) as libc::c_int + 128 as libc::c_int) >> 8 as libc::c_int;
                 } else {
                     *((*(*h).fdec).i_row_satd).offset(y as isize) += diff;
                 }
@@ -16673,7 +16628,7 @@ pub unsafe extern "C" fn x264_8_rc_analyse_slice(mut h: *mut x264_t) -> libc::c_
             y;
         }
     }
-    return cost;
+    cost
 }
 static mut cbp_to_golomb: [[[uint8_t; 48]; 2]; 2] = [
     [
@@ -16969,10 +16924,10 @@ unsafe extern "C" fn cavlc_block_residual_escape(
         if i_level_code >= (1 as libc::c_int) << 12 as libc::c_int {
             if (*((*h).sps).as_mut_ptr()).i_profile_idc >= PROFILE_HIGH as libc::c_int {
                 while i_level_code
-                    >= (1 as libc::c_int) << i_level_prefix - 3 as libc::c_int
+                    >= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int)
                 {
                     i_level_code
-                        -= (1 as libc::c_int) << i_level_prefix - 3 as libc::c_int;
+                        -= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int);
                     i_level_prefix += 1;
                     i_level_prefix;
                 }
@@ -16991,7 +16946,7 @@ unsafe extern "C" fn cavlc_block_residual_escape(
         i_suffix_length += 1;
         i_suffix_length;
     }
-    return i_suffix_length;
+    i_suffix_length
 }
 unsafe extern "C" fn cavlc_block_residual_internal(
     mut h: *mut x264_t,
@@ -17038,29 +16993,24 @@ unsafe extern "C" fn cavlc_block_residual_internal(
     let mut i_sign: libc::c_uint = 0;
     i_total = ((*h).quantf.coeff_level_run[ctx_block_cat as usize])
         .expect("non-null function pointer")(l, &mut runlevel);
-    &mut *x264_8_run_before.as_mut_ptr().offset(runlevel.mask as isize) as *mut uint32_t;
+    x264_8_run_before.as_mut_ptr().offset(runlevel.mask as isize);
     i_total_zero = runlevel.last + 1 as libc::c_int - i_total;
     runlevel.level[(i_total + 0 as libc::c_int) as usize] = 2 as libc::c_int as dctcoef;
     runlevel.level[(i_total + 1 as libc::c_int) as usize] = 2 as libc::c_int as dctcoef;
-    i_trailing = (runlevel.level[0 as libc::c_int as usize] as libc::c_int
-        + 1 as libc::c_int
-        | 1 as libc::c_int - runlevel.level[0 as libc::c_int as usize] as libc::c_int)
-        >> 31 as libc::c_int & 1 as libc::c_int
-        | (runlevel.level[1 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int
-            | 1 as libc::c_int
-                - runlevel.level[1 as libc::c_int as usize] as libc::c_int)
-            >> 31 as libc::c_int & 2 as libc::c_int
-        | (runlevel.level[2 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int
-            | 1 as libc::c_int
-                - runlevel.level[2 as libc::c_int as usize] as libc::c_int)
-            >> 31 as libc::c_int & 4 as libc::c_int;
+    i_trailing = (((runlevel.level[0 as libc::c_int as usize] as libc::c_int
+        + 1 as libc::c_int) | (1 as libc::c_int - runlevel.level[0 as libc::c_int as usize] as libc::c_int))
+        >> 31 as libc::c_int) & 1 as libc::c_int
+        | (((runlevel.level[1 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int) | (1 as libc::c_int
+                - runlevel.level[1 as libc::c_int as usize] as libc::c_int))
+            >> 31 as libc::c_int) & 2 as libc::c_int
+        | (((runlevel.level[2 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int) | (1 as libc::c_int
+                - runlevel.level[2 as libc::c_int as usize] as libc::c_int))
+            >> 31 as libc::c_int) & 4 as libc::c_int;
     i_trailing = ctz_index[i_trailing as usize] as libc::c_int;
-    i_sign = (runlevel.level[2 as libc::c_int as usize] as libc::c_int
-        >> 31 as libc::c_int & 1 as libc::c_int
-        | runlevel.level[1 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int
-            & 2 as libc::c_int
-        | runlevel.level[0 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int
-            & 4 as libc::c_int) as libc::c_uint;
+    i_sign = ((runlevel.level[2 as libc::c_int as usize] as libc::c_int
+        >> 31 as libc::c_int) & 1 as libc::c_int
+        | (runlevel.level[1 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int) & 2 as libc::c_int
+        | (runlevel.level[0 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int) & 4 as libc::c_int) as libc::c_uint;
     i_sign >>= 3 as libc::c_int - i_trailing;
     (*s).i_bits_encoded
         += x264_coeff_token[nC
@@ -17074,7 +17024,7 @@ unsafe extern "C" fn cavlc_block_residual_internal(
         let mut val_original: libc::c_int = runlevel.level[i_trailing as usize]
             as libc::c_int + 128 as libc::c_int / 2 as libc::c_int;
         val
-            -= (val >> 31 as libc::c_int | 1 as libc::c_int)
+            -= ((val >> 31 as libc::c_int) | 1 as libc::c_int)
                 & -((i_trailing < 3 as libc::c_int) as libc::c_int);
         val += 128 as libc::c_int / 2 as libc::c_int;
         if (val_original as libc::c_uint) < 128 as libc::c_int as libc::c_uint {
@@ -17137,7 +17087,7 @@ unsafe extern "C" fn cavlc_block_residual_internal(
     let mut zero_run_code: libc::c_int = x264_8_run_before[runlevel.mask as usize]
         as libc::c_int;
     (*s).i_bits_encoded += zero_run_code & 0x1f as libc::c_int;
-    return i_total;
+    i_total
 }
 static mut ct_index: [uint8_t; 17] = [
     0 as libc::c_int as uint8_t,
@@ -17432,7 +17382,7 @@ unsafe extern "C" fn cavlc_partition_luma_residual(
                 ),
         );
     }
-    if (*h).mb.i_cbp_luma & (1 as libc::c_int) << i8 != 0 {
+    if (*h).mb.i_cbp_luma & ((1 as libc::c_int) << i8) != 0 {
         let mut i4: libc::c_int = 0 as libc::c_int;
         while i4 < 4 as libc::c_int {
             let mut nC: libc::c_int = if DCT_LUMA_4x4 as libc::c_int
@@ -17996,8 +17946,7 @@ unsafe extern "C" fn macroblock_size_cavlc(mut h: *mut x264_t) {
                     || i_mb_type == I_8x8 as libc::c_int
                     || i_mb_type == I_16x16 as libc::c_int
                     || i_mb_type == I_PCM as libc::c_int) as libc::c_int
-                    as usize][((*h).mb.i_cbp_chroma << 4 as libc::c_int
-                    | (*h).mb.i_cbp_luma) as usize] as libc::c_uint,
+                    as usize][(((*h).mb.i_cbp_chroma << 4 as libc::c_int) | (*h).mb.i_cbp_luma) as usize] as libc::c_uint,
             );
     }
     if x264_mb_transform_8x8_allowed(h) != 0 && (*h).mb.i_cbp_luma != 0 {
@@ -18273,7 +18222,7 @@ unsafe extern "C" fn partition_size_cavlc(
             if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
                 == CHROMA_422 as libc::c_int
             {
-                let mut offset: libc::c_int = 5 as libc::c_int * i8 & 0x9 as libc::c_int;
+                let mut offset: libc::c_int = (5 as libc::c_int * i8) & 0x9 as libc::c_int;
                 let mut nC: libc::c_int = if DCT_CHROMA_AC as libc::c_int
                     == DCT_CHROMA_DC as libc::c_int
                 {
@@ -18489,7 +18438,7 @@ unsafe extern "C" fn partition_size_cavlc(
         j -= 1;
         j;
     }
-    return (*h).out.bs.i_bits_encoded;
+    (*h).out.bs.i_bits_encoded
 }
 unsafe extern "C" fn subpartition_size_cavlc(
     mut h: *mut x264_t,
@@ -18584,7 +18533,7 @@ unsafe extern "C" fn subpartition_size_cavlc(
         p += 1;
         p;
     }
-    return (*h).out.bs.i_bits_encoded;
+    (*h).out.bs.i_bits_encoded
 }
 unsafe extern "C" fn cavlc_intra4x4_pred_size(
     mut h: *mut x264_t,
@@ -18594,10 +18543,10 @@ unsafe extern "C" fn cavlc_intra4x4_pred_size(
     if x264_mb_predict_intra4x4_mode(h, i4)
         == x264_mb_pred_mode4x4_fix[(i_mode + 1 as libc::c_int) as usize] as libc::c_int
     {
-        return 1 as libc::c_int
+        1 as libc::c_int
     } else {
-        return 4 as libc::c_int
-    };
+        4 as libc::c_int
+    }
 }
 unsafe extern "C" fn partition_i8x8_size_cavlc(
     mut h: *mut x264_t,
@@ -18617,10 +18566,9 @@ unsafe extern "C" fn partition_i8x8_size_cavlc(
         .i_bits_encoded = cavlc_intra4x4_pred_size(h, 4 as libc::c_int * i8, i_mode);
     (*h).out.bs.i_bits_encoded
         += bs_size_ue(
-            cbp_to_golomb[!((*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                == CHROMA_444 as libc::c_int) as libc::c_int
+            cbp_to_golomb[((*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int) as libc::c_int
                 as usize][1 as libc::c_int
-                as usize][((*h).mb.i_cbp_chroma << 4 as libc::c_int | (*h).mb.i_cbp_luma)
+                as usize][(((*h).mb.i_cbp_chroma << 4 as libc::c_int) | (*h).mb.i_cbp_luma)
                 as usize] as libc::c_uint,
         );
     let mut p: libc::c_int = 0 as libc::c_int;
@@ -18629,7 +18577,7 @@ unsafe extern "C" fn partition_i8x8_size_cavlc(
         p += 1;
         p;
     }
-    return (*h).out.bs.i_bits_encoded;
+    (*h).out.bs.i_bits_encoded
 }
 unsafe extern "C" fn partition_i4x4_size_cavlc(
     mut h: *mut x264_t,
@@ -18680,7 +18628,7 @@ unsafe extern "C" fn partition_i4x4_size_cavlc(
         p += 1;
         p;
     }
-    return (*h).out.bs.i_bits_encoded;
+    (*h).out.bs.i_bits_encoded
 }
 unsafe extern "C" fn chroma_size_cavlc(mut h: *mut x264_t) -> libc::c_int {
     (*h)
@@ -18801,7 +18749,7 @@ unsafe extern "C" fn chroma_size_cavlc(mut h: *mut x264_t) -> libc::c_int {
             }
         }
     }
-    return (*h).out.bs.i_bits_encoded;
+    (*h).out.bs.i_bits_encoded
 }
 static mut i_mb_b_cost_table: [uint8_t; 19] = [
     9 as libc::c_int as uint8_t,
@@ -18869,7 +18817,7 @@ unsafe extern "C" fn init_costs(
     mut logs: *mut libc::c_float,
     mut qp: libc::c_int,
 ) -> libc::c_int {
-    let mut cost_i4x4_mode: *mut uint16_t = 0 as *mut uint16_t;
+    let mut cost_i4x4_mode: *mut uint16_t = std::ptr::null_mut::<uint16_t>();
     let mut current_block: u64;
     if !((*h).cost_mv[qp as usize]).is_null() {
         return 0 as libc::c_int;
@@ -18891,7 +18839,7 @@ unsafe extern "C" fn init_costs(
             .offset((2 as libc::c_int * 4 as libc::c_int * mv_range) as isize);
         let mut i: libc::c_int = 0 as libc::c_int;
         while i <= 2 as libc::c_int * 4 as libc::c_int * mv_range {
-            let ref mut fresh23 = *((*h).cost_mv[qp as usize]).offset(i as isize);
+            let fresh23 = &mut (*((*h).cost_mv[qp as usize]).offset(i as isize));
             *fresh23 = (if ((lambda as libc::c_float * *logs.offset(i as isize) + 0.5f32)
                 as libc::c_int) < 65535 as libc::c_int
             {
@@ -18932,7 +18880,7 @@ unsafe extern "C" fn init_costs(
         {
             let mut j_0: libc::c_int = 0 as libc::c_int;
             loop {
-                if !(j_0 < 4 as libc::c_int) {
+                if j_0 >= 4 as libc::c_int {
                     current_block = 11194104282611034094;
                     break;
                 }
@@ -18989,7 +18937,7 @@ unsafe extern "C" fn init_costs(
             }
         }
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_analyse_init_costs(mut h: *mut x264_t) -> libc::c_int {
@@ -19023,7 +18971,7 @@ pub unsafe extern "C" fn x264_8_analyse_init_costs(mut h: *mut x264_t) -> libc::
         51 as libc::c_int + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
     };
     loop {
-        if !(qp <= (*h).param.rc.i_qp_max) {
+        if qp > (*h).param.rc.i_qp_max {
             current_block = 10886091980245723256;
             break;
         }
@@ -19034,23 +18982,17 @@ pub unsafe extern "C" fn x264_8_analyse_init_costs(mut h: *mut x264_t) -> libc::
         qp += 1;
         qp;
     }
-    match current_block {
-        10886091980245723256 => {
-            if !(init_costs(
-                h,
-                logs,
-                12 as libc::c_int
-                    + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int),
-            ) != 0)
-            {
-                x264_free(logs as *mut libc::c_void);
-                return 0 as libc::c_int;
-            }
-        }
-        _ => {}
+    if current_block == 10886091980245723256 && init_costs(
+            h,
+            logs,
+            12 as libc::c_int
+                + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int),
+        ) == 0 {
+        x264_free(logs as *mut libc::c_void);
+        return 0 as libc::c_int;
     }
     x264_free(logs as *mut libc::c_void);
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_analyse_free_costs(mut h: *mut x264_t) {
@@ -19346,8 +19288,7 @@ unsafe extern "C" fn mb_analyse_init(
     let mut pcm_cost: uint64_t = ((256 as libc::c_int * 8 as libc::c_int
         + 2 as libc::c_int
             * (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
-                256 as libc::c_int * 8 as libc::c_int
-                    >> (*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift
+                (256 as libc::c_int * 8 as libc::c_int) >> ((*h).mb.chroma_h_shift + (*h).mb.chroma_v_shift)
             } else {
                 0 as libc::c_int
             }) + 16 as libc::c_int) as uint64_t * (*a).i_lambda2 as uint64_t)
@@ -19670,10 +19611,7 @@ unsafe extern "C" fn mb_analyse_init(
                 i_2;
             }
         }
-        if (*a).b_early_terminate != 0
-            && (*h).mb.i_mb_xy - (*h).sh.i_first_mb > 4 as libc::c_int
-        {
-            if !((*h).mb.i_mb_type_left[0 as libc::c_int as usize]
+        if (*a).b_early_terminate != 0 && (*h).mb.i_mb_xy - (*h).sh.i_first_mb > 4 as libc::c_int && !((*h).mb.i_mb_type_left[0 as libc::c_int as usize]
                 == I_4x4 as libc::c_int
                 || (*h).mb.i_mb_type_left[0 as libc::c_int as usize]
                     == I_8x8 as libc::c_int
@@ -19719,10 +19657,8 @@ unsafe extern "C" fn mb_analyse_init(
                         * ((*h).stat.frame.i_mb_count[I_4x4 as libc::c_int as usize]
                             + (*h).stat.frame.i_mb_count[I_8x8 as libc::c_int as usize]
                             + (*h).stat.frame.i_mb_count[I_16x16 as libc::c_int as usize]
-                            + (*h).stat.frame.i_mb_count[I_PCM as libc::c_int as usize]))
-            {
-                (*a).b_fast_intra = 1 as libc::c_int;
-            }
+                            + (*h).stat.frame.i_mb_count[I_PCM as libc::c_int as usize])) {
+            (*a).b_fast_intra = 1 as libc::c_int;
         }
         (*h).mb.b_skip_mc = 0 as libc::c_int;
         if (*h).param.b_intra_refresh != 0
@@ -20079,7 +20015,7 @@ unsafe extern "C" fn predict_16x16_mode_available(
     } else {
         idx & (MB_TOP as libc::c_int | MB_LEFT as libc::c_int)
     };
-    return (i16x16_mode_available[idx as usize]).as_ptr();
+    (i16x16_mode_available[idx as usize]).as_ptr()
 }
 #[inline(always)]
 unsafe extern "C" fn predict_chroma_mode_available(
@@ -20094,7 +20030,7 @@ unsafe extern "C" fn predict_chroma_mode_available(
     } else {
         idx & (MB_TOP as libc::c_int | MB_LEFT as libc::c_int)
     };
-    return (chroma_mode_available[idx as usize]).as_ptr();
+    (chroma_mode_available[idx as usize]).as_ptr()
 }
 #[inline(always)]
 unsafe extern "C" fn predict_8x8_mode_available(
@@ -20113,7 +20049,7 @@ unsafe extern "C" fn predict_8x8_mode_available(
     } else {
         idx & (MB_TOP as libc::c_int | MB_LEFT as libc::c_int)
     };
-    return (i8x8_mode_available[avoid_topright as usize][idx as usize]).as_ptr();
+    (i8x8_mode_available[avoid_topright as usize][idx as usize]).as_ptr()
 }
 #[inline(always)]
 unsafe extern "C" fn predict_4x4_mode_available(
@@ -20132,7 +20068,7 @@ unsafe extern "C" fn predict_4x4_mode_available(
     } else {
         idx & (MB_TOP as libc::c_int | MB_LEFT as libc::c_int)
     };
-    return (i4x4_mode_available[avoid_topright as usize][idx as usize]).as_ptr();
+    (i4x4_mode_available[avoid_topright as usize][idx as usize]).as_ptr()
 }
 #[inline]
 unsafe extern "C" fn psy_trellis_init(mut h: *mut x264_t, mut do_both_dct: libc::c_int) {
@@ -20478,8 +20414,8 @@ unsafe extern "C" fn mb_analyse_intra(
             4 as libc::c_int as uint8_t,
         ];
         let mut i16x16_thresh: libc::c_int = if (*a).b_fast_intra != 0 {
-            i16x16_thresh_lut[(*h).mb.i_subpel_refine as usize] as libc::c_int
-                * i_satd_inter >> 1 as libc::c_int
+            (i16x16_thresh_lut[(*h).mb.i_subpel_refine as usize] as libc::c_int
+                * i_satd_inter) >> 1 as libc::c_int
         } else {
             (1 as libc::c_int) << 28 as libc::c_int
         };
@@ -20854,8 +20790,7 @@ unsafe extern "C" fn mb_analyse_intra(
                 341 as libc::c_int as uint16_t,
             ];
             (*a).i_satd_i8x8 = (1 as libc::c_int) << 28 as libc::c_int;
-            i_cost = i_cost * cost_div_fix8[idx as usize] as libc::c_int
-                >> 8 as libc::c_int;
+            i_cost = (i_cost * cost_div_fix8[idx as usize] as libc::c_int) >> 8 as libc::c_int;
         }
         static mut i8x8_thresh: [uint8_t; 11] = [
             4 as libc::c_int as uint8_t,
@@ -20872,9 +20807,8 @@ unsafe extern "C" fn mb_analyse_intra(
         ];
         if (*a).b_early_terminate != 0
             && (if i_cost < (*a).i_satd_i16x16 { i_cost } else { (*a).i_satd_i16x16 })
-                > i_satd_inter
-                    * i8x8_thresh[(*h).mb.i_subpel_refine as usize] as libc::c_int
-                    >> 2 as libc::c_int
+                > (i_satd_inter
+                    * i8x8_thresh[(*h).mb.i_subpel_refine as usize] as libc::c_int) >> 2 as libc::c_int
         {
             return;
         }
@@ -21236,7 +21170,7 @@ unsafe extern "C" fn intra_rd_refine(
                     && i_mode_0 != (*a).i_predict8x8chroma
                 {
                     let fresh24 = i_max;
-                    i_max = i_max + 1;
+                    i_max += 1;
                     predict_mode_sorted[fresh24 as usize] = i_mode_0 as int8_t;
                 }
                 predict_mode_0 = predict_mode_0.offset(1);
@@ -21304,13 +21238,13 @@ unsafe extern "C" fn intra_rd_refine(
                     ((*h).mb.pic.p_fdec[1 as libc::c_int as usize])
                         .offset(block_idx_xy_fdec[idx as usize] as libc::c_int as isize)
                 } else {
-                    0 as *mut pixel
+                    std::ptr::null_mut::<pixel>()
                 },
                 if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
                     ((*h).mb.pic.p_fdec[2 as libc::c_int as usize])
                         .offset(block_idx_xy_fdec[idx as usize] as libc::c_int as isize)
                 } else {
-                    0 as *mut pixel
+                    std::ptr::null_mut::<pixel>()
                 },
             ];
             i_best = ((1 as libc::c_ulonglong) << 60 as libc::c_int) as uint64_t;
@@ -21448,14 +21382,14 @@ unsafe extern "C" fn intra_rd_refine(
                         .offset((8 as libc::c_int * x) as isize)
                         .offset((8 as libc::c_int * y * 32 as libc::c_int) as isize)
                 } else {
-                    0 as *mut pixel
+                    std::ptr::null_mut::<pixel>()
                 },
                 if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != 0 {
                     ((*h).mb.pic.p_fdec[2 as libc::c_int as usize])
                         .offset((8 as libc::c_int * x) as isize)
                         .offset((8 as libc::c_int * y * 32 as libc::c_int) as isize)
                 } else {
-                    0 as *mut pixel
+                    std::ptr::null_mut::<pixel>()
                 },
             ];
             let mut cbp_luma_new: libc::c_int = 0 as libc::c_int;
@@ -21489,8 +21423,8 @@ unsafe extern "C" fn intra_rd_refine(
             }
             while *predict_mode_2 as libc::c_int >= 0 as libc::c_int {
                 let mut i_mode_3: libc::c_int = *predict_mode_2 as libc::c_int;
-                if !((*a).i_satd_i8x8_dir[idx_0 as usize][i_mode_3 as usize]
-                    as libc::c_int > i_thresh_1)
+                if (*a).i_satd_i8x8_dir[idx_0 as usize][i_mode_3 as usize]
+                    as libc::c_int <= i_thresh_1
                 {
                     (*h).mb.i_cbp_luma = (*a).i_cbp_i8x8_luma;
                     i_satd = rd_cost_i8x8(
@@ -21613,14 +21547,14 @@ unsafe extern "C" fn mb_analyse_inter_p16x16(
 ) {
     let mut m: x264_me_t = x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -21635,7 +21569,7 @@ unsafe extern "C" fn mb_analyse_inter_p16x16(
     {
         &mut i_halfpel_thresh
     } else {
-        0 as *mut libc::c_int
+        std::ptr::null_mut::<libc::c_int>()
     };
     m.i_pixel = PIXEL_16x16 as libc::c_int;
     m.p_cost_mv = (*a).p_cost_mv;
@@ -22099,14 +22033,14 @@ unsafe extern "C" fn mb_analyse_inter_p8x8_mixed_ref(
 ) {
     let mut m: x264_me_t = x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -22222,16 +22156,16 @@ unsafe extern "C" fn mb_analyse_inter_p8x8_mixed_ref(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             m
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -22453,7 +22387,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x8_mixed_ref(
                     .offset(4 as libc::c_int as isize))
                     .offset(
                         (8 as libc::c_int * x8
-                            + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                            + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                                 * *(m.i_stride)
                                     .as_mut_ptr()
                                     .offset(1 as libc::c_int as isize)) as isize,
@@ -22511,14 +22445,14 @@ unsafe extern "C" fn mb_analyse_inter_p8x8_mixed_ref(
                     .mvc[0 as libc::c_int as usize][(i + 1 as libc::c_int) as usize])
                     .as_mut_ptr() as *mut x264_union32_t))
                     .i;
-                x264_8_me_refine_qpel_refdupe(h, &mut m, 0 as *mut libc::c_int);
+                x264_8_me_refine_qpel_refdupe(h, &mut m, std::ptr::null_mut::<libc::c_int>());
             } else {
                 x264_8_me_search_ref(
                     h,
                     &mut m,
                     ((*a).l0.mvc[i_ref_0 as usize]).as_mut_ptr(),
                     i + 1 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
             }
             m.cost += m.i_ref_cost;
@@ -22645,16 +22579,16 @@ unsafe extern "C" fn mb_analyse_inter_p8x8(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             (*m)
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -22868,7 +22802,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x8(
                 .offset(4 as libc::c_int as isize))
                 .offset(
                     (8 as libc::c_int * x8
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * *((*m).i_stride)
                                 .as_mut_ptr()
                                 .offset(1 as libc::c_int as isize)) as isize,
@@ -22910,7 +22844,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x8(
             2 as libc::c_int,
             ((*m).mvp).as_mut_ptr(),
         );
-        x264_8_me_search_ref(h, m, mvc, i_mvc, 0 as *mut libc::c_int);
+        x264_8_me_search_ref(h, m, mvc, i_mvc, std::ptr::null_mut::<libc::c_int>());
         x264_macroblock_cache_mv(
             h,
             2 as libc::c_int * x8,
@@ -22956,14 +22890,14 @@ unsafe extern "C" fn mb_analyse_inter_p16x8(
 ) {
     let mut m: x264_me_t = x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -23023,7 +22957,7 @@ unsafe extern "C" fn mb_analyse_inter_p16x8(
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
                     ((0 as libc::c_int >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                        + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             m
@@ -23031,7 +22965,7 @@ unsafe extern "C" fn mb_analyse_inter_p16x8(
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
                     ((0 as libc::c_int >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                        + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -23270,7 +23204,7 @@ unsafe extern "C" fn mb_analyse_inter_p16x8(
                     .offset(4 as libc::c_int as isize))
                     .offset(
                         (0 as libc::c_int
-                            + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                            + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                                 * *(m.i_stride)
                                     .as_mut_ptr()
                                     .offset(1 as libc::c_int as isize)) as isize,
@@ -23322,14 +23256,14 @@ unsafe extern "C" fn mb_analyse_inter_p16x8(
                 (m.mvp).as_mut_ptr(),
             );
             if (*h).mb.ref_blind_dupe == i_ref && ref8[0 as libc::c_int as usize] == 0 {
-                x264_8_me_refine_qpel_refdupe(h, &mut m, 0 as *mut libc::c_int);
+                x264_8_me_refine_qpel_refdupe(h, &mut m, std::ptr::null_mut::<libc::c_int>());
             } else {
                 x264_8_me_search_ref(
                     h,
                     &mut m,
                     mvc.as_mut_ptr(),
                     3 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
             }
             m.cost += m.i_ref_cost;
@@ -23389,14 +23323,14 @@ unsafe extern "C" fn mb_analyse_inter_p8x16(
 ) {
     let mut m: x264_me_t = x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -23455,7 +23389,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x16(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * i >> (*h).mb.chroma_h_shift)
+                    (((8 as libc::c_int * i) >> (*h).mb.chroma_h_shift)
                         + (0 as libc::c_int >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
@@ -23463,7 +23397,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x16(
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * i >> (*h).mb.chroma_h_shift)
+                    (((8 as libc::c_int * i) >> (*h).mb.chroma_h_shift)
                         + (0 as libc::c_int >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
@@ -23751,14 +23685,14 @@ unsafe extern "C" fn mb_analyse_inter_p8x16(
                 (m.mvp).as_mut_ptr(),
             );
             if (*h).mb.ref_blind_dupe == i_ref && ref8[0 as libc::c_int as usize] == 0 {
-                x264_8_me_refine_qpel_refdupe(h, &mut m, 0 as *mut libc::c_int);
+                x264_8_me_refine_qpel_refdupe(h, &mut m, std::ptr::null_mut::<libc::c_int>());
             } else {
                 x264_8_me_search_ref(
                     h,
                     &mut m,
                     mvc.as_mut_ptr(),
                     3 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
             }
             m.cost += m.i_ref_cost;
@@ -24808,7 +24742,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4_chroma_internal(
     } else {
         PIXEL_4x4 as libc::c_int
     };
-    return ((*h).pixf.mbcmp[chromapix as usize])
+    ((*h).pixf.mbcmp[chromapix as usize])
         .expect(
             "non-null function pointer",
         )(
@@ -24827,7 +24761,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4_chroma_internal(
             16 as libc::c_int as intptr_t,
             pix2,
             16 as libc::c_int as intptr_t,
-        );
+        )
 }
 unsafe extern "C" fn mb_analyse_inter_p4x4_chroma(
     mut h: *mut x264_t,
@@ -24837,7 +24771,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4_chroma(
     mut size: libc::c_int,
 ) -> libc::c_int {
     if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int {
-        return mb_analyse_inter_p4x4_chroma_internal(
+        mb_analyse_inter_p4x4_chroma_internal(
             h,
             a,
             p_fref,
@@ -24864,7 +24798,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4_chroma(
             size,
             CHROMA_420 as libc::c_int,
         )
-    };
+    }
 }
 unsafe extern "C" fn mb_analyse_inter_p4x4(
     mut h: *mut x264_t,
@@ -24913,16 +24847,16 @@ unsafe extern "C" fn mb_analyse_inter_p4x4(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             (*m)
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -25058,7 +24992,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4(
                 as usize] = &mut *(*p_fref.offset(4 as libc::c_int as isize))
                 .offset(
                     (4 as libc::c_int * x4
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * *((*m).i_stride)
                                 .as_mut_ptr()
                                 .offset(1 as libc::c_int as isize)) as isize,
@@ -25105,7 +25039,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4(
             m,
             &mut (*((*a).l0.me8x8).as_mut_ptr().offset(i8x8 as isize)).mv,
             i_mvc,
-            0 as *mut libc::c_int,
+            std::ptr::null_mut::<libc::c_int>(),
         );
         x264_macroblock_cache_mv(
             h,
@@ -25131,7 +25065,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x4(
         + (*a).i_lambda
             * i_sub_mb_p_cost_table[D_L0_4x4 as libc::c_int as usize] as libc::c_int;
     if (*h).mb.b_chroma_me != 0
-        && !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int)
+        && ((*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int)
     {
         (*a).l0.i_cost4x4[i8x8 as usize]
             += mb_analyse_inter_p4x4_chroma(
@@ -25190,16 +25124,16 @@ unsafe extern "C" fn mb_analyse_inter_p8x4(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             (*m)
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -25335,7 +25269,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x4(
                 as usize] = &mut *(*p_fref.offset(4 as libc::c_int as isize))
                 .offset(
                     (4 as libc::c_int * x4
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * *((*m).i_stride)
                                 .as_mut_ptr()
                                 .offset(1 as libc::c_int as isize)) as isize,
@@ -25385,7 +25319,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x4(
                 .offset(0 as libc::c_int as isize))
                 .mv,
             i_mvc,
-            0 as *mut libc::c_int,
+            std::ptr::null_mut::<libc::c_int>(),
         );
         x264_macroblock_cache_mv(
             h,
@@ -25409,7 +25343,7 @@ unsafe extern "C" fn mb_analyse_inter_p8x4(
         + (*a).i_lambda
             * i_sub_mb_p_cost_table[D_L0_8x4 as libc::c_int as usize] as libc::c_int;
     if (*h).mb.b_chroma_me != 0
-        && !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int)
+        && ((*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int)
     {
         (*a).l0.i_cost8x4[i8x8 as usize]
             += mb_analyse_inter_p4x4_chroma(
@@ -25468,16 +25402,16 @@ unsafe extern "C" fn mb_analyse_inter_p4x8(
                 .p_fenc[1 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(1 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             (*m)
                 .p_fenc[2 as libc::c_int
                 as usize] = &mut *(*p_fenc.offset(2 as libc::c_int as isize))
                 .offset(
-                    ((4 as libc::c_int * x4 >> (*h).mb.chroma_h_shift)
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                    (((4 as libc::c_int * x4) >> (*h).mb.chroma_h_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -25613,7 +25547,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x8(
                 as usize] = &mut *(*p_fref.offset(4 as libc::c_int as isize))
                 .offset(
                     (4 as libc::c_int * x4
-                        + (4 as libc::c_int * y4 >> (*h).mb.chroma_v_shift)
+                        + ((4 as libc::c_int * y4) >> (*h).mb.chroma_v_shift)
                             * *((*m).i_stride)
                                 .as_mut_ptr()
                                 .offset(1 as libc::c_int as isize)) as isize,
@@ -25663,7 +25597,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x8(
                 .offset(0 as libc::c_int as isize))
                 .mv,
             i_mvc,
-            0 as *mut libc::c_int,
+            std::ptr::null_mut::<libc::c_int>(),
         );
         x264_macroblock_cache_mv(
             h,
@@ -25687,7 +25621,7 @@ unsafe extern "C" fn mb_analyse_inter_p4x8(
         + (*a).i_lambda
             * i_sub_mb_p_cost_table[D_L0_4x8 as libc::c_int as usize] as libc::c_int;
     if (*h).mb.b_chroma_me != 0
-        && !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc == CHROMA_444 as libc::c_int)
+        && ((*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int)
     {
         (*a).l0.i_cost4x8[i8x8 as usize]
             += mb_analyse_inter_p4x4_chroma(
@@ -25803,9 +25737,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                 (*a).l0.bi16x16.p_fref[4 as libc::c_int as usize],
                 (*a).l0.bi16x16.i_stride[1 as libc::c_int as usize] as intptr_t,
                 (*a).l0.bi16x16.mv[0 as libc::c_int as usize] as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l0.bi16x16.mv[1 as libc::c_int as usize] as libc::c_int
-                        + l0_mvy_offset) >> v_shift,
+                        + l0_mvy_offset)) >> v_shift,
                 16 as libc::c_int >> 1 as libc::c_int,
                 16 as libc::c_int >> v_shift,
             );
@@ -25819,9 +25753,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                 (*a).l1.bi16x16.p_fref[4 as libc::c_int as usize],
                 (*a).l1.bi16x16.i_stride[1 as libc::c_int as usize] as intptr_t,
                 (*a).l1.bi16x16.mv[0 as libc::c_int as usize] as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l1.bi16x16.mv[1 as libc::c_int as usize] as libc::c_int
-                        + l1_mvy_offset) >> v_shift,
+                        + l1_mvy_offset)) >> v_shift,
                 16 as libc::c_int >> 1 as libc::c_int,
                 16 as libc::c_int >> v_shift,
             );
@@ -25978,9 +25912,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                     as intptr_t,
                 (*a).l0.me16x8[idx as usize].mv[0 as libc::c_int as usize]
                     as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l0.me16x8[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l0_mvy_offset_0) >> v_shift_0,
+                        as libc::c_int + l0_mvy_offset_0)) >> v_shift_0,
                 16 as libc::c_int >> 1 as libc::c_int,
                 8 as libc::c_int >> v_shift_0,
             );
@@ -25996,9 +25930,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                     as intptr_t,
                 (*a).l1.me16x8[idx as usize].mv[0 as libc::c_int as usize]
                     as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l1.me16x8[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l1_mvy_offset_0) >> v_shift_0,
+                        as libc::c_int + l1_mvy_offset_0)) >> v_shift_0,
                 16 as libc::c_int >> 1 as libc::c_int,
                 8 as libc::c_int >> v_shift_0,
             );
@@ -26157,9 +26091,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                     as intptr_t,
                 (*a).l0.me8x16[idx as usize].mv[0 as libc::c_int as usize]
                     as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l0.me8x16[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l0_mvy_offset_1) >> v_shift_1,
+                        as libc::c_int + l0_mvy_offset_1)) >> v_shift_1,
                 8 as libc::c_int >> 1 as libc::c_int,
                 16 as libc::c_int >> v_shift_1,
             );
@@ -26175,9 +26109,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                     as intptr_t,
                 (*a).l1.me8x16[idx as usize].mv[0 as libc::c_int as usize]
                     as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l1.me8x16[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l1_mvy_offset_1) >> v_shift_1,
+                        as libc::c_int + l1_mvy_offset_1)) >> v_shift_1,
                 8 as libc::c_int >> 1 as libc::c_int,
                 16 as libc::c_int >> v_shift_1,
             );
@@ -26327,9 +26261,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                 (*a).l0.me8x8[idx as usize].i_stride[1 as libc::c_int as usize]
                     as intptr_t,
                 (*a).l0.me8x8[idx as usize].mv[0 as libc::c_int as usize] as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l0.me8x8[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l0_mvy_offset_2) >> v_shift_2,
+                        as libc::c_int + l0_mvy_offset_2)) >> v_shift_2,
                 8 as libc::c_int >> 1 as libc::c_int,
                 8 as libc::c_int >> v_shift_2,
             );
@@ -26344,9 +26278,9 @@ unsafe extern "C" fn analyse_bi_chroma(
                 (*a).l1.me8x8[idx as usize].i_stride[1 as libc::c_int as usize]
                     as intptr_t,
                 (*a).l1.me8x8[idx as usize].mv[0 as libc::c_int as usize] as libc::c_int,
-                2 as libc::c_int
+                (2 as libc::c_int
                     * ((*a).l1.me8x8[idx as usize].mv[1 as libc::c_int as usize]
-                        as libc::c_int + l1_mvy_offset_2) >> v_shift_2,
+                        as libc::c_int + l1_mvy_offset_2)) >> v_shift_2,
                 8 as libc::c_int >> 1 as libc::c_int,
                 8 as libc::c_int >> v_shift_2,
             );
@@ -26400,7 +26334,7 @@ unsafe extern "C" fn analyse_bi_chroma(
                 16 as libc::c_int as intptr_t,
             );
     }
-    return i_chroma_cost;
+    i_chroma_cost
 }
 unsafe extern "C" fn mb_analyse_inter_direct(
     mut h: *mut x264_t,
@@ -26516,8 +26450,8 @@ unsafe extern "C" fn mb_analyse_inter_b16x16(
 ) {
     let mut pix0: [pixel; 256] = [0; 256];
     let mut pix1: [pixel; 256] = [0; 256];
-    let mut src0: *mut pixel = 0 as *mut pixel;
-    let mut src1: *mut pixel = 0 as *mut pixel;
+    let mut src0: *mut pixel = std::ptr::null_mut::<pixel>();
+    let mut src1: *mut pixel = std::ptr::null_mut::<pixel>();
     let mut stride0: intptr_t = 16 as libc::c_int as intptr_t;
     let mut stride1: intptr_t = 16 as libc::c_int as intptr_t;
     let mut i_ref: libc::c_int = 0;
@@ -26536,7 +26470,7 @@ unsafe extern "C" fn mb_analyse_inter_b16x16(
             &mut *i_halfpel_thresh.as_mut_ptr().offset(0 as libc::c_int as isize)
                 as *mut libc::c_int
         } else {
-            0 as *mut libc::c_int
+            std::ptr::null_mut::<libc::c_int>()
         },
         if (*a).b_early_terminate != 0
             && (*h).mb.pic.i_fref[1 as libc::c_int as usize] > 1 as libc::c_int
@@ -26544,19 +26478,19 @@ unsafe extern "C" fn mb_analyse_inter_b16x16(
             &mut *i_halfpel_thresh.as_mut_ptr().offset(1 as libc::c_int as isize)
                 as *mut libc::c_int
         } else {
-            0 as *mut libc::c_int
+            std::ptr::null_mut::<libc::c_int>()
         },
     ];
     let mut m: x264_me_t = x264_me_t {
         i_pixel: 0,
-        p_cost_mv: 0 as *mut uint16_t,
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
         i_ref_cost: 0,
         i_ref: 0,
-        weight: 0 as *const x264_weight_t,
-        p_fref: [0 as *mut pixel; 12],
-        p_fref_w: 0 as *mut pixel,
-        p_fenc: [0 as *mut pixel; 3],
-        integral: 0 as *mut uint16_t,
+        weight: std::ptr::null::<x264_weight_t>(),
+        p_fref: [std::ptr::null_mut::<pixel>(); 12],
+        p_fref_w: std::ptr::null_mut::<pixel>(),
+        p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+        integral: std::ptr::null_mut::<uint16_t>(),
         i_stride: [0; 3],
         mvp: [0; 2],
         cost_mv: 0,
@@ -27929,17 +27863,17 @@ unsafe extern "C" fn mb_analyse_inter_b8x8_mixed_ref(
             8 as libc::c_int as intptr_t,
             8 as libc::c_int as intptr_t,
         ];
-        let mut src: [*mut pixel; 2] = [0 as *mut pixel; 2];
+        let mut src: [*mut pixel; 2] = [std::ptr::null_mut::<pixel>(); 2];
         let mut m: x264_me_t = x264_me_t {
             i_pixel: 0,
-            p_cost_mv: 0 as *mut uint16_t,
+            p_cost_mv: std::ptr::null_mut::<uint16_t>(),
             i_ref_cost: 0,
             i_ref: 0,
-            weight: 0 as *const x264_weight_t,
-            p_fref: [0 as *mut pixel; 12],
-            p_fref_w: 0 as *mut pixel,
-            p_fenc: [0 as *mut pixel; 3],
-            integral: 0 as *mut uint16_t,
+            weight: std::ptr::null::<x264_weight_t>(),
+            p_fref: [std::ptr::null_mut::<pixel>(); 12],
+            p_fref_w: std::ptr::null_mut::<pixel>(),
+            p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+            integral: std::ptr::null_mut::<uint16_t>(),
             i_stride: [0; 3],
             mvp: [0; 2],
             cost_mv: 0,
@@ -27973,8 +27907,8 @@ unsafe extern "C" fn mb_analyse_inter_b8x8_mixed_ref(
                 .as_mut_ptr()
                 .offset(1 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             m
@@ -27983,8 +27917,8 @@ unsafe extern "C" fn mb_analyse_inter_b8x8_mixed_ref(
                 .as_mut_ptr()
                 .offset(2 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                    (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                        + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -28213,7 +28147,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x8_mixed_ref(
                         .offset(4 as libc::c_int as isize))
                         .offset(
                             (8 as libc::c_int * x8
-                                + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                                + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                                     * *(m.i_stride)
                                         .as_mut_ptr()
                                         .offset(1 as libc::c_int as isize)) as isize,
@@ -28257,7 +28191,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x8_mixed_ref(
                     &mut m,
                     ((*lX_0).mvc[i_ref as usize]).as_mut_ptr(),
                     i + 1 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
                 m.cost += m.i_ref_cost;
                 if m.cost < (*lX_0).me8x8[i as usize].cost {
@@ -28407,7 +28341,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x8(
             8 as libc::c_int as intptr_t,
             8 as libc::c_int as intptr_t,
         ];
-        let mut src: [*mut pixel; 2] = [0 as *mut pixel; 2];
+        let mut src: [*mut pixel; 2] = [std::ptr::null_mut::<pixel>(); 2];
         let mut l: libc::c_int = 0 as libc::c_int;
         while l < 2 as libc::c_int {
             let mut lX: *mut x264_mb_analysis_list_t = if l != 0 {
@@ -28445,8 +28379,8 @@ unsafe extern "C" fn mb_analyse_inter_b8x8(
                     .as_mut_ptr()
                     .offset(1 as libc::c_int as isize))
                     .offset(
-                        ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                            + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                        (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                            + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                                 * 16 as libc::c_int) as isize,
                     ) as *mut pixel;
                 (*m)
@@ -28455,8 +28389,8 @@ unsafe extern "C" fn mb_analyse_inter_b8x8(
                     .as_mut_ptr()
                     .offset(2 as libc::c_int as isize))
                     .offset(
-                        ((8 as libc::c_int * x8 >> (*h).mb.chroma_h_shift)
-                            + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                        (((8 as libc::c_int * x8) >> (*h).mb.chroma_h_shift)
+                            + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                                 * 16 as libc::c_int) as isize,
                     ) as *mut pixel;
             }
@@ -28611,7 +28545,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x8(
                     .offset(4 as libc::c_int as isize))
                     .offset(
                         (8 as libc::c_int * x8
-                            + (8 as libc::c_int * y8 >> (*h).mb.chroma_v_shift)
+                            + ((8 as libc::c_int * y8) >> (*h).mb.chroma_v_shift)
                                 * *((*m).i_stride)
                                     .as_mut_ptr()
                                     .offset(1 as libc::c_int as isize)) as isize,
@@ -28655,7 +28589,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x8(
                 m,
                 &mut (*lX).me16x16.mv,
                 1 as libc::c_int,
-                0 as *mut libc::c_int,
+                std::ptr::null_mut::<libc::c_int>(),
             );
             (*a).i_satd8x8[l as usize][i as usize] = (*m).cost - (*m).cost_mv;
             (*m).cost += (*m).i_ref_cost;
@@ -28777,17 +28711,17 @@ unsafe extern "C" fn mb_analyse_inter_b16x8(
             16 as libc::c_int as intptr_t,
             16 as libc::c_int as intptr_t,
         ];
-        let mut src: [*mut pixel; 2] = [0 as *mut pixel; 2];
+        let mut src: [*mut pixel; 2] = [std::ptr::null_mut::<pixel>(); 2];
         let mut m: x264_me_t = x264_me_t {
             i_pixel: 0,
-            p_cost_mv: 0 as *mut uint16_t,
+            p_cost_mv: std::ptr::null_mut::<uint16_t>(),
             i_ref_cost: 0,
             i_ref: 0,
-            weight: 0 as *const x264_weight_t,
-            p_fref: [0 as *mut pixel; 12],
-            p_fref_w: 0 as *mut pixel,
-            p_fenc: [0 as *mut pixel; 3],
-            integral: 0 as *mut uint16_t,
+            weight: std::ptr::null::<x264_weight_t>(),
+            p_fref: [std::ptr::null_mut::<pixel>(); 12],
+            p_fref_w: std::ptr::null_mut::<pixel>(),
+            p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+            integral: std::ptr::null_mut::<uint16_t>(),
             i_stride: [0; 3],
             mvp: [0; 2],
             cost_mv: 0,
@@ -28821,7 +28755,7 @@ unsafe extern "C" fn mb_analyse_inter_b16x8(
                 .offset(1 as libc::c_int as isize))
                 .offset(
                     ((0 as libc::c_int >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                        + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
             m
@@ -28831,7 +28765,7 @@ unsafe extern "C" fn mb_analyse_inter_b16x8(
                 .offset(2 as libc::c_int as isize))
                 .offset(
                     ((0 as libc::c_int >> (*h).mb.chroma_h_shift)
-                        + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                        + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
         }
@@ -29072,7 +29006,7 @@ unsafe extern "C" fn mb_analyse_inter_b16x8(
                         .offset(4 as libc::c_int as isize))
                         .offset(
                             (0 as libc::c_int
-                                + (8 as libc::c_int * i >> (*h).mb.chroma_v_shift)
+                                + ((8 as libc::c_int * i) >> (*h).mb.chroma_v_shift)
                                     * *(m.i_stride)
                                         .as_mut_ptr()
                                         .offset(1 as libc::c_int as isize)) as isize,
@@ -29132,7 +29066,7 @@ unsafe extern "C" fn mb_analyse_inter_b16x8(
                     &mut m,
                     mvc.as_mut_ptr(),
                     3 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
                 m.cost += m.i_ref_cost;
                 if m.cost < (*lX).me16x8[i as usize].cost {
@@ -29264,17 +29198,17 @@ unsafe extern "C" fn mb_analyse_inter_b8x16(
             8 as libc::c_int as intptr_t,
             8 as libc::c_int as intptr_t,
         ];
-        let mut src: [*mut pixel; 2] = [0 as *mut pixel; 2];
+        let mut src: [*mut pixel; 2] = [std::ptr::null_mut::<pixel>(); 2];
         let mut m: x264_me_t = x264_me_t {
             i_pixel: 0,
-            p_cost_mv: 0 as *mut uint16_t,
+            p_cost_mv: std::ptr::null_mut::<uint16_t>(),
             i_ref_cost: 0,
             i_ref: 0,
-            weight: 0 as *const x264_weight_t,
-            p_fref: [0 as *mut pixel; 12],
-            p_fref_w: 0 as *mut pixel,
-            p_fenc: [0 as *mut pixel; 3],
-            integral: 0 as *mut uint16_t,
+            weight: std::ptr::null::<x264_weight_t>(),
+            p_fref: [std::ptr::null_mut::<pixel>(); 12],
+            p_fref_w: std::ptr::null_mut::<pixel>(),
+            p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+            integral: std::ptr::null_mut::<uint16_t>(),
             i_stride: [0; 3],
             mvp: [0; 2],
             cost_mv: 0,
@@ -29307,7 +29241,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x16(
                 .as_mut_ptr()
                 .offset(1 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * i >> (*h).mb.chroma_h_shift)
+                    (((8 as libc::c_int * i) >> (*h).mb.chroma_h_shift)
                         + (0 as libc::c_int >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
@@ -29317,7 +29251,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x16(
                 .as_mut_ptr()
                 .offset(2 as libc::c_int as isize))
                 .offset(
-                    ((8 as libc::c_int * i >> (*h).mb.chroma_h_shift)
+                    (((8 as libc::c_int * i) >> (*h).mb.chroma_h_shift)
                         + (0 as libc::c_int >> (*h).mb.chroma_v_shift)
                             * 16 as libc::c_int) as isize,
                 ) as *mut pixel;
@@ -29615,7 +29549,7 @@ unsafe extern "C" fn mb_analyse_inter_b8x16(
                     &mut m,
                     mvc.as_mut_ptr(),
                     3 as libc::c_int,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
                 m.cost += m.i_ref_cost;
                 if m.cost < (*lX).me8x16[i as usize].cost {
@@ -29823,37 +29757,31 @@ unsafe extern "C" fn mb_analyse_p_rd(
                             })
                         {
                             costs[1 as libc::c_int as usize]
+                        } else if costs[2 as libc::c_int as usize]
+                            < costs[3 as libc::c_int as usize]
+                        {
+                            costs[2 as libc::c_int as usize]
                         } else {
-                            (if costs[2 as libc::c_int as usize]
-                                < costs[3 as libc::c_int as usize]
-                            {
-                                costs[2 as libc::c_int as usize]
-                            } else {
-                                costs[3 as libc::c_int as usize]
-                            })
+                            costs[3 as libc::c_int as usize]
                         })
                     {
                         costs[0 as libc::c_int as usize]
-                    } else {
-                        (if costs[1 as libc::c_int as usize]
-                            < (if costs[2 as libc::c_int as usize]
-                                < costs[3 as libc::c_int as usize]
-                            {
-                                costs[2 as libc::c_int as usize]
-                            } else {
-                                costs[3 as libc::c_int as usize]
-                            })
+                    } else if costs[1 as libc::c_int as usize]
+                        < (if costs[2 as libc::c_int as usize]
+                            < costs[3 as libc::c_int as usize]
                         {
-                            costs[1 as libc::c_int as usize]
+                            costs[2 as libc::c_int as usize]
                         } else {
-                            (if costs[2 as libc::c_int as usize]
-                                < costs[3 as libc::c_int as usize]
-                            {
-                                costs[2 as libc::c_int as usize]
-                            } else {
-                                costs[3 as libc::c_int as usize]
-                            })
+                            costs[3 as libc::c_int as usize]
                         })
+                    {
+                        costs[1 as libc::c_int as usize]
+                    } else if costs[2 as libc::c_int as usize]
+                        < costs[3 as libc::c_int as usize]
+                    {
+                        costs[2 as libc::c_int as usize]
+                    } else {
+                        costs[3 as libc::c_int as usize]
                     }) * 5 as libc::c_int / 4 as libc::c_int
                 } else {
                     (1 as libc::c_int) << 28 as libc::c_int
@@ -29865,10 +29793,10 @@ unsafe extern "C" fn mb_analyse_p_rd(
                 subtype = D_L0_4x4 as libc::c_int;
                 while subtype <= D_L0_8x8 as libc::c_int {
                     let mut cost: uint64_t = 0;
-                    if !(costs[subtype as usize] > sub8x8_thresh) {
+                    if costs[subtype as usize] <= sub8x8_thresh {
                         (*h).mb.i_sub_partition[i as usize] = subtype as uint8_t;
                         mb_cache_mv_p8x8(h, a, i);
-                        if !(subtype == btype) {
+                        if subtype != btype {
                             cost = x264_8_rd_cost_part(
                                 h,
                                 (*a).i_lambda2,
@@ -30197,23 +30125,11 @@ unsafe extern "C" fn mb_analyse_qp_rd(
         let mut already_checked_qp: libc::c_int = -(1 as libc::c_int);
         let mut already_checked_cost: libc::c_int = (1 as libc::c_int)
             << 28 as libc::c_int;
-        if direction == -(1 as libc::c_int) {
-            if origcbp == 0 {
-                (*h)
-                    .mb
-                    .i_qp = if (*h).mb.i_qp - threshold - 1 as libc::c_int
-                    > (if (*h).param.rc.i_qp_min
-                        < 51 as libc::c_int
-                            + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
-                    {
-                        (*h).param.rc.i_qp_min
-                    } else {
-                        51 as libc::c_int
-                            + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
-                    })
-                {
-                    (*h).mb.i_qp - threshold - 1 as libc::c_int
-                } else if (*h).param.rc.i_qp_min
+        if direction == -(1 as libc::c_int) && origcbp == 0 {
+            (*h)
+                .mb
+                .i_qp = if (*h).mb.i_qp - threshold - 1 as libc::c_int
+                > (if (*h).param.rc.i_qp_min
                     < 51 as libc::c_int
                         + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
                 {
@@ -30221,21 +30137,31 @@ unsafe extern "C" fn mb_analyse_qp_rd(
                 } else {
                     51 as libc::c_int
                         + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
-                };
-                (*h)
-                    .mb
-                    .i_chroma_qp = *((*h).chroma_qp_table).offset((*h).mb.i_qp as isize)
-                    as libc::c_int;
-                already_checked_cost = rd_cost_mb(h, (*a).i_lambda2);
-                if *((*h).mb.cbp).offset((*h).mb.i_mb_xy as isize) == 0 {
-                    if (*h).mb.i_last_qp > (*h).mb.i_qp {
-                        last_qp_tried = 1 as libc::c_int;
-                    }
-                    break;
-                } else {
-                    already_checked_qp = (*h).mb.i_qp;
-                    (*h).mb.i_qp = orig_qp;
+                })
+            {
+                (*h).mb.i_qp - threshold - 1 as libc::c_int
+            } else if (*h).param.rc.i_qp_min
+                < 51 as libc::c_int
+                    + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
+            {
+                (*h).param.rc.i_qp_min
+            } else {
+                51 as libc::c_int
+                    + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
+            };
+            (*h)
+                .mb
+                .i_chroma_qp = *((*h).chroma_qp_table).offset((*h).mb.i_qp as isize)
+                as libc::c_int;
+            already_checked_cost = rd_cost_mb(h, (*a).i_lambda2);
+            if *((*h).mb.cbp).offset((*h).mb.i_mb_xy as isize) == 0 {
+                if (*h).mb.i_last_qp > (*h).mb.i_qp {
+                    last_qp_tried = 1 as libc::c_int;
                 }
+                break;
+            } else {
+                already_checked_qp = (*h).mb.i_qp;
+                (*h).mb.i_qp = orig_qp;
             }
         }
         (*h).mb.i_qp += direction;
@@ -30320,8 +30246,8 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         i_lambda: 0,
         i_lambda2: 0,
         i_qp: 0,
-        p_cost_mv: 0 as *mut uint16_t,
-        p_cost_ref: [0 as *mut uint16_t; 2],
+        p_cost_mv: std::ptr::null_mut::<uint16_t>(),
+        p_cost_ref: [std::ptr::null_mut::<uint16_t>(); 2],
         i_mbrd: 0,
         b_fast_intra: 0,
         b_force_intra: 0,
@@ -30343,14 +30269,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         l0: x264_mb_analysis_list_t {
             me16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30359,14 +30285,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             },
             bi16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30375,14 +30301,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             },
             me8x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30391,14 +30317,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 4],
             me4x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30407,14 +30333,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 4]; 4],
             me8x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30423,14 +30349,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2]; 4],
             me4x8: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30439,14 +30365,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2]; 4],
             me16x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30455,14 +30381,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2],
             me8x16: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30481,14 +30407,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         l1: x264_mb_analysis_list_t {
             me16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30497,14 +30423,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             },
             bi16x16: x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30513,14 +30439,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             },
             me8x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30529,14 +30455,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 4],
             me4x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30545,14 +30471,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 4]; 4],
             me8x4: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30561,14 +30487,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2]; 4],
             me4x8: [[x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30577,14 +30503,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2]; 4],
             me16x8: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30593,14 +30519,14 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
             }; 2],
             me8x16: [x264_me_t {
                 i_pixel: 0,
-                p_cost_mv: 0 as *mut uint16_t,
+                p_cost_mv: std::ptr::null_mut::<uint16_t>(),
                 i_ref_cost: 0,
                 i_ref: 0,
-                weight: 0 as *const x264_weight_t,
-                p_fref: [0 as *mut pixel; 12],
-                p_fref_w: 0 as *mut pixel,
-                p_fenc: [0 as *mut pixel; 3],
-                integral: 0 as *mut uint16_t,
+                weight: std::ptr::null::<x264_weight_t>(),
+                p_fref: [std::ptr::null_mut::<pixel>(); 12],
+                p_fref_w: std::ptr::null_mut::<pixel>(),
+                p_fenc: [std::ptr::null_mut::<pixel>(); 3],
+                integral: std::ptr::null_mut::<uint16_t>(),
                 i_stride: [0; 3],
                 mvp: [0; 2],
                 cost_mv: 0,
@@ -30691,7 +30617,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         } else {
             if !((*(*h).fdec).mb_info).is_null()
                 && *((*(*h).fdec).mb_info).offset((*h).mb.i_mb_xy as isize)
-                    as libc::c_uint & (1 as libc::c_uint) << 0 as libc::c_int != 0
+                    as libc::c_uint & ((1 as libc::c_uint) << 0 as libc::c_int) != 0
             {
                 if (*h).sh.b_mbaff == 0
                     && (*(*h).fdec).i_frame
@@ -30718,8 +30644,8 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                     current_block = 2256356447621023004;
                 } else {
                     if (*h).param.analyse.b_mb_info_update != 0 {
-                        let ref mut fresh25 = *((*(*h).fdec).mb_info)
-                            .offset((*h).mb.i_mb_xy as isize);
+                        let fresh25 = &mut (*((*(*h).fdec).mb_info)
+                            .offset((*h).mb.i_mb_xy as isize));
                         *fresh25 = (*fresh25 as libc::c_uint
                             & !((1 as libc::c_uint) << 0 as libc::c_int)) as uint8_t;
                     }
@@ -30742,18 +30668,16 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                         && skip_invalid == 0
                     {
                         b_skip = 1 as libc::c_int;
-                    } else if (*h).param.analyse.b_fast_pskip != 0 {
-                        if !(skip_invalid != 0) {
-                            if (*h).param.analyse.i_subpel_refine >= 3 as libc::c_int {
-                                analysis.b_try_skip = 1 as libc::c_int;
-                            } else if (*h).mb.i_mb_type_left[0 as libc::c_int as usize]
-                                == P_SKIP as libc::c_int
-                                || (*h).mb.i_mb_type_top == P_SKIP as libc::c_int
-                                || (*h).mb.i_mb_type_topleft == P_SKIP as libc::c_int
-                                || (*h).mb.i_mb_type_topright == P_SKIP as libc::c_int
-                            {
-                                b_skip = x264_8_macroblock_probe_skip(h, 0 as libc::c_int);
-                            }
+                    } else if (*h).param.analyse.b_fast_pskip != 0 && skip_invalid == 0 {
+                        if (*h).param.analyse.i_subpel_refine >= 3 as libc::c_int {
+                            analysis.b_try_skip = 1 as libc::c_int;
+                        } else if (*h).mb.i_mb_type_left[0 as libc::c_int as usize]
+                            == P_SKIP as libc::c_int
+                            || (*h).mb.i_mb_type_top == P_SKIP as libc::c_int
+                            || (*h).mb.i_mb_type_topleft == P_SKIP as libc::c_int
+                            || (*h).mb.i_mb_type_topright == P_SKIP as libc::c_int
+                        {
+                            b_skip = x264_8_macroblock_probe_skip(h, 0 as libc::c_int);
                         }
                     }
                     current_block = 13460095289871124136;
@@ -30763,24 +30687,41 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         match current_block {
             10193120697285822987 => {}
             _ => {
-                match current_block {
-                    13460095289871124136 => {
-                        ((*h).mc.prefetch_ref)
-                            .expect(
-                                "non-null function pointer",
-                            )(
-                            (*h)
-                                .mb
-                                .pic
-                                .p_fref[0 as libc::c_int
-                                as usize][0 as libc::c_int
-                                as usize][((*h).mb.i_mb_x & 3 as libc::c_int) as usize],
-                            (*h).mb.pic.i_stride[0 as libc::c_int as usize] as intptr_t,
-                            1 as libc::c_int,
-                        );
-                        if b_skip != 0 {
-                            (*h).mb.i_type = P_SKIP as libc::c_int;
-                            (*h).mb.i_partition = D_16x16 as libc::c_int;
+                if current_block == 13460095289871124136 {
+                    ((*h).mc.prefetch_ref)
+                        .expect(
+                            "non-null function pointer",
+                        )(
+                        (*h)
+                            .mb
+                            .pic
+                            .p_fref[0 as libc::c_int
+                            as usize][0 as libc::c_int
+                            as usize][((*h).mb.i_mb_x & 3 as libc::c_int) as usize],
+                        (*h).mb.pic.i_stride[0 as libc::c_int as usize] as intptr_t,
+                        1 as libc::c_int,
+                    );
+                    if b_skip != 0 {
+                        (*h).mb.i_type = P_SKIP as libc::c_int;
+                        (*h).mb.i_partition = D_16x16 as libc::c_int;
+                        if (*h).mb.cache.pskip_mv[1 as libc::c_int as usize]
+                            as libc::c_int
+                            <= (*h).mb.mv_max_spel[1 as libc::c_int as usize]
+                            || (*h).i_thread_frames == 1 as libc::c_int
+                        {} else {
+                            __assert_fail(
+                                b"h->mb.cache.pskip_mv[1] <= h->mb.mv_max_spel[1] || h->i_thread_frames == 1\0"
+                                    as *const u8 as *const libc::c_char,
+                                b"encoder/analyse.c\0" as *const u8 as *const libc::c_char,
+                                3023 as libc::c_int as libc::c_uint,
+                                (*::core::mem::transmute::<
+                                    &[u8; 41],
+                                    &[libc::c_char; 41],
+                                >(b"void x264_8_macroblock_analyse(x264_t *)\0"))
+                                    .as_ptr(),
+                            );
+                        }
+                        'c_106395: {
                             if (*h).mb.cache.pskip_mv[1 as libc::c_int as usize]
                                 as libc::c_int
                                 <= (*h).mb.mv_max_spel[1 as libc::c_int as usize]
@@ -30798,733 +30739,712 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                                         .as_ptr(),
                                 );
                             }
-                            'c_106395: {
-                                if (*h).mb.cache.pskip_mv[1 as libc::c_int as usize]
-                                    as libc::c_int
-                                    <= (*h).mb.mv_max_spel[1 as libc::c_int as usize]
-                                    || (*h).i_thread_frames == 1 as libc::c_int
-                                {} else {
-                                    __assert_fail(
-                                        b"h->mb.cache.pskip_mv[1] <= h->mb.mv_max_spel[1] || h->i_thread_frames == 1\0"
-                                            as *const u8 as *const libc::c_char,
-                                        b"encoder/analyse.c\0" as *const u8 as *const libc::c_char,
-                                        3023 as libc::c_int as libc::c_uint,
-                                        (*::core::mem::transmute::<
-                                            &[u8; 41],
-                                            &[libc::c_char; 41],
-                                        >(b"void x264_8_macroblock_analyse(x264_t *)\0"))
-                                            .as_ptr(),
-                                    );
-                                }
-                            };
-                            current_block = 2256356447621023004;
-                        } else {
-                            let flags: libc::c_uint = (*h).param.analyse.inter;
-                            let mut i_type: libc::c_int = 0;
-                            let mut i_partition: libc::c_int = 0;
-                            let mut i_satd_inter: libc::c_int = 0;
-                            let mut i_satd_intra: libc::c_int = 0;
-                            mb_analyse_load_costs(h, &mut analysis);
-                            mb_analyse_inter_p16x16(h, &mut analysis);
-                            if (*h).mb.i_type == P_SKIP as libc::c_int {
-                                let mut i_0: libc::c_int = 1 as libc::c_int;
-                                while i_0 < (*h).mb.pic.i_fref[0 as libc::c_int as usize] {
-                                    (*((*((*h).mb.mvr[0 as libc::c_int as usize][i_0 as usize])
-                                        .offset((*h).mb.i_mb_xy as isize))
-                                        .as_mut_ptr() as *mut x264_union32_t))
-                                        .i = 0 as libc::c_int as uint32_t;
-                                    i_0 += 1;
-                                    i_0;
-                                }
-                                return;
+                        };
+                        current_block = 2256356447621023004;
+                    } else {
+                        let flags: libc::c_uint = (*h).param.analyse.inter;
+                        let mut i_type: libc::c_int = 0;
+                        let mut i_partition: libc::c_int = 0;
+                        let mut i_satd_inter: libc::c_int = 0;
+                        let mut i_satd_intra: libc::c_int = 0;
+                        mb_analyse_load_costs(h, &mut analysis);
+                        mb_analyse_inter_p16x16(h, &mut analysis);
+                        if (*h).mb.i_type == P_SKIP as libc::c_int {
+                            let mut i_0: libc::c_int = 1 as libc::c_int;
+                            while i_0 < (*h).mb.pic.i_fref[0 as libc::c_int as usize] {
+                                (*((*((*h).mb.mvr[0 as libc::c_int as usize][i_0 as usize])
+                                    .offset((*h).mb.i_mb_xy as isize))
+                                    .as_mut_ptr() as *mut x264_union32_t))
+                                    .i = 0 as libc::c_int as uint32_t;
+                                i_0 += 1;
+                                i_0;
                             }
-                            if flags & 0x10 as libc::c_uint != 0 {
-                                if (*h).param.analyse.b_mixed_references != 0 {
-                                    mb_analyse_inter_p8x8_mixed_ref(h, &mut analysis);
-                                } else {
-                                    mb_analyse_inter_p8x8(h, &mut analysis);
-                                }
+                            return;
+                        }
+                        if flags & 0x10 as libc::c_uint != 0 {
+                            if (*h).param.analyse.b_mixed_references != 0 {
+                                mb_analyse_inter_p8x8_mixed_ref(h, &mut analysis);
+                            } else {
+                                mb_analyse_inter_p8x8(h, &mut analysis);
                             }
-                            i_type = P_L0 as libc::c_int;
-                            i_partition = D_16x16 as libc::c_int;
-                            i_cost = analysis.l0.me16x16.cost;
-                            if flags & 0x10 as libc::c_uint != 0
-                                && (analysis.b_early_terminate == 0
-                                    || analysis.l0.i_cost8x8 < analysis.l0.me16x16.cost)
-                            {
-                                i_type = P_8x8 as libc::c_int;
-                                i_partition = D_8x8 as libc::c_int;
-                                i_cost = analysis.l0.i_cost8x8;
-                                if flags & 0x20 as libc::c_uint != 0 {
-                                    let mut i_1: libc::c_int = 0 as libc::c_int;
-                                    while i_1 < 4 as libc::c_int {
-                                        mb_analyse_inter_p4x4(h, &mut analysis, i_1);
-                                        let mut i_thresh8x4: libc::c_int = analysis
+                        }
+                        i_type = P_L0 as libc::c_int;
+                        i_partition = D_16x16 as libc::c_int;
+                        i_cost = analysis.l0.me16x16.cost;
+                        if flags & 0x10 as libc::c_uint != 0
+                            && (analysis.b_early_terminate == 0
+                                || analysis.l0.i_cost8x8 < analysis.l0.me16x16.cost)
+                        {
+                            i_type = P_8x8 as libc::c_int;
+                            i_partition = D_8x8 as libc::c_int;
+                            i_cost = analysis.l0.i_cost8x8;
+                            if flags & 0x20 as libc::c_uint != 0 {
+                                let mut i_1: libc::c_int = 0 as libc::c_int;
+                                while i_1 < 4 as libc::c_int {
+                                    mb_analyse_inter_p4x4(h, &mut analysis, i_1);
+                                    let mut i_thresh8x4: libc::c_int = analysis
+                                        .l0
+                                        .me4x4[i_1 as usize][1 as libc::c_int as usize]
+                                        .cost_mv
+                                        + analysis
                                             .l0
-                                            .me4x4[i_1 as usize][1 as libc::c_int as usize]
-                                            .cost_mv
-                                            + analysis
-                                                .l0
-                                                .me4x4[i_1 as usize][2 as libc::c_int as usize]
-                                                .cost_mv;
-                                        if analysis.b_early_terminate == 0
-                                            || analysis.l0.i_cost4x4[i_1 as usize]
-                                                < analysis.l0.me8x8[i_1 as usize].cost + i_thresh8x4
-                                        {
-                                            let mut i_cost8x8: libc::c_int = analysis
-                                                .l0
-                                                .i_cost4x4[i_1 as usize];
+                                            .me4x4[i_1 as usize][2 as libc::c_int as usize]
+                                            .cost_mv;
+                                    if analysis.b_early_terminate == 0
+                                        || analysis.l0.i_cost4x4[i_1 as usize]
+                                            < analysis.l0.me8x8[i_1 as usize].cost + i_thresh8x4
+                                    {
+                                        let mut i_cost8x8: libc::c_int = analysis
+                                            .l0
+                                            .i_cost4x4[i_1 as usize];
+                                        (*h)
+                                            .mb
+                                            .i_sub_partition[i_1
+                                            as usize] = D_L0_4x4 as libc::c_int as uint8_t;
+                                        mb_analyse_inter_p8x4(h, &mut analysis, i_1);
+                                        if analysis.l0.i_cost8x4[i_1 as usize] < i_cost8x8 {
+                                            i_cost8x8 = analysis.l0.i_cost8x4[i_1 as usize];
                                             (*h)
                                                 .mb
                                                 .i_sub_partition[i_1
-                                                as usize] = D_L0_4x4 as libc::c_int as uint8_t;
-                                            mb_analyse_inter_p8x4(h, &mut analysis, i_1);
-                                            if analysis.l0.i_cost8x4[i_1 as usize] < i_cost8x8 {
-                                                i_cost8x8 = analysis.l0.i_cost8x4[i_1 as usize];
-                                                (*h)
-                                                    .mb
-                                                    .i_sub_partition[i_1
-                                                    as usize] = D_L0_8x4 as libc::c_int as uint8_t;
-                                            }
-                                            mb_analyse_inter_p4x8(h, &mut analysis, i_1);
-                                            if analysis.l0.i_cost4x8[i_1 as usize] < i_cost8x8 {
-                                                i_cost8x8 = analysis.l0.i_cost4x8[i_1 as usize];
-                                                (*h)
-                                                    .mb
-                                                    .i_sub_partition[i_1
-                                                    as usize] = D_L0_4x8 as libc::c_int as uint8_t;
-                                            }
-                                            i_cost += i_cost8x8 - analysis.l0.me8x8[i_1 as usize].cost;
+                                                as usize] = D_L0_8x4 as libc::c_int as uint8_t;
                                         }
-                                        mb_cache_mv_p8x8(h, &mut analysis, i_1);
-                                        i_1 += 1;
-                                        i_1;
+                                        mb_analyse_inter_p4x8(h, &mut analysis, i_1);
+                                        if analysis.l0.i_cost4x8[i_1 as usize] < i_cost8x8 {
+                                            i_cost8x8 = analysis.l0.i_cost4x8[i_1 as usize];
+                                            (*h)
+                                                .mb
+                                                .i_sub_partition[i_1
+                                                as usize] = D_L0_4x8 as libc::c_int as uint8_t;
+                                        }
+                                        i_cost += i_cost8x8 - analysis.l0.me8x8[i_1 as usize].cost;
                                     }
-                                    analysis.l0.i_cost8x8 = i_cost;
+                                    mb_cache_mv_p8x8(h, &mut analysis, i_1);
+                                    i_1 += 1;
+                                    i_1;
                                 }
+                                analysis.l0.i_cost8x8 = i_cost;
                             }
-                            let mut i_thresh16x8: libc::c_int = analysis
+                        }
+                        let mut i_thresh16x8: libc::c_int = analysis
+                            .l0
+                            .me8x8[1 as libc::c_int as usize]
+                            .cost_mv
+                            + analysis.l0.me8x8[2 as libc::c_int as usize].cost_mv;
+                        if flags & 0x10 as libc::c_uint != 0
+                            && (analysis.b_early_terminate == 0
+                                || analysis.l0.i_cost8x8
+                                    < analysis.l0.me16x16.cost + i_thresh16x8)
+                        {
+                            let mut i_avg_mv_ref_cost: libc::c_int = (analysis
+                                .l0
+                                .me8x8[2 as libc::c_int as usize]
+                                .cost_mv
+                                + analysis.l0.me8x8[2 as libc::c_int as usize].i_ref_cost
+                                + analysis.l0.me8x8[3 as libc::c_int as usize].cost_mv
+                                + analysis.l0.me8x8[3 as libc::c_int as usize].i_ref_cost
+                                + 1 as libc::c_int) >> 1 as libc::c_int;
+                            analysis
+                                .i_cost_est16x8[1 as libc::c_int
+                                as usize] = analysis
+                                .i_satd8x8[0 as libc::c_int
+                                as usize][2 as libc::c_int as usize]
+                                + analysis
+                                    .i_satd8x8[0 as libc::c_int
+                                    as usize][3 as libc::c_int as usize] + i_avg_mv_ref_cost;
+                            mb_analyse_inter_p16x8(h, &mut analysis, i_cost);
+                            if analysis.l0.i_cost16x8 < i_cost {
+                                i_cost = analysis.l0.i_cost16x8;
+                                i_type = P_L0 as libc::c_int;
+                                i_partition = D_16x8 as libc::c_int;
+                            }
+                            i_avg_mv_ref_cost = (analysis
                                 .l0
                                 .me8x8[1 as libc::c_int as usize]
                                 .cost_mv
-                                + analysis.l0.me8x8[2 as libc::c_int as usize].cost_mv;
-                            if flags & 0x10 as libc::c_uint != 0
-                                && (analysis.b_early_terminate == 0
-                                    || analysis.l0.i_cost8x8
-                                        < analysis.l0.me16x16.cost + i_thresh16x8)
-                            {
-                                let mut i_avg_mv_ref_cost: libc::c_int = analysis
-                                    .l0
-                                    .me8x8[2 as libc::c_int as usize]
-                                    .cost_mv
-                                    + analysis.l0.me8x8[2 as libc::c_int as usize].i_ref_cost
-                                    + analysis.l0.me8x8[3 as libc::c_int as usize].cost_mv
-                                    + analysis.l0.me8x8[3 as libc::c_int as usize].i_ref_cost
-                                    + 1 as libc::c_int >> 1 as libc::c_int;
-                                analysis
-                                    .i_cost_est16x8[1 as libc::c_int
-                                    as usize] = analysis
+                                + analysis.l0.me8x8[1 as libc::c_int as usize].i_ref_cost
+                                + analysis.l0.me8x8[3 as libc::c_int as usize].cost_mv
+                                + analysis.l0.me8x8[3 as libc::c_int as usize].i_ref_cost
+                                + 1 as libc::c_int) >> 1 as libc::c_int;
+                            analysis
+                                .i_cost_est8x16[1 as libc::c_int
+                                as usize] = analysis
+                                .i_satd8x8[0 as libc::c_int
+                                as usize][1 as libc::c_int as usize]
+                                + analysis
                                     .i_satd8x8[0 as libc::c_int
-                                    as usize][2 as libc::c_int as usize]
-                                    + analysis
-                                        .i_satd8x8[0 as libc::c_int
-                                        as usize][3 as libc::c_int as usize] + i_avg_mv_ref_cost;
-                                mb_analyse_inter_p16x8(h, &mut analysis, i_cost);
-                                if analysis.l0.i_cost16x8 < i_cost {
-                                    i_cost = analysis.l0.i_cost16x8;
-                                    i_type = P_L0 as libc::c_int;
-                                    i_partition = D_16x8 as libc::c_int;
-                                }
-                                i_avg_mv_ref_cost = analysis
-                                    .l0
-                                    .me8x8[1 as libc::c_int as usize]
-                                    .cost_mv
-                                    + analysis.l0.me8x8[1 as libc::c_int as usize].i_ref_cost
-                                    + analysis.l0.me8x8[3 as libc::c_int as usize].cost_mv
-                                    + analysis.l0.me8x8[3 as libc::c_int as usize].i_ref_cost
-                                    + 1 as libc::c_int >> 1 as libc::c_int;
-                                analysis
-                                    .i_cost_est8x16[1 as libc::c_int
-                                    as usize] = analysis
-                                    .i_satd8x8[0 as libc::c_int
-                                    as usize][1 as libc::c_int as usize]
-                                    + analysis
-                                        .i_satd8x8[0 as libc::c_int
-                                        as usize][3 as libc::c_int as usize] + i_avg_mv_ref_cost;
-                                mb_analyse_inter_p8x16(h, &mut analysis, i_cost);
-                                if analysis.l0.i_cost8x16 < i_cost {
-                                    i_cost = analysis.l0.i_cost8x16;
-                                    i_type = P_L0 as libc::c_int;
-                                    i_partition = D_8x16 as libc::c_int;
-                                }
+                                    as usize][3 as libc::c_int as usize] + i_avg_mv_ref_cost;
+                            mb_analyse_inter_p8x16(h, &mut analysis, i_cost);
+                            if analysis.l0.i_cost8x16 < i_cost {
+                                i_cost = analysis.l0.i_cost8x16;
+                                i_type = P_L0 as libc::c_int;
+                                i_partition = D_8x16 as libc::c_int;
                             }
-                            (*h).mb.i_partition = i_partition;
-                            if !(analysis.i_mbrd != 0 || (*h).mb.i_subpel_refine == 0) {
-                                if i_partition == D_16x16 as libc::c_int {
-                                    x264_8_me_refine_qpel(h, &mut analysis.l0.me16x16);
-                                    i_cost = analysis.l0.me16x16.cost;
-                                } else if i_partition == D_16x8 as libc::c_int {
-                                    x264_8_me_refine_qpel(
-                                        h,
-                                        &mut *(analysis.l0.me16x8)
-                                            .as_mut_ptr()
-                                            .offset(0 as libc::c_int as isize),
-                                    );
-                                    x264_8_me_refine_qpel(
-                                        h,
-                                        &mut *(analysis.l0.me16x8)
-                                            .as_mut_ptr()
-                                            .offset(1 as libc::c_int as isize),
-                                    );
-                                    i_cost = analysis.l0.me16x8[0 as libc::c_int as usize].cost
-                                        + analysis.l0.me16x8[1 as libc::c_int as usize].cost;
-                                } else if i_partition == D_8x16 as libc::c_int {
-                                    x264_8_me_refine_qpel(
-                                        h,
-                                        &mut *(analysis.l0.me8x16)
-                                            .as_mut_ptr()
-                                            .offset(0 as libc::c_int as isize),
-                                    );
-                                    x264_8_me_refine_qpel(
-                                        h,
-                                        &mut *(analysis.l0.me8x16)
-                                            .as_mut_ptr()
-                                            .offset(1 as libc::c_int as isize),
-                                    );
-                                    i_cost = analysis.l0.me8x16[0 as libc::c_int as usize].cost
-                                        + analysis.l0.me8x16[1 as libc::c_int as usize].cost;
-                                } else if i_partition == D_8x8 as libc::c_int {
-                                    i_cost = 0 as libc::c_int;
-                                    let mut i8x8: libc::c_int = 0 as libc::c_int;
-                                    while i8x8 < 4 as libc::c_int {
-                                        match (*h).mb.i_sub_partition[i8x8 as usize] as libc::c_int
-                                        {
-                                            3 => {
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(analysis.l0.me8x8).as_mut_ptr().offset(i8x8 as isize),
-                                                );
-                                                i_cost += analysis.l0.me8x8[i8x8 as usize].cost;
-                                            }
-                                            1 => {
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me8x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                );
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me8x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                );
-                                                i_cost
-                                                    += analysis
-                                                        .l0
-                                                        .me8x4[i8x8 as usize][0 as libc::c_int as usize]
-                                                        .cost
-                                                        + analysis
-                                                            .l0
-                                                            .me8x4[i8x8 as usize][1 as libc::c_int as usize]
-                                                            .cost;
-                                            }
-                                            2 => {
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x8)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                );
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x8)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                );
-                                                i_cost
-                                                    += analysis
-                                                        .l0
-                                                        .me4x8[i8x8 as usize][0 as libc::c_int as usize]
-                                                        .cost
-                                                        + analysis
-                                                            .l0
-                                                            .me4x8[i8x8 as usize][1 as libc::c_int as usize]
-                                                            .cost;
-                                            }
-                                            0 => {
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                );
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                );
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(2 as libc::c_int as isize),
-                                                );
-                                                x264_8_me_refine_qpel(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(3 as libc::c_int as isize),
-                                                );
-                                                i_cost
-                                                    += analysis
-                                                        .l0
-                                                        .me4x4[i8x8 as usize][0 as libc::c_int as usize]
-                                                        .cost
-                                                        + analysis
-                                                            .l0
-                                                            .me4x4[i8x8 as usize][1 as libc::c_int as usize]
-                                                            .cost
-                                                        + analysis
-                                                            .l0
-                                                            .me4x4[i8x8 as usize][2 as libc::c_int as usize]
-                                                            .cost
-                                                        + analysis
-                                                            .l0
-                                                            .me4x4[i8x8 as usize][3 as libc::c_int as usize]
-                                                            .cost;
-                                            }
-                                            _ => {
-                                                x264_8_log(
-                                                    h,
-                                                    0 as libc::c_int,
-                                                    b"internal error (!8x8 && !4x4)\n\0" as *const u8
-                                                        as *const libc::c_char,
-                                                );
-                                            }
+                        }
+                        (*h).mb.i_partition = i_partition;
+                        if !(analysis.i_mbrd != 0 || (*h).mb.i_subpel_refine == 0) {
+                            if i_partition == D_16x16 as libc::c_int {
+                                x264_8_me_refine_qpel(h, &mut analysis.l0.me16x16);
+                                i_cost = analysis.l0.me16x16.cost;
+                            } else if i_partition == D_16x8 as libc::c_int {
+                                x264_8_me_refine_qpel(
+                                    h,
+                                    &mut *(analysis.l0.me16x8)
+                                        .as_mut_ptr()
+                                        .offset(0 as libc::c_int as isize),
+                                );
+                                x264_8_me_refine_qpel(
+                                    h,
+                                    &mut *(analysis.l0.me16x8)
+                                        .as_mut_ptr()
+                                        .offset(1 as libc::c_int as isize),
+                                );
+                                i_cost = analysis.l0.me16x8[0 as libc::c_int as usize].cost
+                                    + analysis.l0.me16x8[1 as libc::c_int as usize].cost;
+                            } else if i_partition == D_8x16 as libc::c_int {
+                                x264_8_me_refine_qpel(
+                                    h,
+                                    &mut *(analysis.l0.me8x16)
+                                        .as_mut_ptr()
+                                        .offset(0 as libc::c_int as isize),
+                                );
+                                x264_8_me_refine_qpel(
+                                    h,
+                                    &mut *(analysis.l0.me8x16)
+                                        .as_mut_ptr()
+                                        .offset(1 as libc::c_int as isize),
+                                );
+                                i_cost = analysis.l0.me8x16[0 as libc::c_int as usize].cost
+                                    + analysis.l0.me8x16[1 as libc::c_int as usize].cost;
+                            } else if i_partition == D_8x8 as libc::c_int {
+                                i_cost = 0 as libc::c_int;
+                                let mut i8x8: libc::c_int = 0 as libc::c_int;
+                                while i8x8 < 4 as libc::c_int {
+                                    match (*h).mb.i_sub_partition[i8x8 as usize] as libc::c_int
+                                    {
+                                        3 => {
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(analysis.l0.me8x8).as_mut_ptr().offset(i8x8 as isize),
+                                            );
+                                            i_cost += analysis.l0.me8x8[i8x8 as usize].cost;
                                         }
-                                        i8x8 += 1;
-                                        i8x8;
+                                        1 => {
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me8x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                            );
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me8x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                            );
+                                            i_cost
+                                                += analysis
+                                                    .l0
+                                                    .me8x4[i8x8 as usize][0 as libc::c_int as usize]
+                                                    .cost
+                                                    + analysis
+                                                        .l0
+                                                        .me8x4[i8x8 as usize][1 as libc::c_int as usize]
+                                                        .cost;
+                                        }
+                                        2 => {
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x8)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                            );
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x8)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                            );
+                                            i_cost
+                                                += analysis
+                                                    .l0
+                                                    .me4x8[i8x8 as usize][0 as libc::c_int as usize]
+                                                    .cost
+                                                    + analysis
+                                                        .l0
+                                                        .me4x8[i8x8 as usize][1 as libc::c_int as usize]
+                                                        .cost;
+                                        }
+                                        0 => {
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                            );
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                            );
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(2 as libc::c_int as isize),
+                                            );
+                                            x264_8_me_refine_qpel(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(3 as libc::c_int as isize),
+                                            );
+                                            i_cost
+                                                += analysis
+                                                    .l0
+                                                    .me4x4[i8x8 as usize][0 as libc::c_int as usize]
+                                                    .cost
+                                                    + analysis
+                                                        .l0
+                                                        .me4x4[i8x8 as usize][1 as libc::c_int as usize]
+                                                        .cost
+                                                    + analysis
+                                                        .l0
+                                                        .me4x4[i8x8 as usize][2 as libc::c_int as usize]
+                                                        .cost
+                                                    + analysis
+                                                        .l0
+                                                        .me4x4[i8x8 as usize][3 as libc::c_int as usize]
+                                                        .cost;
+                                        }
+                                        _ => {
+                                            x264_8_log(
+                                                h,
+                                                0 as libc::c_int,
+                                                b"internal error (!8x8 && !4x4)\n\0" as *const u8
+                                                    as *const libc::c_char,
+                                            );
+                                        }
                                     }
+                                    i8x8 += 1;
+                                    i8x8;
                                 }
                             }
-                            if (*h).mb.b_chroma_me != 0 {
-                                if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                                    == CHROMA_444 as libc::c_int
-                                {
-                                    mb_analyse_intra(h, &mut analysis, i_cost);
-                                    mb_analyse_intra_chroma(h, &mut analysis);
-                                } else {
-                                    mb_analyse_intra_chroma(h, &mut analysis);
-                                    mb_analyse_intra(
-                                        h,
-                                        &mut analysis,
-                                        i_cost - analysis.i_satd_chroma,
-                                    );
-                                }
-                                analysis.i_satd_i16x16 += analysis.i_satd_chroma;
-                                analysis.i_satd_i8x8 += analysis.i_satd_chroma;
-                                analysis.i_satd_i4x4 += analysis.i_satd_chroma;
-                            } else {
-                                mb_analyse_intra(h, &mut analysis, i_cost);
-                            }
-                            i_satd_inter = i_cost;
-                            i_satd_intra = if analysis.i_satd_i16x16
-                                < (if analysis.i_satd_i8x8 < analysis.i_satd_i4x4 {
-                                    analysis.i_satd_i8x8
-                                } else {
-                                    analysis.i_satd_i4x4
-                                })
+                        }
+                        if (*h).mb.b_chroma_me != 0 {
+                            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
+                                == CHROMA_444 as libc::c_int
                             {
-                                analysis.i_satd_i16x16
-                            } else if analysis.i_satd_i8x8 < analysis.i_satd_i4x4 {
+                                mb_analyse_intra(h, &mut analysis, i_cost);
+                                mb_analyse_intra_chroma(h, &mut analysis);
+                            } else {
+                                mb_analyse_intra_chroma(h, &mut analysis);
+                                mb_analyse_intra(
+                                    h,
+                                    &mut analysis,
+                                    i_cost - analysis.i_satd_chroma,
+                                );
+                            }
+                            analysis.i_satd_i16x16 += analysis.i_satd_chroma;
+                            analysis.i_satd_i8x8 += analysis.i_satd_chroma;
+                            analysis.i_satd_i4x4 += analysis.i_satd_chroma;
+                        } else {
+                            mb_analyse_intra(h, &mut analysis, i_cost);
+                        }
+                        i_satd_inter = i_cost;
+                        i_satd_intra = if analysis.i_satd_i16x16
+                            < (if analysis.i_satd_i8x8 < analysis.i_satd_i4x4 {
                                 analysis.i_satd_i8x8
                             } else {
                                 analysis.i_satd_i4x4
-                            };
-                            if analysis.i_mbrd != 0 {
-                                mb_analyse_p_rd(
-                                    h,
-                                    &mut analysis,
-                                    if i_satd_inter < i_satd_intra {
-                                        i_satd_inter
-                                    } else {
-                                        i_satd_intra
-                                    },
-                                );
-                                i_type = P_L0 as libc::c_int;
-                                i_partition = D_16x16 as libc::c_int;
-                                i_cost = analysis.l0.i_rd16x16;
-                                if analysis.l0.i_cost16x8 < i_cost {
-                                    i_cost = analysis.l0.i_cost16x8;
-                                    i_partition = D_16x8 as libc::c_int;
-                                }
-                                if analysis.l0.i_cost8x16 < i_cost {
-                                    i_cost = analysis.l0.i_cost8x16;
-                                    i_partition = D_8x16 as libc::c_int;
-                                }
-                                if analysis.l0.i_cost8x8 < i_cost {
-                                    i_cost = analysis.l0.i_cost8x8;
-                                    i_partition = D_8x8 as libc::c_int;
-                                    i_type = P_8x8 as libc::c_int;
-                                }
-                                (*h).mb.i_type = i_type;
-                                (*h).mb.i_partition = i_partition;
-                                if i_cost < (1 as libc::c_int) << 28 as libc::c_int {
-                                    mb_analyse_transform_rd(
-                                        h,
-                                        &mut analysis,
-                                        &mut i_satd_inter,
-                                        &mut i_cost,
-                                    );
-                                }
-                                intra_rd(
-                                    h,
-                                    &mut analysis,
-                                    i_satd_inter * 5 as libc::c_int / 4 as libc::c_int
-                                        + 1 as libc::c_int,
-                                );
+                            })
+                        {
+                            analysis.i_satd_i16x16
+                        } else if analysis.i_satd_i8x8 < analysis.i_satd_i4x4 {
+                            analysis.i_satd_i8x8
+                        } else {
+                            analysis.i_satd_i4x4
+                        };
+                        if analysis.i_mbrd != 0 {
+                            mb_analyse_p_rd(
+                                h,
+                                &mut analysis,
+                                if i_satd_inter < i_satd_intra {
+                                    i_satd_inter
+                                } else {
+                                    i_satd_intra
+                                },
+                            );
+                            i_type = P_L0 as libc::c_int;
+                            i_partition = D_16x16 as libc::c_int;
+                            i_cost = analysis.l0.i_rd16x16;
+                            if analysis.l0.i_cost16x8 < i_cost {
+                                i_cost = analysis.l0.i_cost16x8;
+                                i_partition = D_16x8 as libc::c_int;
                             }
-                            if analysis.i_satd_i16x16 < i_cost {
-                                i_cost = analysis.i_satd_i16x16;
-                                i_type = I_16x16 as libc::c_int;
+                            if analysis.l0.i_cost8x16 < i_cost {
+                                i_cost = analysis.l0.i_cost8x16;
+                                i_partition = D_8x16 as libc::c_int;
                             }
-                            if analysis.i_satd_i8x8 < i_cost {
-                                i_cost = analysis.i_satd_i8x8;
-                                i_type = I_8x8 as libc::c_int;
-                            }
-                            if analysis.i_satd_i4x4 < i_cost {
-                                i_cost = analysis.i_satd_i4x4;
-                                i_type = I_4x4 as libc::c_int;
-                            }
-                            if analysis.i_satd_pcm < i_cost {
-                                i_cost = analysis.i_satd_pcm;
-                                i_type = I_PCM as libc::c_int;
+                            if analysis.l0.i_cost8x8 < i_cost {
+                                i_cost = analysis.l0.i_cost8x8;
+                                i_partition = D_8x8 as libc::c_int;
+                                i_type = P_8x8 as libc::c_int;
                             }
                             (*h).mb.i_type = i_type;
-                            if analysis.b_force_intra != 0
-                                && !(i_type == I_4x4 as libc::c_int
-                                    || i_type == I_8x8 as libc::c_int
-                                    || i_type == I_16x16 as libc::c_int
-                                    || i_type == I_PCM as libc::c_int)
-                            {
-                                analyse_update_cache(h, &mut analysis);
-                                x264_8_macroblock_encode(h);
-                                let mut p: libc::c_int = 0 as libc::c_int;
-                                while p
-                                    < (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                                        == CHROMA_444 as libc::c_int
-                                    {
-                                        3 as libc::c_int
-                                    } else {
-                                        1 as libc::c_int
-                                    })
-                                {
-                                    ((*h).mc.copy[PIXEL_16x16 as libc::c_int as usize])
-                                        .expect(
-                                            "non-null function pointer",
-                                        )(
-                                        (*h).mb.pic.p_fenc[p as usize],
-                                        16 as libc::c_int as intptr_t,
-                                        (*h).mb.pic.p_fdec[p as usize],
-                                        32 as libc::c_int as intptr_t,
-                                        16 as libc::c_int,
-                                    );
-                                    p += 1;
-                                    p;
-                                }
-                                if !((*((*h).sps).as_mut_ptr()).i_chroma_format_idc
-                                    == CHROMA_444 as libc::c_int)
-                                {
-                                    let mut height: libc::c_int = 16 as libc::c_int
-                                        >> (*h).mb.chroma_v_shift;
-                                    ((*h).mc.copy[PIXEL_8x8 as libc::c_int as usize])
-                                        .expect(
-                                            "non-null function pointer",
-                                        )(
-                                        (*h).mb.pic.p_fenc[1 as libc::c_int as usize],
-                                        16 as libc::c_int as intptr_t,
-                                        (*h).mb.pic.p_fdec[1 as libc::c_int as usize],
-                                        32 as libc::c_int as intptr_t,
-                                        height,
-                                    );
-                                    ((*h).mc.copy[PIXEL_8x8 as libc::c_int as usize])
-                                        .expect(
-                                            "non-null function pointer",
-                                        )(
-                                        (*h).mb.pic.p_fenc[2 as libc::c_int as usize],
-                                        16 as libc::c_int as intptr_t,
-                                        (*h).mb.pic.p_fdec[2 as libc::c_int as usize],
-                                        32 as libc::c_int as intptr_t,
-                                        height,
-                                    );
-                                }
-                                mb_analyse_init_qp(
+                            (*h).mb.i_partition = i_partition;
+                            if i_cost < (1 as libc::c_int) << 28 as libc::c_int {
+                                mb_analyse_transform_rd(
                                     h,
                                     &mut analysis,
-                                    if (*h).mb.i_qp - (*h).mb.ip_offset > (*h).param.rc.i_qp_min
-                                    {
-                                        (*h).mb.i_qp - (*h).mb.ip_offset
-                                    } else {
-                                        (*h).param.rc.i_qp_min
-                                    },
+                                    &mut i_satd_inter,
+                                    &mut i_cost,
                                 );
-                                current_block = 10193120697285822987;
-                            } else {
-                                if analysis.i_mbrd >= 2 as libc::c_int
-                                    && (*h).mb.i_type != I_PCM as libc::c_int
+                            }
+                            intra_rd(
+                                h,
+                                &mut analysis,
+                                i_satd_inter * 5 as libc::c_int / 4 as libc::c_int
+                                    + 1 as libc::c_int,
+                            );
+                        }
+                        if analysis.i_satd_i16x16 < i_cost {
+                            i_cost = analysis.i_satd_i16x16;
+                            i_type = I_16x16 as libc::c_int;
+                        }
+                        if analysis.i_satd_i8x8 < i_cost {
+                            i_cost = analysis.i_satd_i8x8;
+                            i_type = I_8x8 as libc::c_int;
+                        }
+                        if analysis.i_satd_i4x4 < i_cost {
+                            i_cost = analysis.i_satd_i4x4;
+                            i_type = I_4x4 as libc::c_int;
+                        }
+                        if analysis.i_satd_pcm < i_cost {
+                            i_cost = analysis.i_satd_pcm;
+                            i_type = I_PCM as libc::c_int;
+                        }
+                        (*h).mb.i_type = i_type;
+                        if analysis.b_force_intra != 0
+                            && !(i_type == I_4x4 as libc::c_int
+                                || i_type == I_8x8 as libc::c_int
+                                || i_type == I_16x16 as libc::c_int
+                                || i_type == I_PCM as libc::c_int)
+                        {
+                            analyse_update_cache(h, &mut analysis);
+                            x264_8_macroblock_encode(h);
+                            let mut p: libc::c_int = 0 as libc::c_int;
+                            while p
+                                < (if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc
+                                    == CHROMA_444 as libc::c_int
                                 {
-                                    if (*h).mb.i_type == I_4x4 as libc::c_int
-                                        || (*h).mb.i_type == I_8x8 as libc::c_int
-                                        || (*h).mb.i_type == I_16x16 as libc::c_int
-                                        || (*h).mb.i_type == I_PCM as libc::c_int
-                                    {
-                                        intra_rd_refine(h, &mut analysis);
-                                    } else if i_partition == D_16x16 as libc::c_int {
-                                        x264_macroblock_cache_ref(
-                                            h,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                            4 as libc::c_int,
-                                            4 as libc::c_int,
-                                            0 as libc::c_int,
-                                            analysis.l0.me16x16.i_ref as int8_t,
-                                        );
-                                        analysis.l0.me16x16.cost = i_cost;
-                                        x264_8_me_refine_qpel_rd(
-                                            h,
-                                            &mut analysis.l0.me16x16,
-                                            analysis.i_lambda2,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                        );
-                                    } else if i_partition == D_16x8 as libc::c_int {
-                                        (*(((*h).mb.i_sub_partition).as_mut_ptr()
-                                            as *mut x264_union32_t))
-                                            .i = (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int)
-                                            as uint32_t;
-                                        x264_macroblock_cache_ref(
-                                            h,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                            4 as libc::c_int,
-                                            2 as libc::c_int,
-                                            0 as libc::c_int,
-                                            analysis.l0.me16x8[0 as libc::c_int as usize].i_ref
-                                                as int8_t,
-                                        );
-                                        x264_macroblock_cache_ref(
-                                            h,
-                                            0 as libc::c_int,
-                                            2 as libc::c_int,
-                                            4 as libc::c_int,
-                                            2 as libc::c_int,
-                                            0 as libc::c_int,
-                                            analysis.l0.me16x8[1 as libc::c_int as usize].i_ref
-                                                as int8_t,
-                                        );
-                                        x264_8_me_refine_qpel_rd(
-                                            h,
-                                            &mut *(analysis.l0.me16x8)
-                                                .as_mut_ptr()
-                                                .offset(0 as libc::c_int as isize),
-                                            analysis.i_lambda2,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                        );
-                                        x264_8_me_refine_qpel_rd(
-                                            h,
-                                            &mut *(analysis.l0.me16x8)
-                                                .as_mut_ptr()
-                                                .offset(1 as libc::c_int as isize),
-                                            analysis.i_lambda2,
-                                            8 as libc::c_int,
-                                            0 as libc::c_int,
-                                        );
-                                    } else if i_partition == D_8x16 as libc::c_int {
-                                        (*(((*h).mb.i_sub_partition).as_mut_ptr()
-                                            as *mut x264_union32_t))
-                                            .i = (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int)
-                                            as uint32_t;
-                                        x264_macroblock_cache_ref(
-                                            h,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                            2 as libc::c_int,
-                                            4 as libc::c_int,
-                                            0 as libc::c_int,
-                                            analysis.l0.me8x16[0 as libc::c_int as usize].i_ref
-                                                as int8_t,
-                                        );
-                                        x264_macroblock_cache_ref(
-                                            h,
-                                            2 as libc::c_int,
-                                            0 as libc::c_int,
-                                            2 as libc::c_int,
-                                            4 as libc::c_int,
-                                            0 as libc::c_int,
-                                            analysis.l0.me8x16[1 as libc::c_int as usize].i_ref
-                                                as int8_t,
-                                        );
-                                        x264_8_me_refine_qpel_rd(
-                                            h,
-                                            &mut *(analysis.l0.me8x16)
-                                                .as_mut_ptr()
-                                                .offset(0 as libc::c_int as isize),
-                                            analysis.i_lambda2,
-                                            0 as libc::c_int,
-                                            0 as libc::c_int,
-                                        );
-                                        x264_8_me_refine_qpel_rd(
-                                            h,
-                                            &mut *(analysis.l0.me8x16)
-                                                .as_mut_ptr()
-                                                .offset(1 as libc::c_int as isize),
-                                            analysis.i_lambda2,
-                                            4 as libc::c_int,
-                                            0 as libc::c_int,
-                                        );
-                                    } else if i_partition == D_8x8 as libc::c_int {
-                                        analyse_update_cache(h, &mut analysis);
-                                        let mut i8x8_0: libc::c_int = 0 as libc::c_int;
-                                        while i8x8_0 < 4 as libc::c_int {
-                                            if (*h).mb.i_sub_partition[i8x8_0 as usize] as libc::c_int
-                                                == D_L0_8x8 as libc::c_int
-                                            {
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(analysis.l0.me8x8)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                            } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
-                                                as libc::c_int == D_L0_8x4 as libc::c_int
-                                            {
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me8x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me8x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 2 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                            } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
-                                                as libc::c_int == D_L0_4x8 as libc::c_int
-                                            {
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x8)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x8)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 1 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                            } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
-                                                as libc::c_int == D_L0_4x4 as libc::c_int
-                                            {
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(0 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(1 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 1 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(2 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 2 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                                x264_8_me_refine_qpel_rd(
-                                                    h,
-                                                    &mut *(*(analysis.l0.me4x4)
-                                                        .as_mut_ptr()
-                                                        .offset(i8x8_0 as isize))
-                                                        .as_mut_ptr()
-                                                        .offset(3 as libc::c_int as isize),
-                                                    analysis.i_lambda2,
-                                                    i8x8_0 * 4 as libc::c_int + 3 as libc::c_int,
-                                                    0 as libc::c_int,
-                                                );
-                                            }
-                                            i8x8_0 += 1;
-                                            i8x8_0;
+                                    3 as libc::c_int
+                                } else {
+                                    1 as libc::c_int
+                                })
+                            {
+                                ((*h).mc.copy[PIXEL_16x16 as libc::c_int as usize])
+                                    .expect(
+                                        "non-null function pointer",
+                                    )(
+                                    (*h).mb.pic.p_fenc[p as usize],
+                                    16 as libc::c_int as intptr_t,
+                                    (*h).mb.pic.p_fdec[p as usize],
+                                    32 as libc::c_int as intptr_t,
+                                    16 as libc::c_int,
+                                );
+                                p += 1;
+                                p;
+                            }
+                            if (*((*h).sps).as_mut_ptr()).i_chroma_format_idc != CHROMA_444 as libc::c_int
+                            {
+                                let mut height: libc::c_int = 16 as libc::c_int
+                                    >> (*h).mb.chroma_v_shift;
+                                ((*h).mc.copy[PIXEL_8x8 as libc::c_int as usize])
+                                    .expect(
+                                        "non-null function pointer",
+                                    )(
+                                    (*h).mb.pic.p_fenc[1 as libc::c_int as usize],
+                                    16 as libc::c_int as intptr_t,
+                                    (*h).mb.pic.p_fdec[1 as libc::c_int as usize],
+                                    32 as libc::c_int as intptr_t,
+                                    height,
+                                );
+                                ((*h).mc.copy[PIXEL_8x8 as libc::c_int as usize])
+                                    .expect(
+                                        "non-null function pointer",
+                                    )(
+                                    (*h).mb.pic.p_fenc[2 as libc::c_int as usize],
+                                    16 as libc::c_int as intptr_t,
+                                    (*h).mb.pic.p_fdec[2 as libc::c_int as usize],
+                                    32 as libc::c_int as intptr_t,
+                                    height,
+                                );
+                            }
+                            mb_analyse_init_qp(
+                                h,
+                                &mut analysis,
+                                if (*h).mb.i_qp - (*h).mb.ip_offset > (*h).param.rc.i_qp_min
+                                {
+                                    (*h).mb.i_qp - (*h).mb.ip_offset
+                                } else {
+                                    (*h).param.rc.i_qp_min
+                                },
+                            );
+                            current_block = 10193120697285822987;
+                        } else {
+                            if analysis.i_mbrd >= 2 as libc::c_int
+                                && (*h).mb.i_type != I_PCM as libc::c_int
+                            {
+                                if (*h).mb.i_type == I_4x4 as libc::c_int
+                                    || (*h).mb.i_type == I_8x8 as libc::c_int
+                                    || (*h).mb.i_type == I_16x16 as libc::c_int
+                                    || (*h).mb.i_type == I_PCM as libc::c_int
+                                {
+                                    intra_rd_refine(h, &mut analysis);
+                                } else if i_partition == D_16x16 as libc::c_int {
+                                    x264_macroblock_cache_ref(
+                                        h,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                        4 as libc::c_int,
+                                        4 as libc::c_int,
+                                        0 as libc::c_int,
+                                        analysis.l0.me16x16.i_ref as int8_t,
+                                    );
+                                    analysis.l0.me16x16.cost = i_cost;
+                                    x264_8_me_refine_qpel_rd(
+                                        h,
+                                        &mut analysis.l0.me16x16,
+                                        analysis.i_lambda2,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                    );
+                                } else if i_partition == D_16x8 as libc::c_int {
+                                    (*(((*h).mb.i_sub_partition).as_mut_ptr()
+                                        as *mut x264_union32_t))
+                                        .i = (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int)
+                                        as uint32_t;
+                                    x264_macroblock_cache_ref(
+                                        h,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                        4 as libc::c_int,
+                                        2 as libc::c_int,
+                                        0 as libc::c_int,
+                                        analysis.l0.me16x8[0 as libc::c_int as usize].i_ref
+                                            as int8_t,
+                                    );
+                                    x264_macroblock_cache_ref(
+                                        h,
+                                        0 as libc::c_int,
+                                        2 as libc::c_int,
+                                        4 as libc::c_int,
+                                        2 as libc::c_int,
+                                        0 as libc::c_int,
+                                        analysis.l0.me16x8[1 as libc::c_int as usize].i_ref
+                                            as int8_t,
+                                    );
+                                    x264_8_me_refine_qpel_rd(
+                                        h,
+                                        &mut *(analysis.l0.me16x8)
+                                            .as_mut_ptr()
+                                            .offset(0 as libc::c_int as isize),
+                                        analysis.i_lambda2,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                    );
+                                    x264_8_me_refine_qpel_rd(
+                                        h,
+                                        &mut *(analysis.l0.me16x8)
+                                            .as_mut_ptr()
+                                            .offset(1 as libc::c_int as isize),
+                                        analysis.i_lambda2,
+                                        8 as libc::c_int,
+                                        0 as libc::c_int,
+                                    );
+                                } else if i_partition == D_8x16 as libc::c_int {
+                                    (*(((*h).mb.i_sub_partition).as_mut_ptr()
+                                        as *mut x264_union32_t))
+                                        .i = (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int)
+                                        as uint32_t;
+                                    x264_macroblock_cache_ref(
+                                        h,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                        2 as libc::c_int,
+                                        4 as libc::c_int,
+                                        0 as libc::c_int,
+                                        analysis.l0.me8x16[0 as libc::c_int as usize].i_ref
+                                            as int8_t,
+                                    );
+                                    x264_macroblock_cache_ref(
+                                        h,
+                                        2 as libc::c_int,
+                                        0 as libc::c_int,
+                                        2 as libc::c_int,
+                                        4 as libc::c_int,
+                                        0 as libc::c_int,
+                                        analysis.l0.me8x16[1 as libc::c_int as usize].i_ref
+                                            as int8_t,
+                                    );
+                                    x264_8_me_refine_qpel_rd(
+                                        h,
+                                        &mut *(analysis.l0.me8x16)
+                                            .as_mut_ptr()
+                                            .offset(0 as libc::c_int as isize),
+                                        analysis.i_lambda2,
+                                        0 as libc::c_int,
+                                        0 as libc::c_int,
+                                    );
+                                    x264_8_me_refine_qpel_rd(
+                                        h,
+                                        &mut *(analysis.l0.me8x16)
+                                            .as_mut_ptr()
+                                            .offset(1 as libc::c_int as isize),
+                                        analysis.i_lambda2,
+                                        4 as libc::c_int,
+                                        0 as libc::c_int,
+                                    );
+                                } else if i_partition == D_8x8 as libc::c_int {
+                                    analyse_update_cache(h, &mut analysis);
+                                    let mut i8x8_0: libc::c_int = 0 as libc::c_int;
+                                    while i8x8_0 < 4 as libc::c_int {
+                                        if (*h).mb.i_sub_partition[i8x8_0 as usize] as libc::c_int
+                                            == D_L0_8x8 as libc::c_int
+                                        {
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(analysis.l0.me8x8)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                        } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
+                                            as libc::c_int == D_L0_8x4 as libc::c_int
+                                        {
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me8x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me8x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 2 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                        } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
+                                            as libc::c_int == D_L0_4x8 as libc::c_int
+                                        {
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x8)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x8)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 1 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                        } else if (*h).mb.i_sub_partition[i8x8_0 as usize]
+                                            as libc::c_int == D_L0_4x4 as libc::c_int
+                                        {
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(0 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 0 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(1 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 1 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(2 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 2 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
+                                            x264_8_me_refine_qpel_rd(
+                                                h,
+                                                &mut *(*(analysis.l0.me4x4)
+                                                    .as_mut_ptr()
+                                                    .offset(i8x8_0 as isize))
+                                                    .as_mut_ptr()
+                                                    .offset(3 as libc::c_int as isize),
+                                                analysis.i_lambda2,
+                                                i8x8_0 * 4 as libc::c_int + 3 as libc::c_int,
+                                                0 as libc::c_int,
+                                            );
                                         }
+                                        i8x8_0 += 1;
+                                        i8x8_0;
                                     }
                                 }
-                                current_block = 17193116482801528934;
                             }
+                            current_block = 17193116482801528934;
                         }
                     }
-                    _ => {}
                 }
                 match current_block {
                     17193116482801528934 => {}
@@ -31566,7 +31486,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                         if i_2 != 0 && analysis.b_direct_available != 0 {
                             &mut b_changed
                         } else {
-                            0 as *mut libc::c_int
+                            std::ptr::null_mut::<libc::c_int>()
                         },
                     );
                     if analysis.b_direct_available != 0 {
@@ -31589,7 +31509,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                 analysis
                     .b_direct_available = x264_8_mb_predict_mv_direct16x16(
                     h,
-                    0 as *mut libc::c_int,
+                    std::ptr::null_mut::<libc::c_int>(),
                 );
             }
             analysis.b_try_skip = 0 as libc::c_int;
@@ -31606,8 +31526,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                     (*h)
                         .mb
                         .b_skip_mc = (i_bskip_cost
-                        <= 6 as libc::c_int * analysis.i_lambda2 + 128 as libc::c_int
-                            >> 8 as libc::c_int) as libc::c_int;
+                        <= (6 as libc::c_int * analysis.i_lambda2 + 128 as libc::c_int) >> 8 as libc::c_int) as libc::c_int;
                     b_skip_0 = (*h).mb.b_skip_mc;
                 } else if (*h).mb.b_direct_auto_write == 0 {
                     analysis
@@ -31746,7 +31665,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                                 .i_satd8x8[2 as libc::c_int
                                 as usize][(i_7 * 2 as libc::c_int + 1 as libc::c_int)
                                 as usize];
-                        avg_l0_mv_ref_cost = analysis
+                        avg_l0_mv_ref_cost = (analysis
                             .l0
                             .me8x8[(i_7 * 2 as libc::c_int) as usize]
                             .cost_mv
@@ -31761,8 +31680,8 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                             + analysis
                                 .l0
                                 .me8x8[(i_7 * 2 as libc::c_int + 1 as libc::c_int) as usize]
-                                .i_ref_cost + 1 as libc::c_int >> 1 as libc::c_int;
-                        avg_l1_mv_ref_cost = analysis
+                                .i_ref_cost + 1 as libc::c_int) >> 1 as libc::c_int;
+                        avg_l1_mv_ref_cost = (analysis
                             .l1
                             .me8x8[(i_7 * 2 as libc::c_int) as usize]
                             .cost_mv
@@ -31777,7 +31696,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                             + analysis
                                 .l1
                                 .me8x8[(i_7 * 2 as libc::c_int + 1 as libc::c_int) as usize]
-                                .i_ref_cost + 1 as libc::c_int >> 1 as libc::c_int;
+                                .i_ref_cost + 1 as libc::c_int) >> 1 as libc::c_int;
                         if i_l0_satd + avg_l0_mv_ref_cost < i_best_cost {
                             i_best_cost = i_l0_satd + avg_l0_mv_ref_cost;
                             i_partition16x8[i_7 as usize] = D_L0_8x8 as libc::c_int;
@@ -31810,7 +31729,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                             + analysis
                                 .i_satd8x8[2 as libc::c_int
                                 as usize][(i_7 + 2 as libc::c_int) as usize];
-                        avg_l0_mv_ref_cost = analysis.l0.me8x8[i_7 as usize].cost_mv
+                        avg_l0_mv_ref_cost = (analysis.l0.me8x8[i_7 as usize].cost_mv
                             + analysis.l0.me8x8[i_7 as usize].i_ref_cost
                             + analysis
                                 .l0
@@ -31819,8 +31738,8 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                             + analysis
                                 .l0
                                 .me8x8[(i_7 + 2 as libc::c_int) as usize]
-                                .i_ref_cost + 1 as libc::c_int >> 1 as libc::c_int;
-                        avg_l1_mv_ref_cost = analysis.l1.me8x8[i_7 as usize].cost_mv
+                                .i_ref_cost + 1 as libc::c_int) >> 1 as libc::c_int;
+                        avg_l1_mv_ref_cost = (analysis.l1.me8x8[i_7 as usize].cost_mv
                             + analysis.l1.me8x8[i_7 as usize].i_ref_cost
                             + analysis
                                 .l1
@@ -31829,7 +31748,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                             + analysis
                                 .l1
                                 .me8x8[(i_7 + 2 as libc::c_int) as usize]
-                                .i_ref_cost + 1 as libc::c_int >> 1 as libc::c_int;
+                                .i_ref_cost + 1 as libc::c_int) >> 1 as libc::c_int;
                         if i_l0_satd + avg_l0_mv_ref_cost < i_best_cost {
                             i_best_cost = i_l0_satd + avg_l0_mv_ref_cost;
                             i_partition8x16[i_7 as usize] = D_L0_8x8 as libc::c_int;
@@ -31978,7 +31897,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                     } else if i_partition_0 == D_8x8 as libc::c_int {
                         let mut i_10: libc::c_int = 0 as libc::c_int;
                         while i_10 < 4 as libc::c_int {
-                            let mut m: *mut x264_me_t = 0 as *mut x264_me_t;
+                            let mut m: *mut x264_me_t = std::ptr::null_mut::<x264_me_t>();
                             let mut i_part_cost_old: libc::c_int = 0;
                             let mut i_type_cost: libc::c_int = 0;
                             let mut i_part_type: libc::c_int = (*h)
@@ -31986,7 +31905,7 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
                                 .i_sub_partition[i_10 as usize] as libc::c_int;
                             let mut b_bidir: libc::c_int = (i_part_type
                                 == D_BI_8x8 as libc::c_int) as libc::c_int;
-                            if !(i_part_type == D_DIRECT_8x8 as libc::c_int) {
+                            if i_part_type != D_DIRECT_8x8 as libc::c_int {
                                 if x264_mb_partition_listX_table[0 as libc::c_int
                                     as usize][i_part_type as usize] != 0
                                 {
@@ -32353,35 +32272,32 @@ pub unsafe extern "C" fn x264_8_macroblock_analyse(mut h: *mut x264_t) {
         }
         current_block = 17193116482801528934;
     }
-    match current_block {
-        10193120697285822987 => {
-            if analysis.i_mbrd != 0 {
-                mb_init_fenc_cache(
-                    h,
-                    (analysis.i_mbrd >= 2 as libc::c_int) as libc::c_int,
-                );
-            }
-            mb_analyse_intra(h, &mut analysis, (1 as libc::c_int) << 28 as libc::c_int);
-            if analysis.i_mbrd != 0 {
-                intra_rd(h, &mut analysis, (1 as libc::c_int) << 28 as libc::c_int);
-            }
-            i_cost = analysis.i_satd_i16x16;
-            (*h).mb.i_type = I_16x16 as libc::c_int;
-            if analysis.i_satd_i4x4 < i_cost {
-                i_cost = analysis.i_satd_i4x4;
-                (*h).mb.i_type = I_4x4 as libc::c_int;
-            }
-            if analysis.i_satd_i8x8 < i_cost {
-                i_cost = analysis.i_satd_i8x8;
-                (*h).mb.i_type = I_8x8 as libc::c_int;
-            }
-            if analysis.i_satd_pcm < i_cost {
-                (*h).mb.i_type = I_PCM as libc::c_int;
-            } else if analysis.i_mbrd >= 2 as libc::c_int {
-                intra_rd_refine(h, &mut analysis);
-            }
+    if current_block == 10193120697285822987 {
+        if analysis.i_mbrd != 0 {
+            mb_init_fenc_cache(
+                h,
+                (analysis.i_mbrd >= 2 as libc::c_int) as libc::c_int,
+            );
         }
-        _ => {}
+        mb_analyse_intra(h, &mut analysis, (1 as libc::c_int) << 28 as libc::c_int);
+        if analysis.i_mbrd != 0 {
+            intra_rd(h, &mut analysis, (1 as libc::c_int) << 28 as libc::c_int);
+        }
+        i_cost = analysis.i_satd_i16x16;
+        (*h).mb.i_type = I_16x16 as libc::c_int;
+        if analysis.i_satd_i4x4 < i_cost {
+            i_cost = analysis.i_satd_i4x4;
+            (*h).mb.i_type = I_4x4 as libc::c_int;
+        }
+        if analysis.i_satd_i8x8 < i_cost {
+            i_cost = analysis.i_satd_i8x8;
+            (*h).mb.i_type = I_8x8 as libc::c_int;
+        }
+        if analysis.i_satd_pcm < i_cost {
+            (*h).mb.i_type = I_PCM as libc::c_int;
+        } else if analysis.i_mbrd >= 2 as libc::c_int {
+            intra_rd_refine(h, &mut analysis);
+        }
     }
     analyse_update_cache(h, &mut analysis);
     if analysis.i_mbrd >= 2 as libc::c_int {
@@ -32877,7 +32793,7 @@ unsafe extern "C" fn analyse_update_cache(
                 .cache
                 .ref_0[l as usize][x264_scan8[0 as libc::c_int as usize] as usize]
                 as libc::c_int;
-            if !(ref_0 < 0 as libc::c_int) {
+            if ref_0 >= 0 as libc::c_int {
                 completed = x264_8_frame_cond_wait(
                     (*(*h).fref[l as usize][(ref_0 >> (*h).mb.b_interlaced) as usize])
                         .orig,
@@ -32888,8 +32804,7 @@ unsafe extern "C" fn analyse_update_cache(
                     .cache
                     .mv[l
                     as usize][x264_scan8[15 as libc::c_int as usize]
-                    as usize][1 as libc::c_int as usize] as libc::c_int
-                    >> 2 as libc::c_int - (*h).mb.b_interlaced)
+                    as usize][1 as libc::c_int as usize] as libc::c_int >> (2 as libc::c_int - (*h).mb.b_interlaced))
                     + (*h).mb.i_mb_y * 16 as libc::c_int > completed
                 {
                     x264_8_log(

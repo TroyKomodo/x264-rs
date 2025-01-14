@@ -188,7 +188,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                     .i = v8;
                 h -= 2 as libc::c_int;
                 d = d.offset((s * 2 as libc::c_int) as isize);
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }
@@ -200,7 +200,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                 (*(d.offset(12 as libc::c_int as isize) as *mut x264_union32_t)).i = v4;
                 d = d.offset(s as isize);
                 h -= 1;
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }

@@ -2315,7 +2315,7 @@ pub type ADL_MAIN_MALLOC_CALLBACK = Option::<
 >;
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_opencl_load_library() -> *mut x264_opencl_function_t {
-    let mut ocl: *mut x264_opencl_function_t = 0 as *mut x264_opencl_function_t;
+    let mut ocl: *mut x264_opencl_function_t = std::ptr::null_mut::<x264_opencl_function_t>();
     ocl = x264_malloc(
         ::core::mem::size_of::<x264_opencl_function_t>() as libc::c_ulong as int64_t,
     ) as *mut x264_opencl_function_t;
@@ -2730,7 +2730,7 @@ pub unsafe extern "C" fn x264_8_opencl_load_library() -> *mut x264_opencl_functi
         }
         x264_free(ocl as *mut libc::c_void);
     }
-    return 0 as *mut x264_opencl_function_t;
+    std::ptr::null_mut::<x264_opencl_function_t>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_opencl_close_library(
@@ -77622,7 +77622,7 @@ unsafe extern "C" fn opencl_cache_load(
     mut driver_version: *const libc::c_char,
 ) -> cl_program {
     let mut size: size_t = 0;
-    let mut ptr: *const uint8_t = 0 as *const uint8_t;
+    let mut ptr: *const uint8_t = std::ptr::null::<uint8_t>();
     let mut status: cl_int = 0;
     let mut fp: *mut FILE = fopen(
         (*h).param.psz_clbin_file,
@@ -77633,7 +77633,7 @@ unsafe extern "C" fn opencl_cache_load(
     }
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
     let mut program: cl_program = 0 as cl_program;
-    let mut binary: *mut uint8_t = 0 as *mut uint8_t;
+    let mut binary: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     fseeko(fp, 0 as libc::c_int as __off64_t, 2 as libc::c_int);
     let mut file_size: int64_t = ftello(fp);
     fseeko(fp, 0 as libc::c_int as __off64_t, 0 as libc::c_int);
@@ -77642,82 +77642,79 @@ unsafe extern "C" fn opencl_cache_load(
     {
         size = file_size as size_t;
         binary = x264_malloc(size as int64_t) as *mut uint8_t;
-        if !binary.is_null() {
-            if !(fread(
+        if !binary.is_null() && fread(
                 binary as *mut libc::c_void,
                 1 as libc::c_int as libc::c_ulong,
                 size,
                 fp,
-            ) != size)
+            ) == size {
+            ptr = binary as *const uint8_t;
+            let mut len: size_t = strlen(dev_name);
+            if !(size <= len
+                || strncmp(ptr as *mut libc::c_char, dev_name, len) != 0)
             {
-                ptr = binary as *const uint8_t;
-                let mut len: size_t = strlen(dev_name);
-                if !(size <= len
-                    || strncmp(ptr as *mut libc::c_char, dev_name, len) != 0)
+                size = size
+                    .wrapping_sub(len.wrapping_add(1 as libc::c_int as size_t));
+                ptr = ptr
+                    .offset(len.wrapping_add(1 as libc::c_int as size_t) as isize);
+                let mut len_0: size_t = strlen(dev_vendor);
+                if !(size <= len_0
+                    || strncmp(ptr as *mut libc::c_char, dev_vendor, len_0) != 0)
                 {
                     size = size
-                        .wrapping_sub(len.wrapping_add(1 as libc::c_int as size_t));
+                        .wrapping_sub(
+                            len_0.wrapping_add(1 as libc::c_int as size_t),
+                        );
                     ptr = ptr
-                        .offset(len.wrapping_add(1 as libc::c_int as size_t) as isize);
-                    let mut len_0: size_t = strlen(dev_vendor);
-                    if !(size <= len_0
-                        || strncmp(ptr as *mut libc::c_char, dev_vendor, len_0) != 0)
+                        .offset(
+                            len_0.wrapping_add(1 as libc::c_int as size_t) as isize,
+                        );
+                    let mut len_1: size_t = strlen(driver_version);
+                    if !(size <= len_1
+                        || strncmp(ptr as *mut libc::c_char, driver_version, len_1)
+                            != 0)
                     {
                         size = size
                             .wrapping_sub(
-                                len_0.wrapping_add(1 as libc::c_int as size_t),
+                                len_1.wrapping_add(1 as libc::c_int as size_t),
                             );
                         ptr = ptr
                             .offset(
-                                len_0.wrapping_add(1 as libc::c_int as size_t) as isize,
+                                len_1.wrapping_add(1 as libc::c_int as size_t) as isize,
                             );
-                        let mut len_1: size_t = strlen(driver_version);
-                        if !(size <= len_1
-                            || strncmp(ptr as *mut libc::c_char, driver_version, len_1)
-                                != 0)
+                        let mut len_2: size_t = strlen(
+                            x264_opencl_source_hash.as_ptr(),
+                        );
+                        if !(size <= len_2
+                            || strncmp(
+                                ptr as *mut libc::c_char,
+                                x264_opencl_source_hash.as_ptr(),
+                                len_2,
+                            ) != 0)
                         {
                             size = size
                                 .wrapping_sub(
-                                    len_1.wrapping_add(1 as libc::c_int as size_t),
+                                    len_2.wrapping_add(1 as libc::c_int as size_t),
                                 );
                             ptr = ptr
                                 .offset(
-                                    len_1.wrapping_add(1 as libc::c_int as size_t) as isize,
+                                    len_2.wrapping_add(1 as libc::c_int as size_t) as isize,
                                 );
-                            let mut len_2: size_t = strlen(
-                                x264_opencl_source_hash.as_ptr(),
+                            status = 0;
+                            program = ((*ocl).clCreateProgramWithBinary)
+                                .expect(
+                                    "non-null function pointer",
+                                )(
+                                (*h).opencl.context,
+                                1 as libc::c_int as cl_uint,
+                                &mut (*h).opencl.device,
+                                &mut size,
+                                &mut ptr,
+                                std::ptr::null_mut::<cl_int>(),
+                                &mut status,
                             );
-                            if !(size <= len_2
-                                || strncmp(
-                                    ptr as *mut libc::c_char,
-                                    x264_opencl_source_hash.as_ptr(),
-                                    len_2,
-                                ) != 0)
-                            {
-                                size = size
-                                    .wrapping_sub(
-                                        len_2.wrapping_add(1 as libc::c_int as size_t),
-                                    );
-                                ptr = ptr
-                                    .offset(
-                                        len_2.wrapping_add(1 as libc::c_int as size_t) as isize,
-                                    );
-                                status = 0;
-                                program = ((*ocl).clCreateProgramWithBinary)
-                                    .expect(
-                                        "non-null function pointer",
-                                    )(
-                                    (*h).opencl.context,
-                                    1 as libc::c_int as cl_uint,
-                                    &mut (*h).opencl.device,
-                                    &mut size,
-                                    &mut ptr,
-                                    0 as *mut cl_int,
-                                    &mut status,
-                                );
-                                if status != 0 as libc::c_int {
-                                    program = 0 as cl_program;
-                                }
+                            if status != 0 as libc::c_int {
+                                program = 0 as cl_program;
                             }
                         }
                     }
@@ -77727,7 +77724,7 @@ unsafe extern "C" fn opencl_cache_load(
     }
     fclose(fp);
     x264_free(binary as *mut libc::c_void);
-    return program;
+    program
 }
 unsafe extern "C" fn opencl_cache_save(
     mut h: *mut x264_t,
@@ -77750,7 +77747,7 @@ unsafe extern "C" fn opencl_cache_save(
         return;
     }
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
-    let mut binary: *mut uint8_t = 0 as *mut uint8_t;
+    let mut binary: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     let mut size: size_t = 0 as libc::c_int as size_t;
     let mut status: cl_int = ((*ocl).clGetProgramInfo)
         .expect(
@@ -77760,7 +77757,7 @@ unsafe extern "C" fn opencl_cache_save(
         0x1165 as libc::c_int as cl_program_info,
         ::core::mem::size_of::<size_t>() as libc::c_ulong,
         &mut size as *mut size_t as *mut libc::c_void,
-        0 as *mut size_t,
+        std::ptr::null_mut::<size_t>(),
     );
     if status != 0 as libc::c_int || size == 0 {
         x264_8_log(
@@ -77780,7 +77777,7 @@ unsafe extern "C" fn opencl_cache_save(
                 0x1166 as libc::c_int as cl_program_info,
                 ::core::mem::size_of::<*mut uint8_t>() as libc::c_ulong,
                 &mut binary as *mut *mut uint8_t as *mut libc::c_void,
-                0 as *mut size_t,
+                std::ptr::null_mut::<size_t>(),
             );
             if status != 0 as libc::c_int {
                 x264_8_log(
@@ -77811,10 +77808,10 @@ unsafe extern "C" fn opencl_cache_save(
     x264_free(binary as *mut libc::c_void);
 }
 unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
-    let mut log_file: *mut FILE = 0 as *mut FILE;
+    let mut log_file: *mut FILE = std::ptr::null_mut::<FILE>();
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
     let mut program: cl_program = 0 as cl_program;
-    let mut build_log: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut build_log: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut dev_name: [libc::c_char; 64] = [0; 64];
     let mut dev_vendor: [libc::c_char; 64] = [0; 64];
     let mut driver_version: [libc::c_char; 64] = [0; 64];
@@ -77827,7 +77824,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
         0x102b as libc::c_int as cl_device_info,
         ::core::mem::size_of::<[libc::c_char; 64]>() as libc::c_ulong,
         dev_name.as_mut_ptr() as *mut libc::c_void,
-        0 as *mut size_t,
+        std::ptr::null_mut::<size_t>(),
     );
     status
         |= ((*ocl).clGetDeviceInfo)
@@ -77838,7 +77835,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
             0x102c as libc::c_int as cl_device_info,
             ::core::mem::size_of::<[libc::c_char; 64]>() as libc::c_ulong,
             dev_vendor.as_mut_ptr() as *mut libc::c_void,
-            0 as *mut size_t,
+            std::ptr::null_mut::<size_t>(),
         );
     status
         |= ((*ocl).clGetDeviceInfo)
@@ -77849,7 +77846,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
             0x102d as libc::c_int as cl_device_info,
             ::core::mem::size_of::<[libc::c_char; 64]>() as libc::c_ulong,
             driver_version.as_mut_ptr() as *mut libc::c_void,
-            0 as *mut size_t,
+            std::ptr::null_mut::<size_t>(),
         );
     if status != 0 as libc::c_int {
         return 0 as cl_program;
@@ -77878,7 +77875,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
             0x4042 as libc::c_int as cl_device_info,
             ::core::mem::size_of::<cl_uint>() as libc::c_ulong,
             &mut simdwidth as *mut cl_uint as *mut libc::c_void,
-            0 as *mut size_t,
+            std::ptr::null_mut::<size_t>(),
         );
         if status == 0 as libc::c_int && simdwidth == 1 as libc::c_int as cl_uint {
             vectorize = 0 as libc::c_int;
@@ -77947,7 +77944,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
         &mut (*h).opencl.device,
         buildopts,
         None,
-        0 as *mut libc::c_void,
+        std::ptr::null_mut::<libc::c_void>(),
     );
     if status == 0 as libc::c_int {
         opencl_cache_save(
@@ -77968,7 +77965,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
         (*h).opencl.device,
         0x1183 as libc::c_int as cl_program_build_info,
         0 as libc::c_int as size_t,
-        0 as *mut libc::c_void,
+        std::ptr::null_mut::<libc::c_void>(),
         &mut build_log_len,
     );
     if status != 0 as libc::c_int || build_log_len == 0 {
@@ -77997,7 +77994,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
                 0x1183 as libc::c_int as cl_program_build_info,
                 build_log_len,
                 build_log as *mut libc::c_void,
-                0 as *mut size_t,
+                std::ptr::null_mut::<size_t>(),
             );
             if status != 0 as libc::c_int {
                 x264_8_log(
@@ -78040,7 +78037,7 @@ unsafe extern "C" fn opencl_compile(mut h: *mut x264_t) -> cl_program {
     if !program.is_null() {
         ((*ocl).clReleaseProgram).expect("non-null function pointer")(program);
     }
-    return 0 as cl_program;
+    0 as cl_program
 }
 unsafe extern "C" fn opencl_lookahead_alloc(mut h: *mut x264_t) -> libc::c_int {
     let mut current_block: u64;
@@ -78081,11 +78078,10 @@ unsafe extern "C" fn opencl_lookahead_alloc(mut h: *mut x264_t) -> libc::c_int {
     if !((*h).opencl.lookahead_program).is_null() {
         let mut i: libc::c_int = 0 as libc::c_int;
         loop {
-            if !(i
-                < (::core::mem::size_of::<[*const libc::c_char; 12]>() as libc::c_ulong)
+            if i >= (::core::mem::size_of::<[*const libc::c_char; 12]>() as libc::c_ulong)
                     .wrapping_div(
                         ::core::mem::size_of::<*const libc::c_char>() as libc::c_ulong,
-                    ) as libc::c_int)
+                    ) as libc::c_int
             {
                 current_block = 13183875560443969876;
                 break;
@@ -78121,11 +78117,10 @@ unsafe extern "C" fn opencl_lookahead_alloc(mut h: *mut x264_t) -> libc::c_int {
                         "non-null function pointer",
                     )(
                     (*h).opencl.context,
-                    ((1 as libc::c_int) << 1 as libc::c_int
-                        | (1 as libc::c_int) << 4 as libc::c_int) as cl_mem_flags,
+                    (((1 as libc::c_int) << 1 as libc::c_int) | ((1 as libc::c_int) << 4 as libc::c_int)) as cl_mem_flags,
                     (32 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int)
                         as size_t,
-                    0 as *mut libc::c_void,
+                    std::ptr::null_mut::<libc::c_void>(),
                     &mut status,
                 );
                 if status != 0 as libc::c_int {
@@ -78146,14 +78141,13 @@ unsafe extern "C" fn opencl_lookahead_alloc(mut h: *mut x264_t) -> libc::c_int {
                         (*h).opencl.queue,
                         (*h).opencl.page_locked_buffer,
                         1 as libc::c_int as cl_bool,
-                        ((1 as libc::c_int) << 0 as libc::c_int
-                            | (1 as libc::c_int) << 1 as libc::c_int) as cl_map_flags,
+                        (((1 as libc::c_int) << 0 as libc::c_int) | ((1 as libc::c_int) << 1 as libc::c_int)) as cl_map_flags,
                         0 as libc::c_int as size_t,
                         (32 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int)
                             as size_t,
                         0 as libc::c_int as cl_uint,
-                        0 as *const cl_event,
-                        0 as *mut cl_event,
+                        std::ptr::null::<cl_event>(),
+                        std::ptr::null_mut::<cl_event>(),
                         &mut status,
                     ) as *mut libc::c_char;
                     if status != 0 as libc::c_int {
@@ -78172,7 +78166,7 @@ unsafe extern "C" fn opencl_lookahead_alloc(mut h: *mut x264_t) -> libc::c_int {
         }
     }
     x264_8_opencl_lookahead_delete(h);
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn opencl_error_notify(
     mut errinfo: *const libc::c_char,
@@ -78200,16 +78194,16 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
     mut h: *mut x264_t,
 ) -> libc::c_int {
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
-    let mut platforms: *mut cl_platform_id = 0 as *mut cl_platform_id;
-    let mut devices: *mut cl_device_id = 0 as *mut cl_device_id;
-    let mut imageType: *mut cl_image_format = 0 as *mut cl_image_format;
+    let mut platforms: *mut cl_platform_id = std::ptr::null_mut::<cl_platform_id>();
+    let mut devices: *mut cl_device_id = std::ptr::null_mut::<cl_device_id>();
+    let mut imageType: *mut cl_image_format = std::ptr::null_mut::<cl_image_format>();
     let mut context: cl_context = 0 as cl_context;
     let mut ret: libc::c_int = -(1 as libc::c_int);
     let mut numPlatforms: cl_uint = 0 as libc::c_int as cl_uint;
     let mut status: cl_int = ((*ocl).clGetPlatformIDs)
         .expect(
             "non-null function pointer",
-        )(0 as libc::c_int as cl_uint, 0 as *mut cl_platform_id, &mut numPlatforms);
+        )(0 as libc::c_int as cl_uint, std::ptr::null_mut::<cl_platform_id>(), &mut numPlatforms);
     if status != 0 as libc::c_int || numPlatforms == 0 {
         x264_8_log(
             h,
@@ -78233,7 +78227,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
             status = ((*ocl).clGetPlatformIDs)
                 .expect(
                     "non-null function pointer",
-                )(numPlatforms, platforms, 0 as *mut cl_uint);
+                )(numPlatforms, platforms, std::ptr::null_mut::<cl_uint>());
             if status != 0 as libc::c_int {
                 x264_8_log(
                     h,
@@ -78252,7 +78246,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                         *platforms.offset(i as isize),
                         ((1 as libc::c_int) << 2 as libc::c_int) as cl_device_type,
                         0 as libc::c_int as cl_uint,
-                        0 as *mut cl_device_id,
+                        std::ptr::null_mut::<cl_device_id>(),
                         &mut gpu_count,
                     );
                     if !(status != 0 as libc::c_int || gpu_count == 0) {
@@ -78270,9 +78264,9 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                 ((1 as libc::c_int) << 2 as libc::c_int) as cl_device_type,
                                 gpu_count,
                                 devices,
-                                0 as *mut cl_uint,
+                                std::ptr::null_mut::<cl_uint>(),
                             );
-                            if !(status != 0 as libc::c_int) {
+                            if status == 0 as libc::c_int {
                                 let mut gpu: cl_uint = 0 as libc::c_int as cl_uint;
                                 while gpu < gpu_count {
                                     (*h).opencl.device = *devices.offset(gpu as isize);
@@ -78290,7 +78284,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                             0x1016 as libc::c_int as cl_device_info,
                                             ::core::mem::size_of::<cl_bool>() as libc::c_ulong,
                                             &mut image_support as *mut cl_bool as *mut libc::c_void,
-                                            0 as *mut size_t,
+                                            std::ptr::null_mut::<size_t>(),
                                         );
                                         if !(status != 0 as libc::c_int || image_support == 0) {
                                             if !context.is_null() {
@@ -78301,7 +78295,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                                 .expect(
                                                     "non-null function pointer",
                                                 )(
-                                                0 as *const cl_context_properties,
+                                                std::ptr::null::<cl_context_properties>(),
                                                 1 as libc::c_int as cl_uint,
                                                 &mut (*h).opencl.device,
                                                 ::core::mem::transmute::<
@@ -78350,7 +78344,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                                     ((1 as libc::c_int) << 0 as libc::c_int) as cl_mem_flags,
                                                     0x10f1 as libc::c_int as cl_mem_object_type,
                                                     0 as libc::c_int as cl_uint,
-                                                    0 as *mut cl_image_format,
+                                                    std::ptr::null_mut::<cl_image_format>(),
                                                     &mut imagecount,
                                                 );
                                                 if !(status != 0 as libc::c_int || imagecount == 0) {
@@ -78369,9 +78363,9 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                                             0x10f1 as libc::c_int as cl_mem_object_type,
                                                             imagecount,
                                                             imageType,
-                                                            0 as *mut cl_uint,
+                                                            std::ptr::null_mut::<cl_uint>(),
                                                         );
-                                                        if !(status != 0 as libc::c_int) {
+                                                        if status == 0 as libc::c_int {
                                                             let mut b_has_r: libc::c_int = 0 as libc::c_int;
                                                             let mut b_has_rgba: libc::c_int = 0 as libc::c_int;
                                                             let mut j: cl_uint = 0 as libc::c_int as cl_uint;
@@ -78404,7 +78398,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
                                                                     ::core::mem::size_of::<[libc::c_char; 64]>()
                                                                         as libc::c_ulong,
                                                                     dev_name.as_mut_ptr() as *mut libc::c_void,
-                                                                    0 as *mut size_t,
+                                                                    std::ptr::null_mut::<size_t>(),
                                                                 );
                                                                 if status == 0 as libc::c_int {
                                                                     let mut level: libc::c_int = if !((*h)
@@ -78491,7 +78485,7 @@ pub unsafe extern "C" fn x264_8_opencl_lookahead_init(
     x264_free(imageType as *mut libc::c_void);
     x264_free(devices as *mut libc::c_void);
     x264_free(platforms as *mut libc::c_void);
-    return ret;
+    ret
 }
 unsafe extern "C" fn opencl_lookahead_free(mut h: *mut x264_t) {
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
@@ -78741,11 +78735,11 @@ pub unsafe extern "C" fn x264_8_opencl_frame_delete(mut frame: *mut x264_frame_t
     }
 }
 unsafe extern "C" fn adl_malloc_wrapper(mut iSize: libc::c_int) -> *mut libc::c_void {
-    return x264_malloc(iSize as int64_t);
+    x264_malloc(iSize as int64_t)
 }
 unsafe extern "C" fn detect_switchable_graphics() -> libc::c_int {
     let mut numAdapters: libc::c_int = 0;
-    let mut hDLL: *mut libc::c_void = 0 as *mut libc::c_void;
+    let mut hDLL: *mut libc::c_void = std::ptr::null_mut::<libc::c_void>();
     let mut ADL_Main_Control_Create: ADL_MAIN_CONTROL_CREATE = None;
     let mut ADL_Adapter_NumberOfAdapters_Get: ADL_ADAPTER_NUMBEROFADAPTERS_GET = None;
     let mut ADL_PowerXpress_Scheme_Get: ADL_POWERXPRESS_SCHEME_GET = None;
@@ -78789,10 +78783,7 @@ unsafe extern "C" fn detect_switchable_graphics() -> libc::c_int {
         );
         if !(ADL_Main_Control_Create.is_none() || ADL_Main_Control_Destroy.is_none()
             || ADL_Adapter_NumberOfAdapters_Get.is_none()
-            || ADL_PowerXpress_Scheme_Get.is_none())
-        {
-            if !(0 as libc::c_int
-                != ADL_Main_Control_Create
+            || ADL_PowerXpress_Scheme_Get.is_none()) && 0 as libc::c_int == ADL_Main_Control_Create
                     .expect(
                         "non-null function pointer",
                     )(
@@ -78801,44 +78792,41 @@ unsafe extern "C" fn detect_switchable_graphics() -> libc::c_int {
                             as unsafe extern "C" fn(libc::c_int) -> *mut libc::c_void,
                     ),
                     1 as libc::c_int,
-                ))
+                ) {
+            numAdapters = 0 as libc::c_int;
+            if 0 as libc::c_int == ADL_Adapter_NumberOfAdapters_Get
+                    .expect("non-null function pointer")(&mut numAdapters)
             {
-                numAdapters = 0 as libc::c_int;
-                if !(0 as libc::c_int
-                    != ADL_Adapter_NumberOfAdapters_Get
-                        .expect("non-null function pointer")(&mut numAdapters))
-                {
-                    let mut i: libc::c_int = 0 as libc::c_int;
-                    while i < numAdapters {
-                        let mut PXSchemeRange: libc::c_int = 0;
-                        let mut PXSchemeCurrentState: libc::c_int = 0;
-                        let mut PXSchemeDefaultState: libc::c_int = 0;
-                        if 0 as libc::c_int
-                            != ADL_PowerXpress_Scheme_Get
-                                .expect(
-                                    "non-null function pointer",
-                                )(
-                                i,
-                                &mut PXSchemeRange,
-                                &mut PXSchemeCurrentState,
-                                &mut PXSchemeDefaultState,
-                            )
-                        {
-                            break;
-                        }
-                        if PXSchemeRange >= 2 as libc::c_int {
-                            ret = 1 as libc::c_int;
-                            break;
-                        } else {
-                            i += 1;
-                            i;
-                        }
+                let mut i: libc::c_int = 0 as libc::c_int;
+                while i < numAdapters {
+                    let mut PXSchemeRange: libc::c_int = 0;
+                    let mut PXSchemeCurrentState: libc::c_int = 0;
+                    let mut PXSchemeDefaultState: libc::c_int = 0;
+                    if 0 as libc::c_int
+                        != ADL_PowerXpress_Scheme_Get
+                            .expect(
+                                "non-null function pointer",
+                            )(
+                            i,
+                            &mut PXSchemeRange,
+                            &mut PXSchemeCurrentState,
+                            &mut PXSchemeDefaultState,
+                        )
+                    {
+                        break;
+                    }
+                    if PXSchemeRange >= 2 as libc::c_int {
+                        ret = 1 as libc::c_int;
+                        break;
+                    } else {
+                        i += 1;
+                        i;
                     }
                 }
-                ADL_Main_Control_Destroy.expect("non-null function pointer")();
             }
+            ADL_Main_Control_Destroy.expect("non-null function pointer")();
         }
         dlclose(hDLL);
     }
-    return ret;
+    ret
 }

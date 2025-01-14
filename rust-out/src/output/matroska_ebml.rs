@@ -174,15 +174,15 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 unsafe extern "C" fn mk_create_context(
     mut w: *mut mk_writer,
     mut parent: *mut mk_context,
     mut id: libc::c_uint,
 ) -> *mut mk_context {
-    let mut c: *mut mk_context = 0 as *mut mk_context;
+    let mut c: *mut mk_context = std::ptr::null_mut::<mk_context>();
     if !((*w).freelist).is_null() {
         c = (*w).freelist;
         (*w).freelist = (*(*w).freelist).next;
@@ -192,7 +192,7 @@ unsafe extern "C" fn mk_create_context(
             ::core::mem::size_of::<mk_context>() as libc::c_ulong,
         ) as *mut mk_context;
         if c.is_null() {
-            return 0 as *mut mk_context;
+            return std::ptr::null_mut::<mk_context>();
         }
     }
     (*c).parent = parent;
@@ -204,7 +204,7 @@ unsafe extern "C" fn mk_create_context(
     (*c).next = (*(*c).owner).actlist;
     (*c).prev = &mut (*(*c).owner).actlist;
     (*(*c).owner).actlist = c;
-    return c;
+    c
 }
 unsafe extern "C" fn mk_append_context_data(
     mut c: *mut mk_context,
@@ -213,7 +213,7 @@ unsafe extern "C" fn mk_append_context_data(
 ) -> libc::c_int {
     let mut ns: libc::c_uint = ((*c).d_cur).wrapping_add(size);
     if ns > (*c).d_max {
-        let mut dp: *mut libc::c_void = 0 as *mut libc::c_void;
+        let mut dp: *mut libc::c_void = std::ptr::null_mut::<libc::c_void>();
         let mut dn: libc::c_uint = if (*c).d_max != 0 {
             (*c).d_max << 1 as libc::c_int
         } else {
@@ -235,7 +235,7 @@ unsafe extern "C" fn mk_append_context_data(
         size as libc::c_ulong,
     );
     (*c).d_cur = ns;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_write_id(
     mut c: *mut mk_context,
@@ -268,11 +268,11 @@ unsafe extern "C" fn mk_write_id(
             2 as libc::c_int as libc::c_uint,
         );
     }
-    return mk_append_context_data(
+    mk_append_context_data(
         c,
         c_id.as_mut_ptr().offset(3 as libc::c_int as isize) as *const libc::c_void,
         1 as libc::c_int as libc::c_uint,
-    );
+    )
 }
 unsafe extern "C" fn mk_write_size(
     mut c: *mut mk_context,
@@ -325,11 +325,11 @@ unsafe extern "C" fn mk_write_size(
             4 as libc::c_int as libc::c_uint,
         );
     }
-    return mk_append_context_data(
+    mk_append_context_data(
         c,
         c_size.as_mut_ptr() as *const libc::c_void,
         5 as libc::c_int as libc::c_uint,
-    );
+    )
 }
 unsafe extern "C" fn mk_flush_context_id(mut c: *mut mk_context) -> libc::c_int {
     let mut ff: uint8_t = 0xff as libc::c_int as uint8_t;
@@ -348,7 +348,7 @@ unsafe extern "C" fn mk_flush_context_id(mut c: *mut mk_context) -> libc::c_int 
         return -(1 as libc::c_int);
     }
     (*c).id = 0 as libc::c_int as libc::c_uint;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_flush_context_data(mut c: *mut mk_context) -> libc::c_int {
     if (*c).d_cur == 0 {
@@ -369,7 +369,7 @@ unsafe extern "C" fn mk_flush_context_data(mut c: *mut mk_context) -> libc::c_in
         return -(1 as libc::c_int)
     }
     (*c).d_cur = 0 as libc::c_int as libc::c_uint;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_close_context(
     mut c: *mut mk_context,
@@ -395,10 +395,10 @@ unsafe extern "C" fn mk_close_context(
     *(*c).prev = (*c).next;
     (*c).next = (*(*c).owner).freelist;
     (*(*c).owner).freelist = c;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_destroy_contexts(mut w: *mut mk_writer) {
-    let mut next: *mut mk_context = 0 as *mut mk_context;
+    let mut next: *mut mk_context = std::ptr::null_mut::<mk_context>();
     let mut cur: *mut mk_context = (*w).freelist;
     while !cur.is_null() {
         next = (*cur).next;
@@ -413,7 +413,7 @@ unsafe extern "C" fn mk_destroy_contexts(mut w: *mut mk_writer) {
         free(cur_0 as *mut libc::c_void);
         cur_0 = next;
     }
-    (*w).root = 0 as *mut mk_context;
+    (*w).root = std::ptr::null_mut::<mk_context>();
     (*w).actlist = (*w).root;
     (*w).freelist = (*w).actlist;
 }
@@ -434,7 +434,7 @@ unsafe extern "C" fn mk_write_string(
     {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_write_bin(
     mut c: *mut mk_context,
@@ -451,7 +451,7 @@ unsafe extern "C" fn mk_write_bin(
     if mk_append_context_data(c, data, size) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_write_uint(
     mut c: *mut mk_context,
@@ -489,7 +489,7 @@ unsafe extern "C" fn mk_write_uint(
     {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_write_float_raw(
     mut c: *mut mk_context,
@@ -502,11 +502,11 @@ unsafe extern "C" fn mk_write_float_raw(
     c_f[1 as libc::c_int as usize] = (u.u >> 16 as libc::c_int) as uint8_t;
     c_f[2 as libc::c_int as usize] = (u.u >> 8 as libc::c_int) as uint8_t;
     c_f[3 as libc::c_int as usize] = u.u as uint8_t;
-    return mk_append_context_data(
+    mk_append_context_data(
         c,
         c_f.as_mut_ptr() as *const libc::c_void,
         4 as libc::c_int as libc::c_uint,
-    );
+    )
 }
 unsafe extern "C" fn mk_write_float(
     mut c: *mut mk_context,
@@ -522,7 +522,7 @@ unsafe extern "C" fn mk_write_float(
     if mk_write_float_raw(c, f) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_create_writer(
@@ -533,17 +533,17 @@ pub unsafe extern "C" fn mk_create_writer(
         ::core::mem::size_of::<mk_writer>() as libc::c_ulong,
     ) as *mut mk_writer;
     if w.is_null() {
-        return 0 as *mut mk_writer;
+        return std::ptr::null_mut::<mk_writer>();
     }
     (*w)
         .root = mk_create_context(
         w,
-        0 as *mut mk_context,
+        std::ptr::null_mut::<mk_context>(),
         0 as libc::c_int as libc::c_uint,
     );
     if ((*w).root).is_null() {
         free(w as *mut libc::c_void);
-        return 0 as *mut mk_writer;
+        return std::ptr::null_mut::<mk_writer>();
     }
     if strcmp(filename, b"-\0" as *const u8 as *const libc::c_char) == 0 {
         (*w).fp = stdout;
@@ -553,10 +553,10 @@ pub unsafe extern "C" fn mk_create_writer(
     if ((*w).fp).is_null() {
         mk_destroy_contexts(w);
         free(w as *mut libc::c_void);
-        return 0 as *mut mk_writer;
+        return std::ptr::null_mut::<mk_writer>();
     }
     (*w).timescale = 1000000 as libc::c_int as int64_t;
-    return w;
+    w
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_write_header(
@@ -574,9 +574,9 @@ pub unsafe extern "C" fn mk_write_header(
     mut display_size_units: libc::c_int,
     mut stereo_mode: libc::c_int,
 ) -> libc::c_int {
-    let mut c: *mut mk_context = 0 as *mut mk_context;
-    let mut ti: *mut mk_context = 0 as *mut mk_context;
-    let mut v: *mut mk_context = 0 as *mut mk_context;
+    let mut c: *mut mk_context = std::ptr::null_mut::<mk_context>();
+    let mut ti: *mut mk_context = std::ptr::null_mut::<mk_context>();
+    let mut v: *mut mk_context = std::ptr::null_mut::<mk_context>();
     if (*w).wrote_header != 0 {
         return -(1 as libc::c_int);
     }
@@ -646,7 +646,7 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if mk_close_context(c, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+    if mk_close_context(c, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     c = mk_create_context(w, (*w).root, 0x18538067 as libc::c_int as libc::c_uint);
@@ -656,7 +656,7 @@ pub unsafe extern "C" fn mk_write_header(
     if mk_flush_context_id(c) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_close_context(c, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+    if mk_close_context(c, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     c = mk_create_context(w, (*w).root, 0x1549a966 as libc::c_int as libc::c_uint);
@@ -741,26 +741,20 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if codec_private_size != 0 {
-        if mk_write_bin(
+    if codec_private_size != 0 && mk_write_bin(
             ti,
             0x63a2 as libc::c_int as libc::c_uint,
             codec_private,
             codec_private_size,
-        ) < 0 as libc::c_int
-        {
-            return -(1 as libc::c_int);
-        }
+        ) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
     }
-    if default_frame_duration != 0 {
-        if mk_write_uint(
+    if default_frame_duration != 0 && mk_write_uint(
             ti,
             0x23e383 as libc::c_int as libc::c_uint,
             default_frame_duration as uint64_t,
-        ) < 0 as libc::c_int
-        {
-            return -(1 as libc::c_int);
-        }
+        ) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
     }
     v = mk_create_context(w, ti, 0xe0 as libc::c_int as libc::c_uint);
     if v.is_null() {
@@ -794,43 +788,40 @@ pub unsafe extern "C" fn mk_write_header(
     {
         return -(1 as libc::c_int);
     }
-    if stereo_mode >= 0 as libc::c_int {
-        if mk_write_uint(
+    if stereo_mode >= 0 as libc::c_int && mk_write_uint(
             v,
             0x53b8 as libc::c_int as libc::c_uint,
             stereo_mode as uint64_t,
-        ) < 0 as libc::c_int
-        {
-            return -(1 as libc::c_int);
-        }
-    }
-    if mk_close_context(v, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+        ) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_close_context(ti, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+    if mk_close_context(v, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    if mk_close_context(c, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+    if mk_close_context(ti, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
+    }
+    if mk_close_context(c, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     if mk_flush_context_data((*w).root) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
     (*w).wrote_header = 1 as libc::c_int as int8_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_close_cluster(mut w: *mut mk_writer) -> libc::c_int {
     if ((*w).cluster).is_null() {
         return 0 as libc::c_int;
     }
-    if mk_close_context((*w).cluster, 0 as *mut libc::c_uint) < 0 as libc::c_int {
+    if mk_close_context((*w).cluster, std::ptr::null_mut::<libc::c_uint>()) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    (*w).cluster = 0 as *mut mk_context;
+    (*w).cluster = std::ptr::null_mut::<mk_context>();
     if mk_flush_context_data((*w).root) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
     let mut delta: int64_t = 0;
@@ -840,12 +831,8 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
         return 0 as libc::c_int;
     }
     delta = (*w).frame_tc / (*w).timescale - (*w).cluster_tc_scaled;
-    if delta as libc::c_longlong > 32767 as libc::c_longlong
-        || (delta as libc::c_longlong) < -(32768 as libc::c_longlong)
-    {
-        if mk_close_cluster(w) < 0 as libc::c_int {
-            return -(1 as libc::c_int);
-        }
+    if (delta as libc::c_longlong > 32767 as libc::c_longlong || (delta as libc::c_longlong) < -(32768 as libc::c_longlong)) && mk_close_cluster(w) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
     }
     if ((*w).cluster).is_null() {
         (*w).cluster_tc_scaled = (*w).frame_tc / (*w).timescale;
@@ -888,8 +875,7 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
     c_delta_flags[0 as libc::c_int as usize] = (delta >> 8 as libc::c_int) as uint8_t;
     c_delta_flags[1 as libc::c_int as usize] = delta as uint8_t;
     c_delta_flags[2 as libc::c_int
-        as usize] = (((*w).keyframe as libc::c_int) << 7 as libc::c_int
-        | (*w).skippable as libc::c_int) as uint8_t;
+        as usize] = ((((*w).keyframe as libc::c_int) << 7 as libc::c_int) | (*w).skippable as libc::c_int) as uint8_t;
     if mk_append_context_data(
         (*w).cluster,
         c_delta_flags.as_mut_ptr() as *const libc::c_void,
@@ -907,12 +893,10 @@ unsafe extern "C" fn mk_flush_frame(mut w: *mut mk_writer) -> libc::c_int {
         (*(*w).frame).d_cur = 0 as libc::c_int as libc::c_uint;
     }
     (*w).in_frame = 0 as libc::c_int as int8_t;
-    if (*(*w).cluster).d_cur > 1048576 as libc::c_int as libc::c_uint {
-        if mk_close_cluster(w) < 0 as libc::c_int {
-            return -(1 as libc::c_int);
-        }
+    if (*(*w).cluster).d_cur > 1048576 as libc::c_int as libc::c_uint && mk_close_cluster(w) < 0 as libc::c_int {
+        return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_start_frame(mut w: *mut mk_writer) -> libc::c_int {
@@ -922,7 +906,7 @@ pub unsafe extern "C" fn mk_start_frame(mut w: *mut mk_writer) -> libc::c_int {
     (*w).in_frame = 1 as libc::c_int as int8_t;
     (*w).keyframe = 0 as libc::c_int as int8_t;
     (*w).skippable = 0 as libc::c_int as int8_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_set_frame_flags(
@@ -940,7 +924,7 @@ pub unsafe extern "C" fn mk_set_frame_flags(
     if (*w).max_frame_tc < timestamp {
         (*w).max_frame_tc = timestamp;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_add_frame_data(
@@ -955,14 +939,14 @@ pub unsafe extern "C" fn mk_add_frame_data(
         (*w)
             .frame = mk_create_context(
             w,
-            0 as *mut mk_context,
+            std::ptr::null_mut::<mk_context>(),
             0 as libc::c_int as libc::c_uint,
         );
         if ((*w).frame).is_null() {
             return -(1 as libc::c_int);
         }
     }
-    return mk_append_context_data((*w).frame, data, size);
+    mk_append_context_data((*w).frame, data, size)
 }
 #[no_mangle]
 pub unsafe extern "C" fn mk_close(
@@ -993,5 +977,5 @@ pub unsafe extern "C" fn mk_close(
     mk_destroy_contexts(w);
     fclose((*w).fp);
     free(w as *mut libc::c_void);
-    return ret;
+    ret
 }

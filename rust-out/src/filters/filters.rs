@@ -47,7 +47,7 @@ pub unsafe extern "C" fn x264_split_options(
     let mut size: size_t = 0 as libc::c_int as size_t;
     let mut opt: *const libc::c_char = opt_str;
     if opt_str.is_null() {
-        return 0 as *mut *mut libc::c_char;
+        return std::ptr::null_mut::<*mut libc::c_char>();
     }
     while !(*options.offset(options_count as isize)).is_null() {
         options_count += 1;
@@ -74,7 +74,7 @@ pub unsafe extern "C" fn x264_split_options(
                     length,
                     opt,
                 );
-                return 0 as *mut *mut libc::c_char;
+                return std::ptr::null_mut::<*mut libc::c_char>();
             }
             found_named = 1 as libc::c_int;
             length = (length as libc::c_ulong)
@@ -91,7 +91,7 @@ pub unsafe extern "C" fn x264_split_options(
                     0 as libc::c_int,
                     b"Too many options given\n\0" as *const u8 as *const libc::c_char,
                 );
-                return 0 as *mut *mut libc::c_char;
+                return std::ptr::null_mut::<*mut libc::c_char>();
             }
             if found_named != 0 {
                 x264_cli_log(
@@ -100,7 +100,7 @@ pub unsafe extern "C" fn x264_split_options(
                     b"Ordered option given after named\n\0" as *const u8
                         as *const libc::c_char,
                 );
-                return 0 as *mut *mut libc::c_char;
+                return std::ptr::null_mut::<*mut libc::c_char>();
             }
             size = (size as libc::c_ulong)
                 .wrapping_add(
@@ -113,7 +113,7 @@ pub unsafe extern "C" fn x264_split_options(
         opt = opt.offset(length as isize);
         let fresh0 = opt;
         opt = opt.offset(1);
-        if !(*fresh0 != 0) {
+        if *fresh0 == 0 {
             break;
         }
     }
@@ -134,7 +134,7 @@ pub unsafe extern "C" fn x264_split_options(
             0 as libc::c_int,
             b"malloc failed\n\0" as *const u8 as *const libc::c_char,
         );
-        return 0 as *mut *mut libc::c_char;
+        return std::ptr::null_mut::<*mut libc::c_char>();
     }
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < 2 as libc::c_int * opt_count {
@@ -144,8 +144,8 @@ pub unsafe extern "C" fn x264_split_options(
         );
         if *opt_str.offset(length_0 as isize) as libc::c_int == '=' as i32 {
             let fresh1 = i;
-            i = i + 1;
-            let ref mut fresh2 = *opts.offset(fresh1 as isize);
+            i += 1;
+            let fresh2 = &mut (*opts.offset(fresh1 as isize));
             *fresh2 = memcpy(
                 (opts as *mut libc::c_char).offset(offset as isize) as *mut libc::c_void,
                 opt_str as *const libc::c_void,
@@ -161,8 +161,8 @@ pub unsafe extern "C" fn x264_split_options(
                 .offset((i / 2 as libc::c_int) as isize);
             let mut option_length: size_t = strlen(option_0);
             let fresh3 = i;
-            i = i + 1;
-            let ref mut fresh4 = *opts.offset(fresh3 as isize);
+            i += 1;
+            let fresh4 = &mut (*opts.offset(fresh3 as isize));
             *fresh4 = memcpy(
                 (opts as *mut libc::c_char).offset(offset as isize) as *mut libc::c_void,
                 option_0 as *const libc::c_void,
@@ -174,8 +174,8 @@ pub unsafe extern "C" fn x264_split_options(
                 .offset(option_length.wrapping_add(1 as libc::c_int as size_t) as isize);
         }
         let fresh5 = i;
-        i = i + 1;
-        let ref mut fresh6 = *opts.offset(fresh5 as isize);
+        i += 1;
+        let fresh6 = &mut (*opts.offset(fresh5 as isize));
         *fresh6 = memcpy(
             (opts as *mut libc::c_char).offset(offset as isize) as *mut libc::c_void,
             opt_str as *const libc::c_void,
@@ -211,7 +211,7 @@ pub unsafe extern "C" fn x264_split_options(
             );
         }
     };
-    return opts;
+    opts
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_get_option(
@@ -234,7 +234,7 @@ pub unsafe extern "C" fn x264_get_option(
             return *split_options.offset((last_i + 1 as libc::c_int) as isize);
         }
     }
-    return 0 as *mut libc::c_char;
+    std::ptr::null_mut::<libc::c_char>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_otob(
@@ -247,7 +247,7 @@ pub unsafe extern "C" fn x264_otob(
             || strcasecmp(str, b"yes\0" as *const u8 as *const libc::c_char) == 0)
             as libc::c_int;
     }
-    return def;
+    def
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_otof(
@@ -256,13 +256,13 @@ pub unsafe extern "C" fn x264_otof(
 ) -> libc::c_double {
     let mut ret: libc::c_double = def;
     if !str.is_null() {
-        let mut end: *mut libc::c_char = 0 as *mut libc::c_char;
+        let mut end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
         ret = strtod(str, &mut end);
         if end == str as *mut libc::c_char || *end as libc::c_int != '\0' as i32 {
             ret = def;
         }
     }
-    return ret;
+    ret
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_otoi(
@@ -271,18 +271,18 @@ pub unsafe extern "C" fn x264_otoi(
 ) -> libc::c_int {
     let mut ret: libc::c_int = def;
     if !str.is_null() {
-        let mut end: *mut libc::c_char = 0 as *mut libc::c_char;
+        let mut end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
         ret = strtol(str, &mut end, 0 as libc::c_int) as libc::c_int;
         if end == str as *mut libc::c_char || *end as libc::c_int != '\0' as i32 {
             ret = def;
         }
     }
-    return ret;
+    ret
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_otos(
     mut str: *mut libc::c_char,
     mut def: *mut libc::c_char,
 ) -> *mut libc::c_char {
-    return if !str.is_null() { str } else { def };
+    if !str.is_null() { str } else { def }
 }

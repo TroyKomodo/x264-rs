@@ -755,11 +755,11 @@ pub const OPT_LONGHELP: C2RustUnnamed_6 = 262;
 pub type C2RustUnnamed_6 = libc::c_uint;
 #[inline]
 unsafe extern "C" fn atoi(mut __nptr: *const libc::c_char) -> libc::c_int {
-    return strtol(
+    strtol(
         __nptr,
-        0 as *mut libc::c_void as *mut *mut libc::c_char,
+        std::ptr::null_mut::<libc::c_void>() as *mut *mut libc::c_char,
         10 as libc::c_int,
-    ) as libc::c_int;
+    ) as libc::c_int
 }
 static mut x264_direct_pred_names: [*const libc::c_char; 5] = [
     b"none\0" as *const u8 as *const libc::c_char,
@@ -882,8 +882,8 @@ unsafe extern "C" fn x264_is_regular_file_path(
     if stat(filename, &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_int {
@@ -907,8 +907,8 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn get_filename_extension(
@@ -920,7 +920,7 @@ unsafe extern "C" fn get_filename_extension(
         ext;
     }
     ext = ext.offset((*ext as libc::c_int == '.' as i32) as libc::c_int as isize);
-    return ext;
+    ext
 }
 static mut b_ctrl_c: libc::c_int = 0 as libc::c_int;
 unsafe extern "C" fn sigint_handler(mut a: libc::c_int) {
@@ -1059,7 +1059,8 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
         fps_factor: 0.,
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
                 PIC_STRUCT_TOP_BOTTOM as libc::c_int as uint8_t,
@@ -1088,11 +1089,11 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 0,
             ],
             fps_factor: 1.0f64 as libc::c_float,
-        };
-        init
+        }
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 4 as libc::c_int,
             pattern: [
                 PIC_STRUCT_TOP_BOTTOM_TOP as libc::c_int as uint8_t,
@@ -1121,11 +1122,11 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 0,
             ],
             fps_factor: 1.25f64 as libc::c_float,
-        };
-        init
+        }
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 2 as libc::c_int,
             pattern: [
                 PIC_STRUCT_DOUBLE as libc::c_int as uint8_t,
@@ -1154,11 +1155,11 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 0,
             ],
             fps_factor: 1.0f64 as libc::c_float,
-        };
-        init
+        }
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
                 PIC_STRUCT_DOUBLE as libc::c_int as uint8_t,
@@ -1187,11 +1188,11 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 0,
             ],
             fps_factor: 2.0f64 as libc::c_float,
-        };
-        init
+        }
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 1 as libc::c_int,
             pattern: [
                 PIC_STRUCT_TRIPLE as libc::c_int as uint8_t,
@@ -1220,11 +1221,11 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 0,
             ],
             fps_factor: 3.0f64 as libc::c_float,
-        };
-        init
+        }
     },
     {
-        let mut init = cli_pulldown_t {
+        
+        cli_pulldown_t {
             mod_0: 24 as libc::c_int,
             pattern: [
                 PIC_STRUCT_TOP_BOTTOM_TOP as libc::c_int as uint8_t,
@@ -1253,8 +1254,7 @@ static mut pulldown_values: [cli_pulldown_t; 7] = [
                 PIC_STRUCT_TOP_BOTTOM as libc::c_int as uint8_t,
             ],
             fps_factor: (25.0f64 / 24.0f64) as libc::c_float,
-        };
-        init
+        }
     },
 ];
 static mut pulldown_frame_duration: [libc::c_float; 10] = [
@@ -1280,7 +1280,7 @@ pub unsafe extern "C" fn x264_cli_log(
     if i_level > cli_log_level {
         return;
     }
-    let mut s_level: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut s_level: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     match i_level {
         0 => {
             s_level = b"error\0" as *const u8 as *const libc::c_char
@@ -1400,7 +1400,7 @@ unsafe fn main_0(
         b_interlaced: 0,
         b_constrained_intra: 0,
         i_cqm_preset: 0,
-        psz_cqm_file: 0 as *mut libc::c_char,
+        psz_cqm_file: std::ptr::null_mut::<libc::c_char>(),
         cqm_4iy: [0; 16],
         cqm_4py: [0; 16],
         cqm_4ic: [0; 16],
@@ -1410,10 +1410,10 @@ unsafe fn main_0(
         cqm_8ic: [0; 64],
         cqm_8pc: [0; 64],
         pf_log: None,
-        p_log_private: 0 as *mut libc::c_void,
+        p_log_private: std::ptr::null_mut::<libc::c_void>(),
         i_log_level: 0,
         b_full_recon: 0,
-        psz_dump_yuv: 0 as *mut libc::c_char,
+        psz_dump_yuv: std::ptr::null_mut::<libc::c_char>(),
         analyse: C2RustUnnamed_3 {
             intra: 0,
             inter: 0,
@@ -1463,15 +1463,15 @@ unsafe fn main_0(
             b_mb_tree: 0,
             i_lookahead: 0,
             b_stat_write: 0,
-            psz_stat_out: 0 as *mut libc::c_char,
+            psz_stat_out: std::ptr::null_mut::<libc::c_char>(),
             b_stat_read: 0,
-            psz_stat_in: 0 as *mut libc::c_char,
+            psz_stat_in: std::ptr::null_mut::<libc::c_char>(),
             f_qcompress: 0.,
             f_qblur: 0.,
             f_complexity_blur: 0.,
-            zones: 0 as *mut x264_zone_t,
+            zones: std::ptr::null_mut::<x264_zone_t>(),
             i_zones: 0,
-            psz_zones: 0 as *mut libc::c_char,
+            psz_zones: std::ptr::null_mut::<libc::c_char>(),
         },
         crop_rect: C2RustUnnamed_1 {
             i_left: 0,
@@ -1515,8 +1515,8 @@ unsafe fn main_0(
         b_stitchable: 0,
         b_opencl: 0,
         i_opencl_device: 0,
-        opencl_device_id: 0 as *mut libc::c_void,
-        psz_clbin_file: 0 as *mut libc::c_char,
+        opencl_device_id: std::ptr::null_mut::<libc::c_void>(),
+        psz_clbin_file: std::ptr::null_mut::<libc::c_char>(),
         i_slice_max_size: 0,
         i_slice_max_mbs: 0,
         i_slice_min_mbs: 0,
@@ -1524,20 +1524,20 @@ unsafe fn main_0(
         i_slice_count_max: 0,
         param_free: None,
         nalu_process: None,
-        opaque: 0 as *mut libc::c_void,
+        opaque: std::ptr::null_mut::<libc::c_void>(),
     };
     let mut opt: cli_opt_t = {
-        let mut init = cli_opt_t {
+        
+        cli_opt_t {
             b_progress: 0 as libc::c_int,
             i_seek: 0,
-            hin: 0 as *mut libc::c_void,
-            hout: 0 as *mut libc::c_void,
-            qpfile: 0 as *mut FILE,
-            tcfile_out: 0 as *mut FILE,
+            hin: std::ptr::null_mut::<libc::c_void>(),
+            hout: std::ptr::null_mut::<libc::c_void>(),
+            qpfile: std::ptr::null_mut::<FILE>(),
+            tcfile_out: std::ptr::null_mut::<FILE>(),
             timebase_convert_multiplier: 0.,
             i_pulldown: 0,
-        };
-        init
+        }
     };
     let mut ret: libc::c_int = 0 as libc::c_int;
     x264_param_default(&mut param);
@@ -1569,7 +1569,7 @@ unsafe fn main_0(
         fclose(opt.qpfile);
     }
     x264_param_cleanup(&mut param);
-    return ret;
+    ret
 }
 unsafe extern "C" fn strtable_lookup(
     mut table: *const *const libc::c_char,
@@ -1580,13 +1580,13 @@ unsafe extern "C" fn strtable_lookup(
         i += 1;
         i;
     }
-    return if idx >= 0 as libc::c_int && idx < i
+    if idx >= 0 as libc::c_int && idx < i
         && **table.offset(idx as isize) as libc::c_int != 0
     {
         *table.offset(idx as isize)
     } else {
         b"???\0" as *const u8 as *const libc::c_char
-    };
+    }
 }
 unsafe extern "C" fn stringify_names(
     mut buf: *mut libc::c_char,
@@ -1615,7 +1615,7 @@ unsafe extern "C" fn stringify_names(
         i += 1;
         i;
     }
-    return buf;
+    buf
 }
 unsafe extern "C" fn print_csp_name_internal(
     mut name: *const libc::c_char,
@@ -2779,1525 +2779,1525 @@ static mut short_options: [libc::c_char; 30] = unsafe {
 };
 static mut long_options: [option; 169] = [
     {
-        let mut init = option {
+        
+        option {
             name: b"help\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'h' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"longhelp\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_LONGHELP as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"fullhelp\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_FULLHELP as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"version\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'V' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"profile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_PROFILE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"preset\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_PRESET as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"tune\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_TUNE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slow-firstpass\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_SLOWFIRSTPASS as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"bitrate\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'B' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"bframes\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'b' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"b-adapt\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-b-adapt\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"b-bias\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"b-pyramid\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"open-gop\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"bluray-compat\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"avcintra-class\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"avcintra-flavor\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"min-keyint\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'i' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"keyint\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'I' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"intra-refresh\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"scenecut\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-scenecut\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"nf\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-deblock\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"filter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"deblock\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'f' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INTERLACED as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"tff\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INTERLACED as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"bff\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INTERLACED as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INTERLACED as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"constrained-intra\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cabac\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-cabac\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'q' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qpmin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qpmax\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qpstep\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"crf\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"rc-lookahead\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"ref\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'r' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"asm\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-asm\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"opencl\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"opencl-clbin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"opencl-device\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"sar\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"fps\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_FPS as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"frames\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_FRAMES as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"seek\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_SEEK as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"output\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'o' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"muxer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_MUXER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"demuxer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_DEMUXER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"stdout\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_MUXER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"stdin\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_DEMUXER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"index\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INDEX as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"analyse\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"partitions\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'A' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"direct\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"weightb\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'w' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-weightb\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"weightp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"me\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"merange\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"mvrange\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"mvrange-thread\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"subme\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'm' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"psy-rd\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-psy\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"psy\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"mixed-refs\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-mixed-refs\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-chroma-me\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"8x8dct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: '8' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-8x8dct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"trellis\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 't' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"fast-pskip\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-fast-pskip\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-dct-decimate\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"aq-strength\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"aq-mode\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"deadzone-inter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"deadzone-intra\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"level\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"ratetol\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"vbv-maxrate\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"vbv-bufsize\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"vbv-init\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"crf-max\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"ipratio\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"pbratio\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"chroma-qp-offset\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"pass\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'p' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"stats\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qcomp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"mbtree\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-mbtree\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qblur\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cplxblur\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"zones\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"qpfile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_QPFILE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"threads\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"lookahead-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"sliced-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-sliced-threads\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slice-max-size\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slice-max-mbs\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slice-min-mbs\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slices\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"slices-max\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"thread-input\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_THREAD_INPUT as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"sync-lookahead\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"non-deterministic\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cpu-independent\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"psnr\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"ssim\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"quiet\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_QUIET as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"verbose\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 'v' as i32,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"log-level\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_LOG_LEVEL as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"no-progress\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_NOPROGRESS as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"dump-yuv\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"sps-id\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"aud\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"nr\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqmfile\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4i\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4iy\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4ic\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4p\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4py\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm4pc\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm8\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm8i\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cqm8p\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"overscan\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"videoformat\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"range\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_RANGE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"colorprim\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"transfer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"colormatrix\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"chromaloc\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"force-cfr\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"tcfile-in\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_TCFILE_IN as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"tcfile-out\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_TCFILE_OUT as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"timebase\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_TIMEBASE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"pic-struct\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"crop-rect\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"nal-hrd\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"pulldown\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_PULLDOWN as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"fake-interlaced\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"frame-packing\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"mastering-display\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"cll\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"alternative-transfer\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"vf\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_VIDEO_FILTER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"video-filter\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_VIDEO_FILTER as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"input-fmt\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INPUT_FMT as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"input-res\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INPUT_RES as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"input-csp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INPUT_CSP as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"input-depth\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INPUT_DEPTH as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"output-depth\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_OUTPUT_DEPTH as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"dts-compress\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_DTS_COMPRESSION as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"output-csp\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_OUTPUT_CSP as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"input-range\0" as *const u8 as *const libc::c_char,
             has_arg: 1 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: OPT_INPUT_RANGE as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"stitchable\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: b"filler\0" as *const u8 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = option {
+        
+        option {
             name: 0 as *const libc::c_char,
             has_arg: 0 as libc::c_int,
             flag: 0 as *const libc::c_int as *mut libc::c_int,
             val: 0 as libc::c_int,
-        };
-        init
+        }
     },
 ];
 unsafe extern "C" fn select_output(
@@ -4330,7 +4330,7 @@ unsafe extern "C" fn select_output(
     } else {
         cli_output = raw_output;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn select_input(
     mut demuxer: *const libc::c_char,
@@ -4407,7 +4407,7 @@ unsafe extern "C" fn select_input(
         }
     }
     strcpy(used_demuxer, module);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn init_vid_filters(
     mut sequence: *mut libc::c_char,
@@ -4423,7 +4423,7 @@ unsafe extern "C" fn init_vid_filters(
         &mut filter,
         info,
         param,
-        0 as *mut libc::c_char,
+        std::ptr::null_mut::<libc::c_char>(),
     ) != 0
     {
         return -(1 as libc::c_int);
@@ -4445,7 +4445,7 @@ unsafe extern "C" fn init_vid_filters(
         &mut filter,
         info,
         param,
-        0 as *mut libc::c_char,
+        std::ptr::null_mut::<libc::c_char>(),
     ) != 0
     {
         return -(1 as libc::c_int);
@@ -4519,7 +4519,7 @@ unsafe extern "C" fn init_vid_filters(
         &mut filter,
         info,
         param,
-        0 as *mut libc::c_char,
+        std::ptr::null_mut::<libc::c_char>(),
     ) != 0
     {
         return -(1 as libc::c_int);
@@ -4547,7 +4547,7 @@ unsafe extern "C" fn init_vid_filters(
     {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn parse_enum_name(
     mut arg: *const libc::c_char,
@@ -4565,7 +4565,7 @@ unsafe extern "C" fn parse_enum_name(
         i += 1;
         i;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn parse_enum_value(
     mut arg: *const libc::c_char,
@@ -4583,7 +4583,7 @@ unsafe extern "C" fn parse_enum_value(
         i += 1;
         i;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn parse(
     mut argc: libc::c_int,
@@ -4599,11 +4599,11 @@ unsafe extern "C" fn parse(
         0x10 as libc::c_int as uint8_t,
     ];
     let mut current_block: u64;
-    let mut input_filename: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut input_filename: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut demuxer: *const libc::c_char = x264_demuxer_names[0 as libc::c_int as usize];
-    let mut output_filename: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut output_filename: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut muxer: *const libc::c_char = x264_muxer_names[0 as libc::c_int as usize];
-    let mut tcfile_name: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut tcfile_name: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut defaults: x264_param_t = x264_param_t {
         cpu: 0,
         i_threads: 0,
@@ -4652,7 +4652,7 @@ unsafe extern "C" fn parse(
         b_interlaced: 0,
         b_constrained_intra: 0,
         i_cqm_preset: 0,
-        psz_cqm_file: 0 as *mut libc::c_char,
+        psz_cqm_file: std::ptr::null_mut::<libc::c_char>(),
         cqm_4iy: [0; 16],
         cqm_4py: [0; 16],
         cqm_4ic: [0; 16],
@@ -4662,10 +4662,10 @@ unsafe extern "C" fn parse(
         cqm_8ic: [0; 64],
         cqm_8pc: [0; 64],
         pf_log: None,
-        p_log_private: 0 as *mut libc::c_void,
+        p_log_private: std::ptr::null_mut::<libc::c_void>(),
         i_log_level: 0,
         b_full_recon: 0,
-        psz_dump_yuv: 0 as *mut libc::c_char,
+        psz_dump_yuv: std::ptr::null_mut::<libc::c_char>(),
         analyse: C2RustUnnamed_3 {
             intra: 0,
             inter: 0,
@@ -4715,15 +4715,15 @@ unsafe extern "C" fn parse(
             b_mb_tree: 0,
             i_lookahead: 0,
             b_stat_write: 0,
-            psz_stat_out: 0 as *mut libc::c_char,
+            psz_stat_out: std::ptr::null_mut::<libc::c_char>(),
             b_stat_read: 0,
-            psz_stat_in: 0 as *mut libc::c_char,
+            psz_stat_in: std::ptr::null_mut::<libc::c_char>(),
             f_qcompress: 0.,
             f_qblur: 0.,
             f_complexity_blur: 0.,
-            zones: 0 as *mut x264_zone_t,
+            zones: std::ptr::null_mut::<x264_zone_t>(),
             i_zones: 0,
-            psz_zones: 0 as *mut libc::c_char,
+            psz_zones: std::ptr::null_mut::<libc::c_char>(),
         },
         crop_rect: C2RustUnnamed_1 {
             i_left: 0,
@@ -4767,8 +4767,8 @@ unsafe extern "C" fn parse(
         b_stitchable: 0,
         b_opencl: 0,
         i_opencl_device: 0,
-        opencl_device_id: 0 as *mut libc::c_void,
-        psz_clbin_file: 0 as *mut libc::c_char,
+        opencl_device_id: std::ptr::null_mut::<libc::c_void>(),
+        psz_clbin_file: std::ptr::null_mut::<libc::c_char>(),
         i_slice_max_size: 0,
         i_slice_max_mbs: 0,
         i_slice_min_mbs: 0,
@@ -4776,22 +4776,22 @@ unsafe extern "C" fn parse(
         i_slice_count_max: 0,
         param_free: None,
         nalu_process: None,
-        opaque: 0 as *mut libc::c_void,
+        opaque: std::ptr::null_mut::<libc::c_void>(),
     };
-    let mut profile: *mut libc::c_char = 0 as *mut libc::c_char;
-    let mut vid_filters: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut profile: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+    let mut vid_filters: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut b_thread_input: libc::c_int = 0 as libc::c_int;
     let mut b_turbo: libc::c_int = 1 as libc::c_int;
     let mut b_user_ref: libc::c_int = 0 as libc::c_int;
     let mut b_user_fps: libc::c_int = 0 as libc::c_int;
     let mut b_user_interlaced: libc::c_int = 0 as libc::c_int;
     let mut input_opt: cli_input_opt_t = cli_input_opt_t {
-        index_file: 0 as *mut libc::c_char,
-        format: 0 as *mut libc::c_char,
-        resolution: 0 as *mut libc::c_char,
-        colorspace: 0 as *mut libc::c_char,
+        index_file: std::ptr::null_mut::<libc::c_char>(),
+        format: std::ptr::null_mut::<libc::c_char>(),
+        resolution: std::ptr::null_mut::<libc::c_char>(),
+        colorspace: std::ptr::null_mut::<libc::c_char>(),
         bit_depth: 0,
-        timebase: 0 as *mut libc::c_char,
+        timebase: std::ptr::null_mut::<libc::c_char>(),
         seek: 0,
         progress: 0,
         output_csp: 0,
@@ -4801,8 +4801,8 @@ unsafe extern "C" fn parse(
     let mut output_opt: cli_output_opt_t = cli_output_opt_t {
         use_dts_compress: 0,
     };
-    let mut preset: *mut libc::c_char = 0 as *mut libc::c_char;
-    let mut tune: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut preset: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+    let mut tune: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     optind = 0 as libc::c_int;
     loop {
         let mut c: libc::c_int = getopt_long(
@@ -4810,7 +4810,7 @@ unsafe extern "C" fn parse(
             argv,
             short_options.as_mut_ptr(),
             long_options.as_mut_ptr(),
-            0 as *mut libc::c_int,
+            std::ptr::null_mut::<libc::c_int>(),
         );
         if c == -(1 as libc::c_int) {
             break;
@@ -5149,31 +5149,28 @@ unsafe extern "C" fn parse(
                 current_block = 13467107903497930144;
             }
         }
-        match current_block {
-            13467107903497930144 => {
-                if long_options_index < 0 as libc::c_int {
-                    let mut i: libc::c_int = 0 as libc::c_int;
-                    while !(long_options[i as usize].name).is_null() {
-                        if long_options[i as usize].val == c_0 {
-                            long_options_index = i;
-                            break;
-                        } else {
-                            i += 1;
-                            i;
-                        }
-                    }
-                    if long_options_index < 0 as libc::c_int {
-                        return -(1 as libc::c_int);
+        if current_block == 13467107903497930144 {
+            if long_options_index < 0 as libc::c_int {
+                let mut i: libc::c_int = 0 as libc::c_int;
+                while !(long_options[i as usize].name).is_null() {
+                    if long_options[i as usize].val == c_0 {
+                        long_options_index = i;
+                        break;
+                    } else {
+                        i += 1;
+                        i;
                     }
                 }
-                b_error
-                    |= x264_param_parse(
-                        param,
-                        long_options[long_options_index as usize].name,
-                        optarg,
-                    );
+                if long_options_index < 0 as libc::c_int {
+                    return -(1 as libc::c_int);
+                }
             }
-            _ => {}
+            b_error
+                |= x264_param_parse(
+                    param,
+                    long_options[long_options_index as usize].name,
+                    optarg,
+                );
         }
         if b_error != 0 {
             let mut name: *const libc::c_char = if long_options_index > 0 as libc::c_int
@@ -5229,10 +5226,11 @@ unsafe extern "C" fn parse(
         return -(1 as libc::c_int);
     }
     let fresh0 = optind;
-    optind = optind + 1;
+    optind += 1;
     input_filename = *argv.offset(fresh0 as isize);
     let mut info: video_info_t = {
-        let mut init = video_info_t {
+        
+        video_info_t {
             csp: 0 as libc::c_int,
             fps_num: 0,
             fps_den: 0,
@@ -5248,8 +5246,7 @@ unsafe extern "C" fn parse(
             timebase_num: 0,
             timebase_den: 0,
             vfr: 0,
-        };
-        init
+        }
     };
     let mut demuxername: [libc::c_char; 5] = [0; 5];
     info.csp = (*param).i_csp;
@@ -5352,11 +5349,11 @@ unsafe extern "C" fn parse(
         );
         return -(1 as libc::c_int);
     }
-    let mut thread_input: *const cli_input_t = 0 as *const cli_input_t;
+    let mut thread_input: *const cli_input_t = std::ptr::null::<cli_input_t>();
     if (*param).i_bitdepth == 8 as libc::c_int {
         thread_input = &thread_8_input;
     } else {
-        thread_input = 0 as *const cli_input_t;
+        thread_input = std::ptr::null::<cli_input_t>();
     }
     if !thread_input.is_null() && info.thread_safe != 0
         && (b_thread_input != 0 || (*param).i_threads > 1 as libc::c_int
@@ -5367,10 +5364,10 @@ unsafe extern "C" fn parse(
             .expect(
                 "non-null function pointer",
             )(
-            0 as *mut libc::c_char,
+            std::ptr::null_mut::<libc::c_char>(),
             &mut (*opt).hin,
             &mut info,
-            0 as *mut cli_input_opt_t,
+            std::ptr::null_mut::<cli_input_opt_t>(),
         ) != 0
         {
             fprintf(
@@ -5419,7 +5416,7 @@ unsafe extern "C" fn parse(
             i_user_timebase_num = info.timebase_num as uint64_t;
             i_user_timebase_den = strtoul(
                 input_opt.timebase,
-                0 as *mut *mut libc::c_char,
+                std::ptr::null_mut::<*mut libc::c_char>(),
                 10 as libc::c_int,
             );
         }
@@ -5500,9 +5497,8 @@ unsafe extern "C" fn parse(
         }
     }
     if b_user_ref == 0 {
-        let mut mbs: libc::c_int = ((*param).i_width + 15 as libc::c_int
-            >> 4 as libc::c_int)
-            * ((*param).i_height + 15 as libc::c_int >> 4 as libc::c_int);
+        let mut mbs: libc::c_int = (((*param).i_width + 15 as libc::c_int) >> 4 as libc::c_int)
+            * (((*param).i_height + 15 as libc::c_int) >> 4 as libc::c_int);
         let mut i_0: libc::c_int = 0 as libc::c_int;
         while (*x264_levels.as_ptr().offset(i_0 as isize)).level_idc as libc::c_int
             != 0 as libc::c_int
@@ -5524,7 +5520,7 @@ unsafe extern "C" fn parse(
             }
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn parse_qpfile(
     mut opt: *mut cli_opt_t,
@@ -5568,7 +5564,7 @@ unsafe extern "C" fn parse_qpfile(
                     );
                 }
                 fclose((*opt).qpfile);
-                (*opt).qpfile = 0 as *mut FILE;
+                (*opt).qpfile = std::ptr::null_mut::<FILE>();
             }
             break;
         } else {
@@ -5603,7 +5599,7 @@ unsafe extern "C" fn parse_qpfile(
                     i_frame,
                 );
                 fclose((*opt).qpfile);
-                (*opt).qpfile = 0 as *mut FILE;
+                (*opt).qpfile = std::ptr::null_mut::<FILE>();
                 break;
             } else if ret == 3 as libc::c_int && qp >= 0 as libc::c_int {
                 (*pic).i_qpplus1 = qp + 1 as libc::c_int;
@@ -5624,17 +5620,17 @@ unsafe extern "C" fn encode_frame(
         b_keyframe: 0,
         i_pts: 0,
         i_dts: 0,
-        param: 0 as *mut x264_param_t,
+        param: std::ptr::null_mut::<x264_param_t>(),
         img: x264_image_t {
             i_csp: 0,
             i_plane: 0,
             i_stride: [0; 4],
-            plane: [0 as *mut uint8_t; 4],
+            plane: [std::ptr::null_mut::<uint8_t>(); 4],
         },
         prop: x264_image_properties_t {
-            quant_offsets: 0 as *mut libc::c_float,
+            quant_offsets: std::ptr::null_mut::<libc::c_float>(),
             quant_offsets_free: None,
-            mb_info: 0 as *mut uint8_t,
+            mb_info: std::ptr::null_mut::<uint8_t>(),
             mb_info_free: None,
             f_ssim: 0.,
             f_psnr_avg: 0.,
@@ -5649,12 +5645,12 @@ unsafe extern "C" fn encode_frame(
         },
         extra_sei: x264_sei_t {
             num_payloads: 0,
-            payloads: 0 as *mut x264_sei_payload_t,
+            payloads: std::ptr::null_mut::<x264_sei_payload_t>(),
             sei_free: None,
         },
-        opaque: 0 as *mut libc::c_void,
+        opaque: std::ptr::null_mut::<libc::c_void>(),
     };
-    let mut nal: *mut x264_nal_t = 0 as *mut x264_nal_t;
+    let mut nal: *mut x264_nal_t = std::ptr::null_mut::<x264_nal_t>();
     let mut i_nal: libc::c_int = 0;
     let mut i_frame_size: libc::c_int = 0 as libc::c_int;
     i_frame_size = x264_encoder_encode(h, &mut nal, &mut i_nal, pic, &mut pic_out);
@@ -5678,7 +5674,7 @@ unsafe extern "C" fn encode_frame(
         );
         *last_dts = pic_out.i_dts;
     }
-    return i_frame_size;
+    i_frame_size
 }
 unsafe extern "C" fn print_status(
     mut i_start: int64_t,
@@ -5743,7 +5739,7 @@ unsafe extern "C" fn print_status(
         buf.as_mut_ptr().offset(5 as libc::c_int as isize),
     );
     fflush(stderr);
-    return i_time;
+    i_time
 }
 unsafe extern "C" fn convert_cli_to_lib_pic(
     mut lib: *mut x264_picture_t,
@@ -5768,7 +5764,7 @@ unsafe extern "C" fn encode(
     mut opt: *mut cli_opt_t,
 ) -> libc::c_int {
     let mut current_block: u64;
-    let mut h: *mut x264_t = 0 as *mut x264_t;
+    let mut h: *mut x264_t = std::ptr::null_mut::<x264_t>();
     let mut pic: x264_picture_t = x264_picture_t {
         i_type: 0,
         i_qpplus1: 0,
@@ -5776,17 +5772,17 @@ unsafe extern "C" fn encode(
         b_keyframe: 0,
         i_pts: 0,
         i_dts: 0,
-        param: 0 as *mut x264_param_t,
+        param: std::ptr::null_mut::<x264_param_t>(),
         img: x264_image_t {
             i_csp: 0,
             i_plane: 0,
             i_stride: [0; 4],
-            plane: [0 as *mut uint8_t; 4],
+            plane: [std::ptr::null_mut::<uint8_t>(); 4],
         },
         prop: x264_image_properties_t {
-            quant_offsets: 0 as *mut libc::c_float,
+            quant_offsets: std::ptr::null_mut::<libc::c_float>(),
             quant_offsets_free: None,
-            mb_info: 0 as *mut uint8_t,
+            mb_info: std::ptr::null_mut::<uint8_t>(),
             mb_info_free: None,
             f_ssim: 0.,
             f_psnr_avg: 0.,
@@ -5801,10 +5797,10 @@ unsafe extern "C" fn encode(
         },
         extra_sei: x264_sei_t {
             num_payloads: 0,
-            payloads: 0 as *mut x264_sei_payload_t,
+            payloads: std::ptr::null_mut::<x264_sei_payload_t>(),
             sei_free: None,
         },
-        opaque: 0 as *mut libc::c_void,
+        opaque: std::ptr::null_mut::<libc::c_void>(),
     };
     let mut cli_pic: cli_pic_t = cli_pic_t {
         img: cli_image_t {
@@ -5812,14 +5808,14 @@ unsafe extern "C" fn encode(
             width: 0,
             height: 0,
             planes: 0,
-            plane: [0 as *mut uint8_t; 4],
+            plane: [std::ptr::null_mut::<uint8_t>(); 4],
             stride: [0; 4],
         },
         pts: 0,
         duration: 0,
-        opaque: 0 as *mut libc::c_void,
+        opaque: std::ptr::null_mut::<libc::c_void>(),
     };
-    let mut pulldown: *const cli_pulldown_t = 0 as *const cli_pulldown_t;
+    let mut pulldown: *const cli_pulldown_t = std::ptr::null::<cli_pulldown_t>();
     let mut i_frame: libc::c_int = 0 as libc::c_int;
     let mut i_frame_output: libc::c_int = 0 as libc::c_int;
     let mut i_end: int64_t = 0;
@@ -5867,245 +5863,243 @@ unsafe extern "C" fn encode(
     } else {
         current_block = 7149356873433890176;
     }
-    match current_block {
-        7149356873433890176 => {
-            h = x264_encoder_open_164(param);
-            if h.is_null() {
+    if current_block == 7149356873433890176 {
+        h = x264_encoder_open_164(param);
+        if h.is_null() {
+            x264_cli_log(
+                b"x264\0" as *const u8 as *const libc::c_char,
+                0 as libc::c_int,
+                b"x264_encoder_open failed\n\0" as *const u8 as *const libc::c_char,
+            );
+            retval = -(1 as libc::c_int);
+        } else {
+            x264_encoder_parameters(h, param);
+            if (cli_output.set_param)
+                .expect("non-null function pointer")((*opt).hout, param) != 0
+            {
                 x264_cli_log(
                     b"x264\0" as *const u8 as *const libc::c_char,
                     0 as libc::c_int,
-                    b"x264_encoder_open failed\n\0" as *const u8 as *const libc::c_char,
+                    b"can't set outfile param\n\0" as *const u8
+                        as *const libc::c_char,
                 );
                 retval = -(1 as libc::c_int);
             } else {
-                x264_encoder_parameters(h, param);
-                if (cli_output.set_param)
-                    .expect("non-null function pointer")((*opt).hout, param) != 0
+                i_start = x264_mdate();
+                ticks_per_frame = (*param).i_timebase_den as int64_t
+                    * (*param).i_fps_den as int64_t
+                    / (*param).i_timebase_num as int64_t
+                    / (*param).i_fps_num as int64_t;
+                if ticks_per_frame < 1 as libc::c_int as int64_t
+                    && (*param).b_vfr_input == 0
                 {
                     x264_cli_log(
                         b"x264\0" as *const u8 as *const libc::c_char,
                         0 as libc::c_int,
-                        b"can't set outfile param\n\0" as *const u8
+                        b"ticks_per_frame invalid: %ld\n\0" as *const u8
                             as *const libc::c_char,
+                        ticks_per_frame,
                     );
                     retval = -(1 as libc::c_int);
                 } else {
-                    i_start = x264_mdate();
-                    ticks_per_frame = (*param).i_timebase_den as int64_t
-                        * (*param).i_fps_den as int64_t
-                        / (*param).i_timebase_num as int64_t
-                        / (*param).i_fps_num as int64_t;
-                    if ticks_per_frame < 1 as libc::c_int as int64_t
-                        && (*param).b_vfr_input == 0
+                    ticks_per_frame = if ticks_per_frame
+                        > 1 as libc::c_int as int64_t
                     {
-                        x264_cli_log(
-                            b"x264\0" as *const u8 as *const libc::c_char,
-                            0 as libc::c_int,
-                            b"ticks_per_frame invalid: %ld\n\0" as *const u8
-                                as *const libc::c_char,
-                            ticks_per_frame,
-                        );
-                        retval = -(1 as libc::c_int);
+                        ticks_per_frame
                     } else {
-                        ticks_per_frame = if ticks_per_frame
-                            > 1 as libc::c_int as int64_t
+                        1 as libc::c_int as int64_t
+                    };
+                    if (*param).b_repeat_headers == 0 {
+                        let mut headers: *mut x264_nal_t = std::ptr::null_mut::<x264_nal_t>();
+                        let mut i_nal: libc::c_int = 0;
+                        if x264_encoder_headers(h, &mut headers, &mut i_nal)
+                            < 0 as libc::c_int
                         {
-                            ticks_per_frame
+                            x264_cli_log(
+                                b"x264\0" as *const u8 as *const libc::c_char,
+                                0 as libc::c_int,
+                                b"x264_encoder_headers failed\n\0" as *const u8
+                                    as *const libc::c_char,
+                            );
+                            retval = -(1 as libc::c_int);
+                            current_block = 13915633153210047135;
                         } else {
-                            1 as libc::c_int as int64_t
-                        };
-                        if (*param).b_repeat_headers == 0 {
-                            let mut headers: *mut x264_nal_t = 0 as *mut x264_nal_t;
-                            let mut i_nal: libc::c_int = 0;
-                            if x264_encoder_headers(h, &mut headers, &mut i_nal)
-                                < 0 as libc::c_int
-                            {
+                            i_file = (cli_output.write_headers)
+                                .expect("non-null function pointer")((*opt).hout, headers)
+                                as int64_t;
+                            if i_file < 0 as libc::c_int as int64_t {
                                 x264_cli_log(
                                     b"x264\0" as *const u8 as *const libc::c_char,
                                     0 as libc::c_int,
-                                    b"x264_encoder_headers failed\n\0" as *const u8
+                                    b"error writing headers to output file\n\0" as *const u8
                                         as *const libc::c_char,
                                 );
                                 retval = -(1 as libc::c_int);
                                 current_block = 13915633153210047135;
                             } else {
-                                i_file = (cli_output.write_headers)
-                                    .expect("non-null function pointer")((*opt).hout, headers)
-                                    as int64_t;
-                                if i_file < 0 as libc::c_int as int64_t {
-                                    x264_cli_log(
-                                        b"x264\0" as *const u8 as *const libc::c_char,
-                                        0 as libc::c_int,
-                                        b"error writing headers to output file\n\0" as *const u8
-                                            as *const libc::c_char,
-                                    );
-                                    retval = -(1 as libc::c_int);
-                                    current_block = 13915633153210047135;
-                                } else {
-                                    current_block = 10758786907990354186;
-                                }
+                                current_block = 10758786907990354186;
                             }
-                        } else {
-                            current_block = 10758786907990354186;
                         }
-                        match current_block {
-                            13915633153210047135 => {}
-                            _ => {
+                    } else {
+                        current_block = 10758786907990354186;
+                    }
+                    match current_block {
+                        13915633153210047135 => {}
+                        _ => {
+                            if !((*opt).tcfile_out).is_null() {
+                                fprintf(
+                                    (*opt).tcfile_out,
+                                    b"# timecode format v2\n\0" as *const u8
+                                        as *const libc::c_char,
+                                );
+                            }
+                            while b_ctrl_c == 0
+                                && (i_frame < (*param).i_frame_total
+                                    || (*param).i_frame_total == 0)
+                            {
+                                if (filter.get_frame)
+                                    .expect(
+                                        "non-null function pointer",
+                                    )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
+                                {
+                                    break;
+                                }
+                                x264_picture_init(&mut pic);
+                                convert_cli_to_lib_pic(&mut pic, &mut cli_pic);
+                                if (*param).b_vfr_input == 0 {
+                                    pic.i_pts = i_frame as int64_t;
+                                }
+                                if (*opt).i_pulldown != 0 && (*param).b_vfr_input == 0 {
+                                    pic
+                                        .i_pic_struct = (*pulldown)
+                                        .pattern[(i_frame % (*pulldown).mod_0) as usize]
+                                        as libc::c_int;
+                                    pic.i_pts = (pulldown_pts + 0.5f64) as int64_t;
+                                    pulldown_pts
+                                        += pulldown_frame_duration[pic.i_pic_struct as usize]
+                                            as libc::c_double;
+                                } else if (*opt).timebase_convert_multiplier != 0. {
+                                    pic
+                                        .i_pts = (pic.i_pts as libc::c_double
+                                        * (*opt).timebase_convert_multiplier + 0.5f64) as int64_t;
+                                }
+                                if pic.i_pts <= largest_pts {
+                                    if cli_log_level >= 3 as libc::c_int
+                                        || pts_warning_cnt < 3 as libc::c_int
+                                    {
+                                        x264_cli_log(
+                                            b"x264\0" as *const u8 as *const libc::c_char,
+                                            1 as libc::c_int,
+                                            b"non-strictly-monotonic pts at frame %d (%ld <= %ld)\n\0"
+                                                as *const u8 as *const libc::c_char,
+                                            i_frame,
+                                            pic.i_pts,
+                                            largest_pts,
+                                        );
+                                    } else if pts_warning_cnt == 3 as libc::c_int {
+                                        x264_cli_log(
+                                            b"x264\0" as *const u8 as *const libc::c_char,
+                                            1 as libc::c_int,
+                                            b"too many nonmonotonic pts warnings, suppressing further ones\n\0"
+                                                as *const u8 as *const libc::c_char,
+                                        );
+                                    }
+                                    pts_warning_cnt += 1;
+                                    pts_warning_cnt;
+                                    pic.i_pts = largest_pts + ticks_per_frame;
+                                }
+                                second_largest_pts = largest_pts;
+                                largest_pts = pic.i_pts;
                                 if !((*opt).tcfile_out).is_null() {
                                     fprintf(
                                         (*opt).tcfile_out,
-                                        b"# timecode format v2\n\0" as *const u8
-                                            as *const libc::c_char,
+                                        b"%.6f\n\0" as *const u8 as *const libc::c_char,
+                                        pic.i_pts as libc::c_double
+                                            * ((*param).i_timebase_num as libc::c_double
+                                                / (*param).i_timebase_den as libc::c_double) * 1e3f64,
                                     );
                                 }
-                                while b_ctrl_c == 0
-                                    && (i_frame < (*param).i_frame_total
-                                        || (*param).i_frame_total == 0)
+                                if !((*opt).qpfile).is_null() {
+                                    parse_qpfile(opt, &mut pic, i_frame + (*opt).i_seek);
+                                }
+                                prev_dts = last_dts;
+                                i_frame_size = encode_frame(
+                                    h,
+                                    (*opt).hout,
+                                    &mut pic,
+                                    &mut last_dts,
+                                );
+                                if i_frame_size < 0 as libc::c_int {
+                                    ::core::ptr::write_volatile(
+                                        &mut b_ctrl_c as *mut libc::c_int,
+                                        1 as libc::c_int,
+                                    );
+                                    retval = -(1 as libc::c_int);
+                                } else if i_frame_size != 0 {
+                                    i_file += i_frame_size as int64_t;
+                                    i_frame_output += 1;
+                                    i_frame_output;
+                                    if i_frame_output == 1 as libc::c_int {
+                                        prev_dts = last_dts;
+                                        first_dts = prev_dts;
+                                    }
+                                }
+                                if (filter.release_frame)
+                                    .expect(
+                                        "non-null function pointer",
+                                    )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
                                 {
-                                    if (filter.get_frame)
-                                        .expect(
-                                            "non-null function pointer",
-                                        )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
-                                    {
-                                        break;
-                                    }
-                                    x264_picture_init(&mut pic);
-                                    convert_cli_to_lib_pic(&mut pic, &mut cli_pic);
-                                    if (*param).b_vfr_input == 0 {
-                                        pic.i_pts = i_frame as int64_t;
-                                    }
-                                    if (*opt).i_pulldown != 0 && (*param).b_vfr_input == 0 {
-                                        pic
-                                            .i_pic_struct = (*pulldown)
-                                            .pattern[(i_frame % (*pulldown).mod_0) as usize]
-                                            as libc::c_int;
-                                        pic.i_pts = (pulldown_pts + 0.5f64) as int64_t;
-                                        pulldown_pts
-                                            += pulldown_frame_duration[pic.i_pic_struct as usize]
-                                                as libc::c_double;
-                                    } else if (*opt).timebase_convert_multiplier != 0. {
-                                        pic
-                                            .i_pts = (pic.i_pts as libc::c_double
-                                            * (*opt).timebase_convert_multiplier + 0.5f64) as int64_t;
-                                    }
-                                    if pic.i_pts <= largest_pts {
-                                        if cli_log_level >= 3 as libc::c_int
-                                            || pts_warning_cnt < 3 as libc::c_int
-                                        {
-                                            x264_cli_log(
-                                                b"x264\0" as *const u8 as *const libc::c_char,
-                                                1 as libc::c_int,
-                                                b"non-strictly-monotonic pts at frame %d (%ld <= %ld)\n\0"
-                                                    as *const u8 as *const libc::c_char,
-                                                i_frame,
-                                                pic.i_pts,
-                                                largest_pts,
-                                            );
-                                        } else if pts_warning_cnt == 3 as libc::c_int {
-                                            x264_cli_log(
-                                                b"x264\0" as *const u8 as *const libc::c_char,
-                                                1 as libc::c_int,
-                                                b"too many nonmonotonic pts warnings, suppressing further ones\n\0"
-                                                    as *const u8 as *const libc::c_char,
-                                            );
-                                        }
-                                        pts_warning_cnt += 1;
-                                        pts_warning_cnt;
-                                        pic.i_pts = largest_pts + ticks_per_frame;
-                                    }
-                                    second_largest_pts = largest_pts;
-                                    largest_pts = pic.i_pts;
-                                    if !((*opt).tcfile_out).is_null() {
-                                        fprintf(
-                                            (*opt).tcfile_out,
-                                            b"%.6f\n\0" as *const u8 as *const libc::c_char,
-                                            pic.i_pts as libc::c_double
-                                                * ((*param).i_timebase_num as libc::c_double
-                                                    / (*param).i_timebase_den as libc::c_double) * 1e3f64,
-                                        );
-                                    }
-                                    if !((*opt).qpfile).is_null() {
-                                        parse_qpfile(opt, &mut pic, i_frame + (*opt).i_seek);
-                                    }
-                                    prev_dts = last_dts;
-                                    i_frame_size = encode_frame(
-                                        h,
-                                        (*opt).hout,
-                                        &mut pic,
-                                        &mut last_dts,
-                                    );
-                                    if i_frame_size < 0 as libc::c_int {
-                                        ::core::ptr::write_volatile(
-                                            &mut b_ctrl_c as *mut libc::c_int,
-                                            1 as libc::c_int,
-                                        );
-                                        retval = -(1 as libc::c_int);
-                                    } else if i_frame_size != 0 {
-                                        i_file += i_frame_size as int64_t;
-                                        i_frame_output += 1;
-                                        i_frame_output;
-                                        if i_frame_output == 1 as libc::c_int {
-                                            prev_dts = last_dts;
-                                            first_dts = prev_dts;
-                                        }
-                                    }
-                                    if (filter.release_frame)
-                                        .expect(
-                                            "non-null function pointer",
-                                        )((*opt).hin, &mut cli_pic, i_frame + (*opt).i_seek) != 0
-                                    {
-                                        break;
-                                    }
-                                    if (*opt).b_progress != 0 && i_frame_output != 0 {
-                                        i_previous = print_status(
-                                            i_start,
-                                            i_previous,
-                                            i_frame_output,
-                                            (*param).i_frame_total,
-                                            i_file,
-                                            param,
-                                            2 as libc::c_int as int64_t * last_dts - prev_dts
-                                                - first_dts,
-                                        );
-                                    }
-                                    i_frame += 1;
-                                    i_frame;
+                                    break;
                                 }
-                                while b_ctrl_c == 0 && x264_encoder_delayed_frames(h) != 0 {
-                                    prev_dts = last_dts;
-                                    i_frame_size = encode_frame(
-                                        h,
-                                        (*opt).hout,
-                                        0 as *mut x264_picture_t,
-                                        &mut last_dts,
+                                if (*opt).b_progress != 0 && i_frame_output != 0 {
+                                    i_previous = print_status(
+                                        i_start,
+                                        i_previous,
+                                        i_frame_output,
+                                        (*param).i_frame_total,
+                                        i_file,
+                                        param,
+                                        2 as libc::c_int as int64_t * last_dts - prev_dts
+                                            - first_dts,
                                     );
-                                    if i_frame_size < 0 as libc::c_int {
-                                        ::core::ptr::write_volatile(
-                                            &mut b_ctrl_c as *mut libc::c_int,
-                                            1 as libc::c_int,
-                                        );
-                                        retval = -(1 as libc::c_int);
-                                    } else if i_frame_size != 0 {
-                                        i_file += i_frame_size as int64_t;
-                                        i_frame_output += 1;
-                                        i_frame_output;
-                                        if i_frame_output == 1 as libc::c_int {
-                                            prev_dts = last_dts;
-                                            first_dts = prev_dts;
-                                        }
+                                }
+                                i_frame += 1;
+                                i_frame;
+                            }
+                            while b_ctrl_c == 0 && x264_encoder_delayed_frames(h) != 0 {
+                                prev_dts = last_dts;
+                                i_frame_size = encode_frame(
+                                    h,
+                                    (*opt).hout,
+                                    std::ptr::null_mut::<x264_picture_t>(),
+                                    &mut last_dts,
+                                );
+                                if i_frame_size < 0 as libc::c_int {
+                                    ::core::ptr::write_volatile(
+                                        &mut b_ctrl_c as *mut libc::c_int,
+                                        1 as libc::c_int,
+                                    );
+                                    retval = -(1 as libc::c_int);
+                                } else if i_frame_size != 0 {
+                                    i_file += i_frame_size as int64_t;
+                                    i_frame_output += 1;
+                                    i_frame_output;
+                                    if i_frame_output == 1 as libc::c_int {
+                                        prev_dts = last_dts;
+                                        first_dts = prev_dts;
                                     }
-                                    if (*opt).b_progress != 0 && i_frame_output != 0 {
-                                        i_previous = print_status(
-                                            i_start,
-                                            i_previous,
-                                            i_frame_output,
-                                            (*param).i_frame_total,
-                                            i_file,
-                                            param,
-                                            2 as libc::c_int as int64_t * last_dts - prev_dts
-                                                - first_dts,
-                                        );
-                                    }
+                                }
+                                if (*opt).b_progress != 0 && i_frame_output != 0 {
+                                    i_previous = print_status(
+                                        i_start,
+                                        i_previous,
+                                        i_frame_output,
+                                        (*param).i_frame_total,
+                                        i_file,
+                                        param,
+                                        2 as libc::c_int as int64_t * last_dts - prev_dts
+                                            - first_dts,
+                                    );
                                 }
                             }
                         }
@@ -6113,7 +6107,6 @@ unsafe extern "C" fn encode(
                 }
             }
         }
-        _ => {}
     }
     if pts_warning_cnt >= 3 as libc::c_int && cli_log_level < 3 as libc::c_int {
         x264_cli_log(
@@ -6161,7 +6154,7 @@ unsafe extern "C" fn encode(
         .expect(
             "non-null function pointer",
         )((*opt).hout, largest_pts, second_largest_pts);
-    (*opt).hout = 0 as *mut libc::c_void;
+    (*opt).hout = std::ptr::null_mut::<libc::c_void>();
     if i_frame_output > 0 as libc::c_int {
         let mut fps: libc::c_double = i_frame_output as libc::c_double
             * 1000000 as libc::c_int as libc::c_double
@@ -6176,7 +6169,7 @@ unsafe extern "C" fn encode(
                 / (1000 as libc::c_int as libc::c_double * duration),
         );
     }
-    return retval;
+    retval
 }
 pub fn main() {
     let mut args: Vec::<*mut libc::c_char> = Vec::new();

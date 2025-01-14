@@ -239,8 +239,8 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn gcd(mut a: uint64_t, mut b: uint64_t) -> uint64_t {
@@ -255,7 +255,7 @@ unsafe extern "C" fn gcd(mut a: uint64_t, mut b: uint64_t) -> uint64_t {
 }
 #[inline]
 unsafe extern "C" fn lcm(mut a: uint64_t, mut b: uint64_t) -> uint64_t {
-    return a / gcd(a, b) * b;
+    a / gcd(a, b) * b
 }
 #[inline]
 unsafe extern "C" fn sigexp10(
@@ -263,7 +263,7 @@ unsafe extern "C" fn sigexp10(
     mut exponent: *mut libc::c_double,
 ) -> libc::c_double {
     *exponent = pow(10 as libc::c_int as libc::c_double, floor(log10(value)));
-    return value / *exponent;
+    value / *exponent
 }
 unsafe extern "C" fn correct_fps(
     mut fps: libc::c_double,
@@ -306,7 +306,7 @@ unsafe extern "C" fn correct_fps(
             (*h).auto_timebase_den = 0 as libc::c_int;
         }
     }
-    return fps_num as libc::c_double / fps_den as libc::c_double;
+    fps_num as libc::c_double / fps_den as libc::c_double
 }
 unsafe extern "C" fn try_mkv_timebase_den(
     mut fpss: *mut libc::c_double,
@@ -345,7 +345,7 @@ unsafe extern "C" fn try_mkv_timebase_den(
         num += 1;
         num;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn parse_tcfile(
     mut tcfile_in: *mut FILE,
@@ -359,8 +359,8 @@ unsafe extern "C" fn parse_tcfile(
     let mut num: libc::c_int = 0;
     let mut seq_num: libc::c_int = 0;
     let mut timecodes_num: libc::c_int = 0;
-    let mut timecodes: *mut libc::c_double = 0 as *mut libc::c_double;
-    let mut fpss: *mut libc::c_double = 0 as *mut libc::c_double;
+    let mut timecodes: *mut libc::c_double = std::ptr::null_mut::<libc::c_double>();
+    let mut fpss: *mut libc::c_double = std::ptr::null_mut::<libc::c_double>();
     ret = (!(fgets(
         buff.as_mut_ptr(),
         ::core::mem::size_of::<[libc::c_char; 256]>() as libc::c_ulong as libc::c_int,
@@ -585,12 +585,12 @@ unsafe extern "C" fn parse_tcfile(
                             num += 1;
                             num;
                         }
-                        if !(num < timecodes_num - 1 as libc::c_int) {
+                        if num >= timecodes_num - 1 as libc::c_int {
                             continue;
                         }
                         if (*h).auto_timebase_den != 0 || (*h).auto_timebase_num != 0 {
                             let fresh0 = seq_num;
-                            seq_num = seq_num + 1;
+                            seq_num += 1;
                             *fpss.offset(fresh0 as isize) = seq_fps;
                         }
                         seq_fps = correct_fps(seq_fps, h);
@@ -716,7 +716,7 @@ unsafe extern "C" fn parse_tcfile(
                                 _ => {
                                     if !fpss.is_null() {
                                         free(fpss as *mut libc::c_void);
-                                        fpss = 0 as *mut libc::c_double;
+                                        fpss = std::ptr::null_mut::<libc::c_double>();
                                     }
                                     (*h).assume_fps = assume_fps;
                                     (*h)
@@ -917,7 +917,7 @@ unsafe extern "C" fn parse_tcfile(
                     1109600788113682529 => {}
                     _ => {
                         free(fpss as *mut libc::c_void);
-                        fpss = 0 as *mut libc::c_double;
+                        fpss = std::ptr::null_mut::<libc::c_double>();
                         current_block = 6938158527927677584;
                     }
                 }
@@ -946,66 +946,63 @@ unsafe extern "C" fn parse_tcfile(
             }
         }
     }
-    match current_block {
-        12129449210080749085 => {
-            if (*h).auto_timebase_den != 0 || (*h).auto_timebase_num != 0 {
-                let mut i_0: uint64_t = gcd((*h).timebase_num, (*h).timebase_den);
-                (*h).timebase_num = (*h).timebase_num / i_0;
-                (*h).timebase_den = (*h).timebase_den / i_0;
-                x264_cli_log(
-                    b"timecode\0" as *const u8 as *const libc::c_char,
-                    2 as libc::c_int,
-                    b"automatic timebase generation %lu/%lu\n\0" as *const u8
-                        as *const libc::c_char,
-                    (*h).timebase_num,
-                    (*h).timebase_den,
-                );
-            } else if (*h).timebase_den > 4294967295 as libc::c_uint as uint64_t
-                || (*h).timebase_den == 0
-            {
-                x264_cli_log(
-                    b"timecode\0" as *const u8 as *const libc::c_char,
-                    0 as libc::c_int,
-                    b"automatic timebase generation failed.\n                  Specify an appropriate timebase manually.\n\0"
-                        as *const u8 as *const libc::c_char,
-                );
-                return -(1 as libc::c_int);
-            }
-            (*h)
-                .pts = malloc(
-                ((*h).stored_pts_num as libc::c_ulong)
-                    .wrapping_mul(::core::mem::size_of::<int64_t>() as libc::c_ulong),
-            ) as *mut int64_t;
-            if !((*h).pts).is_null() {
-                num = 0 as libc::c_int;
-                while num < (*h).stored_pts_num {
-                    *((*h).pts)
-                        .offset(
-                            num as isize,
-                        ) = (*timecodes.offset(num as isize)
-                        * ((*h).timebase_den as libc::c_double
-                            / (*h).timebase_num as libc::c_double) + 0.5f64) as int64_t;
-                    if num > 0 as libc::c_int
-                        && *((*h).pts).offset(num as isize)
-                            <= *((*h).pts).offset((num - 1 as libc::c_int) as isize)
-                    {
-                        x264_cli_log(
-                            b"timecode\0" as *const u8 as *const libc::c_char,
-                            0 as libc::c_int,
-                            b"invalid timebase or timecode for frame %d\n\0" as *const u8
-                                as *const libc::c_char,
-                            num,
-                        );
-                        return -(1 as libc::c_int);
-                    }
-                    num += 1;
-                    num;
-                }
-                free(timecodes as *mut libc::c_void);
-                return 0 as libc::c_int;
-            }
+    if current_block == 12129449210080749085 {
+        if (*h).auto_timebase_den != 0 || (*h).auto_timebase_num != 0 {
+            let mut i_0: uint64_t = gcd((*h).timebase_num, (*h).timebase_den);
+            (*h).timebase_num /= i_0;
+            (*h).timebase_den /= i_0;
+            x264_cli_log(
+                b"timecode\0" as *const u8 as *const libc::c_char,
+                2 as libc::c_int,
+                b"automatic timebase generation %lu/%lu\n\0" as *const u8
+                    as *const libc::c_char,
+                (*h).timebase_num,
+                (*h).timebase_den,
+            );
+        } else if (*h).timebase_den > 4294967295 as libc::c_uint as uint64_t
+            || (*h).timebase_den == 0
+        {
+            x264_cli_log(
+                b"timecode\0" as *const u8 as *const libc::c_char,
+                0 as libc::c_int,
+                b"automatic timebase generation failed.\n                  Specify an appropriate timebase manually.\n\0"
+                    as *const u8 as *const libc::c_char,
+            );
+            return -(1 as libc::c_int);
         }
-        _ => {}
+        (*h)
+            .pts = malloc(
+            ((*h).stored_pts_num as libc::c_ulong)
+                .wrapping_mul(::core::mem::size_of::<int64_t>() as libc::c_ulong),
+        ) as *mut int64_t;
+        if !((*h).pts).is_null() {
+            num = 0 as libc::c_int;
+            while num < (*h).stored_pts_num {
+                *((*h).pts)
+                    .offset(
+                        num as isize,
+                    ) = (*timecodes.offset(num as isize)
+                    * ((*h).timebase_den as libc::c_double
+                        / (*h).timebase_num as libc::c_double) + 0.5f64) as int64_t;
+                if num > 0 as libc::c_int
+                    && *((*h).pts).offset(num as isize)
+                        <= *((*h).pts).offset((num - 1 as libc::c_int) as isize)
+                {
+                    x264_cli_log(
+                        b"timecode\0" as *const u8 as *const libc::c_char,
+                        0 as libc::c_int,
+                        b"invalid timebase or timecode for frame %d\n\0" as *const u8
+                            as *const libc::c_char,
+                        num,
+                    );
+                    return -(1 as libc::c_int);
+                }
+                num += 1;
+                num;
+            }
+            free(timecodes as *mut libc::c_void);
+            return 0 as libc::c_int;
+        }
     }
     if !timecodes.is_null() {
         free(timecodes as *mut libc::c_void);
@@ -1013,7 +1010,7 @@ unsafe extern "C" fn parse_tcfile(
     if !fpss.is_null() {
         free(fpss as *mut libc::c_void);
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn open_file(
     mut psz_filename: *mut libc::c_char,
@@ -1022,7 +1019,7 @@ unsafe extern "C" fn open_file(
     mut opt: *mut cli_input_opt_t,
 ) -> libc::c_int {
     let mut ret: libc::c_int = 0 as libc::c_int;
-    let mut tcfile_in: *mut FILE = 0 as *mut FILE;
+    let mut tcfile_in: *mut FILE = std::ptr::null_mut::<FILE>();
     let mut h: *mut timecode_hnd_t = malloc(
         ::core::mem::size_of::<timecode_hnd_t>() as libc::c_ulong,
     ) as *mut timecode_hnd_t;
@@ -1036,7 +1033,7 @@ unsafe extern "C" fn open_file(
     }
     (*h).input = cli_input;
     (*h).p_handle = *p_handle;
-    (*h).pts = 0 as *mut int64_t;
+    (*h).pts = std::ptr::null_mut::<int64_t>();
     if !((*opt).timebase).is_null() {
         ret = sscanf(
             (*opt).timebase,
@@ -1048,7 +1045,7 @@ unsafe extern "C" fn open_file(
             (*h)
                 .timebase_num = strtoul(
                 (*opt).timebase,
-                0 as *mut *mut libc::c_char,
+                std::ptr::null_mut::<*mut libc::c_char>(),
                 10 as libc::c_int,
             );
             (*h).timebase_den = 0 as libc::c_int as uint64_t;
@@ -1106,7 +1103,7 @@ unsafe extern "C" fn open_file(
     (*info).timebase_den = (*h).timebase_den as uint32_t;
     (*info).vfr = 1 as libc::c_int;
     *p_handle = h as hnd_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn get_frame_pts(
     mut h: *mut timecode_hnd_t,
@@ -1114,7 +1111,7 @@ unsafe extern "C" fn get_frame_pts(
     mut real_frame: libc::c_int,
 ) -> int64_t {
     if frame < (*h).stored_pts_num {
-        return *((*h).pts).offset(frame as isize)
+        *((*h).pts).offset(frame as isize)
     } else {
         if !((*h).pts).is_null() && real_frame != 0 {
             x264_cli_log(
@@ -1126,17 +1123,17 @@ unsafe extern "C" fn get_frame_pts(
                 (*h).assume_fps,
             );
             free((*h).pts as *mut libc::c_void);
-            (*h).pts = 0 as *mut int64_t;
+            (*h).pts = std::ptr::null_mut::<int64_t>();
         }
         let mut timecode: libc::c_double = (*h).last_timecode
             + 1 as libc::c_int as libc::c_double / (*h).assume_fps;
         if real_frame != 0 {
             (*h).last_timecode = timecode;
         }
-        return (timecode
+        (timecode
             * ((*h).timebase_den as libc::c_double / (*h).timebase_num as libc::c_double)
-            + 0.5f64) as int64_t;
-    };
+            + 0.5f64) as int64_t
+    }
 }
 unsafe extern "C" fn read_frame(
     mut pic: *mut cli_pic_t,
@@ -1153,7 +1150,7 @@ unsafe extern "C" fn read_frame(
     (*pic)
         .duration = get_frame_pts(h, frame + 1 as libc::c_int, 0 as libc::c_int)
         - (*pic).pts;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut pic: *mut cli_pic_t,
@@ -1164,7 +1161,7 @@ unsafe extern "C" fn release_frame(
         return ((*h).input.release_frame)
             .expect("non-null function pointer")(pic, (*h).p_handle);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn picture_alloc(
     mut pic: *mut cli_pic_t,
@@ -1174,8 +1171,8 @@ unsafe extern "C" fn picture_alloc(
     mut height: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut timecode_hnd_t = handle as *mut timecode_hnd_t;
-    return ((*h).input.picture_alloc)
-        .expect("non-null function pointer")(pic, (*h).p_handle, csp, width, height);
+    ((*h).input.picture_alloc)
+        .expect("non-null function pointer")(pic, (*h).p_handle, csp, width, height)
 }
 unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
     let mut h: *mut timecode_hnd_t = handle as *mut timecode_hnd_t;
@@ -1188,12 +1185,13 @@ unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
     }
     ((*h).input.close_file).expect("non-null function pointer")((*h).p_handle);
     free(h as *mut libc::c_void);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub static mut timecode_input: cli_input_t = unsafe {
     {
-        let mut init = cli_input_t {
+        
+        cli_input_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -1229,7 +1227,6 @@ pub static mut timecode_input: cli_input_t = unsafe {
                 picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> (),
             ),
             close_file: Some(close_file as unsafe extern "C" fn(hnd_t) -> libc::c_int),
-        };
-        init
+        }
     }
 };

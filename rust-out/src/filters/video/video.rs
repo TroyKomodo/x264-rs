@@ -318,7 +318,7 @@ unsafe extern "C" fn register_vid_filter(mut new_filter: *mut cli_vid_filter_t) 
         filter_i = (*filter_i).next;
     }
     (*filter_i).next = new_filter;
-    (*new_filter).next = 0 as *mut cli_vid_filter_t;
+    (*new_filter).next = std::ptr::null_mut::<cli_vid_filter_t>();
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_register_vid_filters() {
@@ -379,7 +379,7 @@ pub unsafe extern "C" fn x264_init_vid_filter(
     {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_vid_filter_help(mut longhelp: libc::c_int) {

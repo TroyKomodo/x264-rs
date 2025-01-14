@@ -578,7 +578,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 static mut x264_preset_names: [*const libc::c_char; 11] = [
     b"ultrafast\0" as *const u8 as *const libc::c_char,
@@ -610,8 +610,8 @@ pub unsafe extern "C" fn x264_reduce_fraction(
         b = c;
         c = a % b;
     }
-    *n = *n / b;
-    *d = *d / b;
+    *n /= b;
+    *d /= b;
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_reduce_fraction64(
@@ -630,8 +630,8 @@ pub unsafe extern "C" fn x264_reduce_fraction64(
         b = c;
         c = a % b;
     }
-    *n = *n / b;
-    *d = *d / b;
+    *n /= b;
+    *d /= b;
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_log_default(
@@ -640,7 +640,7 @@ pub unsafe extern "C" fn x264_log_default(
     mut psz_fmt: *const libc::c_char,
     mut arg: ::core::ffi::VaList,
 ) {
-    let mut psz_prefix: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut psz_prefix: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     match i_level {
         0 => {
             psz_prefix = b"error\0" as *const u8 as *const libc::c_char
@@ -674,7 +674,7 @@ pub unsafe extern "C" fn x264_log_internal(
 ) {
     let mut arg: ::core::ffi::VaListImpl;
     arg = args.clone();
-    x264_log_default(0 as *mut libc::c_void, i_level, psz_fmt, arg.as_va_list());
+    x264_log_default(std::ptr::null_mut::<libc::c_void>(), i_level, psz_fmt, arg.as_va_list());
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_malloc(mut i_size: int64_t) -> *mut libc::c_void {
@@ -691,9 +691,9 @@ pub unsafe extern "C" fn x264_malloc(mut i_size: int64_t) -> *mut libc::c_void {
             b"invalid size of malloc: %ld\n\0" as *const u8 as *const libc::c_char,
             i_size,
         );
-        return 0 as *mut libc::c_void;
+        return std::ptr::null_mut::<libc::c_void>();
     }
-    let mut align_buf: *mut uint8_t = 0 as *mut uint8_t;
+    let mut align_buf: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     if i_size
         >= (2 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int
             * 7 as libc::c_int / 8 as libc::c_int) as int64_t
@@ -704,12 +704,11 @@ pub unsafe extern "C" fn x264_malloc(mut i_size: int64_t) -> *mut libc::c_void {
             i_size as libc::c_ulong,
         ) as *mut uint8_t;
         if !align_buf.is_null() {
-            let mut madv_size: size_t = (i_size
+            let mut madv_size: size_t = ((i_size
                 + (2 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int)
                     as int64_t
                 - (2 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int
-                    * 7 as libc::c_int / 8 as libc::c_int) as int64_t
-                & !(2 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int
+                    * 7 as libc::c_int / 8 as libc::c_int) as int64_t) & !(2 as libc::c_int * 1024 as libc::c_int * 1024 as libc::c_int
                     - 1 as libc::c_int) as int64_t) as size_t;
             madvise(align_buf as *mut libc::c_void, madv_size, 14 as libc::c_int);
         }
@@ -724,7 +723,7 @@ pub unsafe extern "C" fn x264_malloc(mut i_size: int64_t) -> *mut libc::c_void {
             i_size,
         );
     }
-    return align_buf as *mut libc::c_void;
+    align_buf as *mut libc::c_void
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_free(mut p: *mut libc::c_void) {
@@ -738,10 +737,10 @@ pub unsafe extern "C" fn x264_slurp_file(
 ) -> *mut libc::c_char {
     let mut b_error: libc::c_int = 0 as libc::c_int;
     let mut i_size: int64_t = 0;
-    let mut buf: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut buf: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut fh: *mut FILE = fopen(filename, b"rb\0" as *const u8 as *const libc::c_char);
     if fh.is_null() {
-        return 0 as *mut libc::c_char;
+        return std::ptr::null_mut::<libc::c_char>();
     }
     b_error
         |= (fseeko(fh, 0 as libc::c_int as __off64_t, 2 as libc::c_int)
@@ -756,7 +755,7 @@ pub unsafe extern "C" fn x264_slurp_file(
     b_error
         |= (fseeko(fh, 0 as libc::c_int as __off64_t, 0 as libc::c_int)
             < 0 as libc::c_int) as libc::c_int;
-    if !(b_error != 0) {
+    if b_error == 0 {
         buf = x264_malloc(i_size + 2 as libc::c_int as int64_t) as *mut libc::c_char;
         if !buf.is_null() {
             b_error
@@ -769,13 +768,13 @@ pub unsafe extern "C" fn x264_slurp_file(
             fclose(fh);
             if b_error != 0 {
                 x264_free(buf as *mut libc::c_void);
-                return 0 as *mut libc::c_char;
+                return std::ptr::null_mut::<libc::c_char>();
             }
             if *buf.offset((i_size - 1 as libc::c_int as int64_t) as isize)
                 as libc::c_int != '\n' as i32
             {
                 let fresh0 = i_size;
-                i_size = i_size + 1;
+                i_size += 1;
                 *buf.offset(fresh0 as isize) = '\n' as i32 as libc::c_char;
             }
             *buf.offset(i_size as isize) = '\0' as i32 as libc::c_char;
@@ -783,14 +782,14 @@ pub unsafe extern "C" fn x264_slurp_file(
         }
     }
     fclose(fh);
-    return 0 as *mut libc::c_char;
+    std::ptr::null_mut::<libc::c_char>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_strdup(
     mut param: *mut x264_param_t,
     mut src: *const libc::c_char,
 ) -> *mut libc::c_char {
-    let mut res: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut res: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut current_block: u64;
     let mut buf: *mut strdup_buffer = (*param).opaque as *mut strdup_buffer;
     if buf.is_null() {
@@ -842,24 +841,21 @@ pub unsafe extern "C" fn x264_param_strdup(
     } else {
         current_block = 11650488183268122163;
     }
-    match current_block {
-        11650488183268122163 => {
-            res = strdup(src);
-            if !res.is_null() {
-                let fresh1 = (*buf).count;
-                (*buf).count = (*buf).count + 1;
-                let ref mut fresh2 = *((*buf).ptr).as_mut_ptr().offset(fresh1 as isize);
-                *fresh2 = res as *mut libc::c_void;
-                return res;
-            }
+    if current_block == 11650488183268122163 {
+        res = strdup(src);
+        if !res.is_null() {
+            let fresh1 = (*buf).count;
+            (*buf).count += 1;
+            let fresh2 = &mut (*((*buf).ptr).as_mut_ptr().offset(fresh1 as isize));
+            *fresh2 = res as *mut libc::c_void;
+            return res;
         }
-        _ => {}
     }
     x264_log_internal(
         0 as libc::c_int,
         b"x264_param_strdup failed\n\0" as *const u8 as *const libc::c_char,
     );
-    return 0 as *mut libc::c_char;
+    std::ptr::null_mut::<libc::c_char>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_cleanup(mut param: *mut x264_param_t) {
@@ -872,7 +868,7 @@ pub unsafe extern "C" fn x264_param_cleanup(mut param: *mut x264_param_t) {
             i;
         }
         free(buf as *mut libc::c_void);
-        (*param).opaque = 0 as *mut libc::c_void;
+        (*param).opaque = std::ptr::null_mut::<libc::c_void>();
     }
 }
 #[no_mangle]
@@ -900,15 +896,16 @@ pub unsafe extern "C" fn x264_picture_alloc(
             height_fix8: [0; 3],
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -920,11 +917,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int / 2 as libc::c_int,
                     256 as libc::c_int / 2 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -936,11 +933,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int / 2 as libc::c_int,
                     256 as libc::c_int / 2 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 2 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -952,11 +949,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int / 2 as libc::c_int,
                     0,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 2 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -968,11 +965,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int / 2 as libc::c_int,
                     0,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -984,11 +981,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int * 1 as libc::c_int,
                     256 as libc::c_int * 1 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -1000,11 +997,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int * 1 as libc::c_int,
                     256 as libc::c_int * 1 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 2 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -1016,24 +1013,23 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int * 1 as libc::c_int,
                     0,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 2 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 2 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
         x264_csp_tab_t {
             planes: 0,
@@ -1041,7 +1037,8 @@ pub unsafe extern "C" fn x264_picture_alloc(
             height_fix8: [0; 3],
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -1053,11 +1050,11 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int * 1 as libc::c_int,
                     256 as libc::c_int * 1 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 3 as libc::c_int,
                 width_fix8: [
                     256 as libc::c_int * 1 as libc::c_int,
@@ -1069,32 +1066,31 @@ pub unsafe extern "C" fn x264_picture_alloc(
                     256 as libc::c_int * 1 as libc::c_int,
                     256 as libc::c_int * 1 as libc::c_int,
                 ],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 3 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 4 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
         {
-            let mut init = x264_csp_tab_t {
+            
+            x264_csp_tab_t {
                 planes: 1 as libc::c_int,
                 width_fix8: [256 as libc::c_int * 3 as libc::c_int, 0, 0],
                 height_fix8: [256 as libc::c_int * 1 as libc::c_int, 0, 0],
-            };
-            init
+            }
         },
     ];
     let mut csp: libc::c_int = i_csp & 0xff as libc::c_int;
@@ -1114,12 +1110,10 @@ pub unsafe extern "C" fn x264_picture_alloc(
     let mut frame_size: int64_t = 0 as libc::c_int as int64_t;
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*pic).img.i_plane {
-        let mut stride: libc::c_int = ((i_width as int64_t
-            * csp_tab[csp as usize].width_fix8[i as usize] as int64_t
-            >> 8 as libc::c_int) * depth_factor as int64_t) as libc::c_int;
-        let mut plane_size: int64_t = (i_height as int64_t
-            * csp_tab[csp as usize].height_fix8[i as usize] as int64_t
-            >> 8 as libc::c_int) * stride as int64_t;
+        let mut stride: libc::c_int = (((i_width as int64_t
+            * csp_tab[csp as usize].width_fix8[i as usize] as int64_t) >> 8 as libc::c_int) * depth_factor as int64_t) as libc::c_int;
+        let mut plane_size: int64_t = ((i_height as int64_t
+            * csp_tab[csp as usize].height_fix8[i as usize] as int64_t) >> 8 as libc::c_int) * stride as int64_t;
         (*pic).img.i_stride[i as usize] = stride;
         plane_offset[i as usize] = frame_size;
         frame_size += plane_size;
@@ -1142,7 +1136,7 @@ pub unsafe extern "C" fn x264_picture_alloc(
         i_0 += 1;
         i_0;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_picture_clean(mut pic: *mut x264_picture_t) {
@@ -1245,7 +1239,7 @@ pub unsafe extern "C" fn x264_param_default(mut param: *mut x264_param_t) {
                 ::core::ffi::VaList,
             ) -> (),
     );
-    (*param).p_log_private = 0 as *mut libc::c_void;
+    (*param).p_log_private = std::ptr::null_mut::<libc::c_void>();
     (*param).i_log_level = 2 as libc::c_int;
     (*param).analyse.intra = 0x1 as libc::c_uint | 0x2 as libc::c_uint;
     (*param)
@@ -1327,8 +1321,8 @@ pub unsafe extern "C" fn x264_param_default(mut param: *mut x264_param_t) {
     (*param).i_alternative_transfer = 2 as libc::c_int;
     (*param).b_opencl = 0 as libc::c_int;
     (*param).i_opencl_device = 0 as libc::c_int;
-    (*param).opencl_device_id = 0 as *mut libc::c_void;
-    (*param).psz_clbin_file = 0 as *mut libc::c_char;
+    (*param).opencl_device_id = std::ptr::null_mut::<libc::c_void>();
+    (*param).psz_clbin_file = std::ptr::null_mut::<libc::c_char>();
     (*param).i_avcintra_class = 0 as libc::c_int;
     (*param).i_avcintra_flavor = 0 as libc::c_int;
 }
@@ -1336,7 +1330,7 @@ unsafe extern "C" fn param_apply_preset(
     mut param: *mut x264_param_t,
     mut preset: *const libc::c_char,
 ) -> libc::c_int {
-    let mut end: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut i: libc::c_int = strtol(preset, &mut end, 10 as libc::c_int) as libc::c_int;
     if *end as libc::c_int == 0 as libc::c_int && i >= 0 as libc::c_int
         && i
@@ -1396,7 +1390,7 @@ unsafe extern "C" fn param_apply_preset(
         (*param).analyse.i_subpel_refine = 6 as libc::c_int;
         (*param).analyse.i_weighted_pred = 1 as libc::c_int;
         (*param).rc.i_lookahead = 30 as libc::c_int;
-    } else if !(strcasecmp(preset, b"medium\0" as *const u8 as *const libc::c_char) == 0)
+    } else if strcasecmp(preset, b"medium\0" as *const u8 as *const libc::c_char) != 0
     {
         if strcasecmp(preset, b"slow\0" as *const u8 as *const libc::c_char) == 0 {
             (*param).analyse.i_subpel_refine = 8 as libc::c_int;
@@ -1451,7 +1445,7 @@ unsafe extern "C" fn param_apply_preset(
             return -(1 as libc::c_int);
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn param_apply_tune(
     mut param: *mut x264_param_t,
@@ -1467,7 +1461,7 @@ unsafe extern "C" fn param_apply_tune(
             );
         len = strcspn(tune, b",./-+\0" as *const u8 as *const libc::c_char)
             as libc::c_int;
-        if !(len != 0) {
+        if len == 0 {
             break;
         }
         if len == 4 as libc::c_int
@@ -1478,7 +1472,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh3 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh3 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1495,7 +1489,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh4 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh4 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1521,7 +1515,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh5 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh5 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1549,7 +1543,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh6 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh6 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1568,7 +1562,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh7 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh7 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1584,7 +1578,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh8 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh8 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1626,7 +1620,7 @@ unsafe extern "C" fn param_apply_tune(
             ) == 0
         {
             let fresh9 = psy_tuning_used;
-            psy_tuning_used = psy_tuning_used + 1;
+            psy_tuning_used += 1;
             if fresh9 != 0 {
                 current_block = 12353660529553765798;
             } else {
@@ -1655,21 +1649,18 @@ unsafe extern "C" fn param_apply_tune(
             );
             return -(1 as libc::c_int);
         }
-        match current_block {
-            12353660529553765798 => {
-                x264_log_internal(
-                    1 as libc::c_int,
-                    b"only 1 psy tuning can be used: ignoring tune %.*s\n\0" as *const u8
-                        as *const libc::c_char,
-                    len,
-                    tune,
-                );
-            }
-            _ => {}
+        if current_block == 12353660529553765798 {
+            x264_log_internal(
+                1 as libc::c_int,
+                b"only 1 psy tuning can be used: ignoring tune %.*s\n\0" as *const u8
+                    as *const libc::c_char,
+                len,
+                tune,
+            );
         }
         tune = tune.offset(len as isize);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_default_preset(
@@ -1684,7 +1675,7 @@ pub unsafe extern "C" fn x264_param_default_preset(
     if !tune.is_null() && param_apply_tune(param, tune) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_apply_fastfirstpass(mut param: *mut x264_param_t) {
@@ -1723,7 +1714,7 @@ unsafe extern "C" fn profile_string_to_int(mut str: *const libc::c_char) -> libc
     if strcasecmp(str, b"high444\0" as *const u8 as *const libc::c_char) == 0 {
         return PROFILE_HIGH444_PREDICTIVE as libc::c_int;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_apply_profile(
@@ -1803,7 +1794,7 @@ pub unsafe extern "C" fn x264_param_apply_profile(
         (*param).analyse.b_transform_8x8 = 0 as libc::c_int;
         (*param).b_cabac = 0 as libc::c_int;
         (*param).i_cqm_preset = 0 as libc::c_int;
-        (*param).psz_cqm_file = 0 as *mut libc::c_char;
+        (*param).psz_cqm_file = std::ptr::null_mut::<libc::c_char>();
         (*param).i_bframe = 0 as libc::c_int;
         (*param).analyse.i_weighted_pred = 0 as libc::c_int;
         if (*param).b_interlaced != 0 {
@@ -1825,9 +1816,9 @@ pub unsafe extern "C" fn x264_param_apply_profile(
     } else if p == PROFILE_MAIN as libc::c_int {
         (*param).analyse.b_transform_8x8 = 0 as libc::c_int;
         (*param).i_cqm_preset = 0 as libc::c_int;
-        (*param).psz_cqm_file = 0 as *mut libc::c_char;
+        (*param).psz_cqm_file = std::ptr::null_mut::<libc::c_char>();
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn parse_enum(
     mut arg: *const libc::c_char,
@@ -1845,7 +1836,7 @@ unsafe extern "C" fn parse_enum(
         i += 1;
         i;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn parse_cqm(
     mut str: *const libc::c_char,
@@ -1864,7 +1855,7 @@ unsafe extern "C" fn parse_cqm(
             return -(1 as libc::c_int);
         }
         let fresh10 = i;
-        i = i + 1;
+        i += 1;
         *cqm.offset(fresh10 as isize) = coef as uint8_t;
         if !(i < length
             && {
@@ -1880,7 +1871,7 @@ unsafe extern "C" fn parse_cqm(
             break;
         }
     }
-    return if i == length { 0 as libc::c_int } else { -(1 as libc::c_int) };
+    if i == length { 0 as libc::c_int } else { -(1 as libc::c_int) }
 }
 unsafe extern "C" fn atobool_internal(
     mut str: *const libc::c_char,
@@ -1899,29 +1890,29 @@ unsafe extern "C" fn atobool_internal(
         return 0 as libc::c_int;
     }
     *b_error = 1 as libc::c_int;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn atoi_internal(
     mut str: *const libc::c_char,
     mut b_error: *mut libc::c_int,
 ) -> libc::c_int {
-    let mut end: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut v: libc::c_int = strtol(str, &mut end, 0 as libc::c_int) as libc::c_int;
     if end == str as *mut libc::c_char || *end as libc::c_int != '\0' as i32 {
         *b_error = 1 as libc::c_int;
     }
-    return v;
+    v
 }
 unsafe extern "C" fn atof_internal(
     mut str: *const libc::c_char,
     mut b_error: *mut libc::c_int,
 ) -> libc::c_double {
-    let mut end: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut v: libc::c_double = strtod(str, &mut end);
     if end == str as *mut libc::c_char || *end as libc::c_int != '\0' as i32 {
         *b_error = 1 as libc::c_int;
     }
-    return v;
+    v
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param_parse(
@@ -1929,7 +1920,7 @@ pub unsafe extern "C" fn x264_param_parse(
     mut name: *const libc::c_char,
     mut value: *const libc::c_char,
 ) -> libc::c_int {
-    let mut name_buf: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut name_buf: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut b_error: libc::c_int = 0 as libc::c_int;
     let mut errortype: libc::c_int = -(2 as libc::c_int);
     let mut name_was_bool: libc::c_int = 0;
@@ -1945,7 +1936,7 @@ pub unsafe extern "C" fn x264_param_parse(
         value;
     }
     if !(strchr(name, '_' as i32)).is_null() {
-        let mut c: *mut libc::c_char = 0 as *mut libc::c_char;
+        let mut c: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
         name_buf = strdup(name);
         if name_buf.is_null() {
             return -(3 as libc::c_int);
@@ -2001,9 +1992,9 @@ pub unsafe extern "C" fn x264_param_parse(
         if b_error != 0 {
             let mut buf: *mut libc::c_char = strdup(value);
             if !buf.is_null() {
-                let mut tok: *mut libc::c_char = 0 as *mut libc::c_char;
-                let mut saveptr: *mut libc::c_char = 0 as *mut libc::c_char;
-                let mut init: *mut libc::c_char = 0 as *mut libc::c_char;
+                let mut tok: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+                let mut saveptr: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+                let mut init: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
                 b_error = 0 as libc::c_int;
                 (*p).cpu = 0 as libc::c_int as uint32_t;
                 init = buf;
@@ -2030,11 +2021,11 @@ pub unsafe extern "C" fn x264_param_parse(
                     if (*x264_cpu_names.as_ptr().offset(i as isize)).flags == 0 {
                         b_error = 1 as libc::c_int;
                     }
-                    init = 0 as *mut libc::c_char;
+                    init = std::ptr::null_mut::<libc::c_char>();
                 }
                 free(buf as *mut libc::c_void);
-                if (*p).cpu & (1 as libc::c_uint) << 6 as libc::c_int != 0
-                    && (*p).cpu & (1 as libc::c_uint) << 19 as libc::c_int == 0
+                if (*p).cpu & ((1 as libc::c_uint) << 6 as libc::c_int) != 0
+                    && (*p).cpu & ((1 as libc::c_uint) << 19 as libc::c_int) == 0
                 {
                     (*p).cpu |= (1 as libc::c_uint) << 20 as libc::c_int;
                 }
@@ -2727,7 +2718,7 @@ pub unsafe extern "C" fn x264_param_parse(
         free(name_buf as *mut libc::c_void);
     }
     b_error |= (value_was_null != 0 && name_was_bool == 0) as libc::c_int;
-    return if b_error != 0 { errortype } else { 0 as libc::c_int };
+    if b_error != 0 { errortype } else { 0 as libc::c_int }
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_param2string(
@@ -2735,8 +2726,8 @@ pub unsafe extern "C" fn x264_param2string(
     mut b_res: libc::c_int,
 ) -> *mut libc::c_char {
     let mut len: libc::c_int = 2000 as libc::c_int;
-    let mut buf: *mut libc::c_char = 0 as *mut libc::c_char;
-    let mut s: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut buf: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+    let mut s: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     if !((*p).rc.psz_zones).is_null() {
         len = (len as libc::c_ulong).wrapping_add(strlen((*p).rc.psz_zones))
             as libc::c_int as libc::c_int;
@@ -2744,7 +2735,7 @@ pub unsafe extern "C" fn x264_param2string(
     s = x264_malloc(len as int64_t) as *mut libc::c_char;
     buf = s;
     if buf.is_null() {
-        return 0 as *mut libc::c_char;
+        return std::ptr::null_mut::<libc::c_char>();
     }
     if b_res != 0 {
         s = s
@@ -3362,5 +3353,5 @@ pub unsafe extern "C" fn x264_param2string(
                 );
         }
     }
-    return buf;
+    buf
 }

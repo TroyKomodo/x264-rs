@@ -399,13 +399,13 @@ unsafe extern "C" fn open_file(
             return -(1 as libc::c_int);
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn set_param(
     mut handle: hnd_t,
     mut p_param: *mut x264_param_t,
 ) -> libc::c_int {
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn write_headers(
     mut handle: hnd_t,
@@ -423,7 +423,7 @@ unsafe extern "C" fn write_headers(
     {
         return size;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn write_frame(
     mut handle: hnd_t,
@@ -440,7 +440,7 @@ unsafe extern "C" fn write_frame(
     {
         return i_size;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn close_file(
     mut handle: hnd_t,
@@ -450,12 +450,13 @@ unsafe extern "C" fn close_file(
     if handle.is_null() || handle == stdout as hnd_t {
         return 0 as libc::c_int;
     }
-    return fclose(handle as *mut FILE);
+    fclose(handle as *mut FILE)
 }
 #[no_mangle]
 pub static mut raw_output: cli_output_t = unsafe {
     {
-        let mut init = cli_output_t {
+        
+        cli_output_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -485,7 +486,6 @@ pub static mut raw_output: cli_output_t = unsafe {
                 close_file
                     as unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
             ),
-        };
-        init
+        }
     }
 };

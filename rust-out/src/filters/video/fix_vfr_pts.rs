@@ -348,7 +348,7 @@ unsafe extern "C" fn init(
     (*h).prev_filter = *filter;
     *handle = h as hnd_t;
     *filter = fix_vfr_pts_filter;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn get_frame(
     mut handle: hnd_t,
@@ -421,7 +421,7 @@ unsafe extern "C" fn get_frame(
     }
     (*output).pts = (*h).pts;
     (*h).pts += (*output).duration;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
@@ -432,8 +432,8 @@ unsafe extern "C" fn release_frame(
     if frame == (*h).holder_frame - 1 as libc::c_int {
         return 0 as libc::c_int;
     }
-    return ((*h).prev_filter.release_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, pic, frame);
+    ((*h).prev_filter.release_frame)
+        .expect("non-null function pointer")((*h).prev_hnd, pic, frame)
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut fix_vfr_pts_hnd_t = handle as *mut fix_vfr_pts_hnd_t;
@@ -446,7 +446,8 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut fix_vfr_pts_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"fix_vfr_pts\0" as *const u8 as *const libc::c_char,
             help: None,
             init: Some(
@@ -477,7 +478,6 @@ pub static mut fix_vfr_pts_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

@@ -2344,7 +2344,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_median(
@@ -2352,12 +2352,12 @@ unsafe extern "C" fn x264_median(
     mut b: libc::c_int,
     mut c: libc::c_int,
 ) -> libc::c_int {
-    let mut t: libc::c_int = a - b & a - b >> 31 as libc::c_int;
+    let mut t: libc::c_int = (a - b) & ((a - b) >> 31 as libc::c_int);
     a -= t;
     b += t;
-    b -= b - c & b - c >> 31 as libc::c_int;
-    b += a - b & a - b >> 31 as libc::c_int;
-    return b;
+    b -= (b - c) & ((b - c) >> 31 as libc::c_int);
+    b += (a - b) & ((a - b) >> 31 as libc::c_int);
+    b
 }
 #[inline(always)]
 unsafe extern "C" fn x264_median_mv(
@@ -2388,8 +2388,8 @@ unsafe extern "C" fn pack16to32_mask(
     mut a: libc::c_int,
     mut b: libc::c_int,
 ) -> uint32_t {
-    return ((a & 0xffff as libc::c_int) as uint32_t)
-        .wrapping_add((b as uint32_t) << 16 as libc::c_int);
+    ((a & 0xffff as libc::c_int) as uint32_t)
+        .wrapping_add((b as uint32_t) << 16 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn x264_macroblock_cache_mv(
@@ -2574,7 +2574,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                     .i = v8;
                 h -= 2 as libc::c_int;
                 d = d.offset((s * 2 as libc::c_int) as isize);
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }
@@ -2586,7 +2586,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                 (*(d.offset(12 as libc::c_int as isize) as *mut x264_union32_t)).i = v4;
                 d = d.offset(s as isize);
                 h -= 1;
-                if !(h != 0) {
+                if h == 0 {
                     break;
                 }
             }
@@ -2793,11 +2793,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv(
     } else {
         current_block_51 = 7257199314785017154;
     }
-    match current_block_51 {
-        7257199314785017154 => {
-            x264_median_mv(mvp, mv_a, mv_b, mv_c);
-        }
-        _ => {}
+    if current_block_51 == 7257199314785017154 {
+        x264_median_mv(mvp, mv_a, mv_b, mv_c);
     };
 }
 #[no_mangle]
@@ -2883,11 +2880,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_16x16(
     } else {
         current_block_11 = 10810905470696066182;
     }
-    match current_block_11 {
-        10810905470696066182 => {
-            x264_median_mv(mvp, mv_a, mv_b, mv_c);
-        }
-        _ => {}
+    if current_block_11 == 10810905470696066182 {
+        x264_median_mv(mvp, mv_a, mv_b, mv_c);
     };
 }
 #[no_mangle]
@@ -3057,9 +3051,9 @@ unsafe extern "C" fn mb_predict_mv_direct16x16_temporal(
     let mut step: libc::c_int = ((*h).mb.i_partition == D_16x8 as libc::c_int)
         as libc::c_int + 1 as libc::c_int;
     let mut width: libc::c_int = 4 as libc::c_int
-        >> (D_16x16 as libc::c_int - (*h).mb.i_partition & 1 as libc::c_int);
+        >> ((D_16x16 as libc::c_int - (*h).mb.i_partition) & 1 as libc::c_int);
     let mut height: libc::c_int = 4 as libc::c_int
-        >> (D_16x16 as libc::c_int - (*h).mb.i_partition >> 1 as libc::c_int);
+        >> ((D_16x16 as libc::c_int - (*h).mb.i_partition) >> 1 as libc::c_int);
     let mut i8: libc::c_int = 0 as libc::c_int;
     while i8 < max_i8 {
         let mut x8: libc::c_int = i8 & 1 as libc::c_int;
@@ -3135,11 +3129,11 @@ unsafe extern "C" fn mb_predict_mv_direct16x16_temporal(
                 let mut mv_y: int16_t = (*mv_col.offset(1 as libc::c_int as isize)
                     as libc::c_int * ((1 as libc::c_int) << yshift) / 2 as libc::c_int)
                     as int16_t;
-                let mut l0x: libc::c_int = dist_scale_factor
+                let mut l0x: libc::c_int = (dist_scale_factor
                     * *mv_col.offset(0 as libc::c_int as isize) as libc::c_int
-                    + 128 as libc::c_int >> 8 as libc::c_int;
-                let mut l0y: libc::c_int = dist_scale_factor * mv_y as libc::c_int
-                    + 128 as libc::c_int >> 8 as libc::c_int;
+                    + 128 as libc::c_int) >> 8 as libc::c_int;
+                let mut l0y: libc::c_int = (dist_scale_factor * mv_y as libc::c_int
+                    + 128 as libc::c_int) >> 8 as libc::c_int;
                 if (*h).param.i_threads > 1 as libc::c_int
                     && (l0y > (*h).mb.mv_max_spel[1 as libc::c_int as usize]
                         || l0y - mv_y as libc::c_int
@@ -3183,7 +3177,7 @@ unsafe extern "C" fn mb_predict_mv_direct16x16_temporal(
         }
         i8 += step;
     }
-    return 1 as libc::c_int;
+    1 as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn mb_predict_mv_direct16x16_spatial(
@@ -3491,9 +3485,9 @@ unsafe extern "C" fn mb_predict_mv_direct16x16_spatial(
     let mut step: libc::c_int = ((*h).mb.i_partition == D_16x8 as libc::c_int)
         as libc::c_int + 1 as libc::c_int;
     let mut width: libc::c_int = 4 as libc::c_int
-        >> (D_16x16 as libc::c_int - (*h).mb.i_partition & 1 as libc::c_int);
+        >> ((D_16x16 as libc::c_int - (*h).mb.i_partition) & 1 as libc::c_int);
     let mut height: libc::c_int = 4 as libc::c_int
-        >> (D_16x16 as libc::c_int - (*h).mb.i_partition >> 1 as libc::c_int);
+        >> ((D_16x16 as libc::c_int - (*h).mb.i_partition) >> 1 as libc::c_int);
     let mut current_block_59: u64;
     let mut i8: libc::c_int = 0 as libc::c_int;
     while i8 < max_i8 {
@@ -3578,17 +3572,17 @@ unsafe extern "C" fn mb_predict_mv_direct16x16_spatial(
         }
         i8 += step;
     }
-    return 1 as libc::c_int;
+    1 as libc::c_int
 }
 unsafe extern "C" fn mb_predict_mv_direct16x16_spatial_interlaced(
     mut h: *mut x264_t,
 ) -> libc::c_int {
-    return mb_predict_mv_direct16x16_spatial(h, 1 as libc::c_int);
+    mb_predict_mv_direct16x16_spatial(h, 1 as libc::c_int)
 }
 unsafe extern "C" fn mb_predict_mv_direct16x16_spatial_progressive(
     mut h: *mut x264_t,
 ) -> libc::c_int {
-    return mb_predict_mv_direct16x16_spatial(h, 0 as libc::c_int);
+    mb_predict_mv_direct16x16_spatial(h, 0 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_mb_predict_mv_direct16x16(
@@ -3901,7 +3895,7 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_direct16x16(
             l;
         }
     }
-    return b_available;
+    b_available
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
@@ -3946,9 +3940,9 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 as libc::c_int != 0x7fff as libc::c_int
             {
                 (*((*mvc.offset(i as isize)).as_mut_ptr() as *mut x264_union32_t))
-                    .i = (*((*lowres_mv.offset((*h).mb.i_mb_xy as isize)).as_mut_ptr()
+                    .i = ((*((*lowres_mv.offset((*h).mb.i_mb_xy as isize)).as_mut_ptr()
                     as *mut x264_union32_t))
-                    .i * 2 as libc::c_int as uint32_t & 0xfffeffff as libc::c_uint;
+                    .i * 2 as libc::c_int as uint32_t) & 0xfffeffff as libc::c_uint;
                 i += 1;
                 i;
             }
@@ -3973,8 +3967,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 .offset(
                     i as isize,
                 ))[1 as libc::c_int
-                as usize] = (*mvp.offset(1 as libc::c_int as isize) as libc::c_int
-                * 2 as libc::c_int >> shift) as int16_t;
+                as usize] = ((*mvp.offset(1 as libc::c_int as isize) as libc::c_int
+                * 2 as libc::c_int) >> shift) as int16_t;
             i += 1;
             i;
         }
@@ -3994,8 +3988,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 .offset(
                     i as isize,
                 ))[1 as libc::c_int
-                as usize] = (*mvp_0.offset(1 as libc::c_int as isize) as libc::c_int
-                * 2 as libc::c_int >> shift_0) as int16_t;
+                as usize] = ((*mvp_0.offset(1 as libc::c_int as isize) as libc::c_int
+                * 2 as libc::c_int) >> shift_0) as int16_t;
             i += 1;
             i;
         }
@@ -4016,8 +4010,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 .offset(
                     i as isize,
                 ))[1 as libc::c_int
-                as usize] = (*mvp_1.offset(1 as libc::c_int as isize) as libc::c_int
-                * 2 as libc::c_int >> shift_1) as int16_t;
+                as usize] = ((*mvp_1.offset(1 as libc::c_int as isize) as libc::c_int
+                * 2 as libc::c_int) >> shift_1) as int16_t;
             i += 1;
             i;
         }
@@ -4038,8 +4032,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 .offset(
                     i as isize,
                 ))[1 as libc::c_int
-                as usize] = (*mvp_2.offset(1 as libc::c_int as isize) as libc::c_int
-                * 2 as libc::c_int >> shift_2) as int16_t;
+                as usize] = ((*mvp_2.offset(1 as libc::c_int as isize) as libc::c_int
+                * 2 as libc::c_int) >> shift_2) as int16_t;
             i += 1;
             i;
         }
@@ -4091,8 +4085,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 i as isize,
             ))[0 as libc::c_int
             as usize] = x264_clip3(
-            (*((*l0).mv16x16).offset(mb_index as isize))[0 as libc::c_int as usize]
-                as libc::c_int * scale + 128 as libc::c_int >> 8 as libc::c_int,
+            ((*((*l0).mv16x16).offset(mb_index as isize))[0 as libc::c_int as usize]
+                as libc::c_int * scale + 128 as libc::c_int) >> 8 as libc::c_int,
             -(32767 as libc::c_int) - 1 as libc::c_int,
             32767 as libc::c_int,
         ) as int16_t;
@@ -4101,8 +4095,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                 i as isize,
             ))[1 as libc::c_int
             as usize] = x264_clip3(
-            (*((*l0).mv16x16).offset(mb_index as isize))[1 as libc::c_int as usize]
-                as libc::c_int * scale + 128 as libc::c_int >> 8 as libc::c_int,
+            ((*((*l0).mv16x16).offset(mb_index as isize))[1 as libc::c_int as usize]
+                as libc::c_int * scale + 128 as libc::c_int) >> 8 as libc::c_int,
             -(32767 as libc::c_int) - 1 as libc::c_int,
             32767 as libc::c_int,
         ) as int16_t;
@@ -4119,8 +4113,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                     i as isize,
                 ))[0 as libc::c_int
                 as usize] = x264_clip3(
-                (*((*l0).mv16x16).offset(mb_index_0 as isize))[0 as libc::c_int as usize]
-                    as libc::c_int * scale_0 + 128 as libc::c_int >> 8 as libc::c_int,
+                ((*((*l0).mv16x16).offset(mb_index_0 as isize))[0 as libc::c_int as usize]
+                    as libc::c_int * scale_0 + 128 as libc::c_int) >> 8 as libc::c_int,
                 -(32767 as libc::c_int) - 1 as libc::c_int,
                 32767 as libc::c_int,
             ) as int16_t;
@@ -4129,8 +4123,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                     i as isize,
                 ))[1 as libc::c_int
                 as usize] = x264_clip3(
-                (*((*l0).mv16x16).offset(mb_index_0 as isize))[1 as libc::c_int as usize]
-                    as libc::c_int * scale_0 + 128 as libc::c_int >> 8 as libc::c_int,
+                ((*((*l0).mv16x16).offset(mb_index_0 as isize))[1 as libc::c_int as usize]
+                    as libc::c_int * scale_0 + 128 as libc::c_int) >> 8 as libc::c_int,
                 -(32767 as libc::c_int) - 1 as libc::c_int,
                 32767 as libc::c_int,
             ) as int16_t;
@@ -4148,8 +4142,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                     i as isize,
                 ))[0 as libc::c_int
                 as usize] = x264_clip3(
-                (*((*l0).mv16x16).offset(mb_index_1 as isize))[0 as libc::c_int as usize]
-                    as libc::c_int * scale_1 + 128 as libc::c_int >> 8 as libc::c_int,
+                ((*((*l0).mv16x16).offset(mb_index_1 as isize))[0 as libc::c_int as usize]
+                    as libc::c_int * scale_1 + 128 as libc::c_int) >> 8 as libc::c_int,
                 -(32767 as libc::c_int) - 1 as libc::c_int,
                 32767 as libc::c_int,
             ) as int16_t;
@@ -4158,8 +4152,8 @@ pub unsafe extern "C" fn x264_8_mb_predict_mv_ref16x16(
                     i as isize,
                 ))[1 as libc::c_int
                 as usize] = x264_clip3(
-                (*((*l0).mv16x16).offset(mb_index_1 as isize))[1 as libc::c_int as usize]
-                    as libc::c_int * scale_1 + 128 as libc::c_int >> 8 as libc::c_int,
+                ((*((*l0).mv16x16).offset(mb_index_1 as isize))[1 as libc::c_int as usize]
+                    as libc::c_int * scale_1 + 128 as libc::c_int) >> 8 as libc::c_int,
                 -(32767 as libc::c_int) - 1 as libc::c_int,
                 32767 as libc::c_int,
             ) as int16_t;

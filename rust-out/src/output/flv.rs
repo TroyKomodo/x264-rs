@@ -541,20 +541,20 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix32(mut x: uint32_t) -> uint32_t {
-    return (x << 24 as libc::c_int)
-        .wrapping_add(x << 8 as libc::c_int & 0xff0000 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 8 as libc::c_int & 0xff00 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 24 as libc::c_int);
+    (x << 24 as libc::c_int)
+        .wrapping_add((x << 8 as libc::c_int) & 0xff0000 as libc::c_int as uint32_t)
+        .wrapping_add((x >> 8 as libc::c_int) & 0xff00 as libc::c_int as uint32_t)
+        .wrapping_add(x >> 24 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix64(mut x: uint64_t) -> uint64_t {
-    return (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
-        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int);
+    (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
+        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int)
 }
 unsafe extern "C" fn write_header(mut c: *mut flv_buffer) -> libc::c_int {
     flv_put_tag(c, b"FLV\0" as *const u8 as *const libc::c_char);
@@ -562,7 +562,7 @@ unsafe extern "C" fn write_header(mut c: *mut flv_buffer) -> libc::c_int {
     flv_put_byte(c, 1 as libc::c_int as uint8_t);
     flv_put_be32(c, 9 as libc::c_int as uint32_t);
     flv_put_be32(c, 0 as libc::c_int as uint32_t);
-    return flv_flush_data(c);
+    flv_flush_data(c)
 }
 unsafe extern "C" fn open_file(
     mut psz_filename: *mut libc::c_char,
@@ -588,8 +588,8 @@ unsafe extern "C" fn open_file(
         }
         free(p_flv as *mut libc::c_void);
     }
-    *p_handle = 0 as *mut libc::c_void;
-    return -(1 as libc::c_int);
+    *p_handle = std::ptr::null_mut::<libc::c_void>();
+    -(1 as libc::c_int)
 }
 unsafe extern "C" fn set_param(
     mut handle: hnd_t,
@@ -669,7 +669,7 @@ unsafe extern "C" fn set_param(
     } else {
         0 as libc::c_int
     };
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn write_headers(
     mut handle: hnd_t,
@@ -730,7 +730,7 @@ unsafe extern "C" fn write_headers(
     if flv_flush_data(c) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    return sei_size + sps_size + pps_size;
+    sei_size + sps_size + pps_size
 }
 unsafe extern "C" fn write_frame(
     mut handle: hnd_t,
@@ -822,7 +822,7 @@ unsafe extern "C" fn write_frame(
     if !((*p_flv).sei).is_null() {
         flv_append_data(c, (*p_flv).sei, (*p_flv).sei_len as libc::c_uint);
         free((*p_flv).sei as *mut libc::c_void);
-        (*p_flv).sei = 0 as *mut uint8_t;
+        (*p_flv).sei = std::ptr::null_mut::<uint8_t>();
     }
     flv_append_data(c, p_nalu, i_size as libc::c_uint);
     let mut length: libc::c_uint = ((*c).d_cur).wrapping_sub((*p_flv).start);
@@ -837,7 +837,7 @@ unsafe extern "C" fn write_frame(
     }
     (*p_flv).i_framenum += 1;
     (*p_flv).i_framenum;
-    return i_size;
+    i_size
 }
 unsafe extern "C" fn rewrite_amf_double(
     mut fp: *mut FILE,
@@ -845,7 +845,7 @@ unsafe extern "C" fn rewrite_amf_double(
     mut value: libc::c_double,
 ) -> libc::c_int {
     let mut x: uint64_t = endian_fix64(flv_dbl2int(value));
-    return if fseeko(fp, position as __off64_t, 0 as libc::c_int) == 0
+    if fseeko(fp, position as __off64_t, 0 as libc::c_int) == 0
         && fwrite(
             &mut x as *mut uint64_t as *const libc::c_void,
             8 as libc::c_int as libc::c_ulong,
@@ -856,7 +856,7 @@ unsafe extern "C" fn rewrite_amf_double(
         0 as libc::c_int
     } else {
         -(1 as libc::c_int)
-    };
+    }
 }
 unsafe extern "C" fn close_file(
     mut handle: hnd_t,
@@ -868,7 +868,7 @@ unsafe extern "C" fn close_file(
     let mut ret: libc::c_int = -(1 as libc::c_int);
     let mut p_flv: *mut flv_hnd_t = handle as *mut flv_hnd_t;
     let mut c: *mut flv_buffer = (*p_flv).c;
-    if !(flv_flush_data(c) < 0 as libc::c_int) {
+    if flv_flush_data(c) >= 0 as libc::c_int {
         total_duration = 0.;
         if (*p_flv).i_framenum == 1 as libc::c_int as int64_t {
             total_duration = if (*p_flv).i_fps_num != 0 {
@@ -942,12 +942,13 @@ unsafe extern "C" fn close_file(
     free((*c).data as *mut libc::c_void);
     free(c as *mut libc::c_void);
     free(p_flv as *mut libc::c_void);
-    return ret;
+    ret
 }
 #[no_mangle]
 pub static mut flv_output: cli_output_t = unsafe {
     {
-        let mut init = cli_output_t {
+        
+        cli_output_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -977,7 +978,6 @@ pub static mut flv_output: cli_output_t = unsafe {
                 close_file
                     as unsafe extern "C" fn(hnd_t, int64_t, int64_t) -> libc::c_int,
             ),
-        };
-        init
+        }
     }
 };

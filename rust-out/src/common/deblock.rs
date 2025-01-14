@@ -2291,16 +2291,15 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_clip_pixel(mut x: libc::c_int) -> pixel {
-    return (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
-        -x >> 31 as libc::c_int
-            & ((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int
+    (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
+        (-x >> 31 as libc::c_int) & (((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int)
     } else {
         x
-    }) as pixel;
+    }) as pixel
 }
 static mut i_alpha_table: [uint8_t; 88] = [
     0 as libc::c_int as uint8_t,
@@ -3042,8 +3041,7 @@ unsafe extern "C" fn deblock_edge_luma_c(
                         (-(2 as libc::c_int) as intptr_t * xstride) as isize,
                     ) = (p1
                     + x264_clip3(
-                        (p2 + (p0 + q0 + 1 as libc::c_int >> 1 as libc::c_int)
-                            >> 1 as libc::c_int) - p1,
+                        ((p2 + ((p0 + q0 + 1 as libc::c_int) >> 1 as libc::c_int)) >> 1 as libc::c_int) - p1,
                         -(tc0 as libc::c_int),
                         tc0 as libc::c_int,
                     )) as pixel;
@@ -3058,8 +3056,7 @@ unsafe extern "C" fn deblock_edge_luma_c(
                         (1 as libc::c_int as intptr_t * xstride) as isize,
                     ) = (q1
                     + x264_clip3(
-                        (q2 + (p0 + q0 + 1 as libc::c_int >> 1 as libc::c_int)
-                            >> 1 as libc::c_int) - q1,
+                        ((q2 + ((p0 + q0 + 1 as libc::c_int) >> 1 as libc::c_int)) >> 1 as libc::c_int) - q1,
                         -(tc0 as libc::c_int),
                         tc0 as libc::c_int,
                     )) as pixel;
@@ -3068,8 +3065,7 @@ unsafe extern "C" fn deblock_edge_luma_c(
             tc;
         }
         delta = x264_clip3(
-            (q0 - p0) * 4 as libc::c_int + (p1 - q1) + 4 as libc::c_int
-                >> 3 as libc::c_int,
+            ((q0 - p0) * 4 as libc::c_int + (p1 - q1) + 4 as libc::c_int) >> 3 as libc::c_int,
             -tc,
             tc,
         );
@@ -3166,8 +3162,7 @@ unsafe extern "C" fn deblock_edge_chroma_c(
         .offset((1 as libc::c_int as intptr_t * xstride) as isize) as libc::c_int;
     if abs(p0 - q0) < alpha && abs(p1 - p0) < beta && abs(q1 - q0) < beta {
         let mut delta: libc::c_int = x264_clip3(
-            (q0 - p0) * 4 as libc::c_int + (p1 - q1) + 4 as libc::c_int
-                >> 3 as libc::c_int,
+            ((q0 - p0) * 4 as libc::c_int + (p1 - q1) + 4 as libc::c_int) >> 3 as libc::c_int,
             -(tc as libc::c_int),
             tc as libc::c_int,
         );
@@ -3318,25 +3313,24 @@ unsafe extern "C" fn deblock_edge_luma_intra_c(
                 *pix
                     .offset(
                         (-(1 as libc::c_int) as intptr_t * xstride) as isize,
-                    ) = (p2 + 2 as libc::c_int * p1 + 2 as libc::c_int * p0
-                    + 2 as libc::c_int * q0 + q1 + 4 as libc::c_int >> 3 as libc::c_int)
+                    ) = ((p2 + 2 as libc::c_int * p1 + 2 as libc::c_int * p0
+                    + 2 as libc::c_int * q0 + q1 + 4 as libc::c_int) >> 3 as libc::c_int)
                     as pixel;
                 *pix
                     .offset(
                         (-(2 as libc::c_int) as intptr_t * xstride) as isize,
-                    ) = (p2 + p1 + p0 + q0 + 2 as libc::c_int >> 2 as libc::c_int)
+                    ) = ((p2 + p1 + p0 + q0 + 2 as libc::c_int) >> 2 as libc::c_int)
                     as pixel;
                 *pix
                     .offset(
                         (-(3 as libc::c_int) as intptr_t * xstride) as isize,
-                    ) = (2 as libc::c_int * p3 + 3 as libc::c_int * p2 + p1 + p0 + q0
-                    + 4 as libc::c_int >> 3 as libc::c_int) as pixel;
+                    ) = ((2 as libc::c_int * p3 + 3 as libc::c_int * p2 + p1 + p0 + q0
+                    + 4 as libc::c_int) >> 3 as libc::c_int) as pixel;
             } else {
                 *pix
                     .offset(
                         (-(1 as libc::c_int) as intptr_t * xstride) as isize,
-                    ) = (2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int
-                    >> 2 as libc::c_int) as pixel;
+                    ) = ((2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int) >> 2 as libc::c_int) as pixel;
             }
             if abs(q2 - q0) < beta {
                 let q3: libc::c_int = *pix
@@ -3345,37 +3339,34 @@ unsafe extern "C" fn deblock_edge_luma_intra_c(
                 *pix
                     .offset(
                         (0 as libc::c_int as intptr_t * xstride) as isize,
-                    ) = (p1 + 2 as libc::c_int * p0 + 2 as libc::c_int * q0
-                    + 2 as libc::c_int * q1 + q2 + 4 as libc::c_int >> 3 as libc::c_int)
+                    ) = ((p1 + 2 as libc::c_int * p0 + 2 as libc::c_int * q0
+                    + 2 as libc::c_int * q1 + q2 + 4 as libc::c_int) >> 3 as libc::c_int)
                     as pixel;
                 *pix
                     .offset(
                         (1 as libc::c_int as intptr_t * xstride) as isize,
-                    ) = (p0 + q0 + q1 + q2 + 2 as libc::c_int >> 2 as libc::c_int)
+                    ) = ((p0 + q0 + q1 + q2 + 2 as libc::c_int) >> 2 as libc::c_int)
                     as pixel;
                 *pix
                     .offset(
                         (2 as libc::c_int as intptr_t * xstride) as isize,
-                    ) = (2 as libc::c_int * q3 + 3 as libc::c_int * q2 + q1 + q0 + p0
-                    + 4 as libc::c_int >> 3 as libc::c_int) as pixel;
+                    ) = ((2 as libc::c_int * q3 + 3 as libc::c_int * q2 + q1 + q0 + p0
+                    + 4 as libc::c_int) >> 3 as libc::c_int) as pixel;
             } else {
                 *pix
                     .offset(
                         (0 as libc::c_int as intptr_t * xstride) as isize,
-                    ) = (2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int
-                    >> 2 as libc::c_int) as pixel;
+                    ) = ((2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int) >> 2 as libc::c_int) as pixel;
             }
         } else {
             *pix
                 .offset(
                     (-(1 as libc::c_int) as intptr_t * xstride) as isize,
-                ) = (2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int
-                >> 2 as libc::c_int) as pixel;
+                ) = ((2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int) >> 2 as libc::c_int) as pixel;
             *pix
                 .offset(
                     (0 as libc::c_int as intptr_t * xstride) as isize,
-                ) = (2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int
-                >> 2 as libc::c_int) as pixel;
+                ) = ((2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int) >> 2 as libc::c_int) as pixel;
         }
     }
 }
@@ -3444,12 +3435,12 @@ unsafe extern "C" fn deblock_edge_chroma_intra_c(
         *pix
             .offset(
                 (-(1 as libc::c_int) as intptr_t * xstride) as isize,
-            ) = (2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int >> 2 as libc::c_int)
+            ) = ((2 as libc::c_int * p1 + p0 + q1 + 2 as libc::c_int) >> 2 as libc::c_int)
             as pixel;
         *pix
             .offset(
                 (0 as libc::c_int as intptr_t * xstride) as isize,
-            ) = (2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int >> 2 as libc::c_int)
+            ) = ((2 as libc::c_int * q1 + q0 + p1 + 2 as libc::c_int) >> 2 as libc::c_int)
             as pixel;
     }
 }
@@ -3662,9 +3653,9 @@ unsafe extern "C" fn deblock_edge(
     let mut index_a: libc::c_int = i_qp + a;
     let mut index_b: libc::c_int = i_qp + b;
     let mut alpha: libc::c_int = (i_alpha_table[(index_a + 24 as libc::c_int) as usize]
-        as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int;
+        as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int);
     let mut beta: libc::c_int = (i_beta_table[(index_b + 24 as libc::c_int) as usize]
-        as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int;
+        as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int);
     let mut tc: [int8_t; 4] = [0; 4];
     if (*(bS as *mut x264_union32_t)).i == 0 || alpha == 0 || beta == 0 {
         return;
@@ -3672,22 +3663,22 @@ unsafe extern "C" fn deblock_edge(
     tc[0 as libc::c_int
         as usize] = (i_tc0_table[(index_a + 24 as libc::c_int)
         as usize][*bS.offset(0 as libc::c_int as isize) as usize] as libc::c_int
-        * ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int) + b_chroma)
+        * ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int)) + b_chroma)
         as int8_t;
     tc[1 as libc::c_int
         as usize] = (i_tc0_table[(index_a + 24 as libc::c_int)
         as usize][*bS.offset(1 as libc::c_int as isize) as usize] as libc::c_int
-        * ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int) + b_chroma)
+        * ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int)) + b_chroma)
         as int8_t;
     tc[2 as libc::c_int
         as usize] = (i_tc0_table[(index_a + 24 as libc::c_int)
         as usize][*bS.offset(2 as libc::c_int as isize) as usize] as libc::c_int
-        * ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int) + b_chroma)
+        * ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int)) + b_chroma)
         as int8_t;
     tc[3 as libc::c_int
         as usize] = (i_tc0_table[(index_a + 24 as libc::c_int)
         as usize][*bS.offset(3 as libc::c_int as isize) as usize] as libc::c_int
-        * ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int) + b_chroma)
+        * ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int)) + b_chroma)
         as int8_t;
     pf_inter
         .expect(
@@ -3709,9 +3700,9 @@ unsafe extern "C" fn deblock_edge_intra(
     let mut index_a: libc::c_int = i_qp + a;
     let mut index_b: libc::c_int = i_qp + b;
     let mut alpha: libc::c_int = (i_alpha_table[(index_a + 24 as libc::c_int) as usize]
-        as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int;
+        as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int);
     let mut beta: libc::c_int = (i_beta_table[(index_b + 24 as libc::c_int) as usize]
-        as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int;
+        as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int);
     if alpha == 0 || beta == 0 {
         return;
     }
@@ -3839,7 +3830,7 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                 .offset((chroma_height * mb_y * strideuv) as isize)
                 .offset((16 as libc::c_int * mb_x) as isize)
         } else {
-            0 as *mut pixel
+            std::ptr::null_mut::<pixel>()
         };
         if mb_y & (*h).mb.b_interlaced != 0 {
             pixy = pixy.offset(-((15 as libc::c_int * stridey) as isize));
@@ -3888,13 +3879,13 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                     .offset((*h).mb.i_mb_left_xy[0 as libc::c_int as usize] as isize)
                     as libc::c_int;
                 luma_qp[0 as libc::c_int
-                    as usize] = qp + left_qp[0 as libc::c_int as usize]
-                    + 1 as libc::c_int >> 1 as libc::c_int;
+                    as usize] = (qp + left_qp[0 as libc::c_int as usize]
+                    + 1 as libc::c_int) >> 1 as libc::c_int;
                 chroma_qp[0 as libc::c_int
-                    as usize] = qpc
+                    as usize] = (qpc
                     + *((*h).chroma_qp_table)
                         .offset(left_qp[0 as libc::c_int as usize] as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int;
                 if intra_cur != 0
                     || (*((*h).mb.type_0)
                         .offset((*h).mb.i_mb_left_xy[0 as libc::c_int as usize] as isize)
@@ -4027,13 +4018,13 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                     .offset((*h).mb.i_mb_left_xy[1 as libc::c_int as usize] as isize)
                     as libc::c_int;
                 luma_qp[1 as libc::c_int
-                    as usize] = qp + left_qp[1 as libc::c_int as usize]
-                    + 1 as libc::c_int >> 1 as libc::c_int;
+                    as usize] = (qp + left_qp[1 as libc::c_int as usize]
+                    + 1 as libc::c_int) >> 1 as libc::c_int;
                 chroma_qp[1 as libc::c_int
-                    as usize] = qpc
+                    as usize] = (qpc
                     + *((*h).chroma_qp_table)
                         .offset(left_qp[1 as libc::c_int as usize] as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int;
                 if intra_cur != 0
                     || (*((*h).mb.type_0)
                         .offset((*h).mb.i_mb_left_xy[1 as libc::c_int as usize] as isize)
@@ -4159,11 +4150,10 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                 let mut qpl: libc::c_int = *((*h).mb.qp)
                     .offset(((*h).mb.i_mb_xy - 1 as libc::c_int) as isize)
                     as libc::c_int;
-                let mut qp_left: libc::c_int = qp + qpl + 1 as libc::c_int
-                    >> 1 as libc::c_int;
-                let mut qpc_left: libc::c_int = qpc
+                let mut qp_left: libc::c_int = (qp + qpl + 1 as libc::c_int) >> 1 as libc::c_int;
+                let mut qpc_left: libc::c_int = (qpc
                     + *((*h).chroma_qp_table).offset(qpl as isize) as libc::c_int
-                    + 1 as libc::c_int >> 1 as libc::c_int;
+                    + 1 as libc::c_int) >> 1 as libc::c_int;
                 let mut intra_left: libc::c_int = (*((*h).mb.type_0)
                     .offset(((*h).mb.i_mb_xy - 1 as libc::c_int) as isize) as libc::c_int
                     == I_4x4 as libc::c_int
@@ -4184,24 +4174,22 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                         .as_mut_ptr() as *mut x264_union32_t))
                         .i != 0
                 {
-                    let ref mut fresh0 = *((*(*h).fdec).effective_qp)
-                        .offset(mb_xy as isize);
-                    *fresh0 = (*fresh0 as libc::c_int
-                        | 0xff as libc::c_int
+                    let fresh0 = &mut (*((*(*h).fdec).effective_qp)
+                        .offset(mb_xy as isize));
+                    *fresh0 = (*fresh0 as libc::c_int | (0xff as libc::c_int
                             * (*((*(*h).fdec).mb_info).offset(mb_xy as isize)
-                                as libc::c_uint & (1 as libc::c_uint) << 0 as libc::c_int
-                                != 0) as libc::c_int) as uint8_t;
-                    let ref mut fresh1 = *((*(*h).fdec).effective_qp)
+                                as libc::c_uint & ((1 as libc::c_uint) << 0 as libc::c_int)
+                                != 0) as libc::c_int)) as uint8_t;
+                    let fresh1 = &mut (*((*(*h).fdec).effective_qp)
                         .offset(
                             (*h).mb.i_mb_left_xy[0 as libc::c_int as usize] as isize,
-                        );
-                    *fresh1 = (*fresh1 as libc::c_int
-                        | 0xff as libc::c_int
+                        ));
+                    *fresh1 = (*fresh1 as libc::c_int | (0xff as libc::c_int
                             * (*((*(*h).fdec).mb_info)
                                 .offset(
                                     (*h).mb.i_mb_left_xy[0 as libc::c_int as usize] as isize,
-                                ) as libc::c_uint & (1 as libc::c_uint) << 0 as libc::c_int
-                                != 0) as libc::c_int) as uint8_t;
+                                ) as libc::c_uint & ((1 as libc::c_uint) << 0 as libc::c_int)
+                                != 0) as libc::c_int)) as uint8_t;
                 }
                 if intra_deblock != 0 {
                     if 0 as libc::c_int & 1 as libc::c_int == 0 || transform_8x8 == 0 {
@@ -4841,11 +4829,10 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                 while j < 2 as libc::c_int {
                     let mut qpt: libc::c_int = *((*h).mb.qp).offset(mbn_xy as isize)
                         as libc::c_int;
-                    let mut qp_top: libc::c_int = qp + qpt + 1 as libc::c_int
-                        >> 1 as libc::c_int;
-                    let mut qpc_top: libc::c_int = qpc
+                    let mut qp_top: libc::c_int = (qp + qpt + 1 as libc::c_int) >> 1 as libc::c_int;
+                    let mut qpc_top: libc::c_int = (qpc
                         + *((*h).chroma_qp_table).offset(qpt as isize) as libc::c_int
-                        + 1 as libc::c_int >> 1 as libc::c_int;
+                        + 1 as libc::c_int) >> 1 as libc::c_int;
                     let mut intra_top: libc::c_int = (*((*h).mb.type_0)
                         .offset(mbn_xy as isize) as libc::c_int == I_4x4 as libc::c_int
                         || *((*h).mb.type_0).offset(mbn_xy as isize) as libc::c_int
@@ -4934,11 +4921,10 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
             } else {
                 let mut qpt_0: libc::c_int = *((*h).mb.qp)
                     .offset((*h).mb.i_mb_top_xy as isize) as libc::c_int;
-                let mut qp_top_0: libc::c_int = qp + qpt_0 + 1 as libc::c_int
-                    >> 1 as libc::c_int;
-                let mut qpc_top_0: libc::c_int = qpc
+                let mut qp_top_0: libc::c_int = (qp + qpt_0 + 1 as libc::c_int) >> 1 as libc::c_int;
+                let mut qpc_top_0: libc::c_int = (qpc
                     + *((*h).chroma_qp_table).offset(qpt_0 as isize) as libc::c_int
-                    + 1 as libc::c_int >> 1 as libc::c_int;
+                    + 1 as libc::c_int) >> 1 as libc::c_int;
                 let mut intra_top_0: libc::c_int = (*((*h).mb.type_0)
                     .offset((*h).mb.i_mb_top_xy as isize) as libc::c_int
                     == I_4x4 as libc::c_int
@@ -4956,21 +4942,18 @@ pub unsafe extern "C" fn x264_8_frame_deblock_row(
                         .as_mut_ptr() as *mut x264_union32_t))
                         .i != 0
                 {
-                    let ref mut fresh2 = *((*(*h).fdec).effective_qp)
-                        .offset(mb_xy as isize);
-                    *fresh2 = (*fresh2 as libc::c_int
-                        | 0xff as libc::c_int
+                    let fresh2 = &mut (*((*(*h).fdec).effective_qp)
+                        .offset(mb_xy as isize));
+                    *fresh2 = (*fresh2 as libc::c_int | (0xff as libc::c_int
                             * (*((*(*h).fdec).mb_info).offset(mb_xy as isize)
-                                as libc::c_uint & (1 as libc::c_uint) << 0 as libc::c_int
-                                != 0) as libc::c_int) as uint8_t;
-                    let ref mut fresh3 = *((*(*h).fdec).effective_qp)
-                        .offset((*h).mb.i_mb_top_xy as isize);
-                    *fresh3 = (*fresh3 as libc::c_int
-                        | 0xff as libc::c_int
+                                as libc::c_uint & ((1 as libc::c_uint) << 0 as libc::c_int)
+                                != 0) as libc::c_int)) as uint8_t;
+                    let fresh3 = &mut (*((*(*h).fdec).effective_qp)
+                        .offset((*h).mb.i_mb_top_xy as isize));
+                    *fresh3 = (*fresh3 as libc::c_int | (0xff as libc::c_int
                             * (*((*(*h).fdec).mb_info)
-                                .offset((*h).mb.i_mb_top_xy as isize) as libc::c_uint
-                                & (1 as libc::c_uint) << 0 as libc::c_int != 0)
-                                as libc::c_int) as uint8_t;
+                                .offset((*h).mb.i_mb_top_xy as isize) as libc::c_uint & ((1 as libc::c_uint) << 0 as libc::c_int) != 0)
+                                as libc::c_int)) as uint8_t;
                 }
                 if (b_interlaced == 0
                     || (*h).mb.b_interlaced == 0

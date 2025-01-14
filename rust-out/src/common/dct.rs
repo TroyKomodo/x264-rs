@@ -89,12 +89,11 @@ pub union x264_union32_t {
 }
 #[inline(always)]
 unsafe extern "C" fn x264_clip_pixel(mut x: libc::c_int) -> pixel {
-    return (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
-        -x >> 31 as libc::c_int
-            & ((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int
+    (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
+        (-x >> 31 as libc::c_int) & (((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int)
     } else {
         x
-    }) as pixel;
+    }) as pixel
 }
 unsafe extern "C" fn dct4x4dc(mut d: *mut dctcoef) {
     let mut tmp: [dctcoef; 16] = [0; 16];
@@ -140,19 +139,19 @@ unsafe extern "C" fn dct4x4dc(mut d: *mut dctcoef) {
         *d
             .offset(
                 (i_0 * 4 as libc::c_int + 0 as libc::c_int) as isize,
-            ) = (s01_0 + s23_0 + 1 as libc::c_int >> 1 as libc::c_int) as dctcoef;
+            ) = ((s01_0 + s23_0 + 1 as libc::c_int) >> 1 as libc::c_int) as dctcoef;
         *d
             .offset(
                 (i_0 * 4 as libc::c_int + 1 as libc::c_int) as isize,
-            ) = (s01_0 - s23_0 + 1 as libc::c_int >> 1 as libc::c_int) as dctcoef;
+            ) = ((s01_0 - s23_0 + 1 as libc::c_int) >> 1 as libc::c_int) as dctcoef;
         *d
             .offset(
                 (i_0 * 4 as libc::c_int + 2 as libc::c_int) as isize,
-            ) = (d01_0 - d23_0 + 1 as libc::c_int >> 1 as libc::c_int) as dctcoef;
+            ) = ((d01_0 - d23_0 + 1 as libc::c_int) >> 1 as libc::c_int) as dctcoef;
         *d
             .offset(
                 (i_0 * 4 as libc::c_int + 3 as libc::c_int) as isize,
-            ) = (d01_0 + d23_0 + 1 as libc::c_int >> 1 as libc::c_int) as dctcoef;
+            ) = ((d01_0 + d23_0 + 1 as libc::c_int) >> 1 as libc::c_int) as dctcoef;
         i_0 += 1;
         i_0;
     }
@@ -480,7 +479,7 @@ unsafe extern "C" fn sub4x4_dct_dc(
         pix1 = pix1.offset(16 as libc::c_int as isize);
         pix2 = pix2.offset(32 as libc::c_int as isize);
     }
-    return sum;
+    sum
 }
 unsafe extern "C" fn sub8x8_dct_dc(
     mut dct: *mut dctcoef,
@@ -655,16 +654,16 @@ unsafe extern "C" fn add4x4_idct(mut p_dst: *mut pixel, mut dct: *mut dctcoef) {
             as usize] as libc::c_int >> 1 as libc::c_int)
             - tmp[(3 as libc::c_int * 4 as libc::c_int + i_0) as usize] as libc::c_int;
         d[(0 as libc::c_int * 4 as libc::c_int + i_0)
-            as usize] = (s02_0 + s13_0 + 32 as libc::c_int >> 6 as libc::c_int)
+            as usize] = ((s02_0 + s13_0 + 32 as libc::c_int) >> 6 as libc::c_int)
             as dctcoef;
         d[(1 as libc::c_int * 4 as libc::c_int + i_0)
-            as usize] = (d02_0 + d13_0 + 32 as libc::c_int >> 6 as libc::c_int)
+            as usize] = ((d02_0 + d13_0 + 32 as libc::c_int) >> 6 as libc::c_int)
             as dctcoef;
         d[(2 as libc::c_int * 4 as libc::c_int + i_0)
-            as usize] = (d02_0 - d13_0 + 32 as libc::c_int >> 6 as libc::c_int)
+            as usize] = ((d02_0 - d13_0 + 32 as libc::c_int) >> 6 as libc::c_int)
             as dctcoef;
         d[(3 as libc::c_int * 4 as libc::c_int + i_0)
-            as usize] = (s02_0 - s13_0 + 32 as libc::c_int >> 6 as libc::c_int)
+            as usize] = ((s02_0 - s13_0 + 32 as libc::c_int) >> 6 as libc::c_int)
             as dctcoef;
         i_0 += 1;
         i_0;
@@ -898,7 +897,7 @@ unsafe extern "C" fn sub16x16_dct8(
     );
 }
 unsafe extern "C" fn add8x8_idct8(mut dst: *mut pixel, mut dct: *mut dctcoef) {
-    let ref mut fresh0 = *dct.offset(0 as libc::c_int as isize);
+    let fresh0 = &mut (*dct.offset(0 as libc::c_int as isize));
     *fresh0 = (*fresh0 as libc::c_int + 32 as libc::c_int) as dctcoef;
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < 8 as libc::c_int {
@@ -1060,56 +1059,56 @@ unsafe extern "C" fn add8x8_idct8(mut dst: *mut pixel, mut dct: *mut dctcoef) {
                 (i_0 + 0 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 0 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b0_0 + b7_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b0_0 + b7_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 1 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 1 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b2_0 + b5_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b2_0 + b5_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 2 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 2 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b4_0 + b3_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b4_0 + b3_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 3 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 3 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b6_0 + b1_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b6_0 + b1_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 4 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 4 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b6_0 - b1_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b6_0 - b1_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 5 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 5 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b4_0 - b3_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b4_0 - b3_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 6 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 6 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b2_0 - b5_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b2_0 - b5_0) >> 6 as libc::c_int),
         );
         *dst
             .offset(
                 (i_0 + 7 as libc::c_int * 32 as libc::c_int) as isize,
             ) = x264_clip_pixel(
             *dst.offset((i_0 + 7 as libc::c_int * 32 as libc::c_int) as isize)
-                as libc::c_int + (b0_0 - b7_0 >> 6 as libc::c_int),
+                as libc::c_int + ((b0_0 - b7_0) >> 6 as libc::c_int),
         );
         i_0 += 1;
         i_0;
@@ -1137,7 +1136,7 @@ unsafe extern "C" fn add16x16_idct8(mut dst: *mut pixel, mut dct: *mut [dctcoef;
 }
 #[inline]
 unsafe extern "C" fn add4x4_idct_dc(mut p_dst: *mut pixel, mut dc: dctcoef) {
-    dc = (dc as libc::c_int + 32 as libc::c_int >> 6 as libc::c_int) as dctcoef;
+    dc = ((dc as libc::c_int + 32 as libc::c_int) >> 6 as libc::c_int) as dctcoef;
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < 4 as libc::c_int {
         *p_dst
@@ -2212,7 +2211,7 @@ unsafe extern "C" fn zigzag_sub_4x4_frame(
         .i = (*(p_src.offset((3 as libc::c_int * 16 as libc::c_int) as isize)
         as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_sub_4x4_field(
     mut level: *mut dctcoef,
@@ -2368,7 +2367,7 @@ unsafe extern "C" fn zigzag_sub_4x4_field(
         .i = (*(p_src.offset((3 as libc::c_int * 16 as libc::c_int) as isize)
         as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_sub_4x4ac_frame(
     mut level: *mut dctcoef,
@@ -2522,7 +2521,7 @@ unsafe extern "C" fn zigzag_sub_4x4ac_frame(
         .i = (*(p_src.offset((3 as libc::c_int * 16 as libc::c_int) as isize)
         as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_sub_4x4ac_field(
     mut level: *mut dctcoef,
@@ -2676,7 +2675,7 @@ unsafe extern "C" fn zigzag_sub_4x4ac_field(
         .i = (*(p_src.offset((3 as libc::c_int * 16 as libc::c_int) as isize)
         as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_sub_8x8_frame(
     mut level: *mut dctcoef,
@@ -3292,7 +3291,7 @@ unsafe extern "C" fn zigzag_sub_8x8_frame(
         .offset((7 as libc::c_int * 16 as libc::c_int) as isize)
         .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_sub_8x8_field(
     mut level: *mut dctcoef,
@@ -3908,7 +3907,7 @@ unsafe extern "C" fn zigzag_sub_8x8_field(
         .offset((7 as libc::c_int * 16 as libc::c_int) as isize)
         .offset(4 as libc::c_int as isize) as *mut x264_union32_t))
         .i;
-    return (nz != 0) as libc::c_int;
+    (nz != 0) as libc::c_int
 }
 unsafe extern "C" fn zigzag_interleave_8x8_cavlc(
     mut dst: *mut dctcoef,

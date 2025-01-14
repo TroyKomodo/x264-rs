@@ -2232,7 +2232,7 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 static mut cabac_contexts: [[[uint8_t; 1024]; 52]; 4] = [[[0; 1024]; 52]; 4];
 #[no_mangle]
@@ -2261,8 +2261,8 @@ pub unsafe extern "C" fn x264_8_cabac_init(mut h: *mut x264_t) {
             let mut j: libc::c_int = 0 as libc::c_int;
             while j < ctx_count {
                 let mut state: libc::c_int = x264_clip3(
-                    ((*cabac_context_init)[j as usize][0 as libc::c_int as usize]
-                        as libc::c_int * qp >> 4 as libc::c_int)
+                    (((*cabac_context_init)[j as usize][0 as libc::c_int as usize]
+                        as libc::c_int * qp) >> 4 as libc::c_int)
                         + (*cabac_context_init)[j as usize][1 as libc::c_int as usize]
                             as libc::c_int,
                     1 as libc::c_int,
@@ -2271,11 +2271,11 @@ pub unsafe extern "C" fn x264_8_cabac_init(mut h: *mut x264_t) {
                 cabac_contexts[i
                     as usize][qp
                     as usize][j
-                    as usize] = ((if state < 127 as libc::c_int - state {
+                    as usize] = (((if state < 127 as libc::c_int - state {
                     state
                 } else {
                     127 as libc::c_int - state
-                }) << 1 as libc::c_int | state >> 6 as libc::c_int) as uint8_t;
+                }) << 1 as libc::c_int) | (state >> 6 as libc::c_int)) as uint8_t;
                 j += 1;
                 j;
             }
@@ -2330,7 +2330,7 @@ pub unsafe extern "C" fn x264_8_cabac_encode_init(
 #[inline]
 unsafe extern "C" fn cabac_putbyte(mut cb: *mut x264_cabac_t) {
     if (*cb).i_queue >= 0 as libc::c_int {
-        let mut out: libc::c_int = (*cb).i_low >> (*cb).i_queue + 10 as libc::c_int;
+        let mut out: libc::c_int = (*cb).i_low >> ((*cb).i_queue + 10 as libc::c_int);
         (*cb).i_low &= ((0x400 as libc::c_int) << (*cb).i_queue) - 1 as libc::c_int;
         (*cb).i_queue -= 8 as libc::c_int;
         if out & 0xff as libc::c_int == 0xff as libc::c_int {
@@ -2339,7 +2339,7 @@ unsafe extern "C" fn cabac_putbyte(mut cb: *mut x264_cabac_t) {
         } else {
             let mut carry: libc::c_int = out >> 8 as libc::c_int;
             let mut bytes_outstanding: libc::c_int = (*cb).i_bytes_outstanding;
-            let ref mut fresh0 = *((*cb).p).offset(-(1 as libc::c_int) as isize);
+            let fresh0 = &mut (*((*cb).p).offset(-(1 as libc::c_int) as isize));
             *fresh0 = (*fresh0 as libc::c_int + carry) as uint8_t;
             while bytes_outstanding > 0 as libc::c_int {
                 let fresh1 = (*cb).p;
@@ -2421,7 +2421,7 @@ pub unsafe extern "C" fn x264_8_cabac_encode_ue_bypass(
     let mut x: uint32_t = ((bypass_lut[(k - exp_bits) as usize] as uint32_t) << exp_bits)
         .wrapping_add(v);
     k = 2 as libc::c_int * k + 1 as libc::c_int - exp_bits;
-    let mut i: libc::c_int = (k - 1 as libc::c_int & 7 as libc::c_int)
+    let mut i: libc::c_int = ((k - 1 as libc::c_int) & 7 as libc::c_int)
         + 1 as libc::c_int;
     loop {
         k -= i;
@@ -2429,12 +2429,12 @@ pub unsafe extern "C" fn x264_8_cabac_encode_ue_bypass(
         (*cb)
             .i_low = ((*cb).i_low as uint32_t)
             .wrapping_add(
-                (x >> k & 0xff as libc::c_int as uint32_t) * (*cb).i_range as uint32_t,
+                ((x >> k) & 0xff as libc::c_int as uint32_t) * (*cb).i_range as uint32_t,
             ) as libc::c_int as libc::c_int;
         (*cb).i_queue += i;
         cabac_putbyte(cb);
         i = 8 as libc::c_int;
-        if !(k > 0 as libc::c_int) {
+        if k <= 0 as libc::c_int {
             break;
         }
     };
@@ -2457,8 +2457,7 @@ pub unsafe extern "C" fn x264_8_cabac_encode_flush(
     cabac_putbyte(cb);
     (*cb).i_low <<= -(*cb).i_queue;
     (*cb).i_low
-        |= (0x35a4e4f5 as libc::c_int >> ((*h).i_frame & 31 as libc::c_int)
-            & 1 as libc::c_int) << 10 as libc::c_int;
+        |= ((0x35a4e4f5 as libc::c_int >> ((*h).i_frame & 31 as libc::c_int)) & 1 as libc::c_int) << 10 as libc::c_int;
     (*cb).i_queue = 0 as libc::c_int;
     cabac_putbyte(cb);
     while (*cb).i_bytes_outstanding > 0 as libc::c_int {

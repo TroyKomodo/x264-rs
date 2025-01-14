@@ -2272,7 +2272,7 @@ unsafe extern "C" fn threadpool_thread(
     mut pool: *mut x264_threadpool_t,
 ) -> *mut libc::c_void {
     while (*pool).exit == 0 {
-        let mut job: *mut x264_threadpool_job_t = 0 as *mut x264_threadpool_job_t;
+        let mut job: *mut x264_threadpool_job_t = std::ptr::null_mut::<x264_threadpool_job_t>();
         pthread_mutex_lock(&mut (*pool).run.mutex);
         while (*pool).exit == 0 && (*pool).run.i_size == 0 {
             pthread_cond_wait(&mut (*pool).run.cv_fill, &mut (*pool).run.mutex);
@@ -2293,7 +2293,7 @@ unsafe extern "C" fn threadpool_thread(
             job as *mut libc::c_void as *mut x264_frame_t,
         );
     }
-    return 0 as *mut libc::c_void;
+    std::ptr::null_mut::<libc::c_void>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_threadpool_init(
@@ -2307,7 +2307,7 @@ pub unsafe extern "C" fn x264_8_threadpool_init(
     if (0 as libc::c_int) < 0 as libc::c_int {
         return -(1 as libc::c_int);
     }
-    let mut pool: *mut x264_threadpool_t = 0 as *mut x264_threadpool_t;
+    let mut pool: *mut x264_threadpool_t = std::ptr::null_mut::<x264_threadpool_t>();
     pool = x264_malloc(
         ::core::mem::size_of::<x264_threadpool_t>() as libc::c_ulong as int64_t,
     ) as *mut x264_threadpool_t;
@@ -2325,87 +2325,83 @@ pub unsafe extern "C" fn x264_8_threadpool_init(
                 .wrapping_mul(::core::mem::size_of::<pthread_t>() as libc::c_ulong)
                 as int64_t,
         ) as *mut pthread_t;
-        if !((*pool).thread_handle).is_null() {
-            if !(x264_8_sync_frame_list_init(&mut (*pool).uninit, (*pool).threads) != 0
+        if !((*pool).thread_handle).is_null() && !(x264_8_sync_frame_list_init(&mut (*pool).uninit, (*pool).threads) != 0
                 || x264_8_sync_frame_list_init(&mut (*pool).run, (*pool).threads) != 0
-                || x264_8_sync_frame_list_init(&mut (*pool).done, (*pool).threads) != 0)
-            {
-                let mut i: libc::c_int = 0 as libc::c_int;
-                loop {
-                    if !(i < (*pool).threads) {
-                        current_block = 11584701595673473500;
-                        break;
-                    }
-                    let mut job: *mut x264_threadpool_job_t = 0
-                        as *mut x264_threadpool_job_t;
-                    job = x264_malloc(
-                        ::core::mem::size_of::<x264_threadpool_job_t>() as libc::c_ulong
-                            as int64_t,
-                    ) as *mut x264_threadpool_job_t;
-                    if job.is_null() {
-                        current_block = 17998364143390584866;
-                        break;
-                    }
-                    x264_8_sync_frame_list_push(
-                        &mut (*pool).uninit,
-                        job as *mut libc::c_void as *mut x264_frame_t,
-                    );
-                    i += 1;
-                    i;
+                || x264_8_sync_frame_list_init(&mut (*pool).done, (*pool).threads) != 0) {
+            let mut i: libc::c_int = 0 as libc::c_int;
+            loop {
+                if i >= (*pool).threads {
+                    current_block = 11584701595673473500;
+                    break;
                 }
-                match current_block {
-                    17998364143390584866 => {}
-                    _ => {
-                        let mut i_0: libc::c_int = 0 as libc::c_int;
-                        loop {
-                            if !(i_0 < (*pool).threads) {
-                                current_block = 5634871135123216486;
-                                break;
-                            }
-                            if pthread_create(
-                                ((*pool).thread_handle).offset(i_0 as isize),
-                                0 as *const pthread_attr_t,
+                let mut job: *mut x264_threadpool_job_t = std::ptr::null_mut::<x264_threadpool_job_t>();
+                job = x264_malloc(
+                    ::core::mem::size_of::<x264_threadpool_job_t>() as libc::c_ulong
+                        as int64_t,
+                ) as *mut x264_threadpool_job_t;
+                if job.is_null() {
+                    current_block = 17998364143390584866;
+                    break;
+                }
+                x264_8_sync_frame_list_push(
+                    &mut (*pool).uninit,
+                    job as *mut libc::c_void as *mut x264_frame_t,
+                );
+                i += 1;
+                i;
+            }
+            match current_block {
+                17998364143390584866 => {}
+                _ => {
+                    let mut i_0: libc::c_int = 0 as libc::c_int;
+                    loop {
+                        if i_0 >= (*pool).threads {
+                            current_block = 5634871135123216486;
+                            break;
+                        }
+                        if pthread_create(
+                            ((*pool).thread_handle).offset(i_0 as isize),
+                            std::ptr::null::<pthread_attr_t>(),
+                            ::core::mem::transmute::<
+                                *mut libc::c_void,
+                                Option::<
+                                    unsafe extern "C" fn(*mut libc::c_void) -> *mut libc::c_void,
+                                >,
+                            >(
                                 ::core::mem::transmute::<
-                                    *mut libc::c_void,
                                     Option::<
-                                        unsafe extern "C" fn(*mut libc::c_void) -> *mut libc::c_void,
+                                        unsafe extern "C" fn(
+                                            *mut x264_threadpool_t,
+                                        ) -> *mut libc::c_void,
                                     >,
+                                    *mut libc::c_void,
                                 >(
-                                    ::core::mem::transmute::<
-                                        Option::<
-                                            unsafe extern "C" fn(
+                                    Some(
+                                        threadpool_thread
+                                            as unsafe extern "C" fn(
                                                 *mut x264_threadpool_t,
                                             ) -> *mut libc::c_void,
-                                        >,
-                                        *mut libc::c_void,
-                                    >(
-                                        Some(
-                                            threadpool_thread
-                                                as unsafe extern "C" fn(
-                                                    *mut x264_threadpool_t,
-                                                ) -> *mut libc::c_void,
-                                        ),
                                     ),
                                 ),
-                                pool as *mut libc::c_void,
-                            ) != 0
-                            {
-                                current_block = 17998364143390584866;
-                                break;
-                            }
-                            i_0 += 1;
-                            i_0;
+                            ),
+                            pool as *mut libc::c_void,
+                        ) != 0
+                        {
+                            current_block = 17998364143390584866;
+                            break;
                         }
-                        match current_block {
-                            17998364143390584866 => {}
-                            _ => return 0 as libc::c_int,
-                        }
+                        i_0 += 1;
+                        i_0;
+                    }
+                    match current_block {
+                        17998364143390584866 => {}
+                        _ => return 0 as libc::c_int,
                     }
                 }
             }
         }
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_threadpool_run(
@@ -2458,8 +2454,8 @@ unsafe extern "C" fn threadpool_list_delete(mut slist: *mut x264_sync_frame_list
     let mut i: libc::c_int = 0 as libc::c_int;
     while !(*((*slist).list).offset(i as isize)).is_null() {
         x264_free(*((*slist).list).offset(i as isize) as *mut libc::c_void);
-        let ref mut fresh0 = *((*slist).list).offset(i as isize);
-        *fresh0 = 0 as *mut x264_frame_t;
+        let fresh0 = &mut (*((*slist).list).offset(i as isize));
+        *fresh0 = std::ptr::null_mut::<x264_frame_t>();
         i += 1;
         i;
     }
@@ -2475,7 +2471,7 @@ pub unsafe extern "C" fn x264_8_threadpool_delete(mut pool: *mut x264_threadpool
     while i < (*pool).threads {
         pthread_join(
             *((*pool).thread_handle).offset(i as isize),
-            0 as *mut *mut libc::c_void,
+            std::ptr::null_mut::<*mut libc::c_void>(),
         );
         i += 1;
         i;

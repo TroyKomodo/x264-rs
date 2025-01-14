@@ -406,7 +406,7 @@ unsafe extern "C" fn handle_opts(
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn init(
     mut handle: *mut hnd_t,
@@ -491,7 +491,7 @@ unsafe extern "C" fn init(
     (*h).prev_hnd = *handle;
     *handle = h as hnd_t;
     *filter = crop_filter;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn get_frame(
     mut handle: hnd_t,
@@ -523,7 +523,7 @@ unsafe extern "C" fn get_frame(
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
@@ -531,8 +531,8 @@ unsafe extern "C" fn release_frame(
     mut frame: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut crop_hnd_t = handle as *mut crop_hnd_t;
-    return ((*h).prev_filter.release_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, pic, frame);
+    ((*h).prev_filter.release_frame)
+        .expect("non-null function pointer")((*h).prev_hnd, pic, frame)
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut crop_hnd_t = handle as *mut crop_hnd_t;
@@ -542,7 +542,8 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut crop_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"crop\0" as *const u8 as *const libc::c_char,
             help: Some(help as unsafe extern "C" fn(libc::c_int) -> ()),
             init: Some(
@@ -573,7 +574,6 @@ pub static mut crop_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

@@ -2247,17 +2247,15 @@ pub const PIXEL_16x8: C2RustUnnamed_20 = 1;
 pub const PIXEL_16x16: C2RustUnnamed_20 = 0;
 #[inline(always)]
 unsafe extern "C" fn x264_clip_pixel(mut x: libc::c_int) -> pixel {
-    return (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
-        -x >> 31 as libc::c_int
-            & ((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int
+    (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {
+        (-x >> 31 as libc::c_int) & (((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int)
     } else {
         x
-    }) as pixel;
+    }) as pixel
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix16(mut x: uint16_t) -> uint16_t {
-    return ((x as libc::c_int) << 8 as libc::c_int
-        | x as libc::c_int >> 8 as libc::c_int) as uint16_t;
+    (((x as libc::c_int) << 8 as libc::c_int) | (x as libc::c_int >> 8 as libc::c_int)) as uint16_t
 }
 #[inline]
 unsafe extern "C" fn pixel_avg(
@@ -2277,9 +2275,8 @@ unsafe extern "C" fn pixel_avg(
             *dst
                 .offset(
                     x as isize,
-                ) = (*src1.offset(x as isize) as libc::c_int
-                + *src2.offset(x as isize) as libc::c_int + 1 as libc::c_int
-                >> 1 as libc::c_int) as pixel;
+                ) = ((*src1.offset(x as isize) as libc::c_int
+                + *src2.offset(x as isize) as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             x += 1;
             x;
         }
@@ -2308,9 +2305,8 @@ unsafe extern "C" fn pixel_avg_wxh(
             *dst
                 .offset(
                     x as isize,
-                ) = (*src1.offset(x as isize) as libc::c_int
-                + *src2.offset(x as isize) as libc::c_int + 1 as libc::c_int
-                >> 1 as libc::c_int) as pixel;
+                ) = ((*src1.offset(x as isize) as libc::c_int
+                + *src2.offset(x as isize) as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             x += 1;
             x;
         }
@@ -2342,9 +2338,9 @@ unsafe extern "C" fn pixel_avg_weight_wxh(
                 .offset(
                     x as isize,
                 ) = x264_clip_pixel(
-                *src1.offset(x as isize) as libc::c_int * i_weight1
+                (*src1.offset(x as isize) as libc::c_int * i_weight1
                     + *src2.offset(x as isize) as libc::c_int * i_weight2
-                    + ((1 as libc::c_int) << 5 as libc::c_int) >> 6 as libc::c_int,
+                    + ((1 as libc::c_int) << 5 as libc::c_int)) >> 6 as libc::c_int,
             );
             x += 1;
             x;
@@ -2777,7 +2773,7 @@ unsafe extern "C" fn mc_weight(
     mut i_height: libc::c_int,
 ) {
     let mut offset: libc::c_int = (*weight).i_offset
-        * ((1 as libc::c_int) << 8 as libc::c_int - 8 as libc::c_int);
+        * ((1 as libc::c_int) << (8 as libc::c_int - 8 as libc::c_int));
     let mut scale: libc::c_int = (*weight).i_scale;
     let mut denom: libc::c_int = (*weight).i_denom;
     if denom >= 1 as libc::c_int {
@@ -2789,8 +2785,8 @@ unsafe extern "C" fn mc_weight(
                     .offset(
                         x as isize,
                     ) = x264_clip_pixel(
-                    (*src.offset(x as isize) as libc::c_int * scale
-                        + ((1 as libc::c_int) << denom - 1 as libc::c_int) >> denom)
+                    ((*src.offset(x as isize) as libc::c_int * scale
+                        + ((1 as libc::c_int) << (denom - 1 as libc::c_int))) >> denom)
                         + offset,
                 );
                 x += 1;
@@ -3014,7 +3010,7 @@ unsafe extern "C" fn hpel_filter(
             *dstv
                 .offset(
                     x as isize,
-                ) = x264_clip_pixel(v + 16 as libc::c_int >> 5 as libc::c_int);
+                ) = x264_clip_pixel((v + 16 as libc::c_int) >> 5 as libc::c_int);
             *buf.offset((x + 2 as libc::c_int) as isize) = (v + pad) as int16_t;
             x += 1;
             x;
@@ -3025,7 +3021,7 @@ unsafe extern "C" fn hpel_filter(
                 .offset(
                     x_0 as isize,
                 ) = x264_clip_pixel(
-                *buf
+                (*buf
                     .offset(2 as libc::c_int as isize)
                     .offset((x_0 - 2 as libc::c_int * 1 as libc::c_int) as isize)
                     as libc::c_int
@@ -3048,7 +3044,7 @@ unsafe extern "C" fn hpel_filter(
                             + *buf
                                 .offset(2 as libc::c_int as isize)
                                 .offset((x_0 + 1 as libc::c_int) as isize) as libc::c_int)
-                    - 32 as libc::c_int * pad + 512 as libc::c_int >> 10 as libc::c_int,
+                    - 32 as libc::c_int * pad + 512 as libc::c_int) >> 10 as libc::c_int,
             );
             x_0 += 1;
             x_0;
@@ -3059,7 +3055,7 @@ unsafe extern "C" fn hpel_filter(
                 .offset(
                     x_1 as isize,
                 ) = x264_clip_pixel(
-                *src.offset((x_1 - 2 as libc::c_int * 1 as libc::c_int) as isize)
+                (*src.offset((x_1 - 2 as libc::c_int * 1 as libc::c_int) as isize)
                     as libc::c_int
                     + *src.offset((x_1 + 3 as libc::c_int * 1 as libc::c_int) as isize)
                         as libc::c_int
@@ -3072,7 +3068,7 @@ unsafe extern "C" fn hpel_filter(
                     + 20 as libc::c_int
                         * (*src.offset(x_1 as isize) as libc::c_int
                             + *src.offset((x_1 + 1 as libc::c_int) as isize)
-                                as libc::c_int) + 16 as libc::c_int >> 5 as libc::c_int,
+                                as libc::c_int) + 16 as libc::c_int) >> 5 as libc::c_int,
             );
             x_1 += 1;
             x_1;
@@ -3173,14 +3169,14 @@ unsafe extern "C" fn get_ref(
         if !((*weight).weightfn).is_null() {
             mc_weight(dst, *i_dst_stride, dst, *i_dst_stride, weight, i_width, i_height);
         }
-        return dst;
+        dst
     } else if !((*weight).weightfn).is_null() {
         mc_weight(dst, *i_dst_stride, src1, i_src_stride, weight, i_width, i_height);
         return dst;
     } else {
         *i_dst_stride = i_src_stride;
         return src1;
-    };
+    }
 }
 unsafe extern "C" fn mc_chroma(
     mut dstu: *mut pixel,
@@ -3193,7 +3189,7 @@ unsafe extern "C" fn mc_chroma(
     mut i_width: libc::c_int,
     mut i_height: libc::c_int,
 ) {
-    let mut srcp: *mut pixel = 0 as *mut pixel;
+    let mut srcp: *mut pixel = std::ptr::null_mut::<pixel>();
     let mut d8x: libc::c_int = mvx & 0x7 as libc::c_int;
     let mut d8y: libc::c_int = mvy & 0x7 as libc::c_int;
     let mut cA: libc::c_int = (8 as libc::c_int - d8x) * (8 as libc::c_int - d8y);
@@ -3213,18 +3209,18 @@ unsafe extern "C" fn mc_chroma(
             *dstu
                 .offset(
                     x as isize,
-                ) = (cA * *src.offset((2 as libc::c_int * x) as isize) as libc::c_int
+                ) = ((cA * *src.offset((2 as libc::c_int * x) as isize) as libc::c_int
                 + cB
                     * *src.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
                         as libc::c_int
                 + cC * *srcp.offset((2 as libc::c_int * x) as isize) as libc::c_int
                 + cD
                     * *srcp.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
-                        as libc::c_int + 32 as libc::c_int >> 6 as libc::c_int) as pixel;
+                        as libc::c_int + 32 as libc::c_int) >> 6 as libc::c_int) as pixel;
             *dstv
                 .offset(
                     x as isize,
-                ) = (cA
+                ) = ((cA
                 * *src.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
                     as libc::c_int
                 + cB
@@ -3235,7 +3231,7 @@ unsafe extern "C" fn mc_chroma(
                         as libc::c_int
                 + cD
                     * *srcp.offset((2 as libc::c_int * x + 3 as libc::c_int) as isize)
-                        as libc::c_int + 32 as libc::c_int >> 6 as libc::c_int) as pixel;
+                        as libc::c_int + 32 as libc::c_int) >> 6 as libc::c_int) as pixel;
             x += 1;
             x;
         }
@@ -3285,8 +3281,8 @@ pub unsafe extern "C" fn x264_8_plane_copy_c(
 ) {
     loop {
         let fresh0 = h;
-        h = h - 1;
-        if !(fresh0 != 0) {
+        h -= 1;
+        if fresh0 == 0 {
             break;
         }
         memcpy(
@@ -3438,11 +3434,11 @@ unsafe extern "C" fn plane_copy_deinterleave_v210_c(
             *fresh2 = (s & 0x3ff as libc::c_int as uint32_t) as pixel;
             let fresh3 = dsty0;
             dsty0 = dsty0.offset(1);
-            *fresh3 = (s >> 10 as libc::c_int & 0x3ff as libc::c_int as uint32_t)
+            *fresh3 = ((s >> 10 as libc::c_int) & 0x3ff as libc::c_int as uint32_t)
                 as pixel;
             let fresh4 = dstc0;
             dstc0 = dstc0.offset(1);
-            *fresh4 = (s >> 20 as libc::c_int & 0x3ff as libc::c_int as uint32_t)
+            *fresh4 = ((s >> 20 as libc::c_int) & 0x3ff as libc::c_int as uint32_t)
                 as pixel;
             let fresh5 = src0;
             src0 = src0.offset(1);
@@ -3452,11 +3448,11 @@ unsafe extern "C" fn plane_copy_deinterleave_v210_c(
             *fresh6 = (s & 0x3ff as libc::c_int as uint32_t) as pixel;
             let fresh7 = dstc0;
             dstc0 = dstc0.offset(1);
-            *fresh7 = (s >> 10 as libc::c_int & 0x3ff as libc::c_int as uint32_t)
+            *fresh7 = ((s >> 10 as libc::c_int) & 0x3ff as libc::c_int as uint32_t)
                 as pixel;
             let fresh8 = dsty0;
             dsty0 = dsty0.offset(1);
-            *fresh8 = (s >> 20 as libc::c_int & 0x3ff as libc::c_int as uint32_t)
+            *fresh8 = ((s >> 20 as libc::c_int) & 0x3ff as libc::c_int as uint32_t)
                 as pixel;
             n += 3 as libc::c_int;
         }
@@ -3733,49 +3729,49 @@ unsafe extern "C" fn frame_init_lowres_core(
             *dst0
                 .offset(
                     x as isize,
-                ) = ((*src0.offset((2 as libc::c_int * x) as isize) as libc::c_int
+                ) = ((((*src0.offset((2 as libc::c_int * x) as isize) as libc::c_int
                 + *src1.offset((2 as libc::c_int * x) as isize) as libc::c_int
-                + 1 as libc::c_int >> 1 as libc::c_int)
-                + (*src0.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
+                + 1 as libc::c_int) >> 1 as libc::c_int)
+                + ((*src0.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
                     as libc::c_int
                     + *src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + 1 as libc::c_int >> 1 as libc::c_int) as pixel;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             *dsth
                 .offset(
                     x as isize,
-                ) = ((*src0.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
+                ) = ((((*src0.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
                 as libc::c_int
                 + *src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
-                    as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + (*src0.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
+                    as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + ((*src0.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
                     as libc::c_int
                     + *src1.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + 1 as libc::c_int >> 1 as libc::c_int) as pixel;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             *dstv
                 .offset(
                     x as isize,
-                ) = ((*src1.offset((2 as libc::c_int * x) as isize) as libc::c_int
+                ) = ((((*src1.offset((2 as libc::c_int * x) as isize) as libc::c_int
                 + *src2.offset((2 as libc::c_int * x) as isize) as libc::c_int
-                + 1 as libc::c_int >> 1 as libc::c_int)
-                + (*src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
+                + 1 as libc::c_int) >> 1 as libc::c_int)
+                + ((*src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
                     as libc::c_int
                     + *src2.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + 1 as libc::c_int >> 1 as libc::c_int) as pixel;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             *dstc
                 .offset(
                     x as isize,
-                ) = ((*src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
+                ) = ((((*src1.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
                 as libc::c_int
                 + *src2.offset((2 as libc::c_int * x + 1 as libc::c_int) as isize)
-                    as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + (*src1.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
+                    as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + ((*src1.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
                     as libc::c_int
                     + *src2.offset((2 as libc::c_int * x + 2 as libc::c_int) as isize)
-                        as libc::c_int + 1 as libc::c_int >> 1 as libc::c_int)
-                + 1 as libc::c_int >> 1 as libc::c_int) as pixel;
+                        as libc::c_int + 1 as libc::c_int) >> 1 as libc::c_int)
+                + 1 as libc::c_int) >> 1 as libc::c_int) as pixel;
             x += 1;
             x;
         }
@@ -3803,13 +3799,11 @@ unsafe extern "C" fn mbtree_propagate_cost(
         let mut intra_cost: libc::c_int = *intra_costs.offset(i as isize) as libc::c_int;
         let mut inter_cost: libc::c_int = if (*intra_costs.offset(i as isize)
             as libc::c_int)
-            < *inter_costs.offset(i as isize) as libc::c_int
-                & ((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int
+            < *inter_costs.offset(i as isize) as libc::c_int & (((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int)
         {
             *intra_costs.offset(i as isize) as libc::c_int
         } else {
-            *inter_costs.offset(i as isize) as libc::c_int
-                & ((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int
+            *inter_costs.offset(i as isize) as libc::c_int & (((1 as libc::c_int) << 14 as libc::c_int) - 1 as libc::c_int)
         };
         let mut propagate_intra: libc::c_float = (intra_cost
             * *inv_qscales.offset(i as isize) as libc::c_int) as libc::c_float;
@@ -3850,12 +3844,11 @@ unsafe extern "C" fn mbtree_propagate_list(
     while i < len {
         let mut lists_used: libc::c_int = *lowres_costs.offset(i as isize) as libc::c_int
             >> 14 as libc::c_int;
-        if !(lists_used & (1 as libc::c_int) << list == 0) {
+        if lists_used & ((1 as libc::c_int) << list) != 0 {
             let mut listamount: libc::c_int = *propagate_amount.offset(i as isize)
                 as libc::c_int;
             if lists_used == 3 as libc::c_int {
-                listamount = listamount * bipred_weight + 32 as libc::c_int
-                    >> 6 as libc::c_int;
+                listamount = (listamount * bipred_weight + 32 as libc::c_int) >> 6 as libc::c_int;
             }
             if (*((*mvs.offset(i as isize)).as_mut_ptr() as *mut x264_union32_t)).i == 0
             {
@@ -3899,14 +3892,10 @@ unsafe extern "C" fn mbtree_propagate_list(
                 let mut idx1weight: libc::c_int = (32 as libc::c_int - y) * x;
                 let mut idx2weight: libc::c_int = y * (32 as libc::c_int - x);
                 let mut idx3weight: libc::c_int = y * x;
-                idx0weight = idx0weight * listamount + 512 as libc::c_int
-                    >> 10 as libc::c_int;
-                idx1weight = idx1weight * listamount + 512 as libc::c_int
-                    >> 10 as libc::c_int;
-                idx2weight = idx2weight * listamount + 512 as libc::c_int
-                    >> 10 as libc::c_int;
-                idx3weight = idx3weight * listamount + 512 as libc::c_int
-                    >> 10 as libc::c_int;
+                idx0weight = (idx0weight * listamount + 512 as libc::c_int) >> 10 as libc::c_int;
+                idx1weight = (idx1weight * listamount + 512 as libc::c_int) >> 10 as libc::c_int;
+                idx2weight = (idx2weight * listamount + 512 as libc::c_int) >> 10 as libc::c_int;
+                idx3weight = (idx3weight * listamount + 512 as libc::c_int) >> 10 as libc::c_int;
                 if mbx < width.wrapping_sub(1 as libc::c_int as libc::c_uint)
                     && mby < height.wrapping_sub(1 as libc::c_int as libc::c_uint)
                 {
@@ -4704,7 +4693,7 @@ pub unsafe extern "C" fn x264_8_frame_filter(
         }
         if b_interlaced != 0 {
             stride = (*frame).i_stride[p as usize] << 1 as libc::c_int;
-            start = (mb_y * 16 as libc::c_int >> 1 as libc::c_int) - 8 as libc::c_int;
+            start = ((mb_y * 16 as libc::c_int) >> 1 as libc::c_int) - 8 as libc::c_int;
             let mut height_fld: libc::c_int = ((if b_end != 0 {
                 (*frame).i_lines[p as usize]
             } else {
@@ -4797,7 +4786,7 @@ pub unsafe extern "C" fn x264_8_frame_filter(
                                 as libc::c_int
                     }) as isize),
                 );
-            let mut sum4: *mut uint16_t = 0 as *mut uint16_t;
+            let mut sum4: *mut uint16_t = std::ptr::null_mut::<uint16_t>();
             if (*h).frames.b_have_sub8x8_esa != 0 {
                 ((*h).mc.integral_init4h)
                     .expect(

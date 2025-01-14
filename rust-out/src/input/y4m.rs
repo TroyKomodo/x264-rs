@@ -305,8 +305,8 @@ unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_
     if fstat(fileno(filehandle), &mut file_stat) != 0 {
         return 1 as libc::c_int;
     }
-    return (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
-        == 0o100000 as libc::c_int as __mode_t) as libc::c_int;
+    (file_stat.st_mode & 0o170000 as libc::c_int as __mode_t
+        == 0o100000 as libc::c_int as __mode_t) as libc::c_int
 }
 unsafe extern "C" fn parse_csp_and_depth(
     mut csp_name: *mut libc::c_char,
@@ -357,7 +357,7 @@ unsafe extern "C" fn parse_csp_and_depth(
     {
         *bit_depth = 8 as libc::c_int;
     }
-    return csp;
+    csp
 }
 unsafe extern "C" fn open_file(
     mut psz_filename: *mut libc::c_char,
@@ -373,8 +373,8 @@ unsafe extern "C" fn open_file(
     let mut n: uint32_t = 0;
     let mut d: uint32_t = 0;
     let mut header: [libc::c_char; 266] = [0; 266];
-    let mut tokend: *mut libc::c_char = 0 as *mut libc::c_char;
-    let mut header_end: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut tokend: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
+    let mut header_end: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut colorspace: libc::c_int = 0 as libc::c_int;
     let mut alt_colorspace: libc::c_int = 0 as libc::c_int;
     let mut alt_bit_depth: libc::c_int = 8 as libc::c_int;
@@ -432,7 +432,7 @@ unsafe extern "C" fn open_file(
         .as_mut_ptr()
         .offset(::core::mem::size_of::<[libc::c_char; 10]>() as libc::c_ulong as isize);
     while tokstart < header_end {
-        if !(*tokstart as libc::c_int == 0x20 as libc::c_int) {
+        if *tokstart as libc::c_int != 0x20 as libc::c_int {
             let fresh0 = tokstart;
             tokstart = tokstart.offset(1);
             match *fresh0 as libc::c_int {
@@ -630,7 +630,7 @@ unsafe extern "C" fn open_file(
         }
     }
     *p_handle = h as hnd_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 static mut slen: size_t = 0;
 unsafe extern "C" fn read_frame_internal(
@@ -642,7 +642,7 @@ unsafe extern "C" fn read_frame_internal(
     let mut i: libc::c_int = ::core::mem::size_of::<[libc::c_char; 6]>() as libc::c_ulong
         as libc::c_int;
     let mut header_buf: [libc::c_char; 16] = [0; 16];
-    let mut header: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut header: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     if (*h).use_mmap != 0 {
         header = (*pic).img.plane[0 as libc::c_int as usize] as *mut libc::c_char;
         (*pic)
@@ -742,7 +742,7 @@ unsafe extern "C" fn read_frame_internal(
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn read_frame(
     mut pic: *mut cli_pic_t,
@@ -783,7 +783,7 @@ unsafe extern "C" fn read_frame(
         return -(1 as libc::c_int);
     }
     (*h).next_frame = i_frame + 1 as libc::c_int;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut pic: *mut cli_pic_t,
@@ -798,7 +798,7 @@ unsafe extern "C" fn release_frame(
             (*h).frame_size,
         );
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn picture_alloc(
     mut pic: *mut cli_pic_t,
@@ -808,7 +808,7 @@ unsafe extern "C" fn picture_alloc(
     mut height: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut y4m_hnd_t = handle as *mut y4m_hnd_t;
-    return if (*h).use_mmap != 0 {
+    if (*h).use_mmap != 0 {
         Some(
             x264_cli_pic_init_noalloc
                 as unsafe extern "C" fn(
@@ -829,7 +829,7 @@ unsafe extern "C" fn picture_alloc(
                 ) -> libc::c_int,
         )
     }
-        .expect("non-null function pointer")(pic, csp, width, height);
+        .expect("non-null function pointer")(pic, csp, width, height)
 }
 unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
     let mut h: *mut y4m_hnd_t = handle as *mut y4m_hnd_t;
@@ -853,12 +853,13 @@ unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
     }
     fclose((*h).fh);
     free(h as *mut libc::c_void);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub static mut y4m_input: cli_input_t = unsafe {
     {
-        let mut init = cli_input_t {
+        
+        cli_input_t {
             open_file: Some(
                 open_file
                     as unsafe extern "C" fn(
@@ -894,8 +895,7 @@ pub static mut y4m_input: cli_input_t = unsafe {
                 picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> (),
             ),
             close_file: Some(close_file as unsafe extern "C" fn(hnd_t) -> libc::c_int),
-        };
-        init
+        }
     }
 };
 unsafe extern "C" fn run_static_initializers() {

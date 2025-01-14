@@ -2227,7 +2227,7 @@ pub unsafe extern "C" fn x264_8_log(
         let mut arg: ::core::ffi::VaListImpl;
         arg = args.clone();
         if h.is_null() {
-            x264_log_default(0 as *mut libc::c_void, i_level, psz_fmt, arg.as_va_list());
+            x264_log_default(std::ptr::null_mut::<libc::c_void>(), i_level, psz_fmt, arg.as_va_list());
         } else {
             ((*h).param.pf_log)
                 .expect(

@@ -96,7 +96,7 @@ pub struct x264_cli_csp_t {
 }
 #[inline]
 unsafe extern "C" fn putchar(mut __c: libc::c_int) -> libc::c_int {
-    return putc(__c, stdout);
+    putc(__c, stdout)
 }
 static mut x264_direct_pred_names: [*const libc::c_char; 5] = [
     b"none\0" as *const u8 as *const libc::c_char,
@@ -446,7 +446,7 @@ unsafe extern "C" fn list_contains(
             list;
         }
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn suggest(
     mut s: *const libc::c_char,
@@ -596,7 +596,7 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             i += 1;
             i;
         }
-    } else if !(strcmp(prev, b"--input-fmt\0" as *const u8 as *const libc::c_char) == 0)
+    } else if strcmp(prev, b"--input-fmt\0" as *const u8 as *const libc::c_char) != 0
     {
         if strcmp(prev, b"--input-range\0" as *const u8 as *const libc::c_char) == 0 {
             let mut s_8: *const *const libc::c_char = x264_range_names.as_ptr();
@@ -785,5 +785,5 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         }
     }
     putchar('\n' as i32);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }

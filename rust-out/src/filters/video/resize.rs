@@ -319,7 +319,7 @@ unsafe extern "C" fn full_check(
     required |= ((*info).width != (*param).i_width) as libc::c_int;
     required |= ((*info).height != (*param).i_height) as libc::c_int;
     required |= ((*info).fullrange != (*param).vui.b_fullrange) as libc::c_int;
-    return required;
+    required
 }
 unsafe extern "C" fn init(
     mut handle: *mut hnd_t,
@@ -344,12 +344,13 @@ unsafe extern "C" fn init(
         );
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub static mut resize_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"resize\0" as *const u8 as *const libc::c_char,
             help: None,
             init: Some(
@@ -366,7 +367,6 @@ pub static mut resize_filter: cli_vid_filter_t = unsafe {
             release_frame: None,
             free: None,
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

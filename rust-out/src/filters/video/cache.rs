@@ -2327,7 +2327,7 @@ unsafe extern "C" fn init(
     }
     let mut i: libc::c_int = 0 as libc::c_int;
     while i < (*h).max_size {
-        let ref mut fresh0 = *((*h).cache).offset(i as isize);
+        let fresh0 = &mut (*((*h).cache).offset(i as isize));
         *fresh0 = malloc(::core::mem::size_of::<cli_pic_t>() as libc::c_ulong)
             as *mut cli_pic_t;
         if (*((*h).cache).offset(i as isize)).is_null()
@@ -2343,13 +2343,13 @@ unsafe extern "C" fn init(
         i += 1;
         i;
     }
-    let ref mut fresh1 = *((*h).cache).offset((*h).max_size as isize);
-    *fresh1 = 0 as *mut cli_pic_t;
+    let fresh1 = &mut (*((*h).cache).offset((*h).max_size as isize));
+    *fresh1 = std::ptr::null_mut::<cli_pic_t>();
     (*h).prev_filter = *filter;
     (*h).prev_hnd = *handle;
     *handle = h as hnd_t;
     *filter = cache_8_filter;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn fill_cache(mut h: *mut cache_hnd_t, mut frame: libc::c_int) {
     let mut shift: libc::c_int = frame
@@ -2383,12 +2383,12 @@ unsafe extern "C" fn fill_cache(mut h: *mut cache_hnd_t, mut frame: libc::c_int)
                 width: 0,
                 height: 0,
                 planes: 0,
-                plane: [0 as *mut uint8_t; 4],
+                plane: [std::ptr::null_mut::<uint8_t>(); 4],
                 stride: [0; 4],
             },
             pts: 0,
             duration: 0,
-            opaque: 0 as *mut libc::c_void,
+            opaque: std::ptr::null_mut::<libc::c_void>(),
         };
         let mut cache: *mut cli_pic_t = *((*h).cache).offset(0 as libc::c_int as isize);
         if ((*h).prev_filter.get_frame)
@@ -2435,14 +2435,14 @@ unsafe extern "C" fn get_frame(
     let mut idx: libc::c_int = frame
         - (if (*h).eof != 0 { (*h).eof - (*h).max_size } else { (*h).first_frame });
     *output = **((*h).cache).offset(idx as isize);
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
     mut pic: *mut cli_pic_t,
     mut frame: libc::c_int,
 ) -> libc::c_int {
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut cache_hnd_t = handle as *mut cache_hnd_t;
@@ -2460,7 +2460,8 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut cache_8_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"cache_8\0" as *const u8 as *const libc::c_char,
             help: None,
             init: Some(
@@ -2491,7 +2492,6 @@ pub static mut cache_8_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

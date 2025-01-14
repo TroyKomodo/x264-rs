@@ -2272,8 +2272,7 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
                     as uint8_t;
                 (*vlc)
                     .i_bits = (((1 as libc::c_int) << i_suffix)
-                    + (i_level_code
-                        & ((1 as libc::c_int) << i_suffix) - 1 as libc::c_int))
+                    + (i_level_code & (((1 as libc::c_int) << i_suffix) - 1 as libc::c_int)))
                     as uint16_t;
             } else if i_suffix == 0 as libc::c_int && i_level_code < 30 as libc::c_int {
                 (*vlc).i_size = 19 as libc::c_int as uint8_t;
@@ -2286,8 +2285,7 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
                 (*vlc).i_size = (15 as libc::c_int + i_suffix) as uint8_t;
                 (*vlc)
                     .i_bits = (((1 as libc::c_int) << i_suffix)
-                    + (i_level_code
-                        & ((1 as libc::c_int) << i_suffix) - 1 as libc::c_int))
+                    + (i_level_code & (((1 as libc::c_int) << i_suffix) - 1 as libc::c_int)))
                     as uint16_t;
             } else {
                 i_level_code -= (15 as libc::c_int) << i_suffix;
@@ -2303,7 +2301,7 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
                 i_next += 1;
                 i_next;
             }
-            if abs_level > (3 as libc::c_int) << i_next - 1 as libc::c_int
+            if abs_level > (3 as libc::c_int) << (i_next - 1 as libc::c_int)
                 && i_next < 6 as libc::c_int
             {
                 i_next += 1;
@@ -2339,7 +2337,7 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
             .coeff_level_run[DCT_LUMA_4x4 as libc::c_int as usize])
             .expect("non-null function pointer")(dct.as_mut_ptr(), &mut runlevel);
         let mut zeros: libc::c_int = runlevel.last + 1 as libc::c_int - total;
-        let mut mask_0: uint32_t = i << i.leading_zeros() as i32 + 1 as libc::c_int;
+        let mut mask_0: uint32_t = i << (i.leading_zeros() as i32 + 1 as libc::c_int);
         let mut j_0: libc::c_int = 0 as libc::c_int;
         while j_0 < total - 1 as libc::c_int && zeros > 0 as libc::c_int {
             let mut idx: libc::c_int = (if zeros < 7 as libc::c_int {

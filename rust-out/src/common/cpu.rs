@@ -31,335 +31,205 @@ pub struct x264_cpu_name_t {
 #[no_mangle]
 pub static mut x264_cpu_names: [x264_cpu_name_t; 28] = [
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"MMX2\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"MMXEXT\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE2Slow\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 19 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 19 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE2\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE2Fast\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 20 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 20 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"LZCNT\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 4 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 4 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE3\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSSE3\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE4.1\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE4\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SSE4.2\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"AVX\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"XOP\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 10 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 10 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"FMA4\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 11 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 11 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"FMA3\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 12 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 12 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"BMI1\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 4 as libc::c_int
-                | (1 as libc::c_uint) << 13 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 4 as libc::c_int) | ((1 as libc::c_uint) << 13 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"BMI2\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 4 as libc::c_int
-                | (1 as libc::c_uint) << 13 as libc::c_int
-                | (1 as libc::c_uint) << 14 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 4 as libc::c_int) | ((1 as libc::c_uint) << 13 as libc::c_int) | ((1 as libc::c_uint) << 14 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"AVX2\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 12 as libc::c_int
-                | (1 as libc::c_uint) << 4 as libc::c_int
-                | (1 as libc::c_uint) << 13 as libc::c_int
-                | (1 as libc::c_uint) << 14 as libc::c_int
-                | (1 as libc::c_uint) << 15 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 12 as libc::c_int) | ((1 as libc::c_uint) << 4 as libc::c_int) | ((1 as libc::c_uint) << 13 as libc::c_int) | ((1 as libc::c_uint) << 14 as libc::c_int) | ((1 as libc::c_uint) << 15 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"AVX512\0" as *const u8 as *const libc::c_char,
-            flags: (1 as libc::c_uint) << 0 as libc::c_int
-                | (1 as libc::c_uint) << 1 as libc::c_int
-                | (1 as libc::c_uint) << 2 as libc::c_int
-                | (1 as libc::c_uint) << 3 as libc::c_int
-                | (1 as libc::c_uint) << 5 as libc::c_int
-                | (1 as libc::c_uint) << 6 as libc::c_int
-                | (1 as libc::c_uint) << 7 as libc::c_int
-                | (1 as libc::c_uint) << 8 as libc::c_int
-                | (1 as libc::c_uint) << 9 as libc::c_int
-                | (1 as libc::c_uint) << 12 as libc::c_int
-                | (1 as libc::c_uint) << 4 as libc::c_int
-                | (1 as libc::c_uint) << 13 as libc::c_int
-                | (1 as libc::c_uint) << 14 as libc::c_int
-                | (1 as libc::c_uint) << 15 as libc::c_int
-                | (1 as libc::c_uint) << 16 as libc::c_int,
-        };
-        init
+            flags: ((1 as libc::c_uint) << 0 as libc::c_int) | ((1 as libc::c_uint) << 1 as libc::c_int) | ((1 as libc::c_uint) << 2 as libc::c_int) | ((1 as libc::c_uint) << 3 as libc::c_int) | ((1 as libc::c_uint) << 5 as libc::c_int) | ((1 as libc::c_uint) << 6 as libc::c_int) | ((1 as libc::c_uint) << 7 as libc::c_int) | ((1 as libc::c_uint) << 8 as libc::c_int) | ((1 as libc::c_uint) << 9 as libc::c_int) | ((1 as libc::c_uint) << 12 as libc::c_int) | ((1 as libc::c_uint) << 4 as libc::c_int) | ((1 as libc::c_uint) << 13 as libc::c_int) | ((1 as libc::c_uint) << 14 as libc::c_int) | ((1 as libc::c_uint) << 15 as libc::c_int) | ((1 as libc::c_uint) << 16 as libc::c_int),
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"Cache32\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 17 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"Cache64\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 18 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SlowAtom\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 23 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SlowPshufb\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 24 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SlowPalignr\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 25 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"SlowShuffle\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 21 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"UnalignedStack\0" as *const u8 as *const libc::c_char,
             flags: (1 as libc::c_uint) << 22 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cpu_name_t {
+        
+        x264_cpu_name_t {
             name: b"\0" as *const u8 as *const libc::c_char,
             flags: 0 as libc::c_int as uint32_t,
-        };
-        init
+        }
     },
 ];
 #[no_mangle]
 pub unsafe extern "C" fn x264_cpu_detect() -> uint32_t {
-    return 0 as libc::c_int as uint32_t;
+    0 as libc::c_int as uint32_t
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cpu_num_processors() -> libc::c_int {
@@ -377,8 +247,8 @@ pub unsafe extern "C" fn x264_cpu_num_processors() -> libc::c_int {
     {
         return 1 as libc::c_int;
     }
-    return __sched_cpucount(
+    __sched_cpucount(
         ::core::mem::size_of::<cpu_set_t>() as libc::c_ulong,
         &mut p_aff,
-    );
+    )
 }

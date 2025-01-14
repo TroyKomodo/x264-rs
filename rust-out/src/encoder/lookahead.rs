@@ -2274,8 +2274,8 @@ unsafe extern "C" fn lookahead_shift(
     let mut i: libc::c_int = count;
     loop {
         let fresh0 = i;
-        i = i - 1;
-        if !(fresh0 != 0) {
+        i -= 1;
+        if fresh0 == 0 {
             break;
         }
         if (*dst).i_size < (*dst).i_max_size {} else {
@@ -2340,8 +2340,8 @@ unsafe extern "C" fn lookahead_shift(
             }
         };
         let fresh1 = (*dst).i_size;
-        (*dst).i_size = (*dst).i_size + 1;
-        let ref mut fresh2 = *((*dst).list).offset(fresh1 as isize);
+        (*dst).i_size += 1;
+        let fresh2 = &mut (*((*dst).list).offset(fresh1 as isize));
         *fresh2 = x264_8_frame_shift((*src).list);
         (*src).i_size -= 1;
         (*src).i_size;
@@ -2449,15 +2449,15 @@ unsafe extern "C" fn lookahead_thread(mut h: *mut x264_t) -> *mut libc::c_void {
     (*(*h).lookahead).b_thread_active = 0 as libc::c_int as uint8_t;
     pthread_cond_broadcast(&mut (*(*h).lookahead).ofbuf.cv_fill);
     pthread_mutex_unlock(&mut (*(*h).lookahead).ofbuf.mutex);
-    return 0 as *mut libc::c_void;
+    std::ptr::null_mut::<libc::c_void>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_lookahead_init(
     mut h: *mut x264_t,
     mut i_slicetype_length: libc::c_int,
 ) -> libc::c_int {
-    let mut look_h: *mut x264_t = 0 as *mut x264_t;
-    let mut look: *mut x264_lookahead_t = 0 as *mut x264_lookahead_t;
+    let mut look_h: *mut x264_t = std::ptr::null_mut::<x264_t>();
+    let mut look: *mut x264_lookahead_t = std::ptr::null_mut::<x264_lookahead_t>();
     look = x264_malloc(
         ::core::mem::size_of::<x264_lookahead_t>() as libc::c_ulong as int64_t,
     ) as *mut x264_lookahead_t;
@@ -2497,13 +2497,9 @@ pub unsafe extern "C" fn x264_8_lookahead_init(
             }
             look_h = (*h).thread[(*h).param.i_threads as usize];
             *look_h = *h;
-            if !(x264_8_macroblock_cache_allocate(look_h) != 0) {
-                if !(x264_8_macroblock_thread_allocate(look_h, 1 as libc::c_int)
-                    < 0 as libc::c_int)
-                {
-                    if !(pthread_create(
+            if x264_8_macroblock_cache_allocate(look_h) == 0 && x264_8_macroblock_thread_allocate(look_h, 1 as libc::c_int) >= 0 as libc::c_int && pthread_create(
                         &mut (*look).thread_handle,
-                        0 as *const pthread_attr_t,
+                        std::ptr::null::<pthread_attr_t>(),
                         ::core::mem::transmute::<
                             *mut libc::c_void,
                             Option::<
@@ -2523,17 +2519,14 @@ pub unsafe extern "C" fn x264_8_lookahead_init(
                             ),
                         ),
                         look_h as *mut libc::c_void,
-                    ) != 0)
-                    {
-                        (*look).b_thread_active = 1 as libc::c_int as uint8_t;
-                        return 0 as libc::c_int;
-                    }
-                }
+                    ) == 0 {
+                (*look).b_thread_active = 1 as libc::c_int as uint8_t;
+                return 0 as libc::c_int;
             }
         }
     }
     x264_free(look as *mut libc::c_void);
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_lookahead_delete(mut h: *mut x264_t) {
@@ -2545,7 +2538,7 @@ pub unsafe extern "C" fn x264_8_lookahead_delete(mut h: *mut x264_t) {
         );
         pthread_cond_broadcast(&mut (*(*h).lookahead).ifbuf.cv_fill);
         pthread_mutex_unlock(&mut (*(*h).lookahead).ifbuf.mutex);
-        pthread_join((*(*h).lookahead).thread_handle, 0 as *mut *mut libc::c_void);
+        pthread_join((*(*h).lookahead).thread_handle, std::ptr::null_mut::<*mut libc::c_void>());
         x264_8_macroblock_cache_free((*h).thread[(*h).param.i_threads as usize]);
         x264_8_macroblock_thread_free(
             (*h).thread[(*h).param.i_threads as usize],
@@ -2580,7 +2573,7 @@ pub unsafe extern "C" fn x264_8_lookahead_is_empty(mut h: *mut x264_t) -> libc::
         && (*(*h).lookahead).ofbuf.i_size == 0) as libc::c_int;
     pthread_mutex_unlock(&mut (*(*h).lookahead).next.mutex);
     pthread_mutex_unlock(&mut (*(*h).lookahead).ofbuf.mutex);
-    return b_empty;
+    b_empty
 }
 unsafe extern "C" fn lookahead_encoder_shift(mut h: *mut x264_t) {
     if (*(*h).lookahead).ofbuf.i_size == 0 {
@@ -2591,8 +2584,8 @@ unsafe extern "C" fn lookahead_encoder_shift(mut h: *mut x264_t) {
         .i_bframes as libc::c_int + 1 as libc::c_int;
     loop {
         let fresh3 = i_frames;
-        i_frames = i_frames - 1;
-        if !(fresh3 != 0) {
+        i_frames -= 1;
+        if fresh3 == 0 {
             break;
         }
         x264_8_frame_push(

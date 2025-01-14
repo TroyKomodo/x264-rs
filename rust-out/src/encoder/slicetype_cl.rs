@@ -2287,7 +2287,7 @@ unsafe extern "C" fn opencl_alloc_locked(
     let mut ptr: *mut libc::c_char = ((*h).opencl.page_locked_ptr)
         .offset((*h).opencl.pl_occupancy as isize);
     (*h).opencl.pl_occupancy += bytes;
-    return ptr as *mut libc::c_void;
+    ptr as *mut libc::c_void
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_opencl_lowres_init(
@@ -2327,7 +2327,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             width as size_t,
             height as size_t,
             0 as libc::c_int as size_t,
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2358,7 +2358,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
                 width as size_t,
                 height as size_t,
                 0 as libc::c_int as size_t,
-                0 as *mut libc::c_void,
+                std::ptr::null_mut::<libc::c_void>(),
                 &mut status,
             );
             if status != 0 as libc::c_int {
@@ -2387,7 +2387,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 0 as libc::c_int) as cl_mem_flags,
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2411,7 +2411,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 0 as libc::c_int) as cl_mem_flags,
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2435,7 +2435,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 0 as libc::c_int) as cl_mem_flags,
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2460,7 +2460,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(2 as libc::c_int as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2485,7 +2485,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(2 as libc::c_int as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2509,7 +2509,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(2 as libc::c_int as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2533,7 +2533,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 1 as libc::c_int) as cl_mem_flags,
             (4 as libc::c_int as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2557,7 +2557,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 1 as libc::c_int) as cl_mem_flags,
             (4 as libc::c_int as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2581,7 +2581,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 1 as libc::c_int) as cl_mem_flags,
             ((*h).mb.i_mb_height as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2605,7 +2605,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 1 as libc::c_int) as cl_mem_flags,
             ((*h).mb.i_mb_height as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<libc::c_int>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2628,7 +2628,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (*h).opencl.context,
             ((1 as libc::c_int) << 2 as libc::c_int) as cl_mem_flags,
             luma_length as size_t,
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2651,7 +2651,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (*h).opencl.context,
             ((1 as libc::c_int) << 2 as libc::c_int) as cl_mem_flags,
             luma_length as size_t,
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2689,7 +2689,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             width_0 as size_t,
             height_0 as size_t,
             0 as libc::c_int as size_t,
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2721,7 +2721,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
                 width_0 as size_t,
                 height_0 as size_t,
                 0 as libc::c_int as size_t,
-                0 as *mut libc::c_void,
+                std::ptr::null_mut::<libc::c_void>(),
                 &mut status,
             );
             if status != 0 as libc::c_int {
@@ -2750,7 +2750,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 2 as libc::c_int) as cl_mem_flags,
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2773,7 +2773,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((1 as libc::c_int) << 1 as libc::c_int) as cl_mem_flags,
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2797,7 +2797,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((mb_count * 2 as libc::c_int) as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(((*h).param.i_bframe + 1 as libc::c_int) as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2821,7 +2821,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             ((mb_count * 2 as libc::c_int) as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(((*h).param.i_bframe + 1 as libc::c_int) as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2845,7 +2845,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(((*h).param.i_bframe + 1 as libc::c_int) as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2869,7 +2869,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (mb_count as libc::c_ulong)
                 .wrapping_mul(::core::mem::size_of::<int16_t>() as libc::c_ulong)
                 .wrapping_mul(((*h).param.i_bframe + 1 as libc::c_int) as libc::c_ulong),
-            0 as *mut libc::c_void,
+            std::ptr::null_mut::<libc::c_void>(),
             &mut status,
         );
         if status != 0 as libc::c_int {
@@ -2904,8 +2904,8 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         luma_length as size_t,
         locked as *const libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -2943,8 +2943,8 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             size as size_t,
             locked as *const libc::c_void,
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -3022,12 +3022,12 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (*h).opencl.queue,
             (*h).opencl.memset_kernel,
             1 as libc::c_int as cl_uint,
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             gdim.as_mut_ptr(),
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -3160,12 +3160,12 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         (*h).opencl.queue,
         (*h).opencl.downscale_hpel_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdim.as_mut_ptr(),
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3257,12 +3257,12 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
             (*h).opencl.queue,
             kern,
             2 as libc::c_int as cl_uint,
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             gdim.as_mut_ptr(),
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -3281,7 +3281,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
     }
     let mut ldim: [size_t; 2] = [0; 2];
     gdim[0 as libc::c_int
-        as usize] = (((*h).mb.i_mb_width + 31 as libc::c_int >> 5 as libc::c_int)
+        as usize] = ((((*h).mb.i_mb_width + 31 as libc::c_int) >> 5 as libc::c_int)
         << 5 as libc::c_int) as size_t;
     gdim[1 as libc::c_int as usize] = (8 as libc::c_int * (*h).mb.i_mb_height) as size_t;
     ldim[0 as libc::c_int as usize] = 32 as libc::c_int as size_t;
@@ -3453,12 +3453,12 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         (*h).opencl.queue,
         (*h).opencl.intra_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdim.as_mut_ptr(),
         ldim.as_mut_ptr(),
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3614,12 +3614,12 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         (*h).opencl.queue,
         (*h).opencl.rowsum_intra_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdim.as_mut_ptr(),
         ldim.as_mut_ptr(),
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3652,8 +3652,8 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         size_0 as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3697,8 +3697,8 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         size_0 as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3740,8 +3740,8 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
         size_0 as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -3793,7 +3793,7 @@ pub unsafe extern "C" fn x264_8_opencl_lowres_init(
     (*h).opencl.num_copies += 1;
     (*h).opencl.num_copies;
     (*h).opencl.last_buf = ((*h).opencl.last_buf == 0) as libc::c_int;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn optimal_launch_dims(
     mut h: *mut x264_t,
@@ -3815,7 +3815,7 @@ unsafe extern "C" fn optimal_launch_dims(
         0x11b0 as libc::c_int as cl_kernel_work_group_info,
         ::core::mem::size_of::<size_t>() as libc::c_ulong,
         &mut max_work_group as *mut size_t as *mut libc::c_void,
-        0 as *mut size_t,
+        std::ptr::null_mut::<size_t>(),
     );
     ((*ocl).clGetKernelWorkGroupInfo)
         .expect(
@@ -3826,7 +3826,7 @@ unsafe extern "C" fn optimal_launch_dims(
         0x11b3 as libc::c_int as cl_kernel_work_group_info,
         ::core::mem::size_of::<size_t>() as libc::c_ulong,
         &mut preferred_multiple as *mut size_t as *mut libc::c_void,
-        0 as *mut size_t,
+        std::ptr::null_mut::<size_t>(),
     );
     ((*ocl).clGetDeviceInfo)
         .expect(
@@ -3836,7 +3836,7 @@ unsafe extern "C" fn optimal_launch_dims(
         0x1002 as libc::c_int as cl_device_info,
         ::core::mem::size_of::<cl_uint>() as libc::c_ulong,
         &mut num_cus as *mut cl_uint as *mut libc::c_void,
-        0 as *mut size_t,
+        std::ptr::null_mut::<size_t>(),
     );
     *ldims.offset(0 as libc::c_int as isize) = preferred_multiple;
     *ldims.offset(1 as libc::c_int as isize) = 8 as libc::c_int as size_t;
@@ -3864,7 +3864,7 @@ unsafe extern "C" fn optimal_launch_dims(
         while (*gdims.offset(0 as libc::c_int as isize)).wrapping_add(preferred_multiple)
             < *ldims.offset(0 as libc::c_int as isize)
         {
-            let ref mut fresh19 = *ldims.offset(0 as libc::c_int as isize);
+            let fresh19 = &mut (*ldims.offset(0 as libc::c_int as isize));
             *fresh19 = (*fresh19).wrapping_sub(preferred_multiple);
         }
         *gdims
@@ -3879,8 +3879,8 @@ unsafe extern "C" fn optimal_launch_dims(
             .wrapping_add(*ldims.offset(0 as libc::c_int as isize))
             .wrapping_sub(1 as libc::c_int as size_t)
             / *ldims.offset(0 as libc::c_int as isize);
-        let ref mut fresh20 = *gdims.offset(0 as libc::c_int as isize);
-        *fresh20 = *fresh20 * *ldims.offset(0 as libc::c_int as isize);
+        let fresh20 = &mut (*gdims.offset(0 as libc::c_int as isize));
+        *fresh20 *= *ldims.offset(0 as libc::c_int as isize);
     }
     while *gdims.offset(0 as libc::c_int as isize)
         / *ldims.offset(0 as libc::c_int as isize)
@@ -3891,7 +3891,7 @@ unsafe extern "C" fn optimal_launch_dims(
         if *ldims.offset(0 as libc::c_int as isize) > preferred_multiple {
             *ldims.offset(0 as libc::c_int as isize) >>= 1 as libc::c_int;
         } else {
-            if !(*ldims.offset(1 as libc::c_int as isize) > 1 as libc::c_int as size_t) {
+            if *ldims.offset(1 as libc::c_int as isize) <= 1 as libc::c_int as size_t {
                 break;
             }
             *ldims.offset(1 as libc::c_int as isize) >>= 1 as libc::c_int;
@@ -3917,8 +3917,8 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
     let mut ocl: *mut x264_opencl_function_t = (*h).opencl.ocl;
     let mut fenc: *mut x264_frame_t = *frames.offset(b as isize);
     let mut fref: *mut x264_frame_t = *frames.offset(ref_0 as isize);
-    let mut ref_scaled_images: [cl_mem; 4] = [0 as *mut _cl_mem; 4];
-    let mut ref_luma_hpel: cl_mem = 0 as *mut _cl_mem;
+    let mut ref_scaled_images: [cl_mem; 4] = [std::ptr::null_mut::<_cl_mem>(); 4];
+    let mut ref_luma_hpel: cl_mem = std::ptr::null_mut::<_cl_mem>();
     let mut status: cl_int = 0;
     if !w.is_null() && !((*w).weightfn).is_null() {
         let mut gdims: [size_t; 2] = [0; 2];
@@ -4067,12 +4067,12 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
                 (*h).opencl.queue,
                 (*h).opencl.weightp_scaled_images_kernel,
                 2 as libc::c_int as cl_uint,
-                0 as *const size_t,
+                std::ptr::null::<size_t>(),
                 gdims.as_mut_ptr(),
-                0 as *const size_t,
+                std::ptr::null::<size_t>(),
                 0 as libc::c_int as cl_uint,
-                0 as *const cl_event,
-                0 as *mut cl_event,
+                std::ptr::null::<cl_event>(),
+                std::ptr::null_mut::<cl_event>(),
             );
             if status != 0 as libc::c_int {
                 (*h).param.b_opencl = 0 as libc::c_int;
@@ -4236,12 +4236,12 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
             (*h).opencl.queue,
             (*h).opencl.weightp_hpel_kernel,
             2 as libc::c_int as cl_uint,
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             gdims.as_mut_ptr(),
-            0 as *const size_t,
+            std::ptr::null::<size_t>(),
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -4485,7 +4485,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
                 (*h).opencl.hme_kernel,
                 fresh37,
                 cost_local_size as size_t,
-                0 as *const libc::c_void,
+                std::ptr::null::<libc::c_void>(),
             );
             if status != 0 as libc::c_int {
                 (*h).param.b_opencl = 0 as libc::c_int;
@@ -4510,7 +4510,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
                 (*h).opencl.hme_kernel,
                 fresh38,
                 mvc_local_size as size_t,
-                0 as *const libc::c_void,
+                std::ptr::null::<libc::c_void>(),
             );
             if status != 0 as libc::c_int {
                 (*h).param.b_opencl = 0 as libc::c_int;
@@ -4710,12 +4710,12 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
                     (*h).opencl.queue,
                     (*h).opencl.hme_kernel,
                     2 as libc::c_int as cl_uint,
-                    0 as *const size_t,
+                    std::ptr::null::<size_t>(),
                     gdims_0.as_mut_ptr(),
                     ldims.as_mut_ptr(),
                     0 as libc::c_int as cl_uint,
-                    0 as *const cl_event,
-                    0 as *mut cl_event,
+                    std::ptr::null::<cl_event>(),
+                    std::ptr::null_mut::<cl_event>(),
                 );
                 if status != 0 as libc::c_int {
                     (*h).param.b_opencl = 0 as libc::c_int;
@@ -4987,7 +4987,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
         (*h).opencl.subpel_refine_kernel,
         fresh50,
         cost_local_size as size_t,
-        0 as *const libc::c_void,
+        std::ptr::null::<libc::c_void>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5012,7 +5012,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
         (*h).opencl.subpel_refine_kernel,
         fresh51,
         satd_local_size as size_t,
-        0 as *const libc::c_void,
+        std::ptr::null::<libc::c_void>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5037,7 +5037,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
         (*h).opencl.subpel_refine_kernel,
         fresh52,
         mvc_local_size as size_t,
-        0 as *const libc::c_void,
+        std::ptr::null::<libc::c_void>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5293,8 +5293,8 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
             0 as libc::c_int as size_t,
             20 as libc::c_int as size_t,
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -5319,12 +5319,12 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
         (*h).opencl.queue,
         (*h).opencl.subpel_refine_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdims_0.as_mut_ptr(),
         ldims.as_mut_ptr(),
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5366,8 +5366,8 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
             mvlen as size_t,
             locked as *mut libc::c_void,
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -5403,8 +5403,8 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
             mvlen as size_t,
             locked as *mut libc::c_void,
             0 as libc::c_int as cl_uint,
-            0 as *const cl_event,
-            0 as *mut cl_event,
+            std::ptr::null::<cl_event>(),
+            std::ptr::null_mut::<cl_event>(),
         );
         if status != 0 as libc::c_int {
             (*h).param.b_opencl = 0 as libc::c_int;
@@ -5427,7 +5427,7 @@ pub unsafe extern "C" fn x264_8_opencl_motionsearch(
     }
     (*h).opencl.num_copies += 1;
     (*h).opencl.num_copies;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
@@ -5454,7 +5454,7 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).mb.i_mb_height as size_t,
     ];
     let mut ldim_bidir: [size_t; 2] = [0; 2];
-    let mut ldims: *mut size_t = 0 as *mut size_t;
+    let mut ldims: *mut size_t = std::ptr::null_mut::<size_t>();
     let mut cost_local_size: libc::c_int = 4 as libc::c_int;
     let mut satd_local_size: libc::c_int = 4 as libc::c_int;
     if b < p1 {
@@ -5771,7 +5771,7 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).opencl.mode_select_kernel,
         fresh73,
         cost_local_size as size_t,
-        0 as *const libc::c_void,
+        std::ptr::null::<libc::c_void>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5796,7 +5796,7 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).opencl.mode_select_kernel,
         fresh74,
         satd_local_size as size_t,
-        0 as *const libc::c_void,
+        std::ptr::null::<libc::c_void>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -5994,12 +5994,12 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).opencl.queue,
         (*h).opencl.mode_select_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdims.as_mut_ptr(),
         ldims,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -6261,12 +6261,12 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).opencl.queue,
         (*h).opencl.rowsum_inter_kernel,
         2 as libc::c_int as cl_uint,
-        0 as *const size_t,
+        std::ptr::null::<size_t>(),
         gdim.as_mut_ptr(),
         ldim.as_mut_ptr(),
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -6310,8 +6310,8 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         size as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -6354,8 +6354,8 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         size as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -6388,8 +6388,8 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         size as size_t,
         locked as *mut libc::c_void,
         0 as libc::c_int as cl_uint,
-        0 as *const cl_event,
-        0 as *mut cl_event,
+        std::ptr::null::<cl_event>(),
+        std::ptr::null_mut::<cl_event>(),
     );
     if status != 0 as libc::c_int {
         (*h).param.b_opencl = 0 as libc::c_int;
@@ -6460,7 +6460,7 @@ pub unsafe extern "C" fn x264_8_opencl_finalize_cost(
         (*h).opencl.num_copies += 1;
         (*h).opencl.num_copies;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_opencl_slicetype_prep(
@@ -6544,7 +6544,7 @@ pub unsafe extern "C" fn x264_8_opencl_slicetype_prep(
                             p1,
                             1 as libc::c_int,
                             lambda,
-                            0 as *const x264_weight_t,
+                            std::ptr::null::<x264_weight_t>(),
                         );
                     }
                     j += 1;
@@ -6571,7 +6571,7 @@ pub unsafe extern "C" fn x264_8_opencl_precalculate_frame_cost(
     if (**frames.offset(b as isize)).i_cost_est[(b - p0) as usize][(p1 - b) as usize]
         >= 0 as libc::c_int || b == p0 && b == p1
     {
-        return 0 as libc::c_int
+        0 as libc::c_int
     } else {
         let mut do_search: [libc::c_int; 2] = [0; 2];
         let mut dist_scale_factor: libc::c_int = 128 as libc::c_int;
@@ -6623,8 +6623,8 @@ pub unsafe extern "C" fn x264_8_opencl_precalculate_frame_cost(
                 .i_intra_mbs[(b - p0) as usize] = 0 as libc::c_int;
         }
         if p1 != p0 {
-            dist_scale_factor = ((b - p0 << 8 as libc::c_int)
-                + (p1 - p0 >> 1 as libc::c_int)) / (p1 - p0);
+            dist_scale_factor = (((b - p0) << 8 as libc::c_int)
+                + ((p1 - p0) >> 1 as libc::c_int)) / (p1 - p0);
         }
         (**frames.offset(b as isize))
             .i_cost_est[(b - p0) as usize][(p1 - b) as usize] = 0 as libc::c_int;
@@ -6644,10 +6644,10 @@ pub unsafe extern "C" fn x264_8_opencl_precalculate_frame_cost(
                 p1,
                 1 as libc::c_int,
                 lambda,
-                0 as *const x264_weight_t,
+                std::ptr::null::<x264_weight_t>(),
             );
         }
         x264_8_opencl_finalize_cost(h, lambda, frames, p0, p1, b, dist_scale_factor);
-        return 1 as libc::c_int;
-    };
+        1 as libc::c_int
+    }
 }

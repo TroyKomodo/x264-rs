@@ -382,7 +382,7 @@ unsafe extern "C" fn init(
     (*h).hin = *handle;
     *handle = h as hnd_t;
     *filter = source_filter;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn get_frame(
     mut handle: hnd_t,
@@ -398,7 +398,7 @@ unsafe extern "C" fn get_frame(
     }
     (*h).cur_frame = frame;
     *output = (*h).pic;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
@@ -412,7 +412,7 @@ unsafe extern "C" fn release_frame(
     {
         return -(1 as libc::c_int);
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut source_hnd_t = handle as *mut source_hnd_t;
@@ -424,7 +424,8 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut source_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"source\0" as *const u8 as *const libc::c_char,
             help: None,
             init: Some(
@@ -455,7 +456,6 @@ pub static mut source_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

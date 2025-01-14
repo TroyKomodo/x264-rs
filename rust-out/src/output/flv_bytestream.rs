@@ -100,7 +100,7 @@ pub union C2RustUnnamed_0 {
 }
 #[no_mangle]
 pub unsafe extern "C" fn flv_dbl2int(mut value: libc::c_double) -> uint64_t {
-    return C2RustUnnamed_0 { f: value }.i;
+    C2RustUnnamed_0 { f: value }.i
 }
 #[no_mangle]
 pub unsafe extern "C" fn flv_put_byte(mut c: *mut flv_buffer, mut b: uint8_t) {
@@ -165,7 +165,7 @@ pub unsafe extern "C" fn flv_create_writer(
         ::core::mem::size_of::<flv_buffer>() as libc::c_ulong,
     ) as *mut flv_buffer;
     if c.is_null() {
-        return 0 as *mut flv_buffer;
+        return std::ptr::null_mut::<flv_buffer>();
     }
     if strcmp(filename, b"-\0" as *const u8 as *const libc::c_char) == 0 {
         (*c).fp = stdout;
@@ -174,9 +174,9 @@ pub unsafe extern "C" fn flv_create_writer(
     }
     if ((*c).fp).is_null() {
         free(c as *mut libc::c_void);
-        return 0 as *mut flv_buffer;
+        return std::ptr::null_mut::<flv_buffer>();
     }
-    return c;
+    c
 }
 #[no_mangle]
 pub unsafe extern "C" fn flv_append_data(
@@ -186,7 +186,7 @@ pub unsafe extern "C" fn flv_append_data(
 ) -> libc::c_int {
     let mut ns: libc::c_uint = ((*c).d_cur).wrapping_add(size);
     if ns > (*c).d_max {
-        let mut dp: *mut libc::c_void = 0 as *mut libc::c_void;
+        let mut dp: *mut libc::c_void = std::ptr::null_mut::<libc::c_void>();
         let mut dn: libc::c_uint = 16 as libc::c_int as libc::c_uint;
         while ns > dn {
             dn <<= 1 as libc::c_int;
@@ -204,7 +204,7 @@ pub unsafe extern "C" fn flv_append_data(
         size as libc::c_ulong,
     );
     (*c).d_cur = ns;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn flv_rewrite_amf_be24(
@@ -238,5 +238,5 @@ pub unsafe extern "C" fn flv_flush_data(mut c: *mut flv_buffer) -> libc::c_int {
     }
     (*c).d_total = ((*c).d_total).wrapping_add((*c).d_cur as uint64_t);
     (*c).d_cur = 0 as libc::c_int as libc::c_uint;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }

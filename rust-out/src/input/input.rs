@@ -373,18 +373,19 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
         mod_height: 0,
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"i400\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"i420\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -401,11 +402,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 2 as libc::c_int,
             mod_height: 2 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"yv12\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -422,11 +423,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 2 as libc::c_int,
             mod_height: 2 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"nv12\0" as *const u8 as *const libc::c_char,
             planes: 2 as libc::c_int,
             width: [
@@ -438,11 +439,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             height: [1 as libc::c_int as libc::c_float, 0.5f64 as libc::c_float, 0., 0.],
             mod_width: 2 as libc::c_int,
             mod_height: 2 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"nv21\0" as *const u8 as *const libc::c_char,
             planes: 2 as libc::c_int,
             width: [
@@ -454,11 +455,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             height: [1 as libc::c_int as libc::c_float, 0.5f64 as libc::c_float, 0., 0.],
             mod_width: 2 as libc::c_int,
             mod_height: 2 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"i422\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -475,11 +476,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 2 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"yv16\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -496,11 +497,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 2 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"nv16\0" as *const u8 as *const libc::c_char,
             planes: 2 as libc::c_int,
             width: [
@@ -517,30 +518,29 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 2 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"yuyv\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [2 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 2 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"uyvy\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [2 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 2 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     x264_cli_csp_t {
         name: 0 as *const libc::c_char,
@@ -551,7 +551,8 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
         mod_height: 0,
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"i444\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -568,11 +569,11 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"yv24\0" as *const u8 as *const libc::c_char,
             planes: 3 as libc::c_int,
             width: [
@@ -589,60 +590,59 @@ pub static mut x264_cli_csps: [x264_cli_csp_t; 17] = [
             ],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"bgr\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [3 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"bgra\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [4 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
     {
-        let mut init = x264_cli_csp_t {
+        
+        x264_cli_csp_t {
             name: b"rgb\0" as *const u8 as *const libc::c_char,
             planes: 1 as libc::c_int,
             width: [3 as libc::c_int as libc::c_float, 0., 0., 0.],
             height: [1 as libc::c_int as libc::c_float, 0., 0., 0.],
             mod_width: 1 as libc::c_int,
             mod_height: 1 as libc::c_int,
-        };
-        init
+        }
     },
 ];
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_csp_is_invalid(mut csp: libc::c_int) -> libc::c_int {
     let mut csp_mask: libc::c_int = csp & 0xff as libc::c_int;
-    return (csp_mask <= 0 as libc::c_int || csp_mask >= 0x11 as libc::c_int
+    (csp_mask <= 0 as libc::c_int || csp_mask >= 0x11 as libc::c_int
         || csp_mask == 0xb as libc::c_int || csp & 0x4000 as libc::c_int != 0)
-        as libc::c_int;
+        as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_csp_depth_factor(mut csp: libc::c_int) -> libc::c_int {
     if x264_cli_csp_is_invalid(csp) != 0 {
         return 0 as libc::c_int;
     }
-    return if csp & 0x2000 as libc::c_int != 0 {
+    if csp & 0x2000 as libc::c_int != 0 {
         2 as libc::c_int
     } else {
         1 as libc::c_int
-    };
+    }
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_plane_size(
@@ -662,7 +662,7 @@ pub unsafe extern "C" fn x264_cli_pic_plane_size(
         * (x264_cli_csps[csp_mask as usize].width[plane as usize]
             * x264_cli_csps[csp_mask as usize].height[plane as usize])) as int64_t;
     size *= x264_cli_csp_depth_factor(csp) as int64_t;
-    return size;
+    size
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_size(
@@ -681,7 +681,7 @@ pub unsafe extern "C" fn x264_cli_pic_size(
         i += 1;
         i;
     }
-    return size;
+    size
 }
 unsafe extern "C" fn cli_pic_init_internal(
     mut pic: *mut cli_pic_t,
@@ -710,7 +710,7 @@ unsafe extern "C" fn cli_pic_init_internal(
         let mut stride: libc::c_int = (width as libc::c_float
             * x264_cli_csps[csp_mask as usize].width[i as usize]) as libc::c_int;
         stride *= x264_cli_csp_depth_factor(csp);
-        stride = stride + (align - 1 as libc::c_int) & !(align - 1 as libc::c_int);
+        stride = (stride + (align - 1 as libc::c_int)) & !(align - 1 as libc::c_int);
         (*pic).img.stride[i as usize] = stride;
         if alloc != 0 {
             let mut size: int64_t = (height as libc::c_float
@@ -724,7 +724,7 @@ unsafe extern "C" fn cli_pic_init_internal(
         i += 1;
         i;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_alloc(
@@ -733,14 +733,14 @@ pub unsafe extern "C" fn x264_cli_pic_alloc(
     mut width: libc::c_int,
     mut height: libc::c_int,
 ) -> libc::c_int {
-    return cli_pic_init_internal(
+    cli_pic_init_internal(
         pic,
         csp,
         width,
         height,
         1 as libc::c_int,
         1 as libc::c_int,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_alloc_aligned(
@@ -749,14 +749,14 @@ pub unsafe extern "C" fn x264_cli_pic_alloc_aligned(
     mut width: libc::c_int,
     mut height: libc::c_int,
 ) -> libc::c_int {
-    return cli_pic_init_internal(
+    cli_pic_init_internal(
         pic,
         csp,
         width,
         height,
         64 as libc::c_int,
         1 as libc::c_int,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_init_noalloc(
@@ -765,14 +765,14 @@ pub unsafe extern "C" fn x264_cli_pic_init_noalloc(
     mut width: libc::c_int,
     mut height: libc::c_int,
 ) -> libc::c_int {
-    return cli_pic_init_internal(
+    cli_pic_init_internal(
         pic,
         csp,
         width,
         height,
         1 as libc::c_int,
         0 as libc::c_int,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_pic_clean(mut pic: *mut cli_pic_t) {
@@ -793,9 +793,9 @@ pub unsafe extern "C" fn x264_cli_get_csp(
     mut csp: libc::c_int,
 ) -> *const x264_cli_csp_t {
     if x264_cli_csp_is_invalid(csp) != 0 {
-        return 0 as *const x264_cli_csp_t;
+        return std::ptr::null::<x264_cli_csp_t>();
     }
-    return x264_cli_csps.as_ptr().offset((csp & 0xff as libc::c_int) as isize);
+    x264_cli_csps.as_ptr().offset((csp & 0xff as libc::c_int) as isize)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_mmap_init(
@@ -829,7 +829,7 @@ pub unsafe extern "C" fn x264_cli_mmap_init(
         return ((*h).align_mask < 0 as libc::c_int || fd < 0 as libc::c_int)
             as libc::c_int;
     }
-    return -(1 as libc::c_int);
+    -(1 as libc::c_int)
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_mmap(
@@ -837,7 +837,7 @@ pub unsafe extern "C" fn x264_cli_mmap(
     mut offset: int64_t,
     mut size: int64_t,
 ) -> *mut libc::c_void {
-    let mut base: *mut uint8_t = 0 as *mut uint8_t;
+    let mut base: *mut uint8_t = std::ptr::null_mut::<uint8_t>();
     let mut align: libc::c_int = (offset & (*h).align_mask as int64_t) as libc::c_int;
     if offset < 0 as libc::c_int as int64_t || size < 0 as libc::c_int as int64_t
         || size as uint64_t
@@ -845,13 +845,13 @@ pub unsafe extern "C" fn x264_cli_mmap(
                 .wrapping_sub(64 as libc::c_int as libc::c_ulong)
                 .wrapping_sub(align as libc::c_ulong)
     {
-        return 0 as *mut libc::c_void;
+        return std::ptr::null_mut::<libc::c_void>();
     }
     offset -= align as int64_t;
     size += align as int64_t;
     let mut padded_size: size_t = (size + 64 as libc::c_int as int64_t) as size_t;
     base = mmap(
-        0 as *mut libc::c_void,
+        std::ptr::null_mut::<libc::c_void>(),
         padded_size,
         0x1 as libc::c_int,
         0x2 as libc::c_int,
@@ -869,12 +869,12 @@ pub unsafe extern "C" fn x264_cli_mmap(
                 0x1 as libc::c_int,
                 0x2 as libc::c_int | 0x10 as libc::c_int,
                 (*h).fd,
-                offset + size - 1 as libc::c_int as int64_t & !(*h).align_mask as int64_t,
+                (offset + size - 1 as libc::c_int as int64_t) & !(*h).align_mask as int64_t,
             );
         }
         return base.offset(align as isize) as *mut libc::c_void;
     }
-    return 0 as *mut libc::c_void;
+    std::ptr::null_mut::<libc::c_void>()
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_munmap(
@@ -892,11 +892,11 @@ pub unsafe extern "C" fn x264_cli_munmap(
     {
         return -(1 as libc::c_int);
     }
-    return munmap(
+    munmap(
         base,
         (size + 64 as libc::c_int as int64_t + addr as intptr_t - base as intptr_t)
             as size_t,
-    );
+    )
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_mmap_close(mut h: *mut cli_mmap_t) {}

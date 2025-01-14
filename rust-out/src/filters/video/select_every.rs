@@ -375,9 +375,9 @@ unsafe extern "C" fn init(
     (*h).pattern_len = 0 as libc::c_int;
     (*h).step_size = 0 as libc::c_int;
     let mut offsets: [libc::c_int; 100] = [0; 100];
-    let mut tok: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut tok: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     let mut p: *mut libc::c_char = opt_string;
-    let mut saveptr: *mut libc::c_char = 0 as *mut libc::c_char;
+    let mut saveptr: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
     loop {
         tok = strtok_r(p, b",\0" as *const u8 as *const libc::c_char, &mut saveptr);
         if tok.is_null() {
@@ -416,10 +416,10 @@ unsafe extern "C" fn init(
                 return -(1 as libc::c_int);
             }
             let fresh0 = (*h).pattern_len;
-            (*h).pattern_len = (*h).pattern_len + 1;
+            (*h).pattern_len += 1;
             offsets[fresh0 as usize] = val;
         }
-        p = 0 as *mut libc::c_char;
+        p = std::ptr::null_mut::<libc::c_char>();
     }
     if (*h).step_size == 0 {
         x264_cli_log(
@@ -494,12 +494,12 @@ unsafe extern "C" fn init(
         (*info)
             .num_frames = ((*info).num_frames as uint64_t * (*h).pattern_len as uint64_t
             / (*h).step_size as uint64_t) as libc::c_int;
-        (*info).fps_den = (*info).fps_den * (*h).step_size as uint32_t;
-        (*info).fps_num = (*info).fps_num * (*h).pattern_len as uint32_t;
+        (*info).fps_den *= (*h).step_size as uint32_t;
+        (*info).fps_num *= (*h).pattern_len as uint32_t;
         x264_reduce_fraction(&mut (*info).fps_num, &mut (*info).fps_den);
         if (*info).vfr != 0 {
-            (*info).timebase_den = (*info).timebase_den * (*h).pattern_len as uint32_t;
-            (*info).timebase_num = (*info).timebase_num * (*h).step_size as uint32_t;
+            (*info).timebase_den *= (*h).pattern_len as uint32_t;
+            (*info).timebase_num *= (*h).step_size as uint32_t;
             x264_reduce_fraction(&mut (*info).timebase_num, &mut (*info).timebase_den);
         }
     }
@@ -509,7 +509,7 @@ unsafe extern "C" fn init(
     (*h).prev_hnd = *handle;
     *filter = select_every_filter;
     *handle = h as hnd_t;
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn get_frame(
     mut handle: hnd_t,
@@ -529,7 +529,7 @@ unsafe extern "C" fn get_frame(
         (*output).pts = (*h).pts;
         (*h).pts += (*output).duration;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
@@ -540,8 +540,8 @@ unsafe extern "C" fn release_frame(
     let mut pat_frame: libc::c_int = *((*h).pattern)
         .offset((frame % (*h).pattern_len) as isize)
         + frame / (*h).pattern_len * (*h).step_size;
-    return ((*h).prev_filter.release_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, pic, pat_frame);
+    ((*h).prev_filter.release_frame)
+        .expect("non-null function pointer")((*h).prev_hnd, pic, pat_frame)
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut selvry_hnd_t = handle as *mut selvry_hnd_t;
@@ -552,7 +552,8 @@ unsafe extern "C" fn free_filter(mut handle: hnd_t) {
 #[no_mangle]
 pub static mut select_every_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"select_every\0" as *const u8 as *const libc::c_char,
             help: Some(help as unsafe extern "C" fn(libc::c_int) -> ()),
             init: Some(
@@ -583,7 +584,6 @@ pub static mut select_every_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

@@ -2326,24 +2326,24 @@ unsafe extern "C" fn x264_clip3(
     mut i_min: libc::c_int,
     mut i_max: libc::c_int,
 ) -> libc::c_int {
-    return if v < i_min { i_min } else if v > i_max { i_max } else { v };
+    if v < i_min { i_min } else if v > i_max { i_max } else { v }
 }
 unsafe extern "C" fn depth_filter_csp_is_supported(mut csp: libc::c_int) -> libc::c_int {
     let mut csp_mask: libc::c_int = csp & 0xff as libc::c_int;
-    return (csp_mask == 0x1 as libc::c_int || csp_mask == 0x2 as libc::c_int
+    (csp_mask == 0x1 as libc::c_int || csp_mask == 0x2 as libc::c_int
         || csp_mask == 0x6 as libc::c_int || csp_mask == 0xc as libc::c_int
         || csp_mask == 0x3 as libc::c_int || csp_mask == 0x7 as libc::c_int
         || csp_mask == 0xd as libc::c_int || csp_mask == 0x4 as libc::c_int
         || csp_mask == 0x5 as libc::c_int || csp_mask == 0x8 as libc::c_int
         || csp_mask == 0xe as libc::c_int || csp_mask == 0x10 as libc::c_int
-        || csp_mask == 0xf as libc::c_int) as libc::c_int;
+        || csp_mask == 0xf as libc::c_int) as libc::c_int
 }
 unsafe extern "C" fn csp_num_interleaved(
     mut csp: libc::c_int,
     mut plane: libc::c_int,
 ) -> libc::c_int {
     let mut csp_mask: libc::c_int = csp & 0xff as libc::c_int;
-    return if (csp_mask == 0x4 as libc::c_int || csp_mask == 0x5 as libc::c_int
+    if (csp_mask == 0x4 as libc::c_int || csp_mask == 0x5 as libc::c_int
         || csp_mask == 0x8 as libc::c_int) && plane == 1 as libc::c_int
     {
         2 as libc::c_int
@@ -2353,7 +2353,7 @@ unsafe extern "C" fn csp_num_interleaved(
         4 as libc::c_int
     } else {
         1 as libc::c_int
-    };
+    }
 }
 unsafe extern "C" fn dither_plane_1(
     mut dst: *mut pixel,
@@ -2366,8 +2366,7 @@ unsafe extern "C" fn dither_plane_1(
 ) {
     let lshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int;
     let rshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int + 2 as libc::c_int;
-    let half: libc::c_int = (1 as libc::c_int)
-        << 16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int;
+    let half: libc::c_int = (1 as libc::c_int) << (16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int);
     let pixel_max: libc::c_int = ((1 as libc::c_int) << 8 as libc::c_int)
         - 1 as libc::c_int;
     memset(
@@ -2387,8 +2386,8 @@ unsafe extern "C" fn dither_plane_1(
                 .offset(
                     (x * 1 as libc::c_int) as isize,
                 ) = x264_clip3(
-                ((*src.offset((x * 1 as libc::c_int) as isize) as libc::c_int)
-                    << 2 as libc::c_int) + err + half >> rshift,
+                (((*src.offset((x * 1 as libc::c_int) as isize) as libc::c_int)
+                    << 2 as libc::c_int) + err + half) >> rshift,
                 0 as libc::c_int,
                 pixel_max,
             ) as pixel;
@@ -2416,8 +2415,7 @@ unsafe extern "C" fn dither_plane_2(
 ) {
     let lshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int;
     let rshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int + 2 as libc::c_int;
-    let half: libc::c_int = (1 as libc::c_int)
-        << 16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int;
+    let half: libc::c_int = (1 as libc::c_int) << (16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int);
     let pixel_max: libc::c_int = ((1 as libc::c_int) << 8 as libc::c_int)
         - 1 as libc::c_int;
     memset(
@@ -2437,8 +2435,8 @@ unsafe extern "C" fn dither_plane_2(
                 .offset(
                     (x * 2 as libc::c_int) as isize,
                 ) = x264_clip3(
-                ((*src.offset((x * 2 as libc::c_int) as isize) as libc::c_int)
-                    << 2 as libc::c_int) + err + half >> rshift,
+                (((*src.offset((x * 2 as libc::c_int) as isize) as libc::c_int)
+                    << 2 as libc::c_int) + err + half) >> rshift,
                 0 as libc::c_int,
                 pixel_max,
             ) as pixel;
@@ -2466,8 +2464,7 @@ unsafe extern "C" fn dither_plane_3(
 ) {
     let lshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int;
     let rshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int + 2 as libc::c_int;
-    let half: libc::c_int = (1 as libc::c_int)
-        << 16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int;
+    let half: libc::c_int = (1 as libc::c_int) << (16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int);
     let pixel_max: libc::c_int = ((1 as libc::c_int) << 8 as libc::c_int)
         - 1 as libc::c_int;
     memset(
@@ -2487,8 +2484,8 @@ unsafe extern "C" fn dither_plane_3(
                 .offset(
                     (x * 3 as libc::c_int) as isize,
                 ) = x264_clip3(
-                ((*src.offset((x * 3 as libc::c_int) as isize) as libc::c_int)
-                    << 2 as libc::c_int) + err + half >> rshift,
+                (((*src.offset((x * 3 as libc::c_int) as isize) as libc::c_int)
+                    << 2 as libc::c_int) + err + half) >> rshift,
                 0 as libc::c_int,
                 pixel_max,
             ) as pixel;
@@ -2516,8 +2513,7 @@ unsafe extern "C" fn dither_plane_4(
 ) {
     let lshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int;
     let rshift: libc::c_int = 16 as libc::c_int - 8 as libc::c_int + 2 as libc::c_int;
-    let half: libc::c_int = (1 as libc::c_int)
-        << 16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int;
+    let half: libc::c_int = (1 as libc::c_int) << (16 as libc::c_int - 8 as libc::c_int + 1 as libc::c_int);
     let pixel_max: libc::c_int = ((1 as libc::c_int) << 8 as libc::c_int)
         - 1 as libc::c_int;
     memset(
@@ -2537,8 +2533,8 @@ unsafe extern "C" fn dither_plane_4(
                 .offset(
                     (x * 4 as libc::c_int) as isize,
                 ) = x264_clip3(
-                ((*src.offset((x * 4 as libc::c_int) as isize) as libc::c_int)
-                    << 2 as libc::c_int) + err + half >> rshift,
+                (((*src.offset((x * 4 as libc::c_int) as isize) as libc::c_int)
+                    << 2 as libc::c_int) + err + half) >> rshift,
                 0 as libc::c_int,
                 pixel_max,
             ) as pixel;
@@ -2758,7 +2754,7 @@ unsafe extern "C" fn get_frame(
         scale_image(&mut (*h).buffer.img, &mut (*output).img);
         (*output).img = (*h).buffer.img;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 unsafe extern "C" fn release_frame(
     mut handle: hnd_t,
@@ -2766,8 +2762,8 @@ unsafe extern "C" fn release_frame(
     mut frame: libc::c_int,
 ) -> libc::c_int {
     let mut h: *mut depth_hnd_t = handle as *mut depth_hnd_t;
-    return ((*h).prev_filter.release_frame)
-        .expect("non-null function pointer")((*h).prev_hnd, pic, frame);
+    ((*h).prev_filter.release_frame)
+        .expect("non-null function pointer")((*h).prev_hnd, pic, frame)
 }
 unsafe extern "C" fn free_filter(mut handle: hnd_t) {
     let mut h: *mut depth_hnd_t = handle as *mut depth_hnd_t;
@@ -2872,12 +2868,13 @@ unsafe extern "C" fn init(
         *filter = depth_8_filter;
         (*info).csp = (*h).dst_csp;
     }
-    return 0 as libc::c_int;
+    0 as libc::c_int
 }
 #[no_mangle]
 pub static mut depth_8_filter: cli_vid_filter_t = unsafe {
     {
-        let mut init = cli_vid_filter_t {
+        
+        cli_vid_filter_t {
             name: b"depth_8\0" as *const u8 as *const libc::c_char,
             help: None,
             init: Some(
@@ -2908,7 +2905,6 @@ pub static mut depth_8_filter: cli_vid_filter_t = unsafe {
             ),
             free: Some(free_filter as unsafe extern "C" fn(hnd_t) -> ()),
             next: 0 as *const cli_vid_filter_t as *mut cli_vid_filter_t,
-        };
-        init
+        }
     }
 };

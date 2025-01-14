@@ -2365,13 +2365,13 @@ unsafe extern "C" fn bs_init(
 }
 #[inline]
 unsafe extern "C" fn bs_pos(mut s: *mut bs_t) -> libc::c_int {
-    return ((8 as libc::c_int as libc::c_long
+    ((8 as libc::c_int as libc::c_long
         * ((*s).p).offset_from((*s).p_start) as libc::c_long) as libc::c_ulong)
         .wrapping_add(
             (::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong)
                 .wrapping_mul(8 as libc::c_int as libc::c_ulong),
         )
-        .wrapping_sub((*s).i_left as libc::c_ulong) as libc::c_int;
+        .wrapping_sub((*s).i_left as libc::c_ulong) as libc::c_int
 }
 #[inline]
 unsafe extern "C" fn bs_flush(mut s: *mut bs_t) {
@@ -2399,7 +2399,7 @@ unsafe extern "C" fn bs_write(
     if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
         == 8 as libc::c_int as libc::c_ulong
     {
-        (*s).cur_bits = (*s).cur_bits << i_count | i_bits as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << i_count) | i_bits as uintptr_t;
         (*s).i_left -= i_count;
         if (*s).i_left <= 32 as libc::c_int {
             (*((*s).p as *mut x264_union32_t))
@@ -2408,11 +2408,11 @@ unsafe extern "C" fn bs_write(
             (*s).p = ((*s).p).offset(4 as libc::c_int as isize);
         }
     } else if i_count < (*s).i_left {
-        (*s).cur_bits = (*s).cur_bits << i_count | i_bits as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << i_count) | i_bits as uintptr_t;
         (*s).i_left -= i_count;
     } else {
         i_count -= (*s).i_left;
-        (*s).cur_bits = (*s).cur_bits << (*s).i_left | (i_bits >> i_count) as uintptr_t;
+        (*s).cur_bits = ((*s).cur_bits << (*s).i_left) | (i_bits >> i_count) as uintptr_t;
         (*((*s).p as *mut x264_union32_t)).i = endian_fix((*s).cur_bits) as uint32_t;
         (*s).p = ((*s).p).offset(4 as libc::c_int as isize);
         (*s).cur_bits = i_bits as uintptr_t;
@@ -2770,25 +2770,25 @@ static mut x264_mb_pred_mode4x4_fix: [int8_t; 13] = [
 ];
 #[inline(always)]
 unsafe extern "C" fn endian_fix32(mut x: uint32_t) -> uint32_t {
-    return (x << 24 as libc::c_int)
-        .wrapping_add(x << 8 as libc::c_int & 0xff0000 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 8 as libc::c_int & 0xff00 as libc::c_int as uint32_t)
-        .wrapping_add(x >> 24 as libc::c_int);
+    (x << 24 as libc::c_int)
+        .wrapping_add((x << 8 as libc::c_int) & 0xff0000 as libc::c_int as uint32_t)
+        .wrapping_add((x >> 8 as libc::c_int) & 0xff00 as libc::c_int as uint32_t)
+        .wrapping_add(x >> 24 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix64(mut x: uint64_t) -> uint64_t {
-    return (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
-        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int);
+    (endian_fix32((x >> 32 as libc::c_int) as uint32_t) as uint64_t)
+        .wrapping_add((endian_fix32(x as uint32_t) as uint64_t) << 32 as libc::c_int)
 }
 #[inline(always)]
 unsafe extern "C" fn endian_fix(mut x: uintptr_t) -> uintptr_t {
-    return if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
+    if ::core::mem::size_of::<*mut libc::c_void>() as libc::c_ulong
         == 8 as libc::c_int as libc::c_ulong
     {
         endian_fix64(x)
     } else {
         endian_fix32(x as uint32_t) as uint64_t
-    };
+    }
 }
 #[inline(always)]
 unsafe extern "C" fn x264_ctz_4bit(mut x: uint32_t) -> libc::c_int {
@@ -2810,7 +2810,7 @@ unsafe extern "C" fn x264_ctz_4bit(mut x: uint32_t) -> libc::c_int {
         1 as libc::c_int as uint8_t,
         0 as libc::c_int as uint8_t,
     ];
-    return lut[x as usize] as libc::c_int;
+    lut[x as usize] as libc::c_int
 }
 static mut x264_scan8: [uint8_t; 51] = [
     (4 as libc::c_int + 1 as libc::c_int * 8 as libc::c_int) as uint8_t,
@@ -3009,7 +3009,7 @@ unsafe extern "C" fn x264_mb_predict_intra4x4_mode(
     if m < 0 as libc::c_int {
         return I_PRED_4x4_DC as libc::c_int;
     }
-    return m;
+    m
 }
 #[inline(always)]
 unsafe extern "C" fn x264_mb_predict_non_zero_code(
@@ -3028,9 +3028,9 @@ unsafe extern "C" fn x264_mb_predict_non_zero_code(
         as usize] as libc::c_int;
     let mut i_ret: libc::c_int = za + zb;
     if i_ret < 0x80 as libc::c_int {
-        i_ret = i_ret + 1 as libc::c_int >> 1 as libc::c_int;
+        i_ret = (i_ret + 1 as libc::c_int) >> 1 as libc::c_int;
     }
-    return i_ret & 0x7f as libc::c_int;
+    i_ret & 0x7f as libc::c_int
 }
 static mut x264_transform_allowed: [uint8_t; 19] = [
     0 as libc::c_int as uint8_t,
@@ -3061,9 +3061,9 @@ unsafe extern "C" fn x264_mb_transform_8x8_allowed(mut h: *mut x264_t) -> libc::
     if (*h).mb.i_type != P_8x8 as libc::c_int {
         return x264_transform_allowed[(*h).mb.i_type as usize] as libc::c_int;
     }
-    return ((*(((*h).mb.i_sub_partition).as_mut_ptr() as *mut x264_union32_t)).i
+    ((*(((*h).mb.i_sub_partition).as_mut_ptr() as *mut x264_union32_t)).i
         == (D_L0_8x8 as libc::c_int * 0x1010101 as libc::c_int) as uint32_t)
-        as libc::c_int;
+        as libc::c_int
 }
 static mut cbp_to_golomb: [[[uint8_t; 48]; 2]; 2] = [
     [
@@ -3353,8 +3353,7 @@ unsafe extern "C" fn cavlc_block_residual_escape(
             s,
             (i_level_code >> i_suffix_length) + 1 as libc::c_int + i_suffix_length,
             (((1 as libc::c_int) << i_suffix_length)
-                + (i_level_code
-                    & ((1 as libc::c_int) << i_suffix_length) - 1 as libc::c_int))
+                + (i_level_code & (((1 as libc::c_int) << i_suffix_length) - 1 as libc::c_int)))
                 as uint32_t,
         );
     } else {
@@ -3365,10 +3364,10 @@ unsafe extern "C" fn cavlc_block_residual_escape(
         if i_level_code >= (1 as libc::c_int) << 12 as libc::c_int {
             if (*((*h).sps).as_mut_ptr()).i_profile_idc >= PROFILE_HIGH as libc::c_int {
                 while i_level_code
-                    >= (1 as libc::c_int) << i_level_prefix - 3 as libc::c_int
+                    >= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int)
                 {
                     i_level_code
-                        -= (1 as libc::c_int) << i_level_prefix - 3 as libc::c_int;
+                        -= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int);
                     i_level_prefix += 1;
                     i_level_prefix;
                 }
@@ -3380,9 +3379,8 @@ unsafe extern "C" fn cavlc_block_residual_escape(
         bs_write(
             s,
             i_level_prefix - 3 as libc::c_int,
-            (i_level_code
-                & ((1 as libc::c_int) << i_level_prefix - 3 as libc::c_int)
-                    - 1 as libc::c_int) as uint32_t,
+            (i_level_code & (((1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int))
+                    - 1 as libc::c_int)) as uint32_t,
         );
     }
     if i_suffix_length == 0 as libc::c_int {
@@ -3393,7 +3391,7 @@ unsafe extern "C" fn cavlc_block_residual_escape(
         i_suffix_length += 1;
         i_suffix_length;
     }
-    return i_suffix_length;
+    i_suffix_length
 }
 unsafe extern "C" fn cavlc_block_residual_internal(
     mut h: *mut x264_t,
@@ -3440,29 +3438,24 @@ unsafe extern "C" fn cavlc_block_residual_internal(
     let mut i_sign: libc::c_uint = 0;
     i_total = ((*h).quantf.coeff_level_run[ctx_block_cat as usize])
         .expect("non-null function pointer")(l, &mut runlevel);
-    &mut *x264_8_run_before.as_mut_ptr().offset(runlevel.mask as isize) as *mut uint32_t;
+    x264_8_run_before.as_mut_ptr().offset(runlevel.mask as isize);
     i_total_zero = runlevel.last + 1 as libc::c_int - i_total;
     runlevel.level[(i_total + 0 as libc::c_int) as usize] = 2 as libc::c_int as dctcoef;
     runlevel.level[(i_total + 1 as libc::c_int) as usize] = 2 as libc::c_int as dctcoef;
-    i_trailing = (runlevel.level[0 as libc::c_int as usize] as libc::c_int
-        + 1 as libc::c_int
-        | 1 as libc::c_int - runlevel.level[0 as libc::c_int as usize] as libc::c_int)
-        >> 31 as libc::c_int & 1 as libc::c_int
-        | (runlevel.level[1 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int
-            | 1 as libc::c_int
-                - runlevel.level[1 as libc::c_int as usize] as libc::c_int)
-            >> 31 as libc::c_int & 2 as libc::c_int
-        | (runlevel.level[2 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int
-            | 1 as libc::c_int
-                - runlevel.level[2 as libc::c_int as usize] as libc::c_int)
-            >> 31 as libc::c_int & 4 as libc::c_int;
+    i_trailing = (((runlevel.level[0 as libc::c_int as usize] as libc::c_int
+        + 1 as libc::c_int) | (1 as libc::c_int - runlevel.level[0 as libc::c_int as usize] as libc::c_int))
+        >> 31 as libc::c_int) & 1 as libc::c_int
+        | (((runlevel.level[1 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int) | (1 as libc::c_int
+                - runlevel.level[1 as libc::c_int as usize] as libc::c_int))
+            >> 31 as libc::c_int) & 2 as libc::c_int
+        | (((runlevel.level[2 as libc::c_int as usize] as libc::c_int + 1 as libc::c_int) | (1 as libc::c_int
+                - runlevel.level[2 as libc::c_int as usize] as libc::c_int))
+            >> 31 as libc::c_int) & 4 as libc::c_int;
     i_trailing = ctz_index[i_trailing as usize] as libc::c_int;
-    i_sign = (runlevel.level[2 as libc::c_int as usize] as libc::c_int
-        >> 31 as libc::c_int & 1 as libc::c_int
-        | runlevel.level[1 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int
-            & 2 as libc::c_int
-        | runlevel.level[0 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int
-            & 4 as libc::c_int) as libc::c_uint;
+    i_sign = ((runlevel.level[2 as libc::c_int as usize] as libc::c_int
+        >> 31 as libc::c_int) & 1 as libc::c_int
+        | (runlevel.level[1 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int) & 2 as libc::c_int
+        | (runlevel.level[0 as libc::c_int as usize] as libc::c_int >> 31 as libc::c_int) & 4 as libc::c_int) as libc::c_uint;
     i_sign >>= 3 as libc::c_int - i_trailing;
     bs_write(
         s,
@@ -3481,7 +3474,7 @@ unsafe extern "C" fn cavlc_block_residual_internal(
         let mut val_original: libc::c_int = runlevel.level[i_trailing as usize]
             as libc::c_int + 128 as libc::c_int / 2 as libc::c_int;
         val
-            -= (val >> 31 as libc::c_int | 1 as libc::c_int)
+            -= ((val >> 31 as libc::c_int) | 1 as libc::c_int)
                 & -((i_trailing < 3 as libc::c_int) as libc::c_int);
         val += 128 as libc::c_int / 2 as libc::c_int;
         if (val_original as libc::c_uint) < 128 as libc::c_int as libc::c_uint {
@@ -3565,7 +3558,7 @@ unsafe extern "C" fn cavlc_block_residual_internal(
         zero_run_code & 0x1f as libc::c_int,
         (zero_run_code >> 5 as libc::c_int) as uint32_t,
     );
-    return i_total;
+    i_total
 }
 static mut ct_index: [uint8_t; 17] = [
     0 as libc::c_int as uint8_t,
@@ -4417,7 +4410,7 @@ pub unsafe extern "C" fn x264_8_macroblock_write_cavlc(mut h: *mut x264_t) {
                 || i_mb_type == I_8x8 as libc::c_int
                 || i_mb_type == I_16x16 as libc::c_int
                 || i_mb_type == I_PCM as libc::c_int) as libc::c_int
-                as usize][((*h).mb.i_cbp_chroma << 4 as libc::c_int | (*h).mb.i_cbp_luma)
+                as usize][(((*h).mb.i_cbp_chroma << 4 as libc::c_int) | (*h).mb.i_cbp_luma)
                 as usize] as libc::c_int,
         );
     }

@@ -8,6 +8,7 @@
     unused_mut
 )]
 #![feature(label_break_value)]
+use crate::types::*;
 extern "C" {
     fn strtod(_: *const libc::c_char, _: *mut *mut libc::c_char) -> libc::c_double;
     fn strtol(_: *const libc::c_char, _: *mut *mut libc::c_char, _: libc::c_int) -> libc::c_long;
@@ -31,7 +32,6 @@ extern "C" {
     );
     fn calloc(_: libc::c_ulong, _: libc::c_ulong) -> *mut libc::c_void;
 }
-pub type size_t = libc::c_ulong;
 #[no_mangle]
 pub unsafe extern "C" fn x264_split_options(
     mut opt_str: *const libc::c_char,

@@ -8,6 +8,7 @@
     unused_mut
 )]
 #![feature(label_break_value)]
+use crate::types::*;
 extern "C" {
     fn __assert_fail(
         __assertion: *const libc::c_char,
@@ -15,35 +16,6 @@ extern "C" {
         __line: libc::c_uint,
         __function: *const libc::c_char,
     ) -> !;
-}
-pub type __uint8_t = libc::c_uchar;
-pub type __uint16_t = libc::c_ushort;
-pub type __uint32_t = libc::c_uint;
-pub type __uint64_t = libc::c_ulong;
-pub type uint8_t = __uint8_t;
-pub type uint16_t = __uint16_t;
-pub type uint32_t = __uint32_t;
-pub type uint64_t = __uint64_t;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union x264_union16_t {
-    pub i: uint16_t,
-    pub b: [uint8_t; 2],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union x264_union32_t {
-    pub i: uint32_t,
-    pub w: [uint16_t; 2],
-    pub b: [uint8_t; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union x264_union64_t {
-    pub i: uint64_t,
-    pub d: [uint32_t; 2],
-    pub w: [uint16_t; 4],
-    pub b: [uint8_t; 8],
 }
 #[inline(always)]
 unsafe extern "C" fn x264_macroblock_cache_rect(
@@ -225,7 +197,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
         };
     };
 }
-unsafe extern "C" fn macroblock_cache_mv_2_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_2_1(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 4 as libc::c_int,
@@ -234,7 +206,7 @@ unsafe extern "C" fn macroblock_cache_mv_2_1(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_1_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_1_1(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 4 as libc::c_int,
@@ -243,7 +215,7 @@ unsafe extern "C" fn macroblock_cache_mv_1_1(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_2_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_2_4(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 4 as libc::c_int,
@@ -252,7 +224,7 @@ unsafe extern "C" fn macroblock_cache_mv_2_4(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_4_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_4_4(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 4 as libc::c_int,
@@ -261,7 +233,7 @@ unsafe extern "C" fn macroblock_cache_mv_4_4(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_2_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_2_2(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 4 as libc::c_int,
@@ -270,7 +242,7 @@ unsafe extern "C" fn macroblock_cache_mv_2_2(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_1_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_1_2(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 4 as libc::c_int,
@@ -279,7 +251,7 @@ unsafe extern "C" fn macroblock_cache_mv_1_2(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mv_4_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mv_4_2(mut target: *mut libc::c_void, mut val: uint32_t) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 4 as libc::c_int,
@@ -288,41 +260,10 @@ unsafe extern "C" fn macroblock_cache_mv_4_2(mut target: *mut libc::c_void, mut 
         val,
     );
 }
-#[no_mangle]
-pub static mut x264_8_cache_mv_func_table: [Option<
-    unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> (),
->; 10] = unsafe {
-    [
-        Some(macroblock_cache_mv_1_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mv_2_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mv_1_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mv_2_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mv_4_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mv_2_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mv_4_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-    ]
-};
-#[no_mangle]
-pub static mut x264_8_cache_mvd_func_table: [Option<
-    unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> (),
->; 10] = unsafe {
-    [
-        Some(macroblock_cache_mvd_1_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mvd_2_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mvd_1_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_mvd_2_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mvd_4_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mvd_2_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_mvd_4_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-    ]
-};
-unsafe extern "C" fn macroblock_cache_mvd_4_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_4_4(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 2 as libc::c_int,
@@ -331,7 +272,10 @@ unsafe extern "C" fn macroblock_cache_mvd_4_4(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_2_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_2_4(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 2 as libc::c_int,
@@ -340,7 +284,10 @@ unsafe extern "C" fn macroblock_cache_mvd_2_4(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_4_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_4_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 2 as libc::c_int,
@@ -349,7 +296,10 @@ unsafe extern "C" fn macroblock_cache_mvd_4_2(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_2_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_2_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 2 as libc::c_int,
@@ -358,7 +308,10 @@ unsafe extern "C" fn macroblock_cache_mvd_2_2(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_1_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_1_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 2 as libc::c_int,
@@ -367,7 +320,10 @@ unsafe extern "C" fn macroblock_cache_mvd_1_2(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_2_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_2_1(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 2 as libc::c_int,
@@ -376,7 +332,10 @@ unsafe extern "C" fn macroblock_cache_mvd_2_1(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_mvd_1_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_mvd_1_1(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 2 as libc::c_int,
@@ -385,24 +344,10 @@ unsafe extern "C" fn macroblock_cache_mvd_1_1(mut target: *mut libc::c_void, mut
         val,
     );
 }
-#[no_mangle]
-pub static mut x264_8_cache_ref_func_table: [Option<
-    unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> (),
->; 10] = unsafe {
-    [
-        Some(macroblock_cache_ref_1_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_ref_2_1 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_ref_1_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        Some(macroblock_cache_ref_2_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_ref_4_2 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_ref_2_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-        None,
-        Some(macroblock_cache_ref_4_4 as unsafe extern "C" fn(*mut libc::c_void, uint32_t) -> ()),
-    ]
-};
-unsafe extern "C" fn macroblock_cache_ref_4_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_4_4(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 1 as libc::c_int,
@@ -411,7 +356,10 @@ unsafe extern "C" fn macroblock_cache_ref_4_4(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_2_4(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_2_4(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 1 as libc::c_int,
@@ -420,7 +368,10 @@ unsafe extern "C" fn macroblock_cache_ref_2_4(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_2_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_2_1(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 1 as libc::c_int,
@@ -429,7 +380,10 @@ unsafe extern "C" fn macroblock_cache_ref_2_1(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_1_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_1_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 1 as libc::c_int,
@@ -438,7 +392,10 @@ unsafe extern "C" fn macroblock_cache_ref_1_2(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_2_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_2_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         2 as libc::c_int * 1 as libc::c_int,
@@ -447,7 +404,10 @@ unsafe extern "C" fn macroblock_cache_ref_2_2(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_1_1(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_1_1(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         1 as libc::c_int * 1 as libc::c_int,
@@ -456,7 +416,10 @@ unsafe extern "C" fn macroblock_cache_ref_1_1(mut target: *mut libc::c_void, mut
         val,
     );
 }
-unsafe extern "C" fn macroblock_cache_ref_4_2(mut target: *mut libc::c_void, mut val: uint32_t) {
+pub unsafe extern "C" fn macroblock_cache_ref_4_2(
+    mut target: *mut libc::c_void,
+    mut val: uint32_t,
+) {
     x264_macroblock_cache_rect(
         target,
         4 as libc::c_int * 1 as libc::c_int,

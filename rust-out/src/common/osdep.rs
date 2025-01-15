@@ -7,21 +7,10 @@
     unused_assignments,
     unused_mut
 )]
+use crate::types::*;
 extern "C" {
     fn clock_gettime(__clock_id: clockid_t, __tp: *mut timespec) -> libc::c_int;
 }
-pub type __int64_t = libc::c_long;
-pub type __time_t = libc::c_long;
-pub type __clockid_t = libc::c_int;
-pub type __syscall_slong_t = libc::c_long;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct timespec {
-    pub tv_sec: __time_t,
-    pub tv_nsec: __syscall_slong_t,
-}
-pub type int64_t = __int64_t;
-pub type clockid_t = __clockid_t;
 #[no_mangle]
 pub unsafe extern "C" fn x264_mdate() -> int64_t {
     let mut ts: timespec = timespec {

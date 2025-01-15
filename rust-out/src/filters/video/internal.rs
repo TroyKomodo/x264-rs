@@ -7,6 +7,7 @@
     unused_assignments,
     unused_mut
 )]
+use crate::types::*;
 extern "C" {
     fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn x264_cli_log(
@@ -15,41 +16,8 @@ extern "C" {
         fmt: *const libc::c_char,
         _: ...
     );
-    static x264_cli_csps: [x264_cli_csp_t; 0];
     fn x264_cli_csp_is_invalid(csp: libc::c_int) -> libc::c_int;
     fn x264_cli_csp_depth_factor(csp: libc::c_int) -> libc::c_int;
-}
-pub type __uint8_t = libc::c_uchar;
-pub type __int64_t = libc::c_long;
-pub type int64_t = __int64_t;
-pub type uint8_t = __uint8_t;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_image_t {
-    pub csp: libc::c_int,
-    pub width: libc::c_int,
-    pub height: libc::c_int,
-    pub planes: libc::c_int,
-    pub plane: [*mut uint8_t; 4],
-    pub stride: [libc::c_int; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_pic_t {
-    pub img: cli_image_t,
-    pub pts: int64_t,
-    pub duration: int64_t,
-    pub opaque: *mut libc::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct x264_cli_csp_t {
-    pub name: *const libc::c_char,
-    pub planes: libc::c_int,
-    pub width: [libc::c_float; 4],
-    pub height: [libc::c_float; 4],
-    pub mod_width: libc::c_int,
-    pub mod_height: libc::c_int,
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_cli_plane_copy(

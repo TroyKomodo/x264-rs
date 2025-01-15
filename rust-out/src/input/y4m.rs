@@ -8,10 +8,8 @@
     unused_mut
 )]
 #![feature(extern_types)]
+use crate::types::*;
 extern "C" {
-    pub type _IO_wide_data;
-    pub type _IO_codecvt;
-    pub type _IO_marker;
     static mut stdin: *mut FILE;
     fn fclose(__stream: *mut FILE) -> libc::c_int;
     fn fopen(_: *const libc::c_char, _: *const libc::c_char) -> *mut FILE;
@@ -67,197 +65,6 @@ extern "C" {
         plane: libc::c_int,
     ) -> int64_t;
     fn x264_cli_get_csp(csp: libc::c_int) -> *const x264_cli_csp_t;
-}
-pub type size_t = libc::c_ulong;
-pub type __uint8_t = libc::c_uchar;
-pub type __uint16_t = libc::c_ushort;
-pub type __uint32_t = libc::c_uint;
-pub type __int64_t = libc::c_long;
-pub type __uint64_t = libc::c_ulong;
-pub type __dev_t = libc::c_ulong;
-pub type __uid_t = libc::c_uint;
-pub type __gid_t = libc::c_uint;
-pub type __ino_t = libc::c_ulong;
-pub type __mode_t = libc::c_uint;
-pub type __nlink_t = libc::c_ulong;
-pub type __off_t = libc::c_long;
-pub type __off64_t = libc::c_long;
-pub type __time_t = libc::c_long;
-pub type __blksize_t = libc::c_long;
-pub type __blkcnt_t = libc::c_long;
-pub type __syscall_slong_t = libc::c_long;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct _IO_FILE {
-    pub _flags: libc::c_int,
-    pub _IO_read_ptr: *mut libc::c_char,
-    pub _IO_read_end: *mut libc::c_char,
-    pub _IO_read_base: *mut libc::c_char,
-    pub _IO_write_base: *mut libc::c_char,
-    pub _IO_write_ptr: *mut libc::c_char,
-    pub _IO_write_end: *mut libc::c_char,
-    pub _IO_buf_base: *mut libc::c_char,
-    pub _IO_buf_end: *mut libc::c_char,
-    pub _IO_save_base: *mut libc::c_char,
-    pub _IO_backup_base: *mut libc::c_char,
-    pub _IO_save_end: *mut libc::c_char,
-    pub _markers: *mut _IO_marker,
-    pub _chain: *mut _IO_FILE,
-    pub _fileno: libc::c_int,
-    pub _flags2: libc::c_int,
-    pub _old_offset: __off_t,
-    pub _cur_column: libc::c_ushort,
-    pub _vtable_offset: libc::c_schar,
-    pub _shortbuf: [libc::c_char; 1],
-    pub _lock: *mut libc::c_void,
-    pub _offset: __off64_t,
-    pub _codecvt: *mut _IO_codecvt,
-    pub _wide_data: *mut _IO_wide_data,
-    pub _freeres_list: *mut _IO_FILE,
-    pub _freeres_buf: *mut libc::c_void,
-    pub __pad5: size_t,
-    pub _mode: libc::c_int,
-    pub _unused2: [libc::c_char; 20],
-}
-pub type _IO_lock_t = ();
-pub type FILE = _IO_FILE;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct timespec {
-    pub tv_sec: __time_t,
-    pub tv_nsec: __syscall_slong_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct stat {
-    pub st_dev: __dev_t,
-    pub st_ino: __ino_t,
-    pub st_nlink: __nlink_t,
-    pub st_mode: __mode_t,
-    pub st_uid: __uid_t,
-    pub st_gid: __gid_t,
-    pub __pad0: libc::c_int,
-    pub st_rdev: __dev_t,
-    pub st_size: __off_t,
-    pub st_blksize: __blksize_t,
-    pub st_blocks: __blkcnt_t,
-    pub st_atim: timespec,
-    pub st_mtim: timespec,
-    pub st_ctim: timespec,
-    pub __glibc_reserved: [__syscall_slong_t; 3],
-}
-pub type int64_t = __int64_t;
-pub type uint8_t = __uint8_t;
-pub type uint16_t = __uint16_t;
-pub type uint32_t = __uint32_t;
-pub type uint64_t = __uint64_t;
-pub type hnd_t = *mut libc::c_void;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_input_opt_t {
-    pub index_file: *mut libc::c_char,
-    pub format: *mut libc::c_char,
-    pub resolution: *mut libc::c_char,
-    pub colorspace: *mut libc::c_char,
-    pub bit_depth: libc::c_int,
-    pub timebase: *mut libc::c_char,
-    pub seek: libc::c_int,
-    pub progress: libc::c_int,
-    pub output_csp: libc::c_int,
-    pub output_range: libc::c_int,
-    pub input_range: libc::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct video_info_t {
-    pub csp: libc::c_int,
-    pub fps_num: uint32_t,
-    pub fps_den: uint32_t,
-    pub fullrange: libc::c_int,
-    pub width: libc::c_int,
-    pub height: libc::c_int,
-    pub interlaced: libc::c_int,
-    pub num_frames: libc::c_int,
-    pub sar_width: uint32_t,
-    pub sar_height: uint32_t,
-    pub tff: libc::c_int,
-    pub thread_safe: libc::c_int,
-    pub timebase_num: uint32_t,
-    pub timebase_den: uint32_t,
-    pub vfr: libc::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_image_t {
-    pub csp: libc::c_int,
-    pub width: libc::c_int,
-    pub height: libc::c_int,
-    pub planes: libc::c_int,
-    pub plane: [*mut uint8_t; 4],
-    pub stride: [libc::c_int; 4],
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_pic_t {
-    pub img: cli_image_t,
-    pub pts: int64_t,
-    pub duration: int64_t,
-    pub opaque: *mut libc::c_void,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_input_t {
-    pub open_file: Option<
-        unsafe extern "C" fn(
-            *mut libc::c_char,
-            *mut hnd_t,
-            *mut video_info_t,
-            *mut cli_input_opt_t,
-        ) -> libc::c_int,
-    >,
-    pub picture_alloc: Option<
-        unsafe extern "C" fn(
-            *mut cli_pic_t,
-            hnd_t,
-            libc::c_int,
-            libc::c_int,
-            libc::c_int,
-        ) -> libc::c_int,
-    >,
-    pub read_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int>,
-    pub release_frame: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int>,
-    pub picture_clean: Option<unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()>,
-    pub close_file: Option<unsafe extern "C" fn(hnd_t) -> libc::c_int>,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct y4m_hnd_t {
-    pub fh: *mut FILE,
-    pub next_frame: libc::c_int,
-    pub seq_header_len: libc::c_int,
-    pub frame_header_len: libc::c_int,
-    pub frame_size: int64_t,
-    pub plane_size: [int64_t; 3],
-    pub bit_depth: libc::c_int,
-    pub mmap: cli_mmap_t,
-    pub use_mmap: libc::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct cli_mmap_t {
-    pub file_size: int64_t,
-    pub align_mask: libc::c_int,
-    pub fd: libc::c_int,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct x264_cli_csp_t {
-    pub name: *const libc::c_char,
-    pub planes: libc::c_int,
-    pub width: [libc::c_float; 4],
-    pub height: [libc::c_float; 4],
-    pub mod_width: libc::c_int,
-    pub mod_height: libc::c_int,
 }
 #[inline]
 unsafe extern "C" fn x264_is_regular_file(mut filehandle: *mut FILE) -> libc::c_int {
@@ -347,7 +154,7 @@ unsafe extern "C" fn parse_csp_and_depth(
     }
     csp
 }
-unsafe extern "C" fn open_file(
+pub unsafe extern "C" fn open_file(
     mut psz_filename: *mut libc::c_char,
     mut p_handle: *mut hnd_t,
     mut info: *mut video_info_t,
@@ -606,7 +413,6 @@ unsafe extern "C" fn open_file(
     *p_handle = h as hnd_t;
     0 as libc::c_int
 }
-static mut slen: size_t = 0;
 unsafe extern "C" fn read_frame_internal(
     mut pic: *mut cli_pic_t,
     mut h: *mut y4m_hnd_t,
@@ -708,7 +514,7 @@ unsafe extern "C" fn read_frame_internal(
     }
     0 as libc::c_int
 }
-unsafe extern "C" fn read_frame(
+pub unsafe extern "C" fn read_frame(
     mut pic: *mut cli_pic_t,
     mut handle: hnd_t,
     mut i_frame: libc::c_int,
@@ -746,7 +552,7 @@ unsafe extern "C" fn read_frame(
     (*h).next_frame = i_frame + 1 as libc::c_int;
     0 as libc::c_int
 }
-unsafe extern "C" fn release_frame(mut pic: *mut cli_pic_t, mut handle: hnd_t) -> libc::c_int {
+pub unsafe extern "C" fn release_frame(mut pic: *mut cli_pic_t, mut handle: hnd_t) -> libc::c_int {
     let mut h: *mut y4m_hnd_t = handle as *mut y4m_hnd_t;
     if (*h).use_mmap != 0 {
         return x264_cli_munmap(
@@ -758,7 +564,7 @@ unsafe extern "C" fn release_frame(mut pic: *mut cli_pic_t, mut handle: hnd_t) -
     }
     0 as libc::c_int
 }
-unsafe extern "C" fn picture_alloc(
+pub unsafe extern "C" fn picture_alloc(
     mut pic: *mut cli_pic_t,
     mut handle: hnd_t,
     mut csp: libc::c_int,
@@ -789,7 +595,7 @@ unsafe extern "C" fn picture_alloc(
     }
     .expect("non-null function pointer")(pic, csp, width, height)
 }
-unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
+pub unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
     let mut h: *mut y4m_hnd_t = handle as *mut y4m_hnd_t;
     if (*h).use_mmap != 0 {
         memset(
@@ -801,7 +607,7 @@ unsafe extern "C" fn picture_clean(mut pic: *mut cli_pic_t, mut handle: hnd_t) {
         x264_cli_pic_clean(pic);
     };
 }
-unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
+pub unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
     let mut h: *mut y4m_hnd_t = handle as *mut y4m_hnd_t;
     if h.is_null() || ((*h).fh).is_null() {
         return 0 as libc::c_int;
@@ -813,47 +619,14 @@ unsafe extern "C" fn close_file(mut handle: hnd_t) -> libc::c_int {
     free(h as *mut libc::c_void);
     0 as libc::c_int
 }
-#[no_mangle]
-pub static mut y4m_input: cli_input_t = unsafe {
-    {
-        cli_input_t {
-            open_file: Some(
-                open_file
-                    as unsafe extern "C" fn(
-                        *mut libc::c_char,
-                        *mut hnd_t,
-                        *mut video_info_t,
-                        *mut cli_input_opt_t,
-                    ) -> libc::c_int,
-            ),
-            picture_alloc: Some(
-                picture_alloc
-                    as unsafe extern "C" fn(
-                        *mut cli_pic_t,
-                        hnd_t,
-                        libc::c_int,
-                        libc::c_int,
-                        libc::c_int,
-                    ) -> libc::c_int,
-            ),
-            read_frame: Some(
-                read_frame
-                    as unsafe extern "C" fn(*mut cli_pic_t, hnd_t, libc::c_int) -> libc::c_int,
-            ),
-            release_frame: Some(
-                release_frame as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> libc::c_int,
-            ),
-            picture_clean: Some(picture_clean as unsafe extern "C" fn(*mut cli_pic_t, hnd_t) -> ()),
-            close_file: Some(close_file as unsafe extern "C" fn(hnd_t) -> libc::c_int),
-        }
-    }
-};
-unsafe extern "C" fn run_static_initializers() {
-    slen = (::core::mem::size_of::<[libc::c_char; 6]>() as libc::c_ulong)
-        .wrapping_sub(1 as libc::c_int as libc::c_ulong);
-}
+
 #[used]
 #[cfg_attr(target_os = "linux", link_section = ".init_array")]
 #[cfg_attr(target_os = "windows", link_section = ".CRT$XIB")]
 #[cfg_attr(target_os = "macos", link_section = "__DATA,__mod_init_func")]
-static INIT_ARRAY: [unsafe extern "C" fn(); 1] = [run_static_initializers];
+pub static INIT_ARRAY: [unsafe extern "C" fn(); 1] = [run_static_initializers];
+
+unsafe extern "C" fn run_static_initializers() {
+    slen = (::core::mem::size_of::<[libc::c_char; 6]>() as libc::c_ulong)
+        .wrapping_sub(1 as libc::c_int as libc::c_ulong);
+}

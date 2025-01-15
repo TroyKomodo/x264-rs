@@ -8,10 +8,10 @@
     unused_mut
 )]
 #![feature(extern_types)]
+use crate::types::flv_bytestream_file::c2_defs::C2RustUnnamed_0;
+use crate::types::*;
+
 extern "C" {
-    pub type _IO_wide_data;
-    pub type _IO_codecvt;
-    pub type _IO_marker;
     fn calloc(_: libc::c_ulong, _: libc::c_ulong) -> *mut libc::c_void;
     fn realloc(_: *mut libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn free(_: *mut libc::c_void);
@@ -26,81 +26,6 @@ extern "C" {
     fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
     fn strcmp(_: *const libc::c_char, _: *const libc::c_char) -> libc::c_int;
     fn strlen(_: *const libc::c_char) -> libc::c_ulong;
-}
-pub type size_t = libc::c_ulong;
-pub type __uint8_t = libc::c_uchar;
-pub type __uint16_t = libc::c_ushort;
-pub type __uint32_t = libc::c_uint;
-pub type __uint64_t = libc::c_ulong;
-pub type __off_t = libc::c_long;
-pub type __off64_t = libc::c_long;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct _IO_FILE {
-    pub _flags: libc::c_int,
-    pub _IO_read_ptr: *mut libc::c_char,
-    pub _IO_read_end: *mut libc::c_char,
-    pub _IO_read_base: *mut libc::c_char,
-    pub _IO_write_base: *mut libc::c_char,
-    pub _IO_write_ptr: *mut libc::c_char,
-    pub _IO_write_end: *mut libc::c_char,
-    pub _IO_buf_base: *mut libc::c_char,
-    pub _IO_buf_end: *mut libc::c_char,
-    pub _IO_save_base: *mut libc::c_char,
-    pub _IO_backup_base: *mut libc::c_char,
-    pub _IO_save_end: *mut libc::c_char,
-    pub _markers: *mut _IO_marker,
-    pub _chain: *mut _IO_FILE,
-    pub _fileno: libc::c_int,
-    pub _flags2: libc::c_int,
-    pub _old_offset: __off_t,
-    pub _cur_column: libc::c_ushort,
-    pub _vtable_offset: libc::c_schar,
-    pub _shortbuf: [libc::c_char; 1],
-    pub _lock: *mut libc::c_void,
-    pub _offset: __off64_t,
-    pub _codecvt: *mut _IO_codecvt,
-    pub _wide_data: *mut _IO_wide_data,
-    pub _freeres_list: *mut _IO_FILE,
-    pub _freeres_buf: *mut libc::c_void,
-    pub __pad5: size_t,
-    pub _mode: libc::c_int,
-    pub _unused2: [libc::c_char; 20],
-}
-pub type _IO_lock_t = ();
-pub type FILE = _IO_FILE;
-pub type uint8_t = __uint8_t;
-pub type uint16_t = __uint16_t;
-pub type uint32_t = __uint32_t;
-pub type uint64_t = __uint64_t;
-pub type C2RustUnnamed = libc::c_uint;
-pub const AMF_DATA_TYPE_UNSUPPORTED: C2RustUnnamed = 13;
-pub const AMF_DATA_TYPE_LONG_STRING: C2RustUnnamed = 12;
-pub const AMF_DATA_TYPE_DATE: C2RustUnnamed = 11;
-pub const AMF_DATA_TYPE_ARRAY: C2RustUnnamed = 10;
-pub const AMF_DATA_TYPE_OBJECT_END: C2RustUnnamed = 9;
-pub const AMF_DATA_TYPE_MIXEDARRAY: C2RustUnnamed = 8;
-pub const AMF_DATA_TYPE_REFERENCE: C2RustUnnamed = 7;
-pub const AMF_DATA_TYPE_UNDEFINED: C2RustUnnamed = 6;
-pub const AMF_DATA_TYPE_NULL: C2RustUnnamed = 5;
-pub const AMF_DATA_TYPE_OBJECT: C2RustUnnamed = 3;
-pub const AMF_DATA_TYPE_STRING: C2RustUnnamed = 2;
-pub const AMF_DATA_TYPE_BOOL: C2RustUnnamed = 1;
-pub const AMF_DATA_TYPE_NUMBER: C2RustUnnamed = 0;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub struct flv_buffer {
-    pub data: *mut uint8_t,
-    pub d_cur: libc::c_uint,
-    pub d_max: libc::c_uint,
-    pub fp: *mut FILE,
-    pub d_total: uint64_t,
-}
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union C2RustUnnamed_0 {
-    pub f: libc::c_double,
-    pub i: uint64_t,
 }
 #[no_mangle]
 pub unsafe extern "C" fn flv_dbl2int(mut value: libc::c_double) -> uint64_t {

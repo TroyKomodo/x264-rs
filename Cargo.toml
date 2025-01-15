@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "refactor",
+    "rust-out"
+]
+resolver = "2"

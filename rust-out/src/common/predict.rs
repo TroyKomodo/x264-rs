@@ -7,74 +7,7 @@
     unused_assignments,
     unused_mut
 )]
-pub type __uint8_t = libc::c_uchar;
-pub type __uint16_t = libc::c_ushort;
-pub type __uint32_t = libc::c_uint;
-pub type uint8_t = __uint8_t;
-pub type uint16_t = __uint16_t;
-pub type uint32_t = __uint32_t;
-pub type pixel = uint8_t;
-pub type x264_predict_8x8_filter_t =
-    Option<unsafe extern "C" fn(*mut pixel, *mut pixel, libc::c_int, libc::c_int) -> ()>;
-pub type x264_predict_t = Option<unsafe extern "C" fn(*mut pixel) -> ()>;
-pub type x264_predict8x8_t = Option<unsafe extern "C" fn(*mut pixel, *mut pixel) -> ()>;
-#[derive(Copy, Clone)]
-#[repr(C)]
-pub union x264_union32_t {
-    pub i: uint32_t,
-    pub w: [uint16_t; 2],
-    pub b: [uint8_t; 4],
-}
-pub type pixel4 = uint32_t;
-pub type intra_chroma_pred_e = libc::c_uint;
-pub const I_PRED_CHROMA_DC_128: intra_chroma_pred_e = 6;
-pub const I_PRED_CHROMA_DC_TOP: intra_chroma_pred_e = 5;
-pub const I_PRED_CHROMA_DC_LEFT: intra_chroma_pred_e = 4;
-pub const I_PRED_CHROMA_P: intra_chroma_pred_e = 3;
-pub const I_PRED_CHROMA_V: intra_chroma_pred_e = 2;
-pub const I_PRED_CHROMA_H: intra_chroma_pred_e = 1;
-pub const I_PRED_CHROMA_DC: intra_chroma_pred_e = 0;
-pub type intra16x16_pred_e = libc::c_uint;
-pub const I_PRED_16x16_DC_128: intra16x16_pred_e = 6;
-pub const I_PRED_16x16_DC_TOP: intra16x16_pred_e = 5;
-pub const I_PRED_16x16_DC_LEFT: intra16x16_pred_e = 4;
-pub const I_PRED_16x16_P: intra16x16_pred_e = 3;
-pub const I_PRED_16x16_DC: intra16x16_pred_e = 2;
-pub const I_PRED_16x16_H: intra16x16_pred_e = 1;
-pub const I_PRED_16x16_V: intra16x16_pred_e = 0;
-pub type intra4x4_pred_e = libc::c_uint;
-pub const I_PRED_4x4_DC_128: intra4x4_pred_e = 11;
-pub const I_PRED_4x4_DC_TOP: intra4x4_pred_e = 10;
-pub const I_PRED_4x4_DC_LEFT: intra4x4_pred_e = 9;
-pub const I_PRED_4x4_HU: intra4x4_pred_e = 8;
-pub const I_PRED_4x4_VL: intra4x4_pred_e = 7;
-pub const I_PRED_4x4_HD: intra4x4_pred_e = 6;
-pub const I_PRED_4x4_VR: intra4x4_pred_e = 5;
-pub const I_PRED_4x4_DDR: intra4x4_pred_e = 4;
-pub const I_PRED_4x4_DDL: intra4x4_pred_e = 3;
-pub const I_PRED_4x4_DC: intra4x4_pred_e = 2;
-pub const I_PRED_4x4_H: intra4x4_pred_e = 1;
-pub const I_PRED_4x4_V: intra4x4_pred_e = 0;
-pub type intra8x8_pred_e = libc::c_uint;
-pub const I_PRED_8x8_DC_128: intra8x8_pred_e = 11;
-pub const I_PRED_8x8_DC_TOP: intra8x8_pred_e = 10;
-pub const I_PRED_8x8_DC_LEFT: intra8x8_pred_e = 9;
-pub const I_PRED_8x8_HU: intra8x8_pred_e = 8;
-pub const I_PRED_8x8_VL: intra8x8_pred_e = 7;
-pub const I_PRED_8x8_HD: intra8x8_pred_e = 6;
-pub const I_PRED_8x8_VR: intra8x8_pred_e = 5;
-pub const I_PRED_8x8_DDR: intra8x8_pred_e = 4;
-pub const I_PRED_8x8_DDL: intra8x8_pred_e = 3;
-pub const I_PRED_8x8_DC: intra8x8_pred_e = 2;
-pub const I_PRED_8x8_H: intra8x8_pred_e = 1;
-pub const I_PRED_8x8_V: intra8x8_pred_e = 0;
-pub const MB_TOPRIGHT: macroblock_position_e = 4;
-pub const MB_TOPLEFT: macroblock_position_e = 8;
-pub const MB_TOP: macroblock_position_e = 2;
-pub const MB_LEFT: macroblock_position_e = 1;
-pub type macroblock_position_e = libc::c_uint;
-pub const ALL_NEIGHBORS: macroblock_position_e = 15;
-pub const MB_PRIVATE: macroblock_position_e = 16;
+use crate::types::*;
 #[inline(always)]
 unsafe extern "C" fn x264_clip_pixel(mut x: libc::c_int) -> pixel {
     (if x & !(((1 as libc::c_int) << 8 as libc::c_int) - 1 as libc::c_int) != 0 {

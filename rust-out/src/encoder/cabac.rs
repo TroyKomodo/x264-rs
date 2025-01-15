@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types, label_break_value)]
 use crate::types::*;
 extern "C" {
     fn abs(_: libc::c_int) -> libc::c_int;
@@ -299,7 +289,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                 .as_ptr(),
             );
         }
-        'c_27091: {
+        {
             if h != 1 as libc::c_int {
             } else {
                 __assert_fail(
@@ -362,17 +352,6 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
             ))
             .as_ptr(),
         );
-        'c_26858: {
-            __assert_fail(
-                b"0\0" as *const u8 as *const libc::c_char,
-                b"./common/rectangle.h\0" as *const u8 as *const libc::c_char,
-                118 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
-                    b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
-                ))
-                .as_ptr(),
-            );
-        };
     };
 }
 #[inline(always)]
@@ -460,7 +439,6 @@ unsafe extern "C" fn cabac_intra4x4_pred_mode(
         x264_8_cabac_encode_decision_c(cb, 68 as libc::c_int, 0 as libc::c_int);
         if i_mode > i_pred {
             i_mode -= 1;
-            i_mode;
         }
         x264_8_cabac_encode_decision_c(cb, 69 as libc::c_int, i_mode & 0x1 as libc::c_int);
         x264_8_cabac_encode_decision_c(
@@ -482,14 +460,12 @@ unsafe extern "C" fn cabac_intra_chroma_pred_mode(mut h: *mut x264_t, mut cb: *m
             != 0 as libc::c_int
     {
         ctx += 1;
-        ctx;
     }
     if (*h).mb.i_neighbour & MB_TOP as libc::c_int as libc::c_uint != 0
         && *((*h).mb.chroma_pred_mode).offset((*h).mb.i_mb_top_xy as isize) as libc::c_int
             != 0 as libc::c_int
     {
         ctx += 1;
-        ctx;
     }
     x264_8_cabac_encode_decision_c(
         cb,
@@ -550,7 +526,6 @@ unsafe extern "C" fn cabac_cbp_chroma(mut h: *mut x264_t, mut cb: *mut x264_caba
     let mut ctx: libc::c_int = 0 as libc::c_int;
     if cbp_a != 0 && (*h).mb.cache.i_cbp_left != -(1 as libc::c_int) {
         ctx += 1;
-        ctx;
     }
     if cbp_b != 0 && (*h).mb.cache.i_cbp_top != -(1 as libc::c_int) {
         ctx += 2 as libc::c_int;
@@ -562,7 +537,6 @@ unsafe extern "C" fn cabac_cbp_chroma(mut h: *mut x264_t, mut cb: *mut x264_caba
         ctx = 4 as libc::c_int;
         if cbp_a == 0x20 as libc::c_int {
             ctx += 1;
-            ctx;
         }
         if cbp_b == 0x20 as libc::c_int {
             ctx += 2 as libc::c_int;
@@ -597,7 +571,6 @@ unsafe extern "C" fn cabac_qp_delta(mut h: *mut x264_t, mut cb: *mut x264_cabac_
             val = i_dqp;
         }
         val -= 1;
-        val;
         if val >= 51 as libc::c_int + 6 as libc::c_int * (8 as libc::c_int - 8 as libc::c_int)
             && val
                 != 51 as libc::c_int
@@ -690,7 +663,6 @@ unsafe extern "C" fn cabac_ref_internal(
         && (bframe == 0 || (*h).mb.cache.skip[(i8 - 1 as libc::c_int) as usize] == 0)
     {
         ctx += 1;
-        ctx;
     }
     if i_refb > 0 as libc::c_int
         && (bframe == 0 || (*h).mb.cache.skip[(i8 - 8 as libc::c_int) as usize] == 0)
@@ -702,7 +674,6 @@ unsafe extern "C" fn cabac_ref_internal(
         x264_8_cabac_encode_decision_c(cb, 54 as libc::c_int + ctx, 1 as libc::c_int);
         ctx = (ctx >> 2 as libc::c_int) + 4 as libc::c_int;
         i_ref -= 1;
-        i_ref;
     }
     x264_8_cabac_encode_decision_c(cb, 54 as libc::c_int + ctx, 0 as libc::c_int);
 }
@@ -725,10 +696,10 @@ unsafe extern "C" fn cabac_ref_b(
 }
 #[inline(always)]
 unsafe extern "C" fn cabac_mvd_cpn(
-    mut h: *mut x264_t,
+    mut _h: *mut x264_t,
     mut cb: *mut x264_cabac_t,
-    mut i_list: libc::c_int,
-    mut idx: libc::c_int,
+    mut _i_list: libc::c_int,
+    mut _idx: libc::c_int,
     mut l: libc::c_int,
     mut mvd: libc::c_int,
     mut ctx: libc::c_int,
@@ -763,7 +734,6 @@ unsafe extern "C" fn cabac_mvd_cpn(
                 1 as libc::c_int,
             );
             i += 1;
-            i;
         }
         x264_8_cabac_encode_decision_c(
             cb,
@@ -779,7 +749,6 @@ unsafe extern "C" fn cabac_mvd_cpn(
                 1 as libc::c_int,
             );
             i_0 += 1;
-            i_0;
         }
         x264_8_cabac_encode_ue_bypass(cb, 3 as libc::c_int, i_abs - 9 as libc::c_int);
     }
@@ -1005,17 +974,6 @@ unsafe extern "C" fn cabac_8x8_mvd(
                 ))
                 .as_ptr(),
             );
-            'c_35133: {
-                __assert_fail(
-                    b"0\0" as *const u8 as *const libc::c_char,
-                    b"encoder/cabac.c\0" as *const u8 as *const libc::c_char,
-                    377 as libc::c_int as libc::c_uint,
-                    (*::core::mem::transmute::<&[u8; 50], &[libc::c_char; 50]>(
-                        b"void cabac_8x8_mvd(x264_t *, x264_cabac_t *, int)\0",
-                    ))
-                    .as_ptr(),
-                );
-            };
         }
     };
 }
@@ -1033,13 +991,11 @@ unsafe extern "C" fn cabac_mb_header_i(
             && (*h).mb.i_mb_type_left[0 as libc::c_int as usize] != I_4x4 as libc::c_int
         {
             ctx += 1;
-            ctx;
         }
         if (*h).mb.i_neighbour & MB_TOP as libc::c_int as libc::c_uint != 0
             && (*h).mb.i_mb_type_top != I_4x4 as libc::c_int
         {
             ctx += 1;
-            ctx;
         }
         cabac_mb_type_intra(
             h,
@@ -1204,7 +1160,6 @@ unsafe extern "C" fn cabac_mb_header_p(
         while i < 4 as libc::c_int {
             cabac_subpartition_p(cb, (*h).mb.i_sub_partition[i as usize] as libc::c_int);
             i += 1;
-            i;
         }
         if (*h).mb.pic.i_fref[0 as libc::c_int as usize] > 1 as libc::c_int {
             cabac_ref_p(h, cb, 0 as libc::c_int);
@@ -1216,7 +1171,6 @@ unsafe extern "C" fn cabac_mb_header_p(
         while i_0 < 4 as libc::c_int {
             cabac_8x8_mvd(h, cb, i_0);
             i_0 += 1;
-            i_0;
         }
     } else {
         cabac_mb_header_i(h, cb, i_mb_type, SLICE_TYPE_P as libc::c_int, chroma);
@@ -1235,14 +1189,12 @@ unsafe extern "C" fn cabac_mb_header_b(
         && (*h).mb.i_mb_type_left[0 as libc::c_int as usize] != B_DIRECT as libc::c_int
     {
         ctx += 1;
-        ctx;
     }
     if (*h).mb.i_neighbour & MB_TOP as libc::c_int as libc::c_uint != 0
         && (*h).mb.i_mb_type_top != B_SKIP as libc::c_int
         && (*h).mb.i_mb_type_top != B_DIRECT as libc::c_int
     {
         ctx += 1;
-        ctx;
     }
     if i_mb_type == B_DIRECT as libc::c_int {
         x264_8_cabac_encode_decision_c(cb, 27 as libc::c_int + ctx, 0 as libc::c_int);
@@ -1259,7 +1211,6 @@ unsafe extern "C" fn cabac_mb_header_b(
         while i < 4 as libc::c_int {
             cabac_subpartition_b(cb, (*h).mb.i_sub_partition[i as usize] as libc::c_int);
             i += 1;
-            i;
         }
         if (*h).mb.pic.i_fref[0 as libc::c_int as usize] > 1 as libc::c_int {
             let mut i_0: libc::c_int = 0 as libc::c_int;
@@ -1271,7 +1222,6 @@ unsafe extern "C" fn cabac_mb_header_b(
                     cabac_ref_b(h, cb, 0 as libc::c_int, 4 as libc::c_int * i_0);
                 }
                 i_0 += 1;
-                i_0;
             }
         }
         if (*h).mb.pic.i_fref[1 as libc::c_int as usize] > 1 as libc::c_int {
@@ -1284,7 +1234,6 @@ unsafe extern "C" fn cabac_mb_header_b(
                     cabac_ref_b(h, cb, 1 as libc::c_int, 4 as libc::c_int * i_1);
                 }
                 i_1 += 1;
-                i_1;
             }
         }
         let mut i_2: libc::c_int = 0 as libc::c_int;
@@ -1311,7 +1260,6 @@ unsafe extern "C" fn cabac_mb_header_b(
                 );
             }
             i_2 += 1;
-            i_2;
         }
         let mut i_3: libc::c_int = 0 as libc::c_int;
         while i_3 < 4 as libc::c_int {
@@ -1337,7 +1285,6 @@ unsafe extern "C" fn cabac_mb_header_b(
                 );
             }
             i_3 += 1;
-            i_3;
         }
     } else if i_mb_type >= B_L0_L0 as libc::c_int && i_mb_type <= B_BI_BI as libc::c_int {
         static mut i_mb_bits: [uint8_t; 27] = [
@@ -1518,7 +1465,6 @@ unsafe extern "C" fn cabac_mb_header_b(
                 }
             }
             i_list += 1;
-            i_list;
         }
     } else {
         cabac_mb_header_i(h, cb, i_mb_type, SLICE_TYPE_B as libc::c_int, chroma);
@@ -1740,7 +1686,6 @@ unsafe extern "C" fn cabac_block_residual_internal(
             while i_2 > 0 as libc::c_int {
                 x264_8_cabac_encode_decision_c(cb, ctx, 1 as libc::c_int);
                 i_2 -= 1;
-                i_2;
             }
             if abs_coeff < 15 as libc::c_int {
                 x264_8_cabac_encode_decision_c(cb, ctx, 0 as libc::c_int);
@@ -1782,7 +1727,7 @@ unsafe extern "C" fn cabac_block_residual(
 unsafe extern "C" fn cabac_block_residual_422_dc(
     mut h: *mut x264_t,
     mut cb: *mut x264_cabac_t,
-    mut ctx_block_cat: libc::c_int,
+    mut _ctx_block_cat: libc::c_int,
     mut l: *mut dctcoef,
 ) {
     cabac_block_residual_internal(h, cb, DCT_CHROMA_DC as libc::c_int, l, 1 as libc::c_int);
@@ -1841,10 +1786,8 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                     *((*h).mb.pic.p_fenc[p as usize]).offset(i as isize) as uint32_t,
                 );
                 i += 1;
-                i;
             }
             p += 1;
-            p;
         }
         if chroma != 0 {
             let mut ch: libc::c_int = 1 as libc::c_int;
@@ -1861,13 +1804,10 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                                 as uint32_t,
                         );
                         j += 1;
-                        j;
                     }
                     i_0 += 1;
-                    i_0;
                 }
                 ch += 1;
-                ch;
             }
         }
         bs_flush(&mut s);
@@ -1945,11 +1885,9 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                             x264_8_cabac_encode_decision_c(cb, ctxidxinc_0, 0 as libc::c_int);
                         }
                         i_1 += 1;
-                        i_1;
                     }
                 }
                 p_0 += 1;
-                p_0;
             }
         } else if (*h).mb.b_transform_8x8 != 0 {
             if plane_count == 3 as libc::c_int {
@@ -2212,10 +2150,8 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                             x264_8_cabac_encode_decision_c(cb, ctxidxinc_1, 0 as libc::c_int);
                         }
                         i_2 += 1;
-                        i_2;
                     }
                     p_1 += 1;
-                    p_1;
                 }
                 if (*h).mb.i_neighbour & MB_LEFT as libc::c_int as libc::c_uint != 0
                     && *((*h).mb.mb_transform_size)
@@ -2359,7 +2295,6 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                         ((*h).dct.luma8x8[i_3 as usize]).as_mut_ptr(),
                     );
                     i_3 += 1;
-                    i_3;
                 }
             }
         } else {
@@ -2405,13 +2340,10 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                             x264_8_cabac_encode_decision_c(cb, ctxidxinc_2, 0 as libc::c_int);
                         }
                         i_4 += 1;
-                        i_4;
                     }
                     i8x8 += 1;
-                    i8x8;
                 }
                 p_2 += 1;
-                p_2;
             }
         }
         if chroma != 0 && (*h).mb.i_cbp_chroma != 0 {
@@ -2529,7 +2461,6 @@ unsafe extern "C" fn macroblock_write_cabac_internal(
                             x264_8_cabac_encode_decision_c(cb, ctxidxinc_7, 0 as libc::c_int);
                         }
                         j_0 += 1;
-                        j_0;
                     }
                     i_5 += step;
                 }

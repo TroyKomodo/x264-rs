@@ -5,7 +5,7 @@ use std::{
 
 use itertools::Itertools;
 use proc_macro2::Span;
-use syn::{Token, parse_quote};
+use syn::parse_quote;
 
 fn find_all_rust_files(target_folder: &Path) -> Vec<File> {
     let mut rust_files = Vec::new();

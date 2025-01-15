@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(label_break_value)]
 use crate::types::*;
 extern "C" {
     fn __assert_fail(
@@ -121,7 +111,7 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
                 .as_ptr(),
             );
         }
-        'c_27091: {
+        {
             if h != 1 as libc::c_int {
             } else {
                 __assert_fail(
@@ -184,17 +174,6 @@ unsafe extern "C" fn x264_macroblock_cache_rect(
             ))
             .as_ptr(),
         );
-        'c_26858: {
-            __assert_fail(
-                b"0\0" as *const u8 as *const libc::c_char,
-                b"common/rectangle.h\0" as *const u8 as *const libc::c_char,
-                118 as libc::c_int as libc::c_uint,
-                (*::core::mem::transmute::<&[u8; 65], &[libc::c_char; 65]>(
-                    b"void x264_macroblock_cache_rect(void *, int, int, int, uint32_t)\0",
-                ))
-                .as_ptr(),
-            );
-        };
     };
 }
 pub unsafe extern "C" fn macroblock_cache_mv_2_1(mut target: *mut libc::c_void, mut val: uint32_t) {

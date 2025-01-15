@@ -1,17 +1,6 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
-extern "C" {
-    fn memset(_: *mut libc::c_void, _: libc::c_int, _: libc::c_ulong) -> *mut libc::c_void;
-}
+use libc::memset;
+
 unsafe extern "C" fn nal_escape_c(
     mut dst: *mut uint8_t,
     mut src: *mut uint8_t,
@@ -89,7 +78,7 @@ pub unsafe extern "C" fn x264_8_nal_encode(
             memset(
                 dst as *mut libc::c_void,
                 0 as libc::c_int,
-                padding as libc::c_ulong,
+                padding as usize,
             );
             size += padding;
         }
@@ -111,13 +100,13 @@ pub unsafe extern "C" fn x264_8_nal_encode(
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_bitstream_init(
-    mut cpu: uint32_t,
+    mut _cpu: uint32_t,
     mut pf: *mut x264_bitstream_function_t,
 ) {
     memset(
         pf as *mut libc::c_void,
         0 as libc::c_int,
-        ::core::mem::size_of::<x264_bitstream_function_t>() as libc::c_ulong,
+        ::core::mem::size_of::<x264_bitstream_function_t>(),
     );
     (*pf).nal_escape = Some(
         nal_escape_c

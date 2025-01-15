@@ -1,15 +1,5 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
-extern "C" {}
+
 #[no_mangle]
 pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
     let mut i_suffix: libc::c_int = 0 as libc::c_int;
@@ -56,20 +46,16 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
             }
             if i_next == 0 as libc::c_int {
                 i_next += 1;
-                i_next;
             }
             if abs_level > (3 as libc::c_int) << (i_next - 1 as libc::c_int)
                 && i_next < 6 as libc::c_int
             {
                 i_next += 1;
-                i_next;
             }
             (*vlc).i_next = i_next as uint8_t;
             level += 1;
-            level;
         }
         i_suffix += 1;
-        i_suffix;
     }
     x264_8_run_before[0 as libc::c_int as usize] = 0 as libc::c_int as uint32_t;
     x264_8_run_before[1 as libc::c_int as usize] = 0 as libc::c_int as uint32_t;
@@ -110,10 +96,8 @@ pub unsafe extern "C" fn x264_8_cavlc_init(mut h: *mut x264_t) {
             zeros -= run;
             mask_0 <<= run + 1 as libc::c_int;
             j_0 += 1;
-            j_0;
         }
         x264_8_run_before[i as usize] = ((bits << 5 as libc::c_int) + size) as uint32_t;
         i = i.wrapping_add(1);
-        i;
     }
 }

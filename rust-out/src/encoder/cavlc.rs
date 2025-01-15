@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
 extern "C" {
     fn x264_8_mb_predict_mv(
@@ -276,7 +266,6 @@ unsafe extern "C" fn cavlc_block_residual_escape(
                 while i_level_code >= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int) {
                     i_level_code -= (1 as libc::c_int) << (i_level_prefix - 3 as libc::c_int);
                     i_level_prefix += 1;
-                    i_level_prefix;
                 }
             } else {
                 (*h).mb.b_overflow = 1 as libc::c_int;
@@ -297,11 +286,9 @@ unsafe extern "C" fn cavlc_block_residual_escape(
     }
     if i_suffix_length == 0 as libc::c_int {
         i_suffix_length += 1;
-        i_suffix_length;
     }
     if abs_level > next_suffix[i_suffix_length as usize] as libc::c_int {
         i_suffix_length += 1;
-        i_suffix_length;
     }
     i_suffix_length
 }
@@ -427,7 +414,6 @@ unsafe extern "C" fn cavlc_block_residual_internal(
                 );
             }
             i += 1;
-            i;
         }
     }
     if ctx_block_cat == DCT_CHROMA_DC as libc::c_int {
@@ -618,7 +604,6 @@ unsafe extern "C" fn cavlc_macroblock_luma_residual(
                 i8;
             }
             p += 1;
-            p;
         }
     }
     let mut p_0: libc::c_int = 0 as libc::c_int;
@@ -672,13 +657,10 @@ unsafe extern "C" fn cavlc_macroblock_luma_residual(
                     ) as uint8_t;
                 }
                 i4 += 1;
-                i4;
             }
             i8_0 += 1;
-            i8_0;
         }
         p_0 += 1;
-        p_0;
     }
 }
 unsafe extern "C" fn cavlc_mb_header_i(
@@ -827,7 +809,6 @@ unsafe extern "C" fn cavlc_mb_header_p(
                         as libc::c_int,
                 );
                 i += 1;
-                i;
             }
         } else {
             bs_write(s, 4 as libc::c_int, 0xf as libc::c_int as uint32_t);
@@ -863,7 +844,6 @@ unsafe extern "C" fn cavlc_mb_header_p(
         while i_0 < 4 as libc::c_int {
             cavlc_8x8_mvd(h, i_0);
             i_0 += 1;
-            i_0;
         }
     } else {
         cavlc_mb_header_i(h, i_mb_type, 5 as libc::c_int, chroma);
@@ -886,7 +866,6 @@ unsafe extern "C" fn cavlc_mb_header_b(
                     as libc::c_int,
             );
             i += 1;
-            i;
         }
         if (*h).mb.pic.i_fref[0 as libc::c_int as usize] > 1 as libc::c_int {
             let mut i_0: libc::c_int = 0 as libc::c_int;
@@ -904,7 +883,6 @@ unsafe extern "C" fn cavlc_mb_header_b(
                     );
                 }
                 i_0 += 1;
-                i_0;
             }
         }
         if (*h).mb.pic.i_fref[1 as libc::c_int as usize] > 1 as libc::c_int {
@@ -923,7 +901,6 @@ unsafe extern "C" fn cavlc_mb_header_b(
                     );
                 }
                 i_1 += 1;
-                i_1;
             }
         }
         let mut i_2: libc::c_int = 0 as libc::c_int;
@@ -940,7 +917,6 @@ unsafe extern "C" fn cavlc_mb_header_b(
                 );
             }
             i_2 += 1;
-            i_2;
         }
         let mut i_3: libc::c_int = 0 as libc::c_int;
         while i_3 < 4 as libc::c_int {
@@ -956,7 +932,6 @@ unsafe extern "C" fn cavlc_mb_header_b(
                 );
             }
             i_3 += 1;
-            i_3;
         }
     } else if i_mb_type >= B_L0_L0 as libc::c_int && i_mb_type <= B_BI_BI as libc::c_int {
         let mut b_list: *const [uint8_t; 2] =
@@ -1142,10 +1117,8 @@ pub unsafe extern "C" fn x264_8_macroblock_write_cavlc(mut h: *mut x264_t) {
                     *((*h).mb.pic.p_fenc[p as usize]).offset(i as isize) as uint32_t,
                 );
                 i += 1;
-                i;
             }
             p += 1;
-            p;
         }
         if chroma != 0 {
             let mut ch: libc::c_int = 1 as libc::c_int;
@@ -1162,13 +1135,10 @@ pub unsafe extern "C" fn x264_8_macroblock_write_cavlc(mut h: *mut x264_t) {
                                 as uint32_t,
                         );
                         j += 1;
-                        j;
                     }
                     i_0 += 1;
-                    i_0;
                 }
                 ch += 1;
-                ch;
             }
         }
         bs_init(
@@ -1277,11 +1247,9 @@ pub unsafe extern "C" fn x264_8_macroblock_write_cavlc(mut h: *mut x264_t) {
                         ) as uint8_t;
                     }
                     i_1 += 1;
-                    i_1;
                 }
             }
             p_0 += 1;
-            p_0;
         }
     } else if (*h).mb.i_cbp_luma | (*h).mb.i_cbp_chroma != 0 {
         cavlc_qp_delta(h);
@@ -1392,7 +1360,6 @@ pub unsafe extern "C" fn x264_8_macroblock_write_cavlc(mut h: *mut x264_t) {
                         ) as uint8_t;
                     }
                     j_0 += 1;
-                    j_0;
                 }
                 i_2 += step;
             }

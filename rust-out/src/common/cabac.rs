@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
 extern "C" {
     fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
@@ -133,7 +123,6 @@ unsafe extern "C" fn cabac_putbyte(mut cb: *mut x264_cabac_t) {
                 (*cb).p = ((*cb).p).offset(1);
                 *fresh1 = (carry - 1 as libc::c_int) as uint8_t;
                 bytes_outstanding -= 1;
-                bytes_outstanding;
             }
             let fresh2 = (*cb).p;
             (*cb).p = ((*cb).p).offset(1);

@@ -1,14 +1,5 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(c_variadic, extern_types)]
 use crate::types::*;
+
 extern "C" {
     fn fclose(__stream: *mut FILE) -> libc::c_int;
     fn fopen(_: *const libc::c_char, _: *const libc::c_char) -> *mut FILE;
@@ -52,6 +43,7 @@ extern "C" {
     fn memalign(_: libc::c_ulong, _: libc::c_ulong) -> *mut libc::c_void;
     fn madvise(__addr: *mut libc::c_void, __len: size_t, __advice: libc::c_int) -> libc::c_int;
 }
+
 #[inline(always)]
 unsafe extern "C" fn x264_clip3(
     mut v: libc::c_int,
@@ -102,7 +94,7 @@ pub unsafe extern "C" fn x264_reduce_fraction64(mut n: *mut uint64_t, mut d: *mu
 }
 #[no_mangle]
 pub unsafe extern "C" fn x264_log_default(
-    mut p_unused: *mut libc::c_void,
+    mut _p_unused: *mut libc::c_void,
     mut i_level: libc::c_int,
     mut psz_fmt: *const libc::c_char,
     mut arg: ::core::ffi::VaList,
@@ -321,7 +313,6 @@ pub unsafe extern "C" fn x264_param_cleanup(mut param: *mut x264_param_t) {
         while i < (*buf).count {
             free(*((*buf).ptr).as_mut_ptr().offset(i as isize));
             i += 1;
-            i;
         }
         free(buf as *mut libc::c_void);
         (*param).opaque = std::ptr::null_mut::<libc::c_void>();
@@ -562,7 +553,6 @@ pub unsafe extern "C" fn x264_picture_alloc(
         plane_offset[i as usize] = frame_size;
         frame_size += plane_size;
         i += 1;
-        i;
     }
     (*pic).img.plane[0 as libc::c_int as usize] = x264_malloc(frame_size) as *mut uint8_t;
     if ((*pic).img.plane[0 as libc::c_int as usize]).is_null() {
@@ -573,7 +563,6 @@ pub unsafe extern "C" fn x264_picture_alloc(
         (*pic).img.plane[i_0 as usize] = ((*pic).img.plane[0 as libc::c_int as usize])
             .offset(plane_offset[i_0 as usize] as isize);
         i_0 += 1;
-        i_0;
     }
     0 as libc::c_int
 }
@@ -1239,7 +1228,6 @@ unsafe extern "C" fn parse_enum(
             return 0 as libc::c_int;
         }
         i += 1;
-        i;
     }
     -(1 as libc::c_int)
 }
@@ -1344,7 +1332,6 @@ pub unsafe extern "C" fn x264_param_parse(
     }
     if *value.offset(0 as libc::c_int as isize) as libc::c_int == '=' as i32 {
         value = value.offset(1);
-        value;
     }
     if !(strchr(name, '_' as i32)).is_null() {
         let mut c: *mut libc::c_char = std::ptr::null_mut::<libc::c_char>();
@@ -1370,7 +1357,6 @@ pub unsafe extern "C" fn x264_param_parse(
         name = name.offset(2 as libc::c_int as isize);
         if *name.offset(0 as libc::c_int as isize) as libc::c_int == '-' as i32 {
             name = name.offset(1);
-            name;
         }
         name_was_bool = 1 as libc::c_int;
         value = if atobool_internal(value, &mut b_error) != 0 {
@@ -1415,11 +1401,10 @@ pub unsafe extern "C" fn x264_param_parse(
                         break;
                     }
                     let mut i: libc::c_int = 0 as libc::c_int;
-                    while (*x264_cpu_names.as_ptr().offset(i as isize)).flags != 0
-                        && strcasecmp(tok, (*x264_cpu_names.as_ptr().offset(i as isize)).name) != 0
+                    while x264_cpu_names[i as usize].flags != 0
+                        && strcasecmp(tok, x264_cpu_names[i as usize].name) != 0
                     {
                         i += 1;
-                        i;
                     }
                     (*p).cpu |= (*x264_cpu_names.as_ptr().offset(i as isize)).flags;
                     if (*x264_cpu_names.as_ptr().offset(i as isize)).flags == 0 {

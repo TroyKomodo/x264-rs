@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
 extern "C" {
     fn sscanf(_: *const libc::c_char, _: *const libc::c_char, _: ...) -> libc::c_int;
@@ -81,7 +71,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                 break;
             }
             j += 1;
-            j;
         }
         if j < i {
             (*h).quant4_mf[i as usize] = (*h).quant4_mf[j as usize];
@@ -137,7 +126,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                 break;
             }
             j += 1;
-            j;
         }
         if j < i {
             (*h).quant4_bias[i as usize] = (*h).quant4_bias[j as usize];
@@ -169,7 +157,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
             }
         }
         i += 1;
-        i;
     }
     if current_block == 5529461102203738653 {
         let mut i_0: libc::c_int = 0 as libc::c_int;
@@ -199,7 +186,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                     break;
                 }
                 j_0 += 1;
-                j_0;
             }
             if j_0 < i_0 {
                 (*h).quant8_mf[i_0 as usize] = (*h).quant8_mf[j_0 as usize];
@@ -255,7 +241,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                     break;
                 }
                 j_0 += 1;
-                j_0;
             }
             if j_0 < i_0 {
                 (*h).quant8_bias[i_0 as usize] = (*h).quant8_bias[j_0 as usize];
@@ -287,7 +272,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                 }
             }
             i_0 += 1;
-            i_0;
         }
         match current_block {
             9316118096792316650 => {}
@@ -303,7 +287,6 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                         def_quant4[q as usize][i_1 as usize] =
                             quant4_scale[q as usize][j_1 as usize] as libc::c_int;
                         i_1 += 1;
-                        i_1;
                     }
                     let mut i_2: libc::c_int = 0 as libc::c_int;
                     while i_2 < 64 as libc::c_int {
@@ -316,10 +299,8 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                         def_quant8[q as usize][i_2 as usize] =
                             quant8_scale[q as usize][j_2 as usize] as libc::c_int;
                         i_2 += 1;
-                        i_2;
                     }
                     q += 1;
-                    q;
                 }
                 let mut q_0: libc::c_int = 0 as libc::c_int;
                 while q_0 < 6 as libc::c_int {
@@ -342,10 +323,8 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                                         .offset(i_3 as isize)
                                         as libc::c_int;
                             i_3 += 1;
-                            i_3;
                         }
                         i_list += 1;
-                        i_list;
                     }
                     let mut i_list_0: libc::c_int = 0 as libc::c_int;
                     while i_list_0 < num_8x8_lists {
@@ -369,13 +348,10 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                                         .offset(i_4 as isize)
                                         as libc::c_int;
                             i_4 += 1;
-                            i_4;
                         }
                         i_list_0 += 1;
-                        i_list_0;
                     }
                     q_0 += 1;
-                    q_0;
                 }
                 let mut q_1: libc::c_int = 0 as libc::c_int;
                 while q_1
@@ -466,10 +442,8 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                                 }
                             }
                             i_5 += 1;
-                            i_5;
                         }
                         i_list_1 += 1;
-                        i_list_1;
                     }
                     if (*h).param.analyse.b_transform_8x8 != 0 {
                         let mut i_list_2: libc::c_int = 0 as libc::c_int;
@@ -561,14 +535,11 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                                     }
                                 }
                                 i_6 += 1;
-                                i_6;
                             }
                             i_list_2 += 1;
-                            i_list_2;
                         }
                     }
                     q_1 += 1;
-                    q_1;
                 }
                 (*h).nr_offset_emergency = x264_malloc(
                     (::core::mem::size_of::<[[udctcoef; 64]; 4]>() as libc::c_ulong).wrapping_mul(
@@ -712,14 +683,11 @@ pub unsafe extern "C" fn x264_8_cqm_init(mut h: *mut x264_t) -> libc::c_int {
                                         }
                                     }
                                     i_7 += 1;
-                                    i_7;
                                 }
                             }
                             cat += 1;
-                            cat;
                         }
                         q_2 += 1;
-                        q_2;
                     }
                     if (*h).mb.b_lossless == 0 {
                         while *((*h).chroma_qp_table).offset(
@@ -798,7 +766,6 @@ pub unsafe extern "C" fn x264_8_cqm_delete(mut h: *mut x264_t) {
                 break;
             }
             j += 1;
-            j;
         }
         if j == i {
             x264_free((*h).quant4_mf[i as usize] as *mut libc::c_void);
@@ -811,14 +778,12 @@ pub unsafe extern "C" fn x264_8_cqm_delete(mut h: *mut x264_t) {
                 break;
             }
             j += 1;
-            j;
         }
         if j == i {
             x264_free((*h).quant4_bias[i as usize] as *mut libc::c_void);
             x264_free((*h).quant4_bias0[i as usize] as *mut libc::c_void);
         }
         i += 1;
-        i;
     }
     let mut i_0: libc::c_int = 0 as libc::c_int;
     while i_0
@@ -835,7 +800,6 @@ pub unsafe extern "C" fn x264_8_cqm_delete(mut h: *mut x264_t) {
                 break;
             }
             j_0 += 1;
-            j_0;
         }
         if j_0 == i_0 {
             x264_free((*h).quant8_mf[i_0 as usize] as *mut libc::c_void);
@@ -848,14 +812,12 @@ pub unsafe extern "C" fn x264_8_cqm_delete(mut h: *mut x264_t) {
                 break;
             }
             j_0 += 1;
-            j_0;
         }
         if j_0 == i_0 {
             x264_free((*h).quant8_bias[i_0 as usize] as *mut libc::c_void);
             x264_free((*h).quant8_bias0[i_0 as usize] as *mut libc::c_void);
         }
         i_0 += 1;
-        i_0;
     }
     x264_free((*h).nr_offset_emergency as *mut libc::c_void);
 }
@@ -880,7 +842,6 @@ unsafe extern "C" fn cqm_parse_jmlist(
     p = p.offset(strlen(name) as isize);
     if *p as libc::c_int == 'U' as i32 || *p as libc::c_int == 'V' as i32 {
         p = p.offset(1);
-        p;
     }
     let mut nextvar: *mut libc::c_char = strstr(p, b"INT\0" as *const u8 as *const libc::c_char);
     i = 0 as libc::c_int;

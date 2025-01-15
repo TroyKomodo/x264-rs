@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
 extern "C" {
     static mut stdout: *mut FILE;
@@ -39,7 +29,6 @@ unsafe extern "C" fn list_contains(
                 return 1 as libc::c_int;
             }
             list = list.offset(1);
-            list;
         }
     }
     0 as libc::c_int
@@ -69,7 +58,6 @@ unsafe extern "C" fn suggest_lower(
                 },
             );
             s = s.offset(1);
-            s;
         }
         putchar(' ' as i32);
     }
@@ -91,7 +79,6 @@ unsafe extern "C" fn suggest_num_range(
         );
         suggest(buf.as_mut_ptr(), cur, cur_len);
         i += 1;
-        i;
     }
 }
 #[no_mangle]
@@ -109,7 +96,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         while !(*s).is_null() {
             suggest(*s, cur, cur_len);
             s = s.offset(1);
-            s;
         }
     } else if strcmp(prev, b"--aq-mode\0" as *const u8 as *const libc::c_char) == 0 {
         suggest_num_range(0 as libc::c_int, 3 as libc::c_int, cur, cur_len);
@@ -118,7 +104,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         while (*cpu).flags != 0 {
             suggest_lower((*cpu).name, cur, cur_len);
             cpu = cpu.offset(1);
-            cpu;
         }
     } else if strcmp(
         prev,
@@ -129,7 +114,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         while !(*s_0).is_null() {
             suggest(*s_0, cur, cur_len);
             s_0 = s_0.offset(1);
-            s_0;
         }
     } else if strcmp(
         prev,
@@ -140,7 +124,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         while !(*s_1).is_null() {
             suggest(*s_1, cur, cur_len);
             s_1 = s_1.offset(1);
-            s_1;
         }
     } else if strcmp(prev, b"--b-adapt\0" as *const u8 as *const libc::c_char) == 0 {
         suggest_num_range(0 as libc::c_int, 2 as libc::c_int, cur, cur_len);
@@ -149,42 +132,36 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
         while !(*s_2).is_null() {
             suggest(*s_2, cur, cur_len);
             s_2 = s_2.offset(1);
-            s_2;
         }
     } else if strcmp(prev, b"--colormatrix\0" as *const u8 as *const libc::c_char) == 0 {
         let mut s_3: *const *const libc::c_char = x264_colmatrix_names.as_ptr();
         while !(*s_3).is_null() {
             suggest(*s_3, cur, cur_len);
             s_3 = s_3.offset(1);
-            s_3;
         }
     } else if strcmp(prev, b"--colorprim\0" as *const u8 as *const libc::c_char) == 0 {
         let mut s_4: *const *const libc::c_char = x264_colorprim_names.as_ptr();
         while !(*s_4).is_null() {
             suggest(*s_4, cur, cur_len);
             s_4 = s_4.offset(1);
-            s_4;
         }
     } else if strcmp(prev, b"--cqm\0" as *const u8 as *const libc::c_char) == 0 {
         let mut s_5: *const *const libc::c_char = x264_cqm_names.as_ptr();
         while !(*s_5).is_null() {
             suggest(*s_5, cur, cur_len);
             s_5 = s_5.offset(1);
-            s_5;
         }
     } else if strcmp(prev, b"--demuxer\0" as *const u8 as *const libc::c_char) == 0 {
         let mut s_6: *const *const libc::c_char = x264_demuxer_names.as_ptr();
         while !(*s_6).is_null() {
             suggest(*s_6, cur, cur_len);
             s_6 = s_6.offset(1);
-            s_6;
         }
     } else if strcmp(prev, b"--direct\0" as *const u8 as *const libc::c_char) == 0 {
         let mut s_7: *const *const libc::c_char = x264_direct_pred_names.as_ptr();
         while !(*s_7).is_null() {
             suggest(*s_7, cur, cur_len);
             s_7 = s_7.offset(1);
-            s_7;
         }
     } else if strcmp(
         prev,
@@ -273,7 +250,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             while !(*s_16).is_null() {
                 suggest(*s_16, cur, cur_len);
                 s_16 = s_16.offset(1);
-                s_16;
             }
         } else if strcmp(prev, b"--pass\0" as *const u8 as *const libc::c_char) == 0
             || strcmp(prev, b"-p\0" as *const u8 as *const libc::c_char) == 0
@@ -284,28 +260,24 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             while !(*s_17).is_null() {
                 suggest(*s_17, cur, cur_len);
                 s_17 = s_17.offset(1);
-                s_17;
             }
         } else if strcmp(prev, b"--profile\0" as *const u8 as *const libc::c_char) == 0 {
             let mut s_18: *const *const libc::c_char = x264_valid_profile_names.as_ptr();
             while !(*s_18).is_null() {
                 suggest(*s_18, cur, cur_len);
                 s_18 = s_18.offset(1);
-                s_18;
             }
         } else if strcmp(prev, b"--pulldown\0" as *const u8 as *const libc::c_char) == 0 {
             let mut s_19: *const *const libc::c_char = x264_pulldown_names.as_ptr();
             while !(*s_19).is_null() {
                 suggest(*s_19, cur, cur_len);
                 s_19 = s_19.offset(1);
-                s_19;
             }
         } else if strcmp(prev, b"--range\0" as *const u8 as *const libc::c_char) == 0 {
             let mut s_20: *const *const libc::c_char = x264_range_names.as_ptr();
             while !(*s_20).is_null() {
                 suggest(*s_20, cur, cur_len);
                 s_20 = s_20.offset(1);
-                s_20;
             }
         } else if strcmp(prev, b"--subme\0" as *const u8 as *const libc::c_char) == 0
             || strcmp(prev, b"-m\0" as *const u8 as *const libc::c_char) == 0
@@ -316,7 +288,6 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             while !(*s_21).is_null() {
                 suggest(*s_21, cur, cur_len);
                 s_21 = s_21.offset(1);
-                s_21;
             }
         } else if strcmp(prev, b"--trellis\0" as *const u8 as *const libc::c_char) == 0
             || strcmp(prev, b"-t\0" as *const u8 as *const libc::c_char) == 0
@@ -327,14 +298,12 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             while !(*s_22).is_null() {
                 suggest(*s_22, cur, cur_len);
                 s_22 = s_22.offset(1);
-                s_22;
             }
         } else if strcmp(prev, b"--videoformat\0" as *const u8 as *const libc::c_char) == 0 {
             let mut s_23: *const *const libc::c_char = x264_vidformat_names.as_ptr();
             while !(*s_23).is_null() {
                 suggest(*s_23, cur, cur_len);
                 s_23 = s_23.offset(1);
-                s_23;
             }
         } else if strcmp(prev, b"--weightp\0" as *const u8 as *const libc::c_char) == 0 {
             suggest_num_range(0 as libc::c_int, 2 as libc::c_int, cur, cur_len);
@@ -354,32 +323,27 @@ pub unsafe extern "C" fn x264_cli_autocomplete(
             while !(*s_24).is_null() {
                 suggest(*s_24, cur, cur_len);
                 s_24 = s_24.offset(1);
-                s_24;
             }
             let mut s_25: *const *const libc::c_char = opts_nosuggest.as_ptr();
             while !(*s_25).is_null() {
                 suggest(*s_25, cur, cur_len);
                 s_25 = s_25.offset(1);
-                s_25;
             }
             let mut s_26: *const *const libc::c_char = opts_filename.as_ptr();
             while !(*s_26).is_null() {
                 suggest(*s_26, cur, cur_len);
                 s_26 = s_26.offset(1);
-                s_26;
             }
             let mut s_27: *const *const libc::c_char = opts_standalone.as_ptr();
             while !(*s_27).is_null() {
                 suggest(*s_27, cur, cur_len);
                 s_27 = s_27.offset(1);
-                s_27;
             }
             if *prev == 0 {
                 let mut s_28: *const *const libc::c_char = opts_special.as_ptr();
                 while !(*s_28).is_null() {
                     suggest(*s_28, cur, cur_len);
                     s_28 = s_28.offset(1);
-                    s_28;
                 }
             }
         }

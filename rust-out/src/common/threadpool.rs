@@ -1,13 +1,3 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types)]
 use crate::types::*;
 extern "C" {
     fn x264_8_frame_shift(list: *mut *mut x264_frame_t) -> *mut x264_frame_t;
@@ -112,7 +102,6 @@ pub unsafe extern "C" fn x264_8_threadpool_init(
                     job as *mut libc::c_void as *mut x264_frame_t,
                 );
                 i += 1;
-                i;
             }
             match current_block {
                 17998364143390584866 => {}
@@ -153,7 +142,6 @@ pub unsafe extern "C" fn x264_8_threadpool_init(
                             break;
                         }
                         i_0 += 1;
-                        i_0;
                     }
                     match current_block {
                         17998364143390584866 => {}
@@ -206,7 +194,6 @@ pub unsafe extern "C" fn x264_8_threadpool_wait(
                 return ret;
             }
             i += 1;
-            i;
         }
         pthread_cond_wait(&mut (*pool).done.cv_fill, &mut (*pool).done.mutex);
     }
@@ -218,7 +205,6 @@ unsafe extern "C" fn threadpool_list_delete(mut slist: *mut x264_sync_frame_list
         let fresh0 = &mut (*((*slist).list).offset(i as isize));
         *fresh0 = std::ptr::null_mut::<x264_frame_t>();
         i += 1;
-        i;
     }
     x264_8_sync_frame_list_delete(slist);
 }
@@ -235,7 +221,6 @@ pub unsafe extern "C" fn x264_8_threadpool_delete(mut pool: *mut x264_threadpool
             std::ptr::null_mut::<*mut libc::c_void>(),
         );
         i += 1;
-        i;
     }
     threadpool_list_delete(&mut (*pool).uninit);
     threadpool_list_delete(&mut (*pool).run);

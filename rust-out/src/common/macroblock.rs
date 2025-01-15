@@ -1,18 +1,8 @@
-#![allow(
-    dead_code,
-    mutable_transmutes,
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused_assignments,
-    unused_mut
-)]
-#![feature(extern_types, label_break_value, stdsimd)]
 use crate::types::*;
 #[cfg(target_arch = "x86")]
 pub use core::arch::x86::{__m128, _mm_setr_ps};
 #[cfg(target_arch = "x86_64")]
-pub use core::arch::x86_64::{__m128, _mm_setr_ps};
+pub use core::arch::x86_64::_mm_setr_ps;
 extern "C" {
     fn abs(_: libc::c_int) -> libc::c_int;
     fn memcpy(_: *mut libc::c_void, _: *const libc::c_void, _: libc::c_ulong) -> *mut libc::c_void;
